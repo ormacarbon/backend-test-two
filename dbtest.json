@@ -1,0 +1,46 @@
+[
+  {
+    "abv": 8.918797384901016,
+    "address": "141 South Main Street",
+    "category": "British Ale",
+    "city": "Slippery Rock",
+    "coordinates": [
+      41.0638,
+      -80.0556
+    ],
+    "country": "United States",
+    "description": "This robust, hearty stout is as sturdy as its namesake.  Roasted barley is the trademark of stout, a bittersweet separation from its cousin Porter.  The deep character of roasted barley is further enhanced by the addition of oatmeal for an incredible silky finish.",
+    "ibu": 104,
+    "name": "Taciano",
+    "state": "Pennsylvania",
+    "website": "http://www.northcountrybrewing.com"
+  },
+  {
+    "abv": 2.8163389289395333,
+    "address": "1872 North Commerce Street",
+    "city": "Milwaukee",
+    "coordinates": [
+      43.0547,
+      -87.9053
+    ],
+    "country": "United States",
+    "ibu": 34,
+    "name": "Thalisson",
+    "state": "Wisconsin",
+    "website": "http://www.lakefrontbrewery.com/index.html"
+  },
+  {
+    "abv": 3.1895369529300677,
+    "address": "57 South Main Street",
+    "category": "North American Ale",
+    "city": "Moab",
+    "coordinates": [
+      38.5725,
+      -109.551
+    ],
+    "country": "United States",
+    "ibu": 44,
+    "name": "Thiciane",
+    "state": "Utah"
+  }
+]

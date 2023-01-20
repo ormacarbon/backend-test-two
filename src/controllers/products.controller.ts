@@ -1,11 +1,26 @@
 import { Request, Response } from "express";
 
+// const productsJson = require("../../dbtest");
+
 import { Product } from "../models/products.model";
 import { IProduct } from "../types/products.types";
 
-const getProducts = async (req: Request, res: Response) => {
+const getAllProducts = async (req: Request, res: Response) => {
   try {
     const response = await Product.find({});
+    res.status(200).json({ message: response });
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+}
+
+const getProduct = async (req: Request, res: Response) => {
+  const { id } = req.body;
+
+  try {
+    const response = await Product.findOne({
+      _id: id
+    });
     res.status(200).json({ message: response });
   } catch (err) {
     res.status(500).json({ message: "No user found" });
@@ -22,11 +37,27 @@ const postProduct = async (req: Request, res: Response) => {
     const response = await Product.create({ ...request });
     res.status(201).json({ message: response });
   } catch (err) {
-    res.status(500).json({ message: "User is not defined" });
+    res.status(500).json({ message: "Unable to create user" });
   }
 }
 
+// const postProducts = async (req: Request, res: Response) => {
+//   const request: IProduct[] = productsJson;
+//   let response = [];
+
+//   try {
+//     for (let item of request) {
+//       let json = await Product.create(item);
+//       response.push(json);
+//     }
+//     res.status(201).json({ message: response });
+//   } catch (err) {
+//     res.status(500).json({ message: "User is not defined" });
+//   }
+// }
+
 export {
+  getAllProducts,
+  getProduct,
   postProduct,
-  getProducts
 };
