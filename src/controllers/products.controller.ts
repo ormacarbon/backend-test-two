@@ -13,7 +13,7 @@ const getAllProducts = async (req: Request, res: Response) => {
 }
 
 const getProduct = async (req: Request, res: Response) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
     const response = await Product.findOne({
@@ -26,12 +26,13 @@ const getProduct = async (req: Request, res: Response) => {
 }
 
 const deleteProduct = async (req: Request, res: Response) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
     const response = await Product.deleteOne({
       _id: id
     });
+    if (response.deletedCount === 0) throw new Error();
     res.status(200).json({ message: response });
   } catch (err) {
     res.status(500).json({ message: "Unable to delete user" });

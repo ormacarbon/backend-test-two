@@ -5,11 +5,9 @@ import { getAllProducts, postProduct, getProduct, deleteProduct } from "../contr
 const productsRoutes = Router();
 
 productsRoutes.get("/products", getAllProducts);
-productsRoutes.get("/product", getProduct);
-productsRoutes.delete("/product", deleteProduct);
-productsRoutes.post("/product", postProduct);
-// productsRoutes.post("/products", postProducts);
-
+productsRoutes.get("/products/:id", getProduct);
+productsRoutes.delete("/products/:id", deleteProduct);
+productsRoutes.post("/products", postProduct);
 
 export default productsRoutes;
 
