@@ -1,13 +1,11 @@
-import { config } from 'dotenv';
-import mongoose from "mongoose";
 import express from "express";
 export const app = express();
 
+import { connectToDatabase } from "./database/database.service";
+
 import productsRoutes from "./routes/products.routes";
 
-config();
-mongoose.set('strictQuery', false);
-mongoose.connect(process.env.MONGO_URI).then(() => {
+connectToDatabase().then(() => {
   app.emit("Pronto");
   console.log("Connected to database");
 }).catch((err) => {
