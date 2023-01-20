@@ -3,7 +3,7 @@ type IProduct = {
   abv: number;
   category: string;
   city: string;
-  coordinates?: Array<number>;
+  coordinates?: number[];
   country: string;
   ibu: number;
   name: string;
