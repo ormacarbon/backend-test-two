@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 
-// const productsJson = require("../../dbtest");
-
 import { Product } from "../models/products.model";
 import { IProduct } from "../types/products.types";
 
@@ -24,6 +22,19 @@ const getProduct = async (req: Request, res: Response) => {
     res.status(200).json({ message: response });
   } catch (err) {
     res.status(500).json({ message: "No user found" });
+  }
+}
+
+const deleteProduct = async (req: Request, res: Response) => {
+  const { id } = req.body;
+
+  try {
+    const response = await Product.deleteOne({
+      _id: id
+    });
+    res.status(200).json({ message: response });
+  } catch (err) {
+    res.status(500).json({ message: "Unable to delete user" });
   }
 }
 
@@ -59,5 +70,6 @@ const postProduct = async (req: Request, res: Response) => {
 export {
   getAllProducts,
   getProduct,
+  deleteProduct,
   postProduct,
 };
