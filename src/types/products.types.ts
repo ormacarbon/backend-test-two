@@ -1,9 +1,9 @@
 type IProduct = {
-  // id?: string;
+  id?: string;
   abv: number;
   category: string;
   city: string;
-  // coordinates: Array<number>;
+  coordinates?: Array<number>;
   country: string;
   ibu: number;
   name: string;

@@ -2,10 +2,10 @@ import { Schema, model } from "mongoose";
 import { IProduct } from "../types/products.types";
 
 const ProductSchema = new Schema<IProduct>({
-  // id: {
-  //   type: String,
-  //   require: true
-  // },
+  id: {
+    type: String,
+    require: true
+  },
   abv: Number,
   category: {
     type: String,
