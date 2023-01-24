@@ -1,4 +1,4 @@
-type IProduct = {
+interface IProduct {
   id?: string;
   abv: number;
   category: string;

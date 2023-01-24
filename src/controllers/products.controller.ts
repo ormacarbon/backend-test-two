@@ -1,11 +1,13 @@
-import { Request, Response } from "express";
+import { Request, RequestHandler, Response } from "express";
 
 import { Product } from "../models/products.model";
 import { IProduct } from "../types/products.types";
+import * as yup from "yup";
+import { validation } from "../shared/middlewares/validation";
 
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const response = await Product.find({});
+    const response: IProduct[] = await Product.find({});
     res.status(200).json({ message: response });
   } catch (err) {
     res.status(500).json({ message: err });
@@ -16,7 +18,7 @@ const getProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const response = await Product.findOne({
+    const response: IProduct = await Product.findOne({
       _id: id
     });
     res.status(200).json({ message: response });
@@ -39,14 +41,23 @@ const deleteProduct = async (req: Request, res: Response) => {
   }
 }
 
-const postProduct = async (req: Request, res: Response) => {
-  const request: IProduct = {
-    ...req.body
-  };
+const bodyValidation: yup.SchemaOf<IProduct> = yup.object().shape({
+  id: yup.string().min(3),
+  abv: yup.number().required(),
+  category: yup.string().required().min(3),
+  city: yup.string().required().min(3),
+  coordinates: yup.array(),
+  country: yup.string().required().min(3),
+  ibu: yup.number().required(),
+  name: yup.string().required().min(3),
+  state: yup.string().required().min(3),
+});
 
+export const createBodyValidation = validation("body", bodyValidation);
+
+const postProduct = async (req: Request<{}, {}, IProduct>, res: Response) => {
   try {
-    if (!request.name) throw new Error();
-    const response = await Product.create({ ...request });
+    const response = await Product.create({ ...req.body });
     res.status(201).json({ message: response });
   } catch (err) {
     res.status(500).json({ message: "Unable to create user" });
