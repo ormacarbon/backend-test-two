@@ -11,3 +11,7 @@ type IProduct = {
 }
 
 export { IProduct };
+
+// TODO: Criação dos types dos produtos ✅
+// TODO: Verificar itens que nao são obrigatoris
+

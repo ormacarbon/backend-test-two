@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 export const app = express();
 
 import { connectToDatabase } from "./database/database.service";
@@ -12,6 +13,7 @@ connectToDatabase().then(() => {
   console.log(err);
 });
 
+app.use(cors());
 app.use(express.json());
 app.use(productsRoutes);
 
@@ -26,6 +28,6 @@ app.on("Pronto", () => {
 // TODO: Instalar dependências ✅
 // TODO: Criação do banco com mongoDB ✅
 // TODO: Conexão com o banco de dados ✅
+// TODO: Criação do model, view e controller ✅
 // TODO: Adicionar os itens do JSON fornecido no banco de dados
 // TODO: Garantir que não ira ocorrer duplicidade ao rodar o script
-// TODO: Criação do model, view e controller

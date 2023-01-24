@@ -74,3 +74,9 @@ export {
   deleteProduct,
   postProduct,
 };
+
+// TODO: GET, POST, DELETE ✅
+// TODO: PUT
+// TODO: Retornar um erro na criação de produtos com dados imcompletos
+
+
