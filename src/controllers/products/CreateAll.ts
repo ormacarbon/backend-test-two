@@ -6,14 +6,14 @@ import { IProduct } from "../../types/products.types";
 
 export const postProducts = async (req: Request, res: Response) => {
   const request: IProduct[] = productsJson;
-  let response = [];
+  let products = [];
 
   try {
     for (let item of request) {
       let json = await Product.create(item);
-      response.push(json);
+      products.push(json);
     }
-    res.status(201).json({ message: response });
+    res.status(201).json({ message: products });
   } catch (err) {
     res.status(500).json({ message: "User is not defined" });
   }

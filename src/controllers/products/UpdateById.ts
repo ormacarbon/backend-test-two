@@ -5,11 +5,11 @@ export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const response = await Product.updateOne(
+    const products = await Product.updateOne(
       { _id: id },
       { ...req.body }
     );
-    if (!response.acknowledged) {
+    if (!products.acknowledged) {
       throw new Error();
     }
     res.status(200).json({ message: "Successfully updated" });

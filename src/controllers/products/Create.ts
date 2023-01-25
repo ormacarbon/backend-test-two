@@ -3,7 +3,7 @@ import * as yup from "yup";
 
 import { Product } from "../../models/products.model";
 import { IProduct } from "../../types/products.types";
-import { validation } from "../../shared/middlewares/validation.middleware";
+import { validation } from './../../shared/middlewares/validation';
 
 const bodyValidation: yup.SchemaOf<IProduct> = yup.object().shape({
   id: yup.string().min(3),
