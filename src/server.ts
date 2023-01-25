@@ -1,5 +1,6 @@
-import express from "express";
+import 'dotenv/config';
 import cors from "cors";
+import express from "express";
 export const app = express();
 
 import { connectToDatabase } from "./database/database.service";
@@ -18,7 +19,7 @@ app.use(express.json());
 app.use(productsRoutes);
 
 app.on("Pronto", () => {
-  app.listen(3000, () => {
+  app.listen(process.env.PORT || 3333, () => {
     console.log("Server is running http://localhost:3000 🚀");
   });
 });
@@ -29,5 +30,5 @@ app.on("Pronto", () => {
 // TODO: Criação do banco com mongoDB ✅
 // TODO: Conexão com o banco de dados ✅
 // TODO: Criação do model, view e controller ✅
-// TODO: Adicionar os itens do JSON fornecido no banco de dados
+// TODO: Adicionar os itens do JSON fornecido no banco de dados ✅
 // TODO: Garantir que não ira ocorrer duplicidade ao rodar o script

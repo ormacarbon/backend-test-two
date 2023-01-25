@@ -1,19 +1,14 @@
 import { Router } from "express";
 
-import { createBodyValidation } from './../controllers/products.controller';
-import {
-  getAllProducts,
-  postProduct,
-  getProduct,
-  deleteProduct
-} from "../controllers/products.controller";
+import * as productsController from "../controllers/products";
 
 const productsRoutes = Router();
 
-productsRoutes.get("/products", getAllProducts);
-productsRoutes.get("/products/:id", getProduct);
-productsRoutes.delete("/products/:id", deleteProduct);
-productsRoutes.post("/products", createBodyValidation, postProduct);
+productsRoutes.get("/products", productsController.getAllProducts);
+productsRoutes.get("/products/:id", productsController.getProduct);
+productsRoutes.delete("/products/:id", productsController.deleteProduct);
+productsRoutes.post("/products", productsController.createBodyValidation, productsController.postProduct);
+productsRoutes.post("/products/migrations", productsController.createBodyValidation, productsController.postProducts);
 
 export default productsRoutes;
 
