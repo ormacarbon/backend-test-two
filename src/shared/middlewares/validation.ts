@@ -1,5 +1,4 @@
-import { RequestHandler } from 'express';
-import { ValidationError, SchemaOf } from "yup";
+import { ValidationError } from "yup";
 import { IValidation } from '../../types/validation.types';
 
 export const validation: IValidation = (field, scheme) => async (req, res, next) => {

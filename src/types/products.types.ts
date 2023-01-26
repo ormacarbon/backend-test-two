@@ -1,6 +1,7 @@
 interface IProduct {
   id?: string;
   abv: number;
+  address?: string;
   category?: string;
   city: string;
   coordinates: number[];
