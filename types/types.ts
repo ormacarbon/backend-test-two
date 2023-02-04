@@ -1,5 +1,5 @@
 export interface IProduct {
-    id:string
+    id?:string
     abv: number
     category: string
     city: string

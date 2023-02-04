@@ -6,13 +6,14 @@ import router from './routes'
 
 
 const app = express()
+const PORT = config.get('PORT') || 6000
 app.use(cors())
 app.use(express.json())
 
 app.use('/api', router)
 
 
-app.listen(config.get('PORT'), async()=>{
+app.listen(PORT, async()=>{
     await db()
-    console.log(`Server running on Port ${config.get('PORT')}`)
+    console.log(`Server running on Port ${PORT}`)
 })
