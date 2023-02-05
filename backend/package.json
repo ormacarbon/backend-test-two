@@ -2,7 +2,7 @@
   "name": "backend-test-two",
   "version": "1.0.0",
   "description": "## SITUAÇÃO-PROBLEMA",
-  "main": "./build/src/server.js",
+  "main": "./dist/server.js",
   "scripts": {
     "prestart": "npx tsc",
     "start": "node .",

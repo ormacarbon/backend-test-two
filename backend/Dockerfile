@@ -6,4 +6,4 @@ WORKDIR /app
 
 RUN ["npm", "install"]
 
-# ENTRYPOINT ["npm", "start"]
+ENTRYPOINT ["npm", "start"]

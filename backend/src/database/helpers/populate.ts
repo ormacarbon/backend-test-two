@@ -1,6 +1,7 @@
-import Beer from './models';
 import fs from 'fs';
 import path from 'path';
+
+import Beer from '../models';
 
 const databaseData = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../../db.json')).toString());
 

@@ -1,5 +1,6 @@
-import mongoose from 'mongoose';
 import 'dotenv/config';
+
+import mongoose from 'mongoose';
 
 const MONGO_PORT = process.env.MONGO_PORT || 27017;
 

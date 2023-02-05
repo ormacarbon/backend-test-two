@@ -26,7 +26,6 @@ services:
   api:
     build: .
     restart: always
-    tty: true
     ports:
       - ${API_PORT}:${API_PORT}
     depends_on:

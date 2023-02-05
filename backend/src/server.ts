@@ -1,7 +1,9 @@
-import express from 'express';
 import 'dotenv/config';
-import connectToDatabase from './database/connect';
-import populateDatabase from './database/populate';
+
+import connectToDatabase from './database/helpers/connect';
+import populateDatabase from './database/helpers/populate';
+
+import express from 'express';
 import router from './routes';
 import handleErrors from './middlewares/handleErrors';
 import 'express-async-errors';

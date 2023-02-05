@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import Beer from '../database/models';
+
+import { addBeer, deleteBeer, filterBeer, listBeers, updateBeer } from '../database/handleData';
+
 import validateBody from '../middlewares/validateBody';
 import validateId from '../middlewares/validateId';
 
@@ -12,7 +14,7 @@ router.get('/list/:length/:skip', async (req: Request, res: Response, next: Next
 	Number(length) > 100 ? limit = 100 : limit = Number(length);
 
 	try {
-		const beers = await Beer.find({}, null, { limit, skip: Number(skip) });
+		const beers = await listBeers(limit, Number(skip));
 
 		res.status(200).json(beers);
 	} catch (err) {
@@ -27,7 +29,7 @@ router.get('/filter?', async (req: Request, res: Response, next: NextFunction) =
 	const countryQuery = country ? country.toString() : '';
 
 	try {
-		const results = await Beer.find({ name: new RegExp(nameQuery, 'i'), country: new RegExp(countryQuery, 'i') }, null, { limit: 100 });
+		const results = await filterBeer(nameQuery, countryQuery);
 
 		res.status(200).json(results);
 	} catch (err) {
@@ -39,7 +41,7 @@ router.post('/add', validateBody, async (req: Request, res: Response, next: Next
 	const { body } = req;
 
 	try {
-		const newBeer = await Beer.create(body);
+		const newBeer = await addBeer(body);
 
 		res.status(201).json(newBeer);
 	} catch (err) {
@@ -52,7 +54,7 @@ router.put('/update/:id', validateId, validateBody, async (req: Request, res: Re
 	const { body } = req;
 
 	try {
-		await Beer.findByIdAndUpdate(id, body);
+		await updateBeer(id, body);
 
 		res.status(200).json({ message: 'Beer successfully updated.' });
 	} catch (err) {
@@ -64,7 +66,7 @@ router.delete('/delete/:id', validateId, async (req: Request, res: Response, nex
 	const { id } = req.params;
 
 	try {
-		await Beer.findByIdAndDelete(id);
+		await deleteBeer(id);
 
 		res.status(200).json({ message: 'Beer successfully deleted.' });
 	} catch (err) {
