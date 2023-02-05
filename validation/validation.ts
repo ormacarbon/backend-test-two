@@ -6,11 +6,12 @@ export const validateProduct = (product: IProduct)=>{
         abv: Joi.number().min(3).required() ,
         category: Joi.string().min(3).required(),
         city: Joi.string().min(5).required(),
-        coordinates: Joi.array().min(5).required(),
+        coordinates: Joi.array().min(5),
         country: Joi.string().min(5).required(),
         ibu: Joi.number().min(3).required(),
         name: Joi.string().min(4).required(),
-        state: Joi.string().min(5).required()
+        state: Joi.string().min(5).required(),
+        website: Joi.string().min(6)
     })
 
     return productSchema.validate(product)

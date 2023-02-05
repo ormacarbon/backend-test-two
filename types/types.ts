@@ -8,4 +8,5 @@ export interface IProduct {
     name:string
     state:string
     coordinates: Array<Number>
+    website?: string
 }

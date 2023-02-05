@@ -5,15 +5,16 @@ import { validateProduct } from "../validation/validation";
 
 export const createProduct = async (req: Request<IProduct>, res: Response) => {
   try {
-    const validation = validateProduct(req.body)
-    if(validation.error) return res.status(400).json({message: 'Invalid Data'})
   
-    const { abv, category, city, country, ibu, name, state, coordinates } = req.body;
+    const { abv, category, city, country, ibu, name, state, coordinates,website } = req.body;
   
     const ProductAlreadyExists = await product.findOne({ name: req.body.name });
   
     if (ProductAlreadyExists)
       return res.status(400).json({ message: "Product arealdy exists" });
+
+ /*    const validation = validateProduct(req.body)
+    if(validation) return res.status(400).json({message: 'Invalid Data'}) */
   
     const items = new product({
       abv,
@@ -24,6 +25,7 @@ export const createProduct = async (req: Request<IProduct>, res: Response) => {
       name,
       state,
       coordinates,
+      website
     });
 
     const savedItems = await items.save();
