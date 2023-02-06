@@ -1,61 +1,206 @@
-# **TESTE DE BACKEND**
+# **TESTE DE BACKEND by Orma Carbon**
 
-## SITUAÇÃO-PROBLEMA
+### SITUAÇÃO-PROBLEMA
 
-Você acabou de ser contratado para uma vaga de desenvolvedor backend de uma empresa que revende cervejas do mundo inteiro. O desenvolvedor anterior corrompeu completamente o banco de dados e a API anterior e sobrou apenas um arquivo .JSON com todas as informações do banco. Seu líder confiou a tarefa de recriar a API e o banco de dados a você.
+> Você acabou de ser contratado para uma vaga de desenvolvedor backend de uma empresa que revende cervejas do mundo inteiro. O desenvolvedor anterior corrompeu completamente o banco de dados e a API anterior e sobrou apenas um arquivo .JSON com todas as informações do banco. Seu líder confiou a tarefa de recriar a API e o banco de dados a você.
 
 Neste teste, você deverá criar uma API com endpoints a serem consumidos via REST e um banco de dados, utilizando os dados fornecidos no arquivo. ````db.json````.
 
+### Stack utilizadas: Nodejs(Express), Typescript, MongoDB
+
 ---------------------------------------------------------------------
 
-## REQUISITOS OBRIGATÓRIOS:
+# Passos a seguir
 
-- Seja original, projetos suspeitos de serem copiados serão descartados.
-- Queremos ver o seu código, e não o de outros.
-- Criar coleção no Postman (seu teste será testado por aqui).
+## Clonar repositório
 
-## GIT
+    gh repo clone RobertoAthos/backend-test-two
 
-- Faça um fork deste repositório.
-- Crie uma branch para codar as suas features.
-- Faça um pull-request quando o teste for finalizado.
+## Instalar dependências
 
-##### **NOTA: Será avaliado também se o nome da branch, títulos de commit, push e comentários possuem boa legibilidade.**
+    npm install
 
------------------------------------------------------
+## Rodar o app
 
-## FRAMEWORK -
-
-- Servidor: Express (Javascript/Typescript) *<u>**OU**</u>* Gin (Golang)
-- Banco de dados: MongoDB, DynamoDB, MySQL, Postgres...
-
------------------------------------------------------
-
-## PROJETO
-
-- Api deve conter pelo menos 1 endpoint para cada operação crud (Create, Read, Update, Delete).
-- Um endpoint para listagem de conteúdo.
-- Banco de dados a escolha do dev.
-
--------------------------------------------------------
-
-## REQUISITOS DIFERENCIAIS:
-
-- Seguir os princípios de SOLID.
-- Fazer o teste em GoLang.
-- Codar um código performático.
-- Utilizar inglês no projeto todo.
-- Utilizar Injeção de dependências.
-- Criar um frontend que consuma a API
-- Fazer deploy do mesmo (heroku, aws, google cloud ou outro da preferência).
+    npm run dev
 
 
+# REST API
 
----
+Exemplos de requisições.
+> você pode usar o link do deploy `https://orma-carbon.onrender.com` para fazer os testes no postman ou insomnia ou o próprio localhost:6000
 
-## ENTREGA
+<br/>
 
-- Faça um pull request e nomeie-o como no ex.: Teste de (Seu nome aqui).
-- Envie um email para schmidt@repenso.eco e kevin@repenso.eco com o link do pull request, do deploy (tanto do front quanto do back se feito), e anexe a coleção do postman.
-- Assim que avaliarmos seu teste, enviaremos uma devolutiva de sucesso ou falha, e um link para agendar sua entrevista técnica.
+
+## Inserir os dados do `db.json` no Banco de Dados
+
+### Request
+
+`POST`
+
+    http://localhost:6000/api/addData
+
+### Response
+
+    Irá adicionar todos os dados do db.json
+
+## Listagem de todos os produtos
+
+### Request
+> Talvez demore um pouco de fazer essa requisição, pois faz a listagem de 5000 dados
+
+`GET`
+
+    http://localhost:6000/api/products
+
+### Response
+
+    {
+        "abv": 12,
+        "address":"teste Rua",
+        "category": "Teste Categoria",
+        "city": "Teste Cidade",
+        "coordinates": 124125,
+        "country": "Teste País",
+        "description": "Teste descrição",
+        "ibu":124,
+        "name":"Teste Nome",
+        "state":"Teste Estado",
+        "website": "Teste Website"
+    }
+
+
+
+## Criar novo produto
+
+### Request
+
+`POST`
+
+     http://localhost:6000/api/createProduct
+
+### Response
+
+     {
+        "abv": 12,
+        "address": "teste Rua",
+        "category": "Teste Categoria",
+        "city": "Teste Cidade",
+        "coordinates": [
+            124125
+        ],
+        "country": "Teste País",
+        "description": "Teste descrição",
+        "ibu": 124,
+        "name": "Teste Nome",
+        "state": "Teste Estado",
+        "website": "Teste Website",
+        "_id": "63e14b2acb3b517c5075d62a",
+        "__v": 0
+    }
+
+## Pegar um produto específico
+
+### Request
+
+`GET`
+
+     http://localhost:6000/api/product/{id-do-produto}
+
+### Response
+
+    {
+        "_id": "63e14b2acb3b517c5075d62a",
+        "abv": 12,
+        "address": "teste Rua",
+        "category": "Teste Categoria",
+        "city": "Teste Cidade",
+        "coordinates": [
+            124125
+        ],
+        "country": "Teste País",
+        "description": "Teste descrição",
+        "ibu": 124,
+        "name": "Teste Nome",
+        "state": "Teste Estado",
+        "website": "Teste Website",
+        "__v": 0
+    }
+
+
+
+## Atualizar dados do produto
+
+### Request
+
+`PUT` <br/>
+ 
+  `http://localhost:6000/api/update/product/{id-do-produto}`
+
+     {
+        "abv": 12,
+        "address": "teste Rua 2",
+        "category": "Teste Categoria 2",
+        "city": "Teste Cidade",
+        "coordinates": [124125],
+        "country": "Teste País",
+        "description": "Teste descrição",
+        "ibu": 124,
+        "name": "Teste Nome",
+        "state": "Teste Estado",
+        "website": "Teste Website",
+    }
+     
+### Response
+
+    {
+        "_id": "63e14b2acb3b517c5075d62a",
+        "abv": 12,
+        "address": "teste Rua 2",
+        "category": "Teste Categoria 2",
+        "city": "Teste Cidade",
+        "coordinates": [
+            124125
+        ],
+        "country": "Teste País",
+        "description": "Teste descrição",
+        "ibu": 124,
+        "name": "Teste Nome",
+        "state": "Teste Estado",
+        "website": "Teste Website",
+        "__v": 0
+    }
+
+## Deletar produto
+
+### Request
+
+`DELETE`
+
+    http://localhost:6000/api/delete/{id-do-produto}
+
+### Response
+
+    {
+        "_id": "63e1479acb3b517c5075d625",
+        "abv": 12,
+        "address": "teste Rua",
+        "category": "Teste Categoria",
+        "city": "Teste Cidade",
+        "coordinates": [
+            124125
+        ],
+        "country": "Teste País",
+        "description": "Teste descrição",
+        "ibu": 124,
+        "name": "Teste Nome",
+        "state": "Teste Estado",
+        "website": "Teste Website",
+        "__v": 0
+    }
+
+
+
+
 
