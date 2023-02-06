@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
-import { Form, Button } from 'react-bootstrap';
 import { func, string } from 'prop-types';
-import BeerContext from '../context/BeerContext';
 import { useLocation } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
+import BeerContext from '../context/BeerContext';
 
 export default function BeerForm({ onSubmit, buttonText }) {
+	const location = useLocation();
+
 	const { form, setForm } = useContext(BeerContext);
 
-	const location = useLocation();
-	
 	const handleInputs = ({ target }) => setForm(prev => ({ ...prev, [target.name]: target.value }));
 
 	const handleDefaultValue = (field) => location.pathname.includes('update') ? form[field] : '';
@@ -16,92 +16,85 @@ export default function BeerForm({ onSubmit, buttonText }) {
 	return (
 		<Form onSubmit={onSubmit}>
 			<Form.Control
-				defaultValue={handleDefaultValue('name')}
 				required
-				className="mb-4"
-				placeholder="Name"
+				onChange={handleInputs}
 				name="name"
-				onChange={handleInputs}
+				placeholder="Name"
+				defaultValue={handleDefaultValue('name')}
 			/>
 			<Form.Control
-				defaultValue={handleDefaultValue('category')}
 				required
-				className="mb-4"
-				placeholder="Category"
+				onChange={handleInputs}
 				name="category"
-				onChange={handleInputs}
+				placeholder="Category"
+				defaultValue={handleDefaultValue('category')}
 			/>
 			<Form.Control
-				defaultValue={handleDefaultValue('description')}
 				required
-				className="mb-4"
-				placeholder="Description" as="textarea"
+				onChange={handleInputs}
 				name="description"
-				onChange={handleInputs}
+				placeholder="Description"
+				defaultValue={handleDefaultValue('description')}
+				as="textarea"
 			/>
 			<Form.Control
-				defaultValue={handleDefaultValue('address')}
 				required
-				className="mb-4"
-				placeholder="Address"
+				onChange={handleInputs}
 				name="address"
-				onChange={handleInputs}
+				placeholder="Address"
+				defaultValue={handleDefaultValue('address')}
 			/>
 			<Form.Control
-				defaultValue={handleDefaultValue('city')}
 				required
-				className="mb-4"
-				placeholder="City"
+				onChange={handleInputs}
 				name="city"
-				onChange={handleInputs}
+				placeholder="City"
+				defaultValue={handleDefaultValue('city')}
 			/>
 			<Form.Control
-				defaultValue={handleDefaultValue('state')}
 				required
-				className="mb-4"
-				placeholder="State"
+				onChange={handleInputs}
 				name="state"
-				onChange={handleInputs}
+				placeholder="State"
+				defaultValue={handleDefaultValue('state')}
 			/>
 			<Form.Control
-				defaultValue={handleDefaultValue('country')}
 				required
-				className="mb-4"
-				placeholder="Country"
+				onChange={handleInputs}
 				name="country"
-				onChange={handleInputs}
+				placeholder="Country"
+				defaultValue={handleDefaultValue('country')}
 			/>
 			<Form.Control
-				defaultValue={handleDefaultValue('website')}
 				required
-				className="mb-4"
-				placeholder="Website"
+				onChange={handleInputs}
 				name="website"
-				onChange={handleInputs}
+				placeholder="Website"
+				defaultValue={handleDefaultValue('website')}
 			/>
 			<Form.Control
-				defaultValue={handleDefaultValue('abv')}
 				required
-				className="mb-4"
-				type="number" step="0.01" placeholder="ABV"
+				onChange={handleInputs}
 				name="abv"
-				onChange={handleInputs}
+				placeholder="ABV"
+				defaultValue={handleDefaultValue('abv')}
+				type="number"
+				step="0.01"
 			/>
 			<Form.Control
-				defaultValue={handleDefaultValue('ibu')}
 				required
-				className="mb-4"
-				type="number" placeholder="IBU"
+				onChange={handleInputs}
 				name="ibu"
-				onChange={handleInputs}
+				placeholder="IBU"
+				defaultValue={handleDefaultValue('ibu')}
+				type="number"
 			/>
 			<Form.Control
-				defaultValue={handleDefaultValue('coordinates')}
 				required
-				className="mb-4"
-				placeholder="Coordinates: [-16.68, -49.25]"
-				name="coordinates"
 				onChange={handleInputs}
+				name="coordinates"
+				placeholder="Coordinates: [-16.68, -49.25]"
+				defaultValue={handleDefaultValue('coordinates')}
 			/>
 			<Button type="submit">{buttonText}</Button>
 		</Form>

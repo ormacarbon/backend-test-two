@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
 import { func } from 'prop-types';
+import { Button, Form } from 'react-bootstrap';
 import BeerContext from '../context/BeerContext';
 
 export default function Header({ reset }) {

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import BeerForm from '../components/BeerForm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BeerContext from '../context/BeerContext';
+import BeerForm from '../components/BeerForm';
 
 export default function Update() {
-	const { form, listBeer } = useContext(BeerContext);
-
 	const location = useLocation();
 	const navigate = useNavigate();
+
+	const { form, listBeer } = useContext(BeerContext);
 
 	const updateBeer = (e) => {
 		e.preventDefault();

@@ -15,9 +15,9 @@ export default function BeerProvider({ children }) {
 		state: '',
 		country: '',
 		website: '',
-		abv: '',
-		ibu: '',
-		coordinates: ''
+		abv: 0,
+		ibu: 0,
+		coordinates: [0, 0]
 	}); 
 
 

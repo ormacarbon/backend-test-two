@@ -1,16 +1,12 @@
-import React, { useContext, useEffect } from 'react';
-import BeerForm from '../components/BeerForm';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BeerContext from '../context/BeerContext';
+import BeerForm from '../components/BeerForm';
 
 export default function Add() {
-	const { listBeer, form } = useContext(BeerContext);
-
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		
-	}, []);
+	const { listBeer, form } = useContext(BeerContext);
 
 	const addNewBeer = (e) => {
 		e.preventDefault();

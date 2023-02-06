@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import BeerContext from '../context/BeerContext';
 import BeerCard from '../components/BeerCard';
 import Header from '../components/Header';
-import BeerContext from '../context/BeerContext';
 
 export default function Home() {
 	const { beers, setFilter, listBeer } = useContext(BeerContext);
