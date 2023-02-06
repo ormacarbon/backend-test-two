@@ -11,3 +11,5 @@ export const addBeer = async (body: IBeer) => Beer.create(body);
 export const updateBeer = async (id: string, body: IBeer) => Beer.findByIdAndUpdate(id, body);
 
 export const deleteBeer = async (id: string) => Beer.findByIdAndDelete(id);
+
+export const getBeerById = async (id: string) => Beer.findById(id);

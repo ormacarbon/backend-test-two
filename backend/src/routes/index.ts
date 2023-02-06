@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 
-import { addBeer, deleteBeer, filterBeer, listBeers, updateBeer } from '../database/handleData';
+import { addBeer, deleteBeer, filterBeer, getBeerById, listBeers, updateBeer } from '../database/handleData';
 
 import validateBody from '../middlewares/validateBody';
 import validateId from '../middlewares/validateId';
@@ -69,6 +69,18 @@ router.delete('/delete/:id', validateId, async (req: Request, res: Response, nex
 		await deleteBeer(id);
 
 		res.status(200).json({ message: 'Beer successfully deleted.' });
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.get('/:id', validateId, async (req: Request, res: Response, next: NextFunction) => {
+	const { id } = req.params;
+
+	try {
+		const beer = await getBeerById(id);
+
+		res.status(200).json(beer);
 	} catch (err) {
 		next(err);
 	}

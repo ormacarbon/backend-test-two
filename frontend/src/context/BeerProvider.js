@@ -6,6 +6,21 @@ export default function BeerProvider({ children }) {
 	const [beers, setBeers] = useState([]);
 	const [filter, setFilter] = useState('');
 
+	const [form, setForm] = useState({
+		name: '',
+		category: '',
+		description: '',
+		address: '',
+		city: '',
+		state: '',
+		country: '',
+		website: '',
+		abv: '',
+		ibu: '',
+		coordinates: ''
+	}); 
+
+
 	const listBeer = () => {
 		const skip = Math.floor(Math.random() * 5001);
 
@@ -22,6 +37,8 @@ export default function BeerProvider({ children }) {
 		filter,
 		setFilter,
 		listBeer,
+		form,
+		setForm
 	};
 
 	return (
