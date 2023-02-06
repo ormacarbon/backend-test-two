@@ -1,49 +1,23 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useEffect, useState } from 'react';
-import BeerCard from './components/BeerCard';
-import { Button, Form } from 'react-bootstrap';
+import React from 'react';
+import BeerProvider from './context/BeerProvider';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Add from './pages/Add';
+import Update from './pages/Update';
 
 function App() {
-	const [beers, setBeers] = useState([]);
-	const [filter, setFilter] = useState('');
-
-	const listBeer = () => {
-		const skip = Math.floor(Math.random() * 5001);
-
-		fetch(`http://localhost:3001/beer/list/100/${skip}`)
-			.then(response => response.json())
-			.then(json => setBeers(json));
-	};
-
-	useEffect(() => listBeer, []);
-
-	const searchBeer = () => {
-		fetch(`http://localhost:3001/beer/filter?name=${filter}`)
-			.then(response => response.json())
-			.then(json => setBeers(json));
-	};
-
-	const reset = () => {
-		setFilter('');
-		listBeer();
-	};
-
 	return (
-		<div>
-			<header>
-				<Form>
-					<Form.Group style={{ display: 'flex' }}>
-						<Form.Control type="text" placeholder="Type beer name" value={filter} onChange={({ target }) => setFilter(target.value)} />
-						<Button onClick={searchBeer}>Search</Button>
-						<Button onClick={reset}>Reset</Button>
-					</Form.Group>
-				</Form>
-			</header>
-			<main>
-				{beers.map(beer => <BeerCard key={beer._id} beer={beer} />)}
-			</main>
-		</div>
+		<BeerProvider>
+			<BrowserRouter>
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/add' element={<Add />} />
+					<Route path='/update' element={<Update />} />
+				</Routes>
+			</BrowserRouter>
+		</BeerProvider>
 	);
 }
 
