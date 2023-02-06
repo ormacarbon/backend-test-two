@@ -6,7 +6,7 @@ export const updateProduct = async(req:Request<IProduct>,res:Response)=>{
     try {
         const {id} = req.params
 
-        const {abv,category,city,country,ibu,name,state,coordinates} = req.body
+        const { abv, category, city, country, ibu, name, state, coordinates,website,description,address } = req.body;
 
         const SingleProduct = await product.findById(id)
 
@@ -14,13 +14,16 @@ export const updateProduct = async(req:Request<IProduct>,res:Response)=>{
 
         const updatedProduct = await product.findByIdAndUpdate({_id:id},{
             abv,
+            address,
             category,
             city,
+            coordinates,
             country,
+            description,
             ibu,
             name,
             state,
-            coordinates
+            website,
         })
 
         res.status(200).json(updatedProduct)

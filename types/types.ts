@@ -9,4 +9,6 @@ export interface IProduct {
     state:string
     coordinates: Array<Number>
     website?: string
+    description?: string
+    address?:string
 }
