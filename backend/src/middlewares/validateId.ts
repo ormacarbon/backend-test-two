@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { isValidObjectId } from 'mongoose';
 
-import Beer from '../database/models';
+import Beer from '../database/models/Beer';
 
 const validateId = async (req: Request, res: Response, next: NextFunction) => {
 	const { id } = req.params;

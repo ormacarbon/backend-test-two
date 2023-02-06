@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { func } from 'prop-types';
 import BeerContext from '../context/BeerContext';
 
 export default function Header({ reset }) {
 	const { filter, setFilter, setBeers } = useContext(BeerContext);
+
+	useEffect(() => () => setFilter(''), []);
 
 	const searchBeer = () => {
 		fetch(`http://localhost:3001/beer/filter?name=${filter}`)

@@ -1,5 +1,5 @@
 import { IBeer } from '../interfaces/IBeer';
-import Beer from './models/index';
+import Beer from './models/Beer';
 
 export const listBeers = async (limit: number, skip: number) => Beer.find({}, null, { limit, skip });
 
