@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const beerSchema = new mongoose.Schema({
     name:{
       type:String,
-      required:[true, "A Beer must have a name"]
+      required:[true, "A Beer must have a Name"],
+      default:"Nameless Beer"
     },
     abv: {
       type: Number,
@@ -12,11 +13,11 @@ const beerSchema = new mongoose.Schema({
     },
     address:{
       type:String,
-      required:[true, "A Beer must have a fabric location"]
+      required:false
     },
     category:{
       type:String,
-      required:[true, "A Beer must have a city"] 
+      required:false
     },
     coordinates:[Number],
     country: String,
@@ -30,7 +31,7 @@ const beerSchema = new mongoose.Schema({
     },
     state:{
       type:String,
-      required:[true, "A Beer must have a State of origin"]
+      required:false
     },
     website:{
       type:String,
