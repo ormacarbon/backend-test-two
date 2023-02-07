@@ -7,6 +7,9 @@ router
     .route('/')
     .get(beerController.getAllBeers)
 
+router
+    .route('/:id')
+    .get(beerController.getBeer)
 
 
 module.exports = router;
