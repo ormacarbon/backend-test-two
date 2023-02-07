@@ -1,6 +1,6 @@
 import { AddBeer } from "../../../domain/useCases/add-beer";
 import { MissingParamError } from "../../erros/missing-param-error";
-import { badRequest, serverError } from "../../helpers/http-helpers";
+import { badRequest, created, serverError } from "../../helpers/http-helpers";
 import { Controller } from "../../protocols/controller";
 import { HttpRequest, HttpResponse } from "../../protocols/http";
 
@@ -18,7 +18,8 @@ export class AddBeerController implements Controller {
 
       const data = httpRequest.body;
 
-      await this.addBeer.add(data);
+      const beer = await this.addBeer.add(data);
+      return created(beer);
     } catch (error) {
       return serverError();
     }

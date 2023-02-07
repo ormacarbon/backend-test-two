@@ -14,3 +14,10 @@ export const serverError = (): HttpResponse => {
     body: new ServerError()
   }
 }
+
+export const created = (data: any): HttpResponse => {
+  return {
+    statusCode: 201,
+    body: data
+  }
+}
