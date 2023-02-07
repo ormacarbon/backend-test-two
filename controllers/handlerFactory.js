@@ -8,7 +8,7 @@ exports.getAll = Model => async (req, res, next) => {
 
     const features = new APIFeatures(Model.find(filter), req.query)
         .filter()
-
+        .sort()
 
     const doc = await features.query;
 
