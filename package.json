@@ -15,5 +15,17 @@
   "bugs": {
     "url": "https://github.com/caiooliveirah09/backend-test-two/issues"
   },
-  "homepage": "https://github.com/caiooliveirah09/backend-test-two#readme"
+  "homepage": "https://github.com/caiooliveirah09/backend-test-two#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.9.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^18.13.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  }
 }
