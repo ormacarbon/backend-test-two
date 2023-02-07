@@ -1,0 +1,20 @@
+{
+  "name": "backend-test-two",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafael4141/backend-test-two.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafael4141/backend-test-two/issues"
+  },
+  "homepage": "https://github.com/rafael4141/backend-test-two#readme"
+}
