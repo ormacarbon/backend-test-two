@@ -1,18 +1,20 @@
-import { IdGenerator } from './../services/idGenerator';
-import BeerProduct from '../models/beerModel';
+import { IdGenerator } from "../services/idGenerator";
+import BeerProduct from "../models/beerProductModel";
 import {
   MissingCredentials,
   ProductExists,
   ProductNotFound,
-} from './../error/handleError';
-import { BeerDTO } from './../models/beerInterface';
-import fs from 'fs';
-export class BeerBusiness {
+} from "../error/handleError";
+import { BeerProductDTO } from "../models/beerProductInterface";
+import fs from "fs";
+export class BeerProductBusiness {
   constructor(private idGenerator: IdGenerator) {}
   // @desc   Import store data from db.json to the new database.
   // @route   POST /import-data
   public importData = async () => {
-    const data: BeerDTO[] = JSON.parse(fs.readFileSync('..//db.json', 'utf-8'));
+    const data: BeerProductDTO[] = JSON.parse(
+      fs.readFileSync("..//db.json", "utf-8")
+    );
     try {
       await BeerProduct.create(data);
     } catch (error: any) {
@@ -21,7 +23,7 @@ export class BeerBusiness {
   };
   // @desc    Register new product
   // @route   POST /register
-  public createBeerRegister = async (input: BeerDTO) => {
+  public createProductRegister = async (input: BeerProductDTO) => {
     try {
       const {
         abv,
@@ -91,7 +93,7 @@ export class BeerBusiness {
   };
   // @desc    Update product
   // @route   Put /update-product/:id
-  public updateProduct = async (param: string, input: BeerDTO) => {
+  public updateProduct = async (param: string, input: BeerProductDTO) => {
     try {
       const id = param;
       const product = await BeerProduct.findById(id);

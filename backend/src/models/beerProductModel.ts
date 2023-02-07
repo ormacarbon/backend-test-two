@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 //how there were many products in the db.json I choice to put as required only id and abv. 
 //but I did the validation throw error for name, ibu and country properties because I think that should be the basic
 //information to register a new product. 
-const beerSchema = new mongoose.Schema({
+const beerProductSchema = new mongoose.Schema({
   abv: {
     type: Number,
     required: true,
@@ -37,4 +37,4 @@ const beerSchema = new mongoose.Schema({
   },
 });
 
-export default module.exports = mongoose.model("BeerProduct", beerSchema);
+export default module.exports = mongoose.model("BeerProduct", beerProductSchema);

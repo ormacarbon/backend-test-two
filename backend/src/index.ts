@@ -1,4 +1,4 @@
-import { beerRouter } from './router/beerRouter';
+import { beerProductRouter } from './router/beerProductRouter';
 import app from './app';
 
-app.use('/', beerRouter);
+app.use('/', beerProductRouter);

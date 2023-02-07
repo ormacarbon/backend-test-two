@@ -1,18 +1,18 @@
-import { BeerDTO } from './../models/beerInterface';
-import { Request, Response } from 'express';
-import { BeerBusiness } from '../business/beerBusiness';
+import { BeerProductDTO } from "../models/beerProductInterface";
+import { Request, Response } from "express";
+import { BeerProductBusiness } from "../business/beerProductBusiness";
 
-export class BeerController {
-  constructor(private beerBusiness: BeerBusiness) {}
+export class BeerProductController {
+  constructor(private beerBusiness: BeerProductBusiness) {}
   public importData = async (req: Request, res: Response) => {
     try {
       await this.beerBusiness.importData();
-      res.status(201).send({ message: 'Data imported successfully.' });
+      res.status(201).send({ message: "Data imported successfully." });
     } catch (error: any) {
       res.status(error.statusCode || 400).send(error.message);
     }
   };
-  public createBeerRegister = async (req: Request, res: Response) => {
+  public createProductRegister = async (req: Request, res: Response) => {
     try {
       const {
         abv,
@@ -27,7 +27,7 @@ export class BeerController {
         state,
         website,
       } = req.body;
-      const beer: BeerDTO = {
+      const beer: BeerProductDTO = {
         abv,
         address,
         category,
@@ -40,8 +40,8 @@ export class BeerController {
         state,
         website,
       };
-      await this.beerBusiness.createBeerRegister(beer);
-      res.status(201).send({ message: 'Product registered.' });
+      await this.beerBusiness.createProductRegister(beer);
+      res.status(201).send({ message: "Product registered." });
     } catch (error: any) {
       res.status(error.statusCode || 400).send(error.message);
     }
@@ -70,7 +70,7 @@ export class BeerController {
     try {
       const { id } = req.params;
       await this.beerBusiness.updateProduct(id, req.body);
-      res.status(200).send({ message: 'Product updated'});
+      res.status(200).send({ message: "Product updated" });
     } catch (error: any) {
       res.status(error.statusCode || 400).send(error.message);
     }
@@ -80,7 +80,7 @@ export class BeerController {
     try {
       const { id } = req.params;
       await this.beerBusiness.deleteProduct(id);
-      res.status(200).send({ message: 'Product deleted'});
+      res.status(200).send({ message: "Product deleted" });
     } catch (error: any) {
       res.status(error.statusCode || 400).send(error.message);
     }

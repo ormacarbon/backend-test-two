@@ -1,4 +1,4 @@
-export interface BeerDTO {
+export interface BeerProductDTO {
   abv: number;
   address?: string;
   category?: string;
