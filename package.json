@@ -1,0 +1,24 @@
+{
+  "name": "backend-test-two",
+  "version": "1.0.0",
+  "description": "## SITUAÇÃO-PROBLEMA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DouglasD18/backend-test-two.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DouglasD18/backend-test-two/issues"
+  },
+  "homepage": "https://github.com/DouglasD18/backend-test-two#readme",
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "typescript": "^4.9.5"
+  }
+}
