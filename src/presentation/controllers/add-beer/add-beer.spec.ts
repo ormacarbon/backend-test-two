@@ -324,4 +324,77 @@ describe("AddBeer Controller", () => {
     expect(httpResponse.statusCode).toBe(500);
     expect(httpResponse.body).toEqual(new ServerError());
   })
+
+  it('Should call CreateBudge with correct values.', async () => {
+    const { sut, addBeerStub } = makeSut();
+    const httpRequest = {
+      body: {
+        name: "Stone House Stout",
+        abv:8.918797384901016,
+        address:"141 South Main Street",
+        category:"British Ale",
+        city:"Slippery Rock",
+        coordinates:[41.0638,-80.0556],
+        country:"United States",
+        description:"This robust, hearty stout is as sturdy as its namesake.  Roasted barley is the trademark of stout, a bittersweet separation from its cousin Porter.  The deep character of roasted barley is further enhanced by the addition of oatmeal for an incredible silky finish.",
+        ibu:104,
+        state:"Pennsylvania",
+        website:"http://www.northcountrybrewing.com"
+      }
+    }
+    
+    const createSpy = jest.spyOn(addBeerStub, "add");
+    sut.handle(httpRequest);
+
+    expect(createSpy).toHaveBeenCalledWith({
+      name: "Stone House Stout",
+      abv:8.918797384901016,
+      address:"141 South Main Street",
+      category:"British Ale",
+      city:"Slippery Rock",
+      coordinates:[41.0638,-80.0556],
+      country:"United States",
+      description:"This robust, hearty stout is as sturdy as its namesake.  Roasted barley is the trademark of stout, a bittersweet separation from its cousin Porter.  The deep character of roasted barley is further enhanced by the addition of oatmeal for an incredible silky finish.",
+      ibu:104,
+      state:"Pennsylvania",
+      website:"http://www.northcountrybrewing.com"
+    });
+  })
+
+  it('Should return 201 if valid values is provided.', async () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: {
+        name: "Stone House Stout",
+        abv:8.918797384901016,
+        address:"141 South Main Street",
+        category:"British Ale",
+        city:"Slippery Rock",
+        coordinates:[41.0638,-80.0556],
+        country:"United States",
+        description:"This robust, hearty stout is as sturdy as its namesake.  Roasted barley is the trademark of stout, a bittersweet separation from its cousin Porter.  The deep character of roasted barley is further enhanced by the addition of oatmeal for an incredible silky finish.",
+        ibu:104,
+        state:"Pennsylvania",
+        website:"http://www.northcountrybrewing.com"
+      }
+    }
+    
+    const httpResponse = await sut.handle(httpRequest);
+
+    expect(httpResponse.statusCode).toBe(201);
+    expect(httpResponse.body).toEqual({
+      id: 1,
+      name: "Stone House Stout",
+      abv:8.918797384901016,
+      address:"141 South Main Street",
+      category:"British Ale",
+      city:"Slippery Rock",
+      coordinates:[41.0638,-80.0556],
+      country:"United States",
+      description:"This robust, hearty stout is as sturdy as its namesake.  Roasted barley is the trademark of stout, a bittersweet separation from its cousin Porter.  The deep character of roasted barley is further enhanced by the addition of oatmeal for an incredible silky finish.",
+      ibu:104,
+      state:"Pennsylvania",
+      website:"http://www.northcountrybrewing.com"
+    });
+  })
 })
