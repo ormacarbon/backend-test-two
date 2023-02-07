@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      # Garanta que não haverá conflitos de porta com um mongodb que esteja
+      # rodando localmente
+      - "27017:27017"
