@@ -1,20 +1,51 @@
+import { BeerModels } from "../../../domain/models/beer";
+import { AddBeer, AddBeerData } from "../../../domain/useCases/add-beer";
 import { MissingParamError } from "../../erros/missing-param-error";
 import { AddBeerController } from './add-beer';
+import { ServerError } from '../../erros/server-error';
+
+const makeAddBeer = (): AddBeer => {
+  class AddBeerStub implements AddBeer {
+    add(data: AddBeerData): Promise<BeerModels> {
+      const fakeBeer = {
+        id: 1,
+        name: "Stone House Stout",
+        abv: 8.918797384901016,
+        address:"141 South Main Street",
+        category:"British Ale",
+        city:"Slippery Rock",
+        coordinates:[41.0638,-80.0556],
+        country:"United States",
+        description:"This robust, hearty stout is as sturdy as its namesake.  Roasted barley is the trademark of stout, a bittersweet separation from its cousin Porter.  The deep character of roasted barley is further enhanced by the addition of oatmeal for an incredible silky finish.",
+        ibu:104,
+        state:"Pennsylvania",
+        website:"http://www.northcountrybrewing.com"
+      }
+
+      return new Promise(resolve => resolve(fakeBeer));
+    }
+  }
+
+  return new AddBeerStub();
+}
 
 interface SutTypes {
   sut: AddBeerController
+  addBeerStub: AddBeer
 }
 
 const makeSut = (): SutTypes => {
-  const sut = new AddBeerController();
+  const addBeerStub = makeAddBeer();
+  const sut = new AddBeerController(addBeerStub);
 
   return {
-    sut
+    sut,
+    addBeerStub
   }
 }
 
 describe("AddBeer Controller", () => {
-  it("Should return 400 if no name is provided", () => {
+  it("Should return 400 if no name is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -31,13 +62,13 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('name'));
   })
 
-  it("Should return 400 if no abv is provided", () => {
+  it("Should return 400 if no abv is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -54,13 +85,13 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('abv'));
   })
 
-  it("Should return 400 if no address is provided", () => {
+  it("Should return 400 if no address is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -77,13 +108,13 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('address'));
   })
 
-  it("Should return 400 if no category is provided", () => {
+  it("Should return 400 if no category is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -100,13 +131,13 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('category'));
   })
 
-  it("Should return 400 if no city is provided", () => {
+  it("Should return 400 if no city is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -123,13 +154,13 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('city'));
   })
 
-  it("Should return 400 if no coordinates is provided", () => {
+  it("Should return 400 if no coordinates is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -146,13 +177,13 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('coordinates'));
   })
 
-  it("Should return 400 if no country is provided", () => {
+  it("Should return 400 if no country is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -169,13 +200,13 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('country'));
   })
   
-  it("Should return 400 if no description is provided", () => {
+  it("Should return 400 if no description is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -192,13 +223,13 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('description'));
   })
 
-  it("Should return 400 if no ibu is provided", () => {
+  it("Should return 400 if no ibu is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -215,13 +246,13 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('ibu'));
   })
 
-  it("Should return 400 if no state is provided", () => {
+  it("Should return 400 if no state is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -238,13 +269,13 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('state'));
   })
 
-  it("Should return 400 if no website is provided", () => {
+  it("Should return 400 if no website is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
       body: {
@@ -261,9 +292,36 @@ describe("AddBeer Controller", () => {
       }
     }
 
-    const httpResponse = sut.handle(httpResquest);
+    const httpResponse = await sut.handle(httpResquest);
 
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('website'));
+  })
+
+  it("Should return 500 if AddBeer throws", async () => {
+    const { sut, addBeerStub } = makeSut();
+    const httpResquest = {
+      body: {
+        name: "Stone House Stout",
+        abv:8.918797384901016,
+        address:"141 South Main Street",
+        category:"British Ale",
+        city:"Slippery Rock",
+        coordinates:[41.0638,-80.0556],
+        country:"United States",
+        description:"This robust, hearty stout is as sturdy as its namesake.  Roasted barley is the trademark of stout, a bittersweet separation from its cousin Porter.  The deep character of roasted barley is further enhanced by the addition of oatmeal for an incredible silky finish.",
+        ibu:104,
+        state:"Pennsylvania",
+        website:"http://www.northcountrybrewing.com"
+      }
+    }
+
+    jest.spyOn(addBeerStub, "add").mockImplementationOnce(() => {
+      throw new Error();
+    })
+    const httpResponse = await sut.handle(httpResquest);
+
+    expect(httpResponse.statusCode).toBe(500);
+    expect(httpResponse.body).toEqual(new ServerError());
   })
 })
