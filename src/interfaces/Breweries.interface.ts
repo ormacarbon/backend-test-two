@@ -3,7 +3,7 @@ export default interface BreweriesInterface {
   address: string;
   category: string;
   city: string;
-  coordinates: number[];
+  coordinates: Coords;
   country: string;
   description: string;
   ibu: number;
@@ -11,3 +11,5 @@ export default interface BreweriesInterface {
   state: string;
   website: string;
 }
+
+export type Coords = number[];

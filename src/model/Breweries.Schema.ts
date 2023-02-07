@@ -1,5 +1,9 @@
 import { Schema, model } from 'mongoose';
+import { handleErrorDatabase } from '../common/utils/errorDatabaseHandler';
 import BreweriesInterface from '../interfaces/Breweries.interface';
+import { InternalServerError } from '../services/err/Errors';
+
+type Coords = [number, number];
 
 const BrewerieSchema = new Schema({
   abv: Number,
@@ -29,19 +33,36 @@ class BreweriesModel {
   brewerie = model('breweries', BrewerieSchema);
 
   async findAllBreweries() {
+    return await this.brewerie.find();
+  }
+
+  async find(id: string) {
     try {
-      return await this.brewerie.find();
+      const brewerie = await this.brewerie.findById(id);
+      return brewerie;
     } catch (error) {
-      return error;
+      throw new InternalServerError(error as string);
     }
   }
 
-  async saveData(data: BreweriesInterface) {
+  async saveData(brewerie: BreweriesInterface) {
     try {
-      await this.brewerie.create(data);
+      const data = await this.brewerie.create(brewerie);
+
+      if (data) {
+        return data;
+      }
+
+      return new InternalServerError('ERROR');
     } catch (error) {
-      return error;
+      console.log(error);
     }
+  }
+
+  async findCoordenatesDatabase(coords: number[]) {
+    return await this.brewerie.findOne({
+      coordinates: coords
+    });
   }
 }
 

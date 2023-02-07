@@ -1,8 +1,8 @@
-import { Errback, NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
 
 const errorHandler = (
-  err: Errback,
+  err: any,
   req: Request,
   res: Response,
   next: NextFunction
@@ -11,10 +11,18 @@ const errorHandler = (
     res.status(400).json(err);
   }
 
-  if (err) {
-    console.log('cai aqui?');
+  if (err.message.includes('E11000')) {
+    res.status(400).json({
+      message: 'Key duplicate',
+      status: err.statusCode
+    });
+  }
 
-    res.status(400).json(err);
+  if (err) {
+    res.status(err.statusCode).json({
+      message: err.message,
+      status: err.statusCode
+    });
   }
 
   next();
