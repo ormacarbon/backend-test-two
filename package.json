@@ -4,7 +4,8 @@
   "description": "Solução",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch --noStackTrace --runInBand",
+    "test:ci": "npm test -- --coverage"
   },
   "repository": {
     "type": "git",
