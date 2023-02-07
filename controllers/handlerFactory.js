@@ -1,3 +1,4 @@
+const APIFeatures = require("../utils/apiFeatures");
 
 exports.getAll = Model => async (req, res, next) => {
 
@@ -5,7 +6,11 @@ exports.getAll = Model => async (req, res, next) => {
     let filter = {};
     if(req.params.beerId) filter = {tour: req.params.beerId}
 
-    const doc = await Model.find()
+    const features = new APIFeatures(Model.find(filter), req.query)
+        .filter()
+
+
+    const doc = await features.query;
 
     res.status(200).json({
         status: 'success',
