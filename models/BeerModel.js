@@ -48,7 +48,7 @@ const beerSchema = new mongoose.Schema({
 );
 
 beerSchema.index({name:1});
-beerSchema.index({startLocation: '2dsphere'})
+beerSchema.index({coordinates: '2dsphere'})
 
 const Beer = mongoose.model('Beer', beerSchema);
 
