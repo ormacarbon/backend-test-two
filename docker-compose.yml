@@ -1,0 +1,9 @@
+services:
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - POSTGRES_USER = docker
+      - POSTGRES_PASSWORD= ignite
+      - POSTGRES_DB= search_engine
