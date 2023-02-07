@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { findAllBrewelers, store, find } from '../controller/breweries.handler';
+import breweriesHandler from '../controller/breweries.handler';
 const routes = Router();
 
-routes.get('/api/v1/brewelers', findAllBrewelers);
-routes.get('/api/v1/brewelers/:id', find);
-routes.post('/api/v1/brewelers', store);
+routes.get('/api/v1/brewelers', breweriesHandler.findAllBrewelers);
+routes.get('/api/v1/brewelers/:id', breweriesHandler.find);
+routes.post('/api/v1/brewelers', breweriesHandler.store);
 
 export default routes;
