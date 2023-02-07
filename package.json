@@ -19,6 +19,7 @@
   "homepage": "https://github.com/LucasBarboza-maker/backend-test-two#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "mongodb": "^5.0.0"
+    "mongodb": "^5.0.0",
+    "mongoose": "^6.9.1"
   }
 }
