@@ -6,6 +6,7 @@ const router = express.Router();
 router
     .route('/')
     .get(beerController.getAllBeers)
+    .post(beerController.createBeer)
 
 router
     .route('/:id')
