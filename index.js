@@ -19,3 +19,8 @@ mongoose.connect(DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log(`Connection established`))
+
+
+const server = app.listen(port, () => {
+  console.log(`App running on port: ${port}...`);
+})
