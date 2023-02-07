@@ -12,5 +12,6 @@ router
     .route('/:id')
     .get(beerController.getBeer)
     .patch(beerController.updateBeer)
+    .delete(beerController.deleteBeer)
 
 module.exports = router;
