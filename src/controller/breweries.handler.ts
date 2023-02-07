@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-
+import BreweriesDTO from '../dtos/BreweriesDTO';
+import BreweriesService from '../services/Breweries.service';
 
 export const findAllBrewelers = async (
   req: Request,
@@ -7,7 +8,9 @@ export const findAllBrewelers = async (
   next: NextFunction
 ) => {
   try {
-    res.json([])
+    const data = await BreweriesService.findAllBrewelers();
+
+    return res.status(200).json(data);
   } catch (error) {
     next(error);
   }
@@ -19,9 +22,11 @@ export const store = async (
   next: NextFunction
 ) => {
   try {
-    res.json({
-      message: "criado"
-    })
+    const body = BreweriesDTO.parse(req.body);
+
+    const data = await BreweriesService.store(body);
+
+    return res.status(201).json(data);
   } catch (error) {
     next(error);
   }
