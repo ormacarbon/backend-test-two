@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/rafael4141/backend-test-two/issues"
   },
-  "homepage": "https://github.com/rafael4141/backend-test-two#readme"
+  "homepage": "https://github.com/rafael4141/backend-test-two#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
 }
