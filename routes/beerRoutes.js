@@ -10,6 +10,6 @@ router
 router
     .route('/:id')
     .get(beerController.getBeer)
-
+    .patch(beerController.updateBeer)
 
 module.exports = router;
