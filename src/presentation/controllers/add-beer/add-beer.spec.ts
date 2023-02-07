@@ -1,8 +1,6 @@
 import { BeerModels } from "../../../domain/models/beer";
-import { AddBeer, AddBeerData } from "../../../domain/useCases/add-beer";
-import { MissingParamError } from "../../erros/missing-param-error";
-import { AddBeerController } from './add-beer';
-import { ServerError } from '../../erros/server-error';
+import { AddBeer, AddBeerData, MissingParamError, ServerError } from "./add-beer-protocols"
+import { AddBeerController } from "./add-beer";
 
 const makeAddBeer = (): AddBeer => {
   class AddBeerStub implements AddBeer {

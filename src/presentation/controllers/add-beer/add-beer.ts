@@ -1,8 +1,4 @@
-import { AddBeer } from "../../../domain/useCases/add-beer";
-import { MissingParamError } from "../../erros/missing-param-error";
-import { badRequest, created, serverError } from "../../helpers/http-helpers";
-import { Controller } from "../../protocols/controller";
-import { HttpRequest, HttpResponse } from "../../protocols/http";
+import { AddBeer, Controller, HttpRequest, HttpResponse, MissingParamError, badRequest, created, serverError } from "./add-beer-protocols";
 
 export class AddBeerController implements Controller {
   constructor(private addBeer: AddBeer) {}
