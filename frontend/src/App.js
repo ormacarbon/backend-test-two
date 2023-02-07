@@ -10,16 +10,16 @@ import Details from './pages/Details';
 
 function App() {
 	return (
-		<BeerProvider>
-			<BrowserRouter>
+		<BrowserRouter>
+			<BeerProvider>
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/add' element={<Add />} />
 					<Route path='/update/:id' element={<Update />} />
 					<Route path='/details/:id' element={<Details />} />
 				</Routes>
-			</BrowserRouter>
-		</BeerProvider>
+			</BeerProvider>
+		</BrowserRouter>
 	);
 }
 

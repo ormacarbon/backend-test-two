@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { func } from 'prop-types';
-import { Button, Form } from 'react-bootstrap';
+import { Button, ButtonGroup, Form } from 'react-bootstrap';
 import BeerContext from '../context/BeerContext';
 
 export default function Header({ reset }) {
@@ -17,10 +17,12 @@ export default function Header({ reset }) {
 	return (
 		<header>
 			<Form>
-				<Form.Group style={{ display: 'flex' }}>
+				<Form.Group style={{}}>
 					<Form.Control type="text" placeholder="Type beer name" value={filter} onChange={({ target }) => setFilter(target.value)} />
-					<Button onClick={searchBeer}>Search</Button>
-					<Button onClick={reset}>Reset</Button>
+					<ButtonGroup style={{ width: '100%', marginTop: '5px' }}>
+						<Button variant="light" onClick={searchBeer}>Search</Button>
+						<Button variant="light" onClick={reset}>Reset</Button>
+					</ButtonGroup>
 				</Form.Group>
 			</Form>
 		</header>

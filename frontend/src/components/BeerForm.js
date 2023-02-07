@@ -14,7 +14,7 @@ export default function BeerForm({ onSubmit, buttonText }) {
 	const handleDefaultValue = (field) => location.pathname.includes('update') ? form[field] : '';
 
 	return (
-		<Form onSubmit={onSubmit}>
+		<Form className="beer-form" onSubmit={onSubmit}>
 			<Form.Control
 				required
 				onChange={handleInputs}
@@ -96,7 +96,7 @@ export default function BeerForm({ onSubmit, buttonText }) {
 				placeholder="Coordinates: [-16.68, -49.25]"
 				defaultValue={handleDefaultValue('coordinates')}
 			/>
-			<Button type="submit">{buttonText}</Button>
+			<Button variant="success" type="submit">{buttonText}</Button>
 		</Form>
 	);
 }

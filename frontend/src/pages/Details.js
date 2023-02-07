@@ -11,7 +11,7 @@ export default function Details() {
 	}, []);
 
 	if (beer) return (
-		<div>
+		<div className="details-container">
 			<h1>Name: {beer.name}</h1>
 			<p>Category: {beer.category}</p>
 			<p>Description: {beer.description}</p>

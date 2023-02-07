@@ -1,18 +1,16 @@
 import React, { useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import BeerContext from '../context/BeerContext';
 import BeerForm from '../components/BeerForm';
 
 export default function Update() {
-	const location = useLocation();
+	const { id } = useParams();
 	const navigate = useNavigate();
 
 	const { form, listBeer } = useContext(BeerContext);
 
 	const updateBeer = (e) => {
 		e.preventDefault();
-
-		const id = location.pathname.replace('/update/', '');
 
 		const aux = JSON.parse(form.coordinates);
 		const aux2 = JSON.parse(form.abv);

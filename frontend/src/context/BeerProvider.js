@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import BeerContext from './BeerContext';
-import {node} from 'prop-types';
+import { node } from 'prop-types';
 
 export default function BeerProvider({ children }) {
 	const [beers, setBeers] = useState([]);
@@ -18,7 +19,7 @@ export default function BeerProvider({ children }) {
 		abv: 0,
 		ibu: 0,
 		coordinates: [0, 0]
-	}); 
+	});
 
 
 	const listBeer = () => {
@@ -44,6 +45,7 @@ export default function BeerProvider({ children }) {
 	return (
 		<BeerContext.Provider value={valueObject}>
 			{children}
+			<Link className="footer" to="/">Home</Link>
 		</BeerContext.Provider>
 	);
 }

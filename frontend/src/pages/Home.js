@@ -13,12 +13,12 @@ export default function Home() {
 	};
 
 	return (
-		<div>
+		<>
 			<Header reset={reset} />
-			<Link to="/add">+</Link>
+			<Link className="add" to="/add">+</Link>
 			<main>
 				{beers.length === 0 ? 'No results.' : beers.map(beer => <BeerCard key={beer._id} beer={beer} reset={reset} />)}
 			</main>
-		</div>
+		</>
 	);
 }
