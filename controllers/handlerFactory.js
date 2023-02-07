@@ -10,7 +10,8 @@ exports.getAll = Model => async (req, res, next) => {
         .filter()
         .sort()
         .limitFields()
-
+        .paginate()
+        
     const doc = await features.query;
 
     res.status(200).json({
