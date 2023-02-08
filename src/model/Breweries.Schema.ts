@@ -2,6 +2,8 @@ import { Schema, model } from 'mongoose';
 import { handleErrorDatabase } from '../common/utils/errorDatabaseHandler';
 import BreweriesInterface from '../interfaces/Breweries.interface';
 import { BreweriesUpdateInterface } from '../interfaces/BreweryUptade.interface';
+import { Filters } from '../services/Breweries.service';
+
 import { InternalServerError } from '../services/err/Errors';
 
 const BrewerieSchema = new Schema({
@@ -113,6 +115,10 @@ class BreweriesModel {
     } catch (error) {
       throw new InternalServerError(error as string);
     }
+  }
+
+  async findBreweryWithFilter(filters: Filters) {
+    return await this.brewerie.find(filters);
   }
 }
 

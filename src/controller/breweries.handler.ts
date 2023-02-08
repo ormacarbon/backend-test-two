@@ -3,7 +3,7 @@ import { catchContent } from '../common/utils/readFileJSON';
 import BreweriesDTO from '../dtos/BreweriesDTO';
 import BreweryUpdateDTO from '../dtos/BreweryUpdate.dto';
 
-import BreweriesService from '../services/Breweries.service';
+import BreweriesService, { Filters } from '../services/Breweries.service';
 import { InvalidArgumentError } from '../services/err/Errors';
 
 class BreweriesHandlerController {
@@ -34,7 +34,7 @@ class BreweriesHandlerController {
         );
       }
 
-      const brewerie = await BreweriesService.find(id);
+      const brewerie = await BreweriesService.findByID(id);
 
       return res.json(brewerie);
     } catch (error) {
@@ -44,7 +44,13 @@ class BreweriesHandlerController {
 
   async findAllBrewelers(req: Request, res: Response, next: NextFunction) {
     try {
-      const data = await BreweriesService.findAllBrewelers();
+      const filters: Filters = {
+        city: String(req.query.city),
+        state: String(req.query.state),
+        country: String(req.query.country)
+      };
+
+      const data = await BreweriesService.findBrewelers(filters);
 
       return res.status(200).json(data);
     } catch (error) {

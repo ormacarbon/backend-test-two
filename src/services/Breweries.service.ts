@@ -1,4 +1,5 @@
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
+
 import BreweriesInterface, {
   constructorBreweryInterface
 } from '../interfaces/Breweries.interface';
@@ -6,16 +7,30 @@ import { BreweriesUpdateInterface } from '../interfaces/BreweryUptade.interface'
 import BreweriesModel from '../model/Breweries.Schema';
 import { InvalidArgumentError } from './err/Errors';
 
+export interface Filters {
+  country?: string;
+  city?: string;
+  state?: string;
+}
+
 class BreweriesService {
-  async findAllBrewelers() {
+  async findBrewelers(filters: Filters) {
     try {
+      if (filters) {
+        const filteredObject = Object.fromEntries(
+          Object.entries(filters).filter(([key, value]) => value != 'undefined')
+        );
+
+        return BreweriesModel.findBreweryWithFilter(filteredObject);
+      }
+
       return BreweriesModel.findAllBreweries();
     } catch (error) {
       cacthErrosFunctions(error);
     }
   }
 
-  async find(id: string) {
+  async findByID(id: string) {
     try {
       const errors = [];
 
@@ -94,6 +109,10 @@ class BreweriesService {
       if (brewery.name) {
         href = brewery.name.replace(/ /g, '').toLowerCase();
       }
+
+      brewery.city = String(brewery.city).toLowerCase();
+      brewery.country = String(brewery.country).toLowerCase();
+      brewery.state = String(brewery.state).toLowerCase();
 
       const data: constructorBreweryInterface = {
         ...brewery,
