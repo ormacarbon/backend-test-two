@@ -2,10 +2,11 @@ import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 
 import BreweriesInterface, {
   constructorBreweryInterface
-} from '../interfaces/Breweries.interface';
-import { BreweriesUpdateInterface } from '../interfaces/BreweryUptade.interface';
+} from '../interfaces/Breweries/Breweries.interface';
+import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import BreweriesModel from '../model/Breweries.Schema';
 import { InvalidArgumentError } from './err/Errors';
+import MenuService from './Menu.service';
 
 export interface Filters {
   country?: string;
@@ -18,7 +19,7 @@ class BreweriesService {
     try {
       if (filters) {
         const filteredObject = Object.fromEntries(
-          Object.entries(filters).filter(([key, value]) => value != 'undefined')
+          Object.entries(filters).filter(([, value]) => value != 'undefined')
         );
 
         return BreweriesModel.findBreweryWithFilter(filteredObject);
@@ -74,7 +75,7 @@ class BreweriesService {
         const update = await BreweriesModel.findAndUpdate(breweryUptade);
 
         if (!update) {
-          errors.push('Error: Breweries not find;');
+          errors.push('Error: Not possible uptade the data;');
         }
 
         if (errors.length > 0) {
@@ -127,7 +128,11 @@ class BreweriesService {
         throw new InvalidArgumentError(JSON.stringify(errors));
       }
 
-      return await BreweriesModel.saveData(data);
+      const brewelyStored = await BreweriesModel.saveData(data);
+
+      await MenuService.store(brewelyStored?.id);
+
+      return brewelyStored;
     } catch (error) {
       cacthErrosFunctions(error);
     }

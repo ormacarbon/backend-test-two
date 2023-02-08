@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { handleErrorDatabase } from '../common/utils/errorDatabaseHandler';
-import BreweriesInterface from '../interfaces/Breweries.interface';
-import { BreweriesUpdateInterface } from '../interfaces/BreweryUptade.interface';
+import BreweriesInterface from '../interfaces/Breweries/Breweries.interface';
+import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import { Filters } from '../services/Breweries.service';
 
 import { InternalServerError } from '../services/err/Errors';
@@ -59,7 +59,7 @@ class BreweriesModel {
         return data;
       }
 
-      return new InternalServerError('ERROR');
+      throw new InternalServerError('ERROR');
     } catch (error) {
       console.log(error);
     }
