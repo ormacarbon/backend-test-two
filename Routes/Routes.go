@@ -9,6 +9,8 @@ import(
 
 )
 
+// Sets up routes using Gin.
+// In this case, the routes are Rest endpoints.
 func SetupRouter() *gin.Engine {
 	
 	r := gin.Default()
