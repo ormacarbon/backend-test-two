@@ -19,13 +19,10 @@ interface ClientRequest {
 export class GetFilteredClientsController {
   async handle(req: Request, res: Response) {
     const {
-      id,
       abv,
       address,
       category,
       city,
-      lat,
-      long,
       country,
       description,
       ibu,
@@ -41,8 +38,6 @@ export class GetFilteredClientsController {
       address,
       category,
       city,
-      lat,
-      long,
       country,
       description,
       ibu,

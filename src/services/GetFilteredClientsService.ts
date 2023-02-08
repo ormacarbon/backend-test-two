@@ -1,14 +1,10 @@
 import { prismaClient } from "../prisma";
-import { Coord } from "../helpers/CoordinatesClient";
-import { removeEmpty } from "../helpers/RemoveEmpty";
 
 interface ClientRequest {
   abv?: number;
   address?: string;
   category?: string;
   city?: string;
-  lat?: number;
-  long?: number;
   country?: string;
   description?: string;
   ibu?: number;
@@ -22,8 +18,6 @@ export class GetFilteredClientsService {
     address,
     category,
     city,
-    lat,
-    long,
     country,
     description,
     ibu,
@@ -37,8 +31,6 @@ export class GetFilteredClientsService {
         address: address,
         category: category,
         city: city,
-        lat: lat,
-        long: long,
         country: country,
         description: description,
         ibu: ibu,
