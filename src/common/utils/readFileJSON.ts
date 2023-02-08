@@ -1,15 +1,21 @@
 import fs from 'fs';
 import Path = require('path');
 
-async function readFile(path: string): Promise<string | void> {
+export function unlinkFile(path: string): void {
+  fs.unlinkSync(path);
+}
+
+function readFile(path: string): string | void {
   return fs.readFileSync(path, { encoding: 'utf-8' });
 }
 
-export async function catchContent(path: string) {
+export async function catchContent(path: string): Promise<string | void> {
   path = Path.resolve(__dirname, '..', '..', '..', path);
-  const file = await readFile(path);
+  const file = readFile(path);
 
   if (file) {
+    unlinkFile(path);
+
     return file;
   }
 

@@ -94,7 +94,11 @@ class BreweriesHandlerController {
 
         if (content) {
           const response = await BreweriesService.storeWithJSONFile(content);
-          return res.json(response);
+
+          return res.status(201).json({
+            message: response,
+            statusCode: 201
+          });
         }
       }
 

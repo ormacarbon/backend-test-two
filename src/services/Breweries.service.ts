@@ -75,9 +75,11 @@ class BreweriesService {
     try {
       const content: BreweriesInterface[] = JSON.parse(data);
 
-      return content.forEach(async (value: BreweriesInterface) => {
+      content.forEach(async (value: BreweriesInterface) => {
         await this.store(value);
       });
+
+      return `Data added with success`;
     } catch (error) {
       cacthErrosFunctions(error);
     }

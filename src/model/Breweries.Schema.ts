@@ -17,8 +17,7 @@ const BrewerieSchema = new Schema({
   description: String,
   ibu: Number,
   name: {
-    type: String,
-    unique: true
+    type: String
   },
   state: String,
   website: {
