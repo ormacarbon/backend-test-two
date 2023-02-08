@@ -1,18 +1,24 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": ".",
-    "target": "es2019",
     "module": "commonjs",
-    "typeRoots": [
-      "src/@types",
-      "./node_modules/@types"
-    ],
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
     "skipLibCheck": true,
-  },
-  "exclude": ["node_modules"]
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "resolveJsonModule":true
+  }
 }
 
