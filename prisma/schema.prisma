@@ -12,11 +12,12 @@ datasource db {
 
 model Client{
   id String @id @default(uuid())
-  abv Int
+  abv Float
   address String
   category String
   city String
-  coordinates String
+  lat Float
+  long Float
   country String
   description String
   ibu Int
