@@ -11,6 +11,10 @@ abstract class MongoModel<T> implements IModel<T> {
   public async create(obj:T):Promise<T> {
     return this.model.create({ ...obj });
   }
+
+  public async readBeer(name: string):Promise<T | null> {
+    return this.model.findOne({ name });
+  }
 }
 
 export default MongoModel;

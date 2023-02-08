@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import Beers from './routes/BeersRoutes';
 
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
@@ -12,6 +13,7 @@ const limiter = rateLimit({
 const app = express();
 app.use(express.json());
 app.use(limiter);
+app.use(Beers);
 app.use(helmet());
 app.use(cors());
 
