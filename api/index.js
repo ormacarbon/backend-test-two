@@ -1,11 +1,10 @@
 const express = require('express')
-const bodyParser = require('body-parser')
-
+const routes = require('./routes')
 const port = 3000
-
 const server = express()
 
-server.use(bodyParser.json())
+routes(server)
+
 
 server.get('/', (req, res) => {
     return res.status(200).json({
@@ -16,3 +15,5 @@ server.get('/', (req, res) => {
 server.listen(port, () => {
     console.log(`Server is on in ${port}`)
 })
+
+module.exports = server
