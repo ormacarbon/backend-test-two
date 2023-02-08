@@ -57,5 +57,5 @@ Neste teste, você deverá criar uma API com endpoints a serem consumidos via RE
 
 - Faça um pull request e nomeie-o como no ex.: Teste de (Seu nome aqui).
 - Envie um email para schmidt@repenso.eco e kevin@repenso.eco com o link do pull request, do deploy (tanto do front quanto do back se feito), e anexe a coleção do postman.
-- Assim que avaliarmos seu teste, enviaremos uma devolutiva de sucesso ou falha, e um link para agendar sua entrevista técnica.
+- Assim que avaliarmos seu teste, enviaremos uma devolutiva de sucesso ou falha, e caso seja aprovado, um link para agendar sua entrevista técnica.
 
