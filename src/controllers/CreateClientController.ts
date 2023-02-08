@@ -8,7 +8,8 @@ export class CreateClientController {
       address,
       category,
       city,
-      coordinates,
+      lat,
+      long,
       country,
       description,
       ibu,
@@ -17,6 +18,18 @@ export class CreateClientController {
       website,
     } = req.body;
 
+    if (!category) {
+      category == "";
+    }
+
+    if (!description) {
+      description == "";
+    }
+
+    if (!website) {
+      website == "";
+    }
+
     const createClientService = new CreateClientService();
 
     const client = await createClientService.execute({
@@ -24,7 +37,8 @@ export class CreateClientController {
       address,
       category,
       city,
-      coordinates,
+      lat,
+      long,
       country,
       description,
       ibu,
