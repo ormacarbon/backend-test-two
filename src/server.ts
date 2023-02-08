@@ -1,5 +1,11 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
 import express from "express";
 
 const app = express();
 
-app.listen(3000);
+app.use(express.json());
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => { console.log("APPLICATION UP") });
