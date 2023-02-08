@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.router = void 0;
+const express_1 = require("express");
+const CreateClientController_1 = require("./controllers/CreateClientController");
+const DetailsClientController_1 = require("./controllers/DetailsClientController");
+const AllClientsController_ts_1 = require("./controllers/AllClientsController.ts");
+const GetFilteredClientsController_1 = require("./controllers/GetFilteredClientsController");
+const UpdateClientController_1 = require("./controllers/UpdateClientController");
+const DeleteClientController_1 = require("./controllers/DeleteClientController");
+const router = (0, express_1.Router)();
+exports.router = router;
+router.post("/client", new CreateClientController_1.CreateClientController().handle);
+router.get("/detail", new DetailsClientController_1.DetailsClientController().handle);
+router.get("/clients", new AllClientsController_ts_1.AllClientsController().handle);
+router.get("/filtered", new GetFilteredClientsController_1.GetFilteredClientsController().handle);
+router.put("/update", new UpdateClientController_1.UpdateClientController().handle);
+router.delete("/remove", new DeleteClientController_1.DeleteClientController().handle);

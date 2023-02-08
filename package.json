@@ -6,7 +6,7 @@
   "author": "K0dax <yancarlosbrg@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "install": "npm install"
+    "install": "npm install",
     "build": "rm -rf /dist && tsc",
     "start": "node /dist/server.js"
   },
