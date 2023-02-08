@@ -18,6 +18,13 @@ const PORT = process.env.PORT || 3000;
   await connection();
 })();
 
+/**
+ * @name appConfig
+ * @param {app} Express.APP
+ *
+ * Make initial configs for application Ex: cors, routes...
+ *
+ */
 appConfig(app);
 
 app.listen(PORT, async () => {

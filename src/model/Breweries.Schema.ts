@@ -1,9 +1,8 @@
 import { Schema, model } from 'mongoose';
 import { handleErrorDatabase } from '../common/utils/errorDatabaseHandler';
 import BreweriesInterface from '../interfaces/Breweries.interface';
+import { BreweriesUpdateInterface } from '../interfaces/BreweryUptade.interface';
 import { InternalServerError } from '../services/err/Errors';
-
-type Coords = [number, number];
 
 const BrewerieSchema = new Schema({
   abv: Number,
@@ -12,7 +11,6 @@ const BrewerieSchema = new Schema({
   city: String,
   coordinates: {
     type: Array,
-    unique: true,
     default: [0, 0]
   },
   country: String,
@@ -24,8 +22,7 @@ const BrewerieSchema = new Schema({
   },
   state: String,
   website: {
-    type: String,
-    unique: true
+    type: String
   }
 });
 
@@ -38,8 +35,11 @@ class BreweriesModel {
 
   async find(id: string) {
     try {
-      const brewerie = await this.brewerie.findById(id);
-      return brewerie;
+      const brewery = await this.brewerie
+        .findById(id)
+        .catch(handleErrorDatabase);
+
+      return brewery;
     } catch (error) {
       throw new InternalServerError(error as string);
     }
@@ -47,7 +47,9 @@ class BreweriesModel {
 
   async saveData(brewerie: BreweriesInterface) {
     try {
-      const data = await this.brewerie.create(brewerie);
+      const data = await this.brewerie
+        .create(brewerie)
+        .catch(handleErrorDatabase);
 
       if (data) {
         return data;
@@ -63,6 +65,42 @@ class BreweriesModel {
     return await this.brewerie.findOne({
       coordinates: coords
     });
+  }
+
+  async findAndDelete(id: string) {
+    try {
+      const brewery = await this.brewerie
+        .findByIdAndDelete(id)
+        .catch(handleErrorDatabase);
+
+      return brewery;
+    } catch (error) {
+      throw new InternalServerError(error as string);
+    }
+  }
+
+  async findWebSiteHref(website: string) {
+    try {
+      const find = await this.brewerie.findOne({
+        website: website
+      });
+
+      return find;
+    } catch (error) {
+      throw new InternalServerError(error as string);
+    }
+  }
+
+  async findAndUpdate(brewerieUpdate: BreweriesUpdateInterface) {
+    try {
+      return await this.brewerie.findByIdAndUpdate(
+        brewerieUpdate.id,
+        brewerieUpdate
+      );
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerError(error as string);
+    }
   }
 }
 

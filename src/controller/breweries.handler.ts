@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
+import { catchContent } from '../common/utils/readFileJSON';
 import BreweriesDTO from '../dtos/BreweriesDTO';
+import BreweryUpdateDTO from '../dtos/BreweryUpdate.dto';
 
 import BreweriesService from '../services/Breweries.service';
 import { InvalidArgumentError } from '../services/err/Errors';
 
 class BreweriesHandlerController {
-  store = async (req: Request, res: Response, next: NextFunction) => {
+  async store(req: Request, res: Response, next: NextFunction) {
     try {
       const body = BreweriesDTO.parse(req.body);
 
@@ -19,8 +21,8 @@ class BreweriesHandlerController {
     } catch (error) {
       next(error);
     }
-  };
-  find = async (req: Request, res: Response, next: NextFunction) => {
+  }
+  async find(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
 
     const regex = /[0-9A-Fa-f]{6}/g;
@@ -38,13 +40,9 @@ class BreweriesHandlerController {
     } catch (error) {
       next(error);
     }
-  };
+  }
 
-  findAllBrewelers = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  async findAllBrewelers(req: Request, res: Response, next: NextFunction) {
     try {
       const data = await BreweriesService.findAllBrewelers();
 
@@ -52,7 +50,59 @@ class BreweriesHandlerController {
     } catch (error) {
       next(error);
     }
-  };
+  }
+  async findAndDelete(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+
+    const regex = /[0-9A-Fa-f]{6}/g;
+
+    try {
+      if (!regex.test(id)) {
+        throw new InvalidArgumentError(
+          'Error: not-valid-param; hexadecimal neccessity'
+        );
+      }
+
+      const brewery = await BreweriesService.FindAndDelete(id);
+
+      return res.json(brewery);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async uptade(req: Request, res: Response, next: NextFunction) {
+    const body = BreweryUpdateDTO.parse(req.body);
+    const { id } = req.params;
+    body.id = id;
+
+    try {
+      const data = await BreweriesService.update(body);
+
+      res.status(200).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async storeWithJSONFile(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { file } = req;
+
+      if (file) {
+        const content = await catchContent(file.path);
+
+        if (content) {
+          const response = await BreweriesService.storeWithJSONFile(content);
+          return res.json(response);
+        }
+      }
+
+      throw new Error('Error: unknown file');
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new BreweriesHandlerController();

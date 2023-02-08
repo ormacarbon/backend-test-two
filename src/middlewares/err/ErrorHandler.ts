@@ -7,18 +7,7 @@ const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  if (err instanceof ZodError) {
-    res.status(400).json(err);
-  }
-
-  if (err.message.includes('E11000')) {
-    res.status(400).json({
-      message: 'Key duplicate',
-      status: err.statusCode
-    });
-  }
-
-  if (err) {
+  if (err && err.statusCode) {
     res.status(err.statusCode).json({
       message: err.message,
       status: err.statusCode

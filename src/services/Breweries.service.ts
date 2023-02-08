@@ -1,46 +1,136 @@
+import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 import BreweriesInterface from '../interfaces/Breweries.interface';
+import { BreweriesUpdateInterface } from '../interfaces/BreweryUptade.interface';
 import BreweriesModel from '../model/Breweries.Schema';
-import { InternalServerError, InvalidArgumentError } from './err/Errors';
+import { InvalidArgumentError } from './err/Errors';
 
 class BreweriesService {
   async findAllBrewelers() {
     try {
       return BreweriesModel.findAllBreweries();
     } catch (error) {
-      return error;
+      cacthErrosFunctions(error);
     }
   }
 
   async find(id: string) {
     try {
-      const brewerie = await BreweriesModel.find(id);
-      console.log(brewerie);
-      if (!brewerie) {
-        throw new InvalidArgumentError(`Brewerie not found`);
+      const errors = [];
+
+      const brewery = await BreweriesModel.find(id);
+
+      if (!brewery) {
+        errors.push(`brewery not found`);
       }
 
-      return brewerie;
+      if (errors.length > 0) {
+        throw new InvalidArgumentError(JSON.stringify(errors));
+      }
+
+      return brewery;
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async update(breweryUptade: BreweriesUpdateInterface) {
+    try {
+      const errors = [];
+
+      if (breweryUptade.id) {
+        const findBrewery = await BreweriesModel.find(breweryUptade.id);
+
+        if (!findBrewery) {
+          errors.push('Error: Brewery not found');
+        }
+
+        if (breweryUptade.website) {
+          const verifyWebSiteHref = await this.verifyWebSite(
+            breweryUptade.website
+          );
+
+          if (verifyWebSiteHref) {
+            errors.push('Error: Website Duplicate');
+          }
+        }
+
+        const update = await BreweriesModel.findAndUpdate(breweryUptade);
+
+        if (!update) {
+          errors.push('Error: Breweries not find;');
+        }
+
+        if (errors.length > 0) {
+          throw new InvalidArgumentError(JSON.stringify(errors));
+        }
+
+        return update;
+      }
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async storeWithJSONFile(data: string) {
+    try {
+      const content: BreweriesInterface[] = JSON.parse(data);
+
+      return content.forEach(async (value: BreweriesInterface) => {
+        await this.store(value);
+      });
+    } catch (error) {
+      cacthErrosFunctions(error);
     }
   }
 
   async store(brewerie: BreweriesInterface) {
     try {
-      const coords = await this.verifyCoordenates(brewerie.coordinates);
+      const errors: string[] = [];
 
-      if (coords) {
-        throw new Error('The coordinates are already being used');
+      if (errors.length > 0) {
+        throw new InvalidArgumentError(JSON.stringify(errors));
       }
 
       return await BreweriesModel.saveData(brewerie);
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async FindAndDelete(id: string) {
+    try {
+      const errors = [];
+
+      const brewery = await BreweriesModel.findAndDelete(id);
+
+      if (!brewery) {
+        errors.push(`Brewerie not found`);
+      }
+
+      if (errors.length > 0) {
+        throw new InvalidArgumentError(JSON.stringify(errors));
+      }
+
+      return brewery;
+    } catch (error) {
+      cacthErrosFunctions(error);
     }
   }
 
   async verifyCoordenates(coords: number[]) {
-    return await BreweriesModel.findCoordenatesDatabase(coords);
+    try {
+      return await BreweriesModel.findCoordenatesDatabase(coords);
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async verifyWebSite(website: string) {
+    try {
+      return await BreweriesModel.findWebSiteHref(website);
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
   }
 }
 
