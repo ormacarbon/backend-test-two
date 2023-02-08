@@ -1,0 +1,7 @@
+header {
+    display: flex;
+    direction: row;
+    justify-content: center;
+    align-items: center;
+    text-decoration: underline;
+  }
