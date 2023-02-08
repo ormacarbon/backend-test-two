@@ -1,3 +1,5 @@
+const { db } = require("../models/beerModel");
+
 class APIFeatures {
   constructor(query, queryString) {
     this.query = query;
@@ -12,7 +14,16 @@ class APIFeatures {
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
-    this.query = this.query.find(JSON.parse(queryStr));
+
+    let filterOBJ = JSON.parse(queryStr);
+
+    if(filterOBJ.name){
+      let name = filterOBJ.name;
+      filterOBJ.name = {};
+      filterOBJ.name.$regex = new RegExp(`.*${name}.*`, "i")
+    }
+    
+    this.query = this.query.find(filterOBJ);
 
     return this;
 

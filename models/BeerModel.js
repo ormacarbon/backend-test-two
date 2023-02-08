@@ -37,8 +37,6 @@ const beerSchema = new mongoose.Schema({
       type:String,
       required:false
     }
-
-
 },
 {
     toJSON: { virtuals: true },
