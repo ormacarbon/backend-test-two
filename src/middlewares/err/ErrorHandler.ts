@@ -1,8 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
-import { ZodError } from 'zod';
 
-const errorHandler = (
-  err: any,
+interface ErrorExtension {
+  statusCode: number;
+  message: string;
+}
+
+const errorHandler = <T extends ErrorExtension>(
+  err: T,
   req: Request,
   res: Response,
   next: NextFunction
@@ -10,7 +14,8 @@ const errorHandler = (
   if (err && err.statusCode) {
     res.status(err.statusCode).json({
       message: err.message,
-      status: err.statusCode
+      status: err.statusCode,
+      href: req.url
     });
   }
 

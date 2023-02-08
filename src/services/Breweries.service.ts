@@ -22,7 +22,7 @@ class BreweriesService {
       const brewery = await BreweriesModel.find(id);
 
       if (!brewery) {
-        errors.push(`brewery not found`);
+        errors.push(`Error: Brewery not found`);
       }
 
       if (errors.length > 0) {
@@ -100,7 +100,7 @@ class BreweriesService {
         href,
         external_urls: {
           website: brewery.website,
-          href: `http://localhost:3000/api/v1/brewely/${href}`
+          href: `${process.env.ENDPOINT}/brewely/${href}`
         }
       };
 
@@ -152,7 +152,19 @@ class BreweriesService {
 
   async findByName(href: string) {
     try {
-      return await BreweriesModel.findByName(href);
+      const errors = [];
+
+      const result = await BreweriesModel.findByName(href);
+
+      if (!result) {
+        errors.push('Invalid href or not exists');
+      }
+
+      if (errors.length > 0) {
+        throw new InvalidArgumentError(JSON.stringify(errors));
+      }
+
+      return result;
     } catch (error) {
       cacthErrosFunctions(error);
     }
