@@ -22,12 +22,12 @@ body {
   background: #fff;
   color: #000;
   border: 10;
-  padding: 10px 20px;
+  padding: 5px 10px;
   margin: 5px;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 10px;
   font-family: inherit;
 }
 

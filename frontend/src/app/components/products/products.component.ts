@@ -14,10 +14,10 @@ export class ProductsComponent {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productService.getUserActivity().subscribe((products) => {this.object = products;
+    this.productService.getAllProducts().subscribe((products) => {this.object = products;
     this.products = this.object.products
     });
   }
 
-  
+
 }
