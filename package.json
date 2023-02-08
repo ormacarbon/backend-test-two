@@ -6,8 +6,7 @@
   "author": "K0dax <yancarlosbrg@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf ./dist && tsc",
-    "start": "node ./dist/server.js"
+    "start": "ts-node-dev src/server.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.9.0",
