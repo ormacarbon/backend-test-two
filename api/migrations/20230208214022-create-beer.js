@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       coordinates: {
-        type: Sequelize.GEOMETRY('POINT')
+        type: DataTypes.JSON
       },
       country: {
         type: Sequelize.STRING
