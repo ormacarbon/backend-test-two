@@ -20,9 +20,12 @@ const BrewerieSchema = new Schema({
     type: String
   },
   state: String,
-  website: {
-    type: String
-  }
+  external_urls: {
+    type: Object,
+    website: String,
+    href: String
+  },
+  href: String
 });
 
 class BreweriesModel {
@@ -98,6 +101,16 @@ class BreweriesModel {
       );
     } catch (error) {
       console.log(error);
+      throw new InternalServerError(error as string);
+    }
+  }
+
+  async findByName(href: string) {
+    try {
+      return await this.brewerie.findOne({
+        href
+      });
+    } catch (error) {
       throw new InternalServerError(error as string);
     }
   }

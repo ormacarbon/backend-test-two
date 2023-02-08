@@ -1,5 +1,7 @@
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
-import BreweriesInterface from '../interfaces/Breweries.interface';
+import BreweriesInterface, {
+  constructorBreweryInterface
+} from '../interfaces/Breweries.interface';
 import { BreweriesUpdateInterface } from '../interfaces/BreweryUptade.interface';
 import BreweriesModel from '../model/Breweries.Schema';
 import { InvalidArgumentError } from './err/Errors';
@@ -73,9 +75,9 @@ class BreweriesService {
 
   async storeWithJSONFile(data: string) {
     try {
-      const content: BreweriesInterface[] = JSON.parse(data);
+      const content: constructorBreweryInterface[] = JSON.parse(data);
 
-      content.forEach(async (value: BreweriesInterface) => {
+      content.forEach(async (value: constructorBreweryInterface) => {
         await this.store(value);
       });
 
@@ -85,15 +87,28 @@ class BreweriesService {
     }
   }
 
-  async store(brewerie: BreweriesInterface) {
+  async store(brewery: BreweriesInterface) {
     try {
       const errors: string[] = [];
+      let href = '';
+      if (brewery.name) {
+        href = brewery.name.replace(/ /g, '').toLowerCase();
+      }
+
+      const data: constructorBreweryInterface = {
+        ...brewery,
+        href,
+        external_urls: {
+          website: brewery.website,
+          href: `http://localhost:3000/api/v1/brewely/${href}`
+        }
+      };
 
       if (errors.length > 0) {
         throw new InvalidArgumentError(JSON.stringify(errors));
       }
 
-      return await BreweriesModel.saveData(brewerie);
+      return await BreweriesModel.saveData(data);
     } catch (error) {
       cacthErrosFunctions(error);
     }
@@ -130,6 +145,14 @@ class BreweriesService {
   async verifyWebSite(website: string) {
     try {
       return await BreweriesModel.findWebSiteHref(website);
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async findByName(href: string) {
+    try {
+      return await BreweriesModel.findByName(href);
     } catch (error) {
       cacthErrosFunctions(error);
     }

@@ -12,4 +12,12 @@ export default interface BreweriesInterface {
   website: string;
 }
 
+export interface constructorBreweryInterface extends BreweriesInterface {
+  external_urls: {
+    website: string;
+    href: string;
+  };
+  href: string;
+}
+
 export type Coords = number[];

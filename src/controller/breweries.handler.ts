@@ -107,6 +107,18 @@ class BreweriesHandlerController {
       next(error);
     }
   }
+
+  async findByName(req: Request, res: Response, next: NextFunction) {
+    const { name } = req.params;
+
+    try {
+      const data = await BreweriesService.findByName(name);
+
+      res.status(200).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new BreweriesHandlerController();
