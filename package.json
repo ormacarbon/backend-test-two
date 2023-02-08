@@ -1,0 +1,22 @@
+{
+  "name": "backend-test-two",
+  "version": "1.0.0",
+  "description": "## SITUAÇÃO-PROBLEMA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compose:up": "(docker-compose up -d --build)",
+    "compose:down": "(docker-compose down --remove-orphans)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AiramToscano/backend-test-two.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AiramToscano/backend-test-two/issues"
+  },
+  "homepage": "https://github.com/AiramToscano/backend-test-two#readme"
+}
