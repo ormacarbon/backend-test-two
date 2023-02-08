@@ -1,6 +1,7 @@
 const APIFeatures = require("../utils/apiFeatures");
+const catchAsync = require("../utils/catchAsync");
 
-exports.getAll = Model => async (req, res, next) => {
+exports.getAll = Model => catchAsync(async (req, res, next) => {
 
   try{
     let filter = {};
@@ -11,7 +12,7 @@ exports.getAll = Model => async (req, res, next) => {
         .sort()
         .limitFields()
         .paginate()
-        
+
     const doc = await features.query;
 
     res.status(200).json({
@@ -24,10 +25,10 @@ exports.getAll = Model => async (req, res, next) => {
   }catch(err){
     console.log(err)
   }
-};
+});
 
 
-exports.getOne = (Model) => async (req, res, next) => {
+exports.getOne = (Model) => catchAsync(async (req, res, next) => {
   let query = Model.findById(req.params.id);
 
   const doc = await query;
@@ -43,9 +44,9 @@ exports.getOne = (Model) => async (req, res, next) => {
       }
   });
 
-}
+});
 
-exports.updateOne = Model => async (req, res, next) => {
+exports.updateOne = Model => catchAsync(async (req, res, next) => {
 
 
   console.log(req.body);
@@ -65,9 +66,9 @@ exports.updateOne = Model => async (req, res, next) => {
       }
   });
 
-};
+});
 
-exports.createOne = Model => async (req, res, next) => {
+exports.createOne = Model => catchAsync( async (req, res, next) => {
 
   const doc = await Model.create(req.body);
 
@@ -77,10 +78,10 @@ exports.createOne = Model => async (req, res, next) => {
           data:doc
       }
   })
-}
+});
 
 
-exports.deleteOne = Model => async (req, res, next) => {
+exports.deleteOne = Model => catchAsync(async (req, res, next) => {
    
   const doc = await Model.findByIdAndDelete(req.params.id)
 
@@ -92,4 +93,4 @@ exports.deleteOne = Model => async (req, res, next) => {
       status: 'success',
       data: null
   });
-};
+});
