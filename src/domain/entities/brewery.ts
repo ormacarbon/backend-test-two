@@ -1,4 +1,4 @@
-export type Brewery = {
+export type BreweryEntity = {
   abv: number
   adress?: string
   category?: string
