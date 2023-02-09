@@ -5,5 +5,9 @@ const router = express.Router();
 
 router
     .get("/beers", BeerController.getBeers)
+    .get("/beers/:id", BeerController.getBeerById)
+    .post("/beers", BeerController.createBeer)
+    .put("/beers/:id", BeerController.updateBeer)
+    .delete("/beers/:id", BeerController.deleteBeer)
 
 export default router;

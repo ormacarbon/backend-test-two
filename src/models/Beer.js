@@ -13,8 +13,10 @@ const beerSchema = new mongoose.Schema(
         name: {type: String, required: true},
         state: {type: String, required: true},
         website: {type: String}
-    }
-)
+    },
+    // Remove the '__v' property
+    { versionKey: false }
+);
 
 const beers = mongoose.model('beers', beerSchema)
 
