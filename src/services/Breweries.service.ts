@@ -1,7 +1,9 @@
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
+import { LowerCaseFunction } from '../common/utils/LowerCaseFunction';
 
 import BreweriesInterface, {
-  constructorBreweryInterface
+  constructorBreweryInterface,
+  ResponseBreweryInterface
 } from '../interfaces/Breweries/Breweries.interface';
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import { Filters } from '../interfaces/Filters.interface';
@@ -56,29 +58,29 @@ class BreweriesService {
         if (!findBrewery) {
           errors.push('Error: Brewery not found');
         }
-
-        if (breweryUptade.website) {
-          const verifyWebSiteHref = await this.verifyWebSite(
-            breweryUptade.website
-          );
-
-          if (verifyWebSiteHref) {
-            errors.push('Error: Website Duplicate');
-          }
-        }
-
-        const update = await BreweriesModel.findAndUpdate(breweryUptade);
-
-        if (!update) {
-          errors.push('Error: Not possible uptade the data;');
-        }
-
-        if (errors.length > 0) {
-          throw new InvalidArgumentError(JSON.stringify(errors));
-        }
-
-        return update;
       }
+
+      if (breweryUptade.website) {
+        const verifyWebSiteHref = await this.verifyWebSite(
+          breweryUptade.website
+        );
+
+        if (verifyWebSiteHref) {
+          errors.push('Error: Website Duplicate');
+        }
+      }
+
+      const update = await BreweriesModel.update(breweryUptade);
+
+      if (!update) {
+        errors.push('Error: Not possible uptade the data;');
+      }
+
+      if (errors.length > 0) {
+        throw new InvalidArgumentError(JSON.stringify(errors));
+      }
+
+      return update.acknowledged;
     } catch (error) {
       cacthErrosFunctions(error);
     }
@@ -101,22 +103,25 @@ class BreweriesService {
   async store(brewery: BreweriesInterface) {
     try {
       const errors: string[] = [];
-      let href = '';
+
+      let href_contructor = '';
+
       if (brewery.name) {
-        href = brewery.name.replace(/ /g, '').toLowerCase();
+        const findName = await this.findName(brewery.name);
+
+        if (findName) {
+          errors.push('Error: Name already in use');
+        }
+
+        href_contructor = brewery.name.replace(/ /g, '').toLowerCase();
       }
 
-      brewery.city = String(brewery.city).toLowerCase();
-      brewery.country = String(brewery.country).toLowerCase();
-      brewery.state = String(brewery.state).toLowerCase();
+      LowerCaseFunction(brewery);
 
       const data: constructorBreweryInterface = {
         ...brewery,
-        href,
-        external_urls: {
-          website: brewery.website,
-          href: `${process.env.ENDPOINT}/brewely/${href}`
-        }
+        path: href_contructor,
+        website: brewery.website
       };
 
       if (errors.length > 0) {
@@ -124,10 +129,17 @@ class BreweriesService {
       }
 
       const brewelyStored = await BreweriesModel.saveData(data);
-
       await MenuService.store(brewelyStored?.id);
 
-      return brewelyStored;
+      const response: ResponseBreweryInterface = {
+        ...brewery,
+        external_url: {
+          website: brewery.website,
+          href: `${process.env.ENDPOINT}/brewely/${href_contructor}`
+        }
+      };
+
+      return response;
     } catch (error) {
       cacthErrosFunctions(error);
     }
@@ -169,11 +181,11 @@ class BreweriesService {
     }
   }
 
-  async findByName(href: string) {
+  async findByName(path: string) {
     try {
       const errors = [];
 
-      const result = await BreweriesModel.findByName(href);
+      const result = await BreweriesModel.findByName(path);
 
       if (!result) {
         errors.push('Invalid href or not exists');
@@ -184,6 +196,14 @@ class BreweriesService {
       }
 
       return result;
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async findName(name: string) {
+    try {
+      return BreweriesModel.findName(name);
     } catch (error) {
       cacthErrosFunctions(error);
     }

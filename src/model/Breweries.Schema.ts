@@ -19,15 +19,12 @@ const BrewerieSchema = new Schema({
   description: String,
   ibu: Number,
   name: {
-    type: String
+    type: String,
+    unique: true
   },
   state: String,
-  external_urls: {
-    type: Object,
-    website: String,
-    href: String
-  },
-  href: String
+  website: String,
+  path: String
 });
 
 class BreweriesModel {
@@ -95,22 +92,19 @@ class BreweriesModel {
     }
   }
 
-  async findAndUpdate(brewerieUpdate: BreweriesUpdateInterface) {
+  async update(brewerieUpdate: BreweriesUpdateInterface) {
     try {
-      return await this.brewerie.findByIdAndUpdate(
-        brewerieUpdate.id,
-        brewerieUpdate
-      );
+      return await this.brewerie.updateOne(brewerieUpdate);
     } catch (error) {
       console.log(error);
       throw new InternalServerError(error as string);
     }
   }
 
-  async findByName(href: string) {
+  async findByName(path: string) {
     try {
       return await this.brewerie.findOne({
-        href
+        path
       });
     } catch (error) {
       throw new InternalServerError(error as string);
@@ -119,6 +113,18 @@ class BreweriesModel {
 
   async findBreweryWithFilter(filters: Filters) {
     return await this.brewerie.find(filters);
+  }
+
+  async findName(name: string) {
+    try {
+      const nameFind = await this.brewerie.findOne({
+        name
+      });
+
+      return nameFind;
+    } catch (error) {
+      throw new InternalServerError(error as string);
+    }
   }
 }
 

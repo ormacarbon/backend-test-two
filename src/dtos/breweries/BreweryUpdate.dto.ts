@@ -7,7 +7,7 @@ const BreweryUpdateDTO = z.object({
   category: z.string().optional(),
   city: z.string().optional(),
   coordinates: z.number().array().optional(),
-  country: z.string(),
+  country: z.string().optional(),
   description: z.string().optional(),
   ibu: z.number().optional(),
   name: z.string().optional(),

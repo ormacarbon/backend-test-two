@@ -6,6 +6,16 @@ interface ErrorExtension {
   message: string;
 }
 
+/**
+ *  Funtion midleware error, used for capture errors from controllers.
+ *
+ * @param err
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
+
 const errorHandler = <T extends ErrorExtension>(
   err: T,
   req: Request,

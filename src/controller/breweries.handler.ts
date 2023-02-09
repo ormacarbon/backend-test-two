@@ -90,9 +90,12 @@ class BreweriesHandlerController {
       const { id } = req.params;
       body.id = id;
 
-      const data = await BreweriesService.update(body);
+      await BreweriesService.update(body);
 
-      res.status(200).json(data);
+      res.status(200).json({
+        message: 'Updated with sucess.',
+        stautsCode: 200
+      });
     } catch (error) {
       next(error);
     }
