@@ -2,6 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import db from '.';
 
 class Beer extends Model {
+  public id: string;
   public abv: number;
   public address: string;
   public category: string;
@@ -16,6 +17,11 @@ class Beer extends Model {
 }
 
 Beer.init({
+  id: {
+    type: DataTypes.STRING,
+    primaryKey: true,
+    allowNull: false,
+  },
   abv: {
     type: DataTypes.INTEGER,
     primaryKey: true,

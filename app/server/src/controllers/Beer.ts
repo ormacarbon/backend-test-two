@@ -13,4 +13,9 @@ export default class beerController {
     const getAll = await this._beerService.read();
     return res.status(200).json(getAll);
   }
+
+  public async readOne(req: Request, res: Response<IBeer>) {
+    const getOne = await this._beerService.readOne(req.params.id) as IBeer;
+    return res.status(200).json(getOne);
+  }
 }

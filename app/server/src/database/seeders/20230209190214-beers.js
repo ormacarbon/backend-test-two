@@ -1,10 +1,13 @@
 let data = require('../../db.json');
+const { 
+  v1: uuidv1,
+} = require('uuid');
 
 data = data.map((beer) => {
   if (beer.coordinates) {
-    return ({...beer, coordinates: beer.coordinates.toString()})
+    return ({id: uuidv1(), ...beer, coordinates: beer.coordinates.toString()})
   }
-  return beer
+  return {id: uuidv1(), ...beer}
 })
 
 module.exports = {

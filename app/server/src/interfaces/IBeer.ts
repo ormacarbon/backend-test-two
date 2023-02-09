@@ -1,6 +1,11 @@
 import { z } from 'zod';
 
 const beerZodSchema = z.object({
+  id: z
+  .string({
+    required_error: "id is required",
+    invalid_type_error: "id must be a number",
+  }),
   abv: z
   .number({
     required_error: "abv is required",

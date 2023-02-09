@@ -3,6 +3,11 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('beers', {
+      id: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.STRING
+      },
       abv: {
         allowNull: true,
         type: Sequelize.DECIMAL(22, 20)
