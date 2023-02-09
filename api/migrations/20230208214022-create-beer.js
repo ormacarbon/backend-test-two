@@ -29,7 +29,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('long'),
+        allowNull: false,
+        defaultValue: 'Sem descrição'
       },
       ibu: {
         type: Sequelize.INTEGER,
