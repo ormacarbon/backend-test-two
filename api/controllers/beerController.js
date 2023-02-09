@@ -12,6 +12,51 @@ class BeerController {
         }
     } 
 
+    static async getOneBeerByID(req,res){
+        const { id } = req.params
+        try{
+            const beer = await database.Beer.findOne({
+                where: {
+                    id: Number(id)
+                }
+            })
+            return res.status(200).json(beer)
+        }
+        catch(error){
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async getOneBeerByABV(req,res){
+        const { abv } = req.params
+        try{
+            const beer = await database.Beer.findOne({
+                where: {
+                    abv: Number(abv)
+                }
+            })
+            return res.status(200).json(beer)
+        }
+        catch(error){
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async getOneBeerByIBU(req,res){
+        const { ibu } = req.params
+        try{
+            const beer = await database.Beer.findOne({
+                where: {
+                    ibu: Number(ibu)
+                }
+            })
+            return res.status(200).json(beer)
+        }
+        catch(error){
+            return res.status(500).json(error.message)
+        }
+    }
+
     static async createBeer(req, res) {
         const newBeer = req.body
         try {
