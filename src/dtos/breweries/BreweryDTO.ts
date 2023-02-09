@@ -1,6 +1,6 @@
 import z from 'zod';
 
-const BreweriesDTO = z.object({
+const BreweryDTO = z.object({
   abv: z.number(),
   address: z.string(),
   category: z.string(),
@@ -14,4 +14,4 @@ const BreweriesDTO = z.object({
   website: z.string()
 });
 
-export default BreweriesDTO;
+export default BreweryDTO;

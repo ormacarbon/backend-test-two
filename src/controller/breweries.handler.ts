@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { catchContent } from '../common/utils/readFileJSON';
-import BreweriesDTO from '../dtos/breweries/BreweriesDTO';
+import BreweryDTO from '../dtos/breweries/BreweryDTO';
 import BreweryUpdateDTO from '../dtos/breweries/BreweryUpdate.dto';
 import { Filters } from '../interfaces/Filters.interface';
 
@@ -10,7 +10,7 @@ import { InvalidArgumentError } from '../services/err/Errors';
 class BreweriesHandlerController {
   async store(req: Request, res: Response, next: NextFunction) {
     try {
-      const body = BreweriesDTO.parse(req.body);
+      const body = BreweryDTO.parse(req.body);
 
       const data = await BreweriesService.store(body).catch((e) => {
         if (e) {

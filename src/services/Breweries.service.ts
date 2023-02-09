@@ -1,10 +1,10 @@
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 import { LowerCaseFunction } from '../common/utils/LowerCaseFunction';
 
-import BreweriesInterface, {
+import BrewelyInterface, {
   constructorBreweryInterface,
   ResponseBreweryInterface
-} from '../interfaces/Breweries/Breweries.interface';
+} from '../interfaces/Breweries/Brewery.interface';
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import { Filters } from '../interfaces/Filters.interface';
 import BreweriesModel from '../model/Breweries.Schema';
@@ -98,7 +98,7 @@ class BreweriesService {
     }
   }
 
-  async store(brewery: BreweriesInterface) {
+  async store(brewery: BrewelyInterface) {
     try {
       const errors: string[] = [];
 

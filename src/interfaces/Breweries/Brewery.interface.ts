@@ -1,4 +1,4 @@
-export default interface BreweriesInterface {
+export default interface BreweryInterface {
   abv: number;
   address: string;
   category: string;
@@ -14,7 +14,7 @@ export default interface BreweriesInterface {
 
 export type Coords = number[];
 
-export interface constructorBreweryInterface extends BreweriesInterface {
+export interface constructorBreweryInterface extends BreweryInterface {
   path?: string;
 }
 
