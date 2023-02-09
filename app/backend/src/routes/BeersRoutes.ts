@@ -21,4 +21,6 @@ route.post(
 
 route.get('/beers', (req, res) => beersController.readAll(req, res));
 
+route.put('/beers', (req, res) => beersController.update(req, res));
+
 export default route;
