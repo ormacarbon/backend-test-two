@@ -1,3 +1,4 @@
+/*eslint-disable */
 import { IBeers } from '../../interfaces/IBeers';
 
 const BeerMock: IBeers = {
@@ -42,9 +43,9 @@ const BeerUpadateMockId: IBeers & { _id: string } = {
     state: "rondonia",
     name: "dale",
     website: "www.google.com"
-  };
+};
 
-  const BeersMocks: IBeers[] = [
+const BeersMocks: IBeers[] = [
     {
         abv: 10,
         address: "porto velho rondonia",
@@ -57,7 +58,7 @@ const BeerUpadateMockId: IBeers & { _id: string } = {
         state: "rondonia",
         name: "dale",
         website: "www.google.com"
-    }, 
+    },
     {
         abv: 10,
         address: "porto velho rondonia",
