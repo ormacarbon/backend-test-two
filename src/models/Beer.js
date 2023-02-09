@@ -9,6 +9,7 @@ const beerSchema = new mongoose.Schema(
         city: {type: String, required: true},
         coordinates: {type: Array, required: true},
         country: {type: String, required: true},
+        description: {type: String},
         ibu: {type: Number, required: true},
         name: {type: String, required: true},
         state: {type: String, required: true},

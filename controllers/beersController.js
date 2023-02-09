@@ -3,9 +3,14 @@ import beers from "../src/models/Beer.js";
 class BeerController {
 
     static getBeers = (req, res) => {
+        let limit = req.query.limit;
+        if (!limit) {
+            limit = 10;
+        }
+
         beers.find((err, beers) => {
             res.status(200).json(beers)
-        }).limit(10);
+        }).limit(limit);
     }
 
     static getBeerById = (req, res) => {
@@ -47,10 +52,12 @@ class BeerController {
     static deleteBeer = (req, res) => {
         const id = req.params.id;
 
-        beers.findByIdAndDelete(id, (err) => {
+        beers.findByIdAndDelete(id, (err, deletedBeer) => {
             if (err) {
-                res.status(500).send({ message: `${err.message} - Error while deleting record, check if your id is right` })
-            } else {
+                res.status(500).send({ message: `${err.message} - Error while deleting record, record not found` },)
+            } else if (!deletedBeer){
+                res.status(404).send({ message: `Record with ID ${id} not found` },)
+            }  else {
                 res.status(200).send({ message: 'Beer deleted successfully' })
             }
         })
