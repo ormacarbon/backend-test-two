@@ -1,15 +1,15 @@
-import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
-import { LowerCaseFunction } from '../common/utils/LowerCaseFunction';
+import cacthErrosFunctions from './common/utils/catchErrorsFunction';
+import { LowerCaseFunction } from './common/utils/LowerCaseFunction';
 
 import BrewelyInterface, {
   constructorBreweryInterface,
   ResponseBreweryInterface
-} from '../interfaces/Breweries/Brewery.interface';
-import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
-import { Filters } from '../interfaces/Filters.interface';
-import BreweriesModel from '../model/Breweries.Schema';
-import { InvalidArgumentError } from './err/Errors';
-import MenuService from './Menu.service';
+} from './interfaces/Breweries/Brewery.interface';
+import { BreweriesUpdateInterface } from './interfaces/Breweries/BreweryUptade.interface';
+import { Filters } from './interfaces/Filters.interface';
+import BreweriesModel from './model/Breweries.Schema';
+import { InvalidArgumentError } from './services/err/Errors';
+import MenuService from './services/Menu.service';
 
 class BreweriesService {
   async findBrewelers(filters: Filters) {

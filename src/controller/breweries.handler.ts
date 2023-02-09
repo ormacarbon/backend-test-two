@@ -4,7 +4,7 @@ import BreweryDTO from '../dtos/breweries/BreweryDTO';
 import BreweryUpdateDTO from '../dtos/breweries/BreweryUpdate.dto';
 import { Filters } from '../interfaces/Filters.interface';
 
-import BreweriesService from '../services/Breweries.service';
+import BreweriesService from '../Breweries.service';
 import { InvalidArgumentError } from '../services/err/Errors';
 
 class BreweriesHandlerController {

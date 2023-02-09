@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
 import { MenuDTOInterface } from '../dtos/menu/Menu.dto';
-import { InternalServerError } from '../services/err/Errors';
 import { RemoveItemMenu } from '../interfaces/Menu/Menu.interface';
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 const MenuSchema = new Schema({
