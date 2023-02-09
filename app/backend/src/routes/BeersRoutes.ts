@@ -23,4 +23,6 @@ route.get('/beers', (req, res) => beersController.readAll(req, res));
 
 route.put('/beers', (req, res) => beersController.update(req, res));
 
+route.delete('/beers/:id', (req, res) => beersController.delete(req, res));
+
 export default route;
