@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 import { handleErrorDatabase } from '../common/utils/errorDatabaseHandler';
 import BreweriesInterface from '../interfaces/Breweries/Breweries.interface';
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
-import { Filters } from '../services/Breweries.service';
+import { Filters } from '../interfaces/Filters.interface';
 
 import { InternalServerError } from '../services/err/Errors';
 

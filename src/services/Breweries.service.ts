@@ -4,15 +4,10 @@ import BreweriesInterface, {
   constructorBreweryInterface
 } from '../interfaces/Breweries/Breweries.interface';
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
+import { Filters } from '../interfaces/Filters.interface';
 import BreweriesModel from '../model/Breweries.Schema';
 import { InvalidArgumentError } from './err/Errors';
 import MenuService from './Menu.service';
-
-export interface Filters {
-  country?: string;
-  city?: string;
-  state?: string;
-}
 
 class BreweriesService {
   async findBrewelers(filters: Filters) {

@@ -2,8 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 import { catchContent } from '../common/utils/readFileJSON';
 import BreweriesDTO from '../dtos/breweries/BreweriesDTO';
 import BreweryUpdateDTO from '../dtos/breweries/BreweryUpdate.dto';
+import { Filters } from '../interfaces/Filters.interface';
 
-import BreweriesService, { Filters } from '../services/Breweries.service';
+import BreweriesService from '../services/Breweries.service';
 import { InvalidArgumentError } from '../services/err/Errors';
 
 class BreweriesHandlerController {
@@ -59,6 +60,12 @@ class BreweriesHandlerController {
   }
   async findAndDelete(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
+
+    /**
+     * @var regex   Check if id param is hexadecimal
+     * @default
+     * @type {RegExp}
+     */
 
     const regex = /[0-9A-Fa-f]{6}/g;
 

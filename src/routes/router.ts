@@ -22,5 +22,6 @@ routes.get('/api/v1/brewely/:name', breweriesHandler.findByName);
 
 routes.get('/api/v1/menu', menuHandler.show);
 routes.post('/api/v1/menu/:id', menuHandler.addMenu);
+routes.delete('/api/v1/menu/:id/:id_item', menuHandler.delete);
 
 export default routes;

@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { MenuWithIdOwnerTranfer } from '../interfaces/Menu/Menu.interface';
+import { MenuDTOInterface } from '../dtos/menu/Menu.dto';
 import { InternalServerError } from '../services/err/Errors';
-
+import { RemoveItemMenu } from '../interfaces/Menu/Menu.interface';
 const MenuSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
@@ -11,7 +11,8 @@ const MenuSchema = new Schema({
     {
       name: String,
       description: String,
-      ingredients: []
+      ingredients: [],
+      id: String
     }
   ]
 });
@@ -32,22 +33,23 @@ class MenuModel {
     }
   }
 
-  async addMenu(data: MenuWithIdOwnerTranfer) {
+  async addMenu(data: MenuDTOInterface) {
     try {
-      const storeMenu = await this.menu.findOneAndUpdate(
-        data.id as unknown as Schema.Types.ObjectId,
+      await this.menu.findOneAndUpdate(
+        {
+          owner: data.owner
+        },
         {
           $push: {
-            menu: data.menu
+            menu: {
+              name: data.name,
+              description: data.description,
+              ingredients: data.ingredients,
+              id: data.id
+            }
           }
         }
       );
-
-      if (storeMenu) {
-        return storeMenu.menu;
-      }
-
-      return;
     } catch (error) {
       throw new InternalServerError(error as string);
     }
@@ -56,6 +58,49 @@ class MenuModel {
   async AllMenus() {
     try {
       return await this.menu.find();
+    } catch (error) {
+      throw new InternalServerError(error as string);
+    }
+  }
+
+  async delete(data: RemoveItemMenu) {
+    try {
+      return await this.menu.deleteMany(
+        {
+          owner: data.owner
+        },
+        {
+          $pop: {
+            id: data.id
+          }
+        }
+      );
+    } catch (error) {
+      throw new InternalServerError(error as string);
+    }
+  }
+
+  async findItemInMenuById(data: RemoveItemMenu) {
+    try {
+      const result = await this.menu.findOne({
+        owner: data.owner,
+        'menu.id': data.id
+      });
+
+      return result;
+    } catch (error) {
+      throw new InternalServerError(error as string);
+    }
+  }
+
+  async findItemInMenuByName(data: MenuDTOInterface) {
+    try {
+      const result = await this.menu.findOne({
+        owner: data.owner,
+        'menu.name': data.name
+      });
+
+      return result;
     } catch (error) {
       throw new InternalServerError(error as string);
     }

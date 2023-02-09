@@ -13,6 +13,7 @@ export interface MenuDTOInterface {
   description: string | undefined;
   ingredients: string[];
   owner: string;
+  id?: string;
 }
 
 export default MenuDTO;

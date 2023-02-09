@@ -8,3 +8,8 @@ export interface Menu {
   description: string;
   ingredients: string[];
 }
+
+export interface RemoveItemMenu {
+  owner: string;
+  id: string;
+}
