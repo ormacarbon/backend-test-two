@@ -12,9 +12,10 @@ describe('Should test codes response of routes relational with breweries', () =>
       country: 'United States',
       description: 'a good day',
       ibu: 23,
-      name: 'Dancing with driks',
+      name: 'Dancing with drinks',
       state: 'california',
-      website: 'google.com.br'
+      website: 'google.com.br',
+      path: 'dancingwithdrinks'
     });
 
     await BreweryModel.deleteMany();

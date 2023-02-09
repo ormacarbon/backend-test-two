@@ -1,6 +1,8 @@
 import { Schema, model } from 'mongoose';
 import { handleErrorDatabase } from '../common/utils/errorDatabaseHandler';
-import BreweryInterface from '../interfaces/Breweries/Brewery.interface';
+import BreweryInterface, {
+  constructorBreweryInterface
+} from '../interfaces/Breweries/Brewery.interface';
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import { Filters } from '../interfaces/Filters.interface';
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
@@ -46,7 +48,7 @@ class BreweryModel {
     }
   }
 
-  async saveData(brewerie: BreweryInterface) {
+  async saveData(brewerie: constructorBreweryInterface) {
     try {
       const data = await this.brewerie
         .create(brewerie)
