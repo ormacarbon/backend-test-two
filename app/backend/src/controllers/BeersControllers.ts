@@ -40,4 +40,17 @@ export default class BeersController {
       return res.status(400).json({ message: err.message });
     }
   }
+
+  public async delete(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const { id } = req.params;
+      const beer = await this.service.delete(id);
+      return res.status(200).json(beer);
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
+    }
+  }
 }
