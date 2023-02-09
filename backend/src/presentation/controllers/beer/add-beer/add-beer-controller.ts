@@ -1,42 +1,67 @@
+import { AddBeer } from '../../../../domain/use-cases/add-beer'
 import {
-  badRequest,
-  noContent,
-  serverError
+	badRequest,
+	noContent,
+	serverError
 } from '../../../../presentation/helpers/http/http-helper'
 
 import {
-  Validation,
-  Controller,
-  HttpRequest,
-  HttpResponse
+	Validation,
+	Controller,
+	HttpRequest,
+	HttpResponse
 } from '../../../protocols'
 
-export class AddSurveyController implements Controller {
-  private readonly validation: Validation
-  private readonly addSurvey: AddSurvey
+export class AddBeerController implements Controller {
+	private readonly validation: Validation
+	private readonly addBeer: AddBeer
 
-  constructor (validation: Validation, addSurvey: AddSurvey) {
-    this.validation = validation
-    this.addSurvey = addSurvey
-  }
+	constructor (validation: Validation, addBeer: AddBeer) {
+		this.validation = validation
+		this.addBeer = addBeer
+	}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    try {
-      const error = this.validation.validate(httpRequest.body)
-      if (error) {
-        return badRequest(error)
-      }
+	async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+		try {
+			const error = this.validation.validate(httpRequest.body)
+			if (error) {
+				return badRequest(error)
+			}
 
-      const { question, answers } = httpRequest.body
-      await this.addSurvey.add({
-        question,
-        answers,
-        createdAt: new Date()
-      })
+			// Getting data from request
 
-      return noContent()
-    } catch (err) {
-      return serverError(err)
-    }
-  }
+			const {
+				abv,
+				address,
+				category,
+				city,
+				coordinates,
+				country,
+				description,
+				ibu,
+				name,
+				state,
+				website
+			} = httpRequest.body
+
+			await this.addBeer.add({
+				abv,
+				address,
+				category,
+				city,
+				coordinates,
+				country,
+				description,
+				ibu,
+				name,
+				state,
+				website,
+				created_at: new Date()
+			})
+
+			return noContent()
+		} catch (err: any) {
+			return serverError(err)
+		}
+	}
 }
