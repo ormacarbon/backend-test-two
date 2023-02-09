@@ -1,6 +1,6 @@
 'use strict';
 const { Beer } = require('../models');
-const beers = require('../../db.json');
+const beers = require('./db.json');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
