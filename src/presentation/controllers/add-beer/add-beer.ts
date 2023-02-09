@@ -1,15 +1,16 @@
-import { AddBeer, Controller, HttpRequest, HttpResponse, MissingParamError, badRequest, created, serverError } from "./add-beer-protocols";
+import { AddBeer, Controller, HttpRequest, HttpResponse, MissingParamError, ValidateBody, badRequest, created, serverError } from "./add-beer-protocols";
 
 export class AddBeerController implements Controller {
-  constructor(private addBeer: AddBeer) {}
+  constructor(
+    private addBeer: AddBeer, 
+    private validateBeerBody: ValidateBody
+  ) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const requiredFields = ["abv", "address", "category", "city", "coordinates", "country", "description", "ibu", "name", "state", "website"];
-      for (const field of requiredFields) {
-        if (!httpRequest.body[field]) {
-          return badRequest(new MissingParamError(field));
-        }
+      const validate = this.validateBeerBody.validate(httpRequest.body);
+      if (typeof validate === "string") {
+        return badRequest(new MissingParamError(validate));
       }
 
       const data = httpRequest.body;
