@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "403cc80f-fe02-47c3-bff0-92e9375c2b69",
+		"name": "Beer test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25757289"
+	},
+	"item": [
+		{
+			"name": "Get all beers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}beers",
+					"host": [
+						"{{url}}beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a beer reference by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}beers/id/:id",
+					"host": [
+						"{{url}}beers"
+					],
+					"path": [
+						"id",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a beer reference by abv",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}beers/abv/:abv",
+					"host": [
+						"{{url}}beers"
+					],
+					"path": [
+						"abv",
+						":abv"
+					],
+					"variable": [
+						{
+							"key": "abv",
+							"value": "8.918797384901016"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a beer reference by ibu",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}beers/ibu/:ibu",
+					"host": [
+						"{{url}}beers"
+					],
+					"path": [
+						"ibu",
+						":ibu"
+					],
+					"variable": [
+						{
+							"key": "ibu",
+							"value": "67"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new beer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"abv\":32.403,\r\n      \"address\":\"adress test\",\r\n      \"category\":\"test category\",\r\n      \"city\":\"test city\",\r\n      \"coordinates\":[\r\n         61.1473,\r\n         -149.844\r\n      ],\r\n      \"country\":\"country test\",\r\n      \"description\": null,\r\n      \"ibu\":120,\r\n      \"name\":\"test name\",\r\n      \"state\":\"test state\",\r\n      \"website\":\"test website\"\r\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}beers",
+					"host": [
+						"{{url}}beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a beer",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"abv\":323,\r\n      \"address\":\"adress test\",\r\n      \"category\":\"test category\",\r\n      \"city\":\"test city\",\r\n      \"coordinates\":[\r\n         61.1473,\r\n         -149.844\r\n      ],\r\n      \"country\":\"country test\",\r\n      \"description\": null,\r\n      \"ibu\":120,\r\n      \"name\":\"test name\",\r\n      \"state\":\"test state\",\r\n      \"website\":\"test website\"\r\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}beers/id/:id",
+					"host": [
+						"{{url}}beers"
+					],
+					"path": [
+						"id",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6968"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Destroy beer by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}beers/id/:id",
+					"host": [
+						"{{url}}beers"
+					],
+					"path": [
+						"id",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6968"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:3000/",
+			"type": "string"
+		},
+		{
+			"key": "url_deploy",
+			"value": "backend-test-two-maria-fernanda-production.up.railway.app/",
+			"type": "string"
+		}
+	]
+}
