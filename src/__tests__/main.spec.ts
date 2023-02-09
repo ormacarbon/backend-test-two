@@ -9,8 +9,8 @@ describe('App', () => {
     return await request(app).get('/').expect(200);
   });
 
-  it('should have a /hello endpoint', (done) => {
-    request(app).post('/hello').expect(400, done);
+  it('should have a /beer endpoint', (done) => {
+    request(app).post('/beer').expect(400, done);
   });
 
   it('should have a /docs endpoint', async () => {
@@ -18,7 +18,7 @@ describe('App', () => {
   });
 
   it('should be send hello', async () => {
-    const res = await request(app).post('/hello').send({
+    const res = await request(app).post('/beer').send({
       name: 'Neith',
     });
 
