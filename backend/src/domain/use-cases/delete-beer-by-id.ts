@@ -1,3 +1,3 @@
 export interface DeleteBeerById {
-  add: (id: string) => Promise<void>
+  deleteById: (id: string) => Promise<void>
 }
