@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Beer.init(
     {
-      abv: DataTypes.DOUBLE,
+      abv: DataTypes.DOUBLE(18, 17),
       address: DataTypes.STRING,
       category: DataTypes.STRING,
       city: DataTypes.STRING,

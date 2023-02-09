@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       abv: {
-        type: Sequelize.DOUBLE,
+        type: Sequelize.DOUBLE(18, 17),
         allowNull: false
       },
       address: {
