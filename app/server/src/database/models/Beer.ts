@@ -6,7 +6,7 @@ class Beer extends Model {
   public address: string;
   public category: string;
   public city: string;
-  public coordinates: string[];
+  public coordinates: string;
   public country: string;
   public description: string;
   public ibu: number;
