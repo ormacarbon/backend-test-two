@@ -2,7 +2,8 @@ import { Schema, model } from 'mongoose';
 import { MenuDTOInterface } from '../dtos/menu/Menu.dto';
 import { RemoveItemMenu } from '../interfaces/Menu/Menu.interface';
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
-const MenuSchema = new Schema({
+
+export const MenuSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     unique: true
@@ -111,6 +112,14 @@ class MenuModel {
       return await this.menu.findOne({
         owner: brewely
       });
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async deleteMany() {
+    try {
+      return await this.menu.deleteMany();
     } catch (error) {
       cacthErrosFunctions(error);
     }

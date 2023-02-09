@@ -34,9 +34,6 @@ describe('Should return errors codes response of routes relational with brewerie
         city: 'dancing street',
         coordinates: [434, 5454],
         country: 'United States',
-        description: 'a good day',
-        ibu: 23,
-        name: 'Dancing with drinks',
         state: 'california',
         website: 'google.com.br'
       });
@@ -50,7 +47,7 @@ describe('Should return errors codes response of routes relational with brewerie
       .send({
         abv: 1,
         category: 'Hot drinks',
-        city: 'dancing street',
+        city: 'las vegas',
         coordinates: [434, 5454],
         country: 'United States',
         description: 'a good day',
@@ -71,7 +68,9 @@ describe('Should return errors codes response of routes relational with brewerie
   });
 
   it('Shoud return 200 to find All with filters', async () => {
-    const response = await supertest(app).get('/api/v1/breweries');
+    const response = await supertest(app).get(
+      '/api/v1/breweries?country=united+states&state=california&city=las+vegas'
+    );
 
     expect(response.statusCode).toBe(200);
   });

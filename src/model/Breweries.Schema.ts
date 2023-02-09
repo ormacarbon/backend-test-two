@@ -1,8 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { handleErrorDatabase } from '../common/utils/errorDatabaseHandler';
-import BreweryInterface, {
-  constructorBreweryInterface
-} from '../interfaces/Breweries/Brewery.interface';
+import { constructorBreweryInterface } from '../interfaces/Breweries/Brewery.interface';
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import { Filters } from '../interfaces/Filters.interface';
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
