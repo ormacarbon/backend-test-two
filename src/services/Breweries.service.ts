@@ -79,8 +79,6 @@ class BreweriesService {
       if (errors.length > 0) {
         throw new InvalidArgumentError(JSON.stringify(errors));
       }
-
-      return update.acknowledged;
     } catch (error) {
       cacthErrosFunctions(error);
     }
@@ -145,19 +143,21 @@ class BreweriesService {
     }
   }
 
-  async FindAndDelete(id: string) {
+  async delete(id: string) {
     try {
       const errors = [];
 
-      const brewery = await BreweriesModel.findAndDelete(id);
+      const find = await this.findByID(id);
 
-      if (!brewery) {
-        errors.push(`Brewerie not found`);
+      if (!find) {
+        errors.push('Error: Brewely not found;');
       }
 
       if (errors.length > 0) {
         throw new InvalidArgumentError(JSON.stringify(errors));
       }
+
+      const brewery = await BreweriesModel.delete(id);
 
       return brewery;
     } catch (error) {

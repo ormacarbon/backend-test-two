@@ -2,6 +2,7 @@ import { Schema, model } from 'mongoose';
 import { MenuDTOInterface } from '../dtos/menu/Menu.dto';
 import { InternalServerError } from '../services/err/Errors';
 import { RemoveItemMenu } from '../interfaces/Menu/Menu.interface';
+import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 const MenuSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
@@ -29,7 +30,7 @@ class MenuModel {
 
       return create;
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 
@@ -51,7 +52,7 @@ class MenuModel {
         }
       );
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 
@@ -59,7 +60,7 @@ class MenuModel {
     try {
       return await this.menu.find();
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 
@@ -76,7 +77,7 @@ class MenuModel {
         }
       );
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 
@@ -89,7 +90,7 @@ class MenuModel {
 
       return result;
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 
@@ -102,7 +103,17 @@ class MenuModel {
 
       return result;
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async findMenu(brewely: string) {
+    try {
+      return await this.menu.findOne({
+        owner: brewely
+      });
+    } catch (error) {
+      cacthErrosFunctions(error);
     }
   }
 }

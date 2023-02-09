@@ -55,6 +55,18 @@ class MenuHandler {
       next(error);
     }
   }
+
+  async findMenuFromOwner(req: Request, res: Response, next: NextFunction) {
+    const { brewely_name } = req.params;
+
+    try {
+      const data = await MenuService.findMenuFromOwner(brewely_name);
+
+      res.status(200).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new MenuHandler();

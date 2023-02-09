@@ -76,9 +76,12 @@ class BreweriesHandlerController {
         );
       }
 
-      const brewery = await BreweriesService.FindAndDelete(id);
+      await BreweriesService.delete(id);
 
-      return res.json(brewery);
+      return res.status(200).json({
+        message: 'deleted with success;',
+        statusCode: 200
+      });
     } catch (error) {
       next(error);
     }

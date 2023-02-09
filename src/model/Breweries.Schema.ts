@@ -3,7 +3,7 @@ import { handleErrorDatabase } from '../common/utils/errorDatabaseHandler';
 import BreweriesInterface from '../interfaces/Breweries/Breweries.interface';
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import { Filters } from '../interfaces/Filters.interface';
-
+import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 import { InternalServerError } from '../services/err/Errors';
 
 const BrewerieSchema = new Schema({
@@ -42,7 +42,7 @@ class BreweriesModel {
 
       return brewery;
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 
@@ -68,7 +68,7 @@ class BreweriesModel {
     });
   }
 
-  async findAndDelete(id: string) {
+  async delete(id: string) {
     try {
       const brewery = await this.brewerie
         .findByIdAndDelete(id)
@@ -76,7 +76,7 @@ class BreweriesModel {
 
       return brewery;
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 
@@ -88,7 +88,7 @@ class BreweriesModel {
 
       return find;
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 
@@ -97,7 +97,7 @@ class BreweriesModel {
       return await this.brewerie.updateOne(brewerieUpdate);
     } catch (error) {
       console.log(error);
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 
@@ -107,7 +107,7 @@ class BreweriesModel {
         path
       });
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 
@@ -123,7 +123,7 @@ class BreweriesModel {
 
       return nameFind;
     } catch (error) {
-      throw new InternalServerError(error as string);
+      cacthErrosFunctions(error);
     }
   }
 }

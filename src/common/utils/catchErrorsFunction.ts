@@ -15,6 +15,7 @@ export default function cacthErrosFunctions<T>(error: T): void {
   }
 
   if (error) {
-    throw new InternalServerError(error as string);
+    console.log(error);
+    throw new InternalServerError('unexpected error');
   }
 }

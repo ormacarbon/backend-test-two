@@ -85,9 +85,35 @@ class MenuService {
     }
   }
 
+  async findMenu(id: string) {
+    try {
+      return await MenuModel.findMenu(id);
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
   async findItemInMenuByName(data: MenuDTOInterface) {
     try {
       return await MenuModel.findItemInMenuByName(data);
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async findMenuFromOwner(name: string) {
+    try {
+      const findBrewery = await BreweriesService.findByName(name);
+
+      if (findBrewery) {
+        const menu = await this.findMenu(findBrewery.id);
+
+        if (menu) {
+          return menu.menu;
+        }
+      }
+
+      return;
     } catch (error) {
       cacthErrosFunctions(error);
     }
