@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       country: DataTypes.STRING,
-      description: DataTypes.TEXT('long'),
+      description: DataTypes.STRING,
       ibu: DataTypes.INTEGER,
       name: DataTypes.STRING,
       state: DataTypes.STRING,

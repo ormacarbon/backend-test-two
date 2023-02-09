@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.TEXT('long'),
+        type: Sequelize.STRING,
         allowNull: false,
         defaultValue: 'Sem descrição'
       },
