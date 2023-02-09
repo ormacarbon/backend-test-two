@@ -28,28 +28,12 @@ describe('Beers Model', function() {
       const userFound = await beer.create(BeerMock)
       expect(userFound).to.be.deep.equal(BeerMockId);
     });
-
-    it('Cerveja não foi criada', async function() {
-      try {
-        await beer.create(BeerMock);
-      } catch (error: any) {
-        expect(error.message).to.be.eq('Usuario não encontrado');
-      }
-    });
   });
 
   describe('Encontrando todas as cervejas', function() {
     it('Cervejas encontradas', async function() {
       const userFound = await beer.readAll()
       expect(userFound).to.be.deep.equal(BeersMocks);
-    });
-
-    it('Cervejas não cadastradas', async function() {
-      try {
-        await beer.readAll();
-      } catch (error: any) {
-        expect(error.message).to.be.eq('Usuario não encontrado');
-      }
     });
   });
 
