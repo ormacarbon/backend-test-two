@@ -1,6 +1,6 @@
-import BreweryModel from '../model/Breweries.Schema';
+import BreweryModel from '../../model/Breweries.Schema';
 import supertest = require('supertest');
-import app from '../app';
+import app from '../../app';
 
 describe('Should return errors codes response of routes relational with breweries', () => {
   beforeEach(async () => {

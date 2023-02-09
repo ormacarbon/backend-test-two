@@ -1,6 +1,6 @@
-import BreweryModel from '../model/Breweries.Schema';
+import BreweryModel from '../../model/Breweries.Schema';
 import supertest = require('supertest');
-import app from '../app';
+import app from '../../app';
 describe('Should test codes response of routes relational with breweries', () => {
   beforeAll(async () => {
     await BreweryModel.saveData({
