@@ -37,8 +37,29 @@ type Beer struct{
 func CreateBeer( db *gorm.DB, Beer *Beer ) ( err error ) {
 
 	// Basic insert query.
-	// Uses GORM standard Conventions
+	// Uses GORM default Conventions
 	err = db.Create( Beer ).Error
+	
+	// Checks for errors
+	if err != nil {
+		return err
+	}
+
+	return nil
+
+}
+
+// Creates new beers in batch.
+//
+// A successful creation return err = nil;
+// Returns error otherwise.
+// Data is passed through reference.
+func CreateBeers( db *gorm.DB, Beers *[]Beer ) ( err error ) {
+
+	// Basic insert query. Insert in batches of 5000 due to 
+	// MySQL limits.
+	// Uses GORM default Conventions
+	err = db.CreateInBatches( Beers, 5000 ).Error
 	
 	// Checks for errors
 	if err != nil {
@@ -57,7 +78,7 @@ func CreateBeer( db *gorm.DB, Beer *Beer ) ( err error ) {
 func GetBeer( db *gorm.DB, Beer *Beer, id int ) ( err error ) {
 
 	// Basic select with WHERE query.
-	// Uses GORM standard Conventions
+	// Uses GORM default Conventions
 	err = db.Where( "id = ?", id ).First( Beer ).Error
 	
 	// Checks for errors
@@ -77,7 +98,7 @@ func GetBeer( db *gorm.DB, Beer *Beer, id int ) ( err error ) {
 func GetBeers( db *gorm.DB, Beers *[]Beer ) ( err error ) {
 
 	// Basic select query.
-	// Uses GORM standard Conventions
+	// Uses GORM default Conventions
 	err = db.Find( Beers ).Error
 	
 	// Checks for errors
@@ -97,7 +118,7 @@ func GetBeers( db *gorm.DB, Beers *[]Beer ) ( err error ) {
 func UpdateBeer( db *gorm.DB, Beer *Beer ) ( err error ) {
 
 	// Basic update query.
-	// Uses GORM standard Conventions
+	// Uses GORM default Conventions
 	err = db.Save( Beer ).Error
 
 	// Checks for errors
@@ -116,7 +137,7 @@ func UpdateBeer( db *gorm.DB, Beer *Beer ) ( err error ) {
 func DeleteBeer( db *gorm.DB, Beer *Beer, id int ) ( err error ) {
 
 	// Basic delete query.
-	// Uses GORM standard Conventions
+	// Uses GORM default Conventions
 	err = db.Where( "id = ?", id ).Delete( Beer ).Error
 	
 	// Checks for errors

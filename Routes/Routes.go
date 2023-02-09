@@ -14,11 +14,12 @@ func SetupRouter() *gin.Engine {
 	
 	r := gin.Default()
 
-	r.POST( "/beers", Controllers.CreateBeer )
+	r.POST( "/beer", Controllers.CreateBeer )
+	r.POST( "/beers", Controllers.CreateBeers )
 	r.GET( "/beers", Controllers.GetBeers )
-	r.GET( "/beers/:id", Controllers.GetBeer )
-	r.PUT( "/beers/:id", Controllers.UpdateBeer )
-	r.DELETE( "/beers/:id", Controllers.DeleteBeer )
+	r.GET( "/beer/:id", Controllers.GetBeer )
+	r.PUT( "/beer/:id", Controllers.UpdateBeer )
+	r.DELETE( "/beer/:id", Controllers.DeleteBeer )
 
 	return r
 	

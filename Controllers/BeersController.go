@@ -11,6 +11,7 @@ import(
 	"net/http"
 	"strconv"
 	"errors"
+	"fmt"
 
 )
 
@@ -28,8 +29,12 @@ func CreateBeer( c *gin.Context ) {
 	
 	// Sets coodinates received in JSON as array to its own
 	// attributes, so it can be saved on DB properly
-	beer.Latitude = beer.Coordinates[0]
-	beer.Longitude = beer.Coordinates[1]
+	if len( beer.Coordinates ) > 0 {
+		
+		beer.Latitude = beer.Coordinates[0]
+		beer.Longitude = beer.Coordinates[1]
+
+	}
 
 	// Try to create a new beer
 	err := Models.CreateBeer( Config.Db, &beer )
@@ -44,6 +49,49 @@ func CreateBeer( c *gin.Context ) {
 
 	// Sends back ok status with the data received
 	c.JSON(http.StatusOK, beer)
+
+}
+
+// Prepare to create new beers in batches.
+// Sends back OK status and data created via http if successful;
+// Sends back error status and message otherwise. 
+func CreateBeers( c *gin.Context ) {
+
+	// Creates a variable for our model, which will be used for response
+	// It also defines what will be looked for on DB
+	var beers []Models.Beer
+
+	// Serializes JSON to Go Struct
+	c.BindJSON( &beers )
+
+	fmt.Println( beers[0] )
+	
+	// Sets coodinates received in JSON as array to its own
+	// attributes, so it can be saved on DB properly
+	for index, beer := range beers{
+
+		if len( beer.Coordinates ) > 0 {
+			
+			beers[index].Latitude = beer.Coordinates[0]
+			beers[index].Longitude = beer.Coordinates[1]
+			
+		}
+
+	}
+
+	// Try to create new beers
+	err := Models.CreateBeers( Config.Db, &beers )
+	
+	if err != nil {
+
+		// Sends back an error status if any
+		c.AbortWithStatusJSON( http.StatusInternalServerError, gin.H{"error": err} )
+		return
+	
+	}
+
+	// Sends back ok status with the data received
+	c.JSON(http.StatusOK, beers)
 
 }
 
