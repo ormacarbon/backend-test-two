@@ -15,7 +15,7 @@ routes.post(
   breweriesHandler.storeWithJSONFile
 );
 
-routes.delete('/api/v1/brewelers/:id', breweriesHandler.findAndDelete);
+routes.delete('/api/v1/brewelers/:id', breweriesHandler.delete);
 routes.put('/api/v1/brewelers/:id', breweriesHandler.uptade);
 
 routes.get('/api/v1/brewely/:name', breweriesHandler.findByName);

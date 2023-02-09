@@ -9,6 +9,6 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "include": ["src/**/*", "src/config"],
+  "include": ["src/**/*.ts", "src/config"],
   "exclude": ["node_modules"]
 }

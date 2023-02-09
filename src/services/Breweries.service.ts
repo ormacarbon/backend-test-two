@@ -1,4 +1,3 @@
-import { NextFunction } from 'express';
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 import { LowerCaseFunction } from '../common/utils/LowerCaseFunction';
 
@@ -89,9 +88,19 @@ class BreweriesService {
     try {
       const content: constructorBreweryInterface[] = JSON.parse(data);
 
-      content.forEach(async (value: constructorBreweryInterface) => {
-        return await this.store(value);
-      });
+      for (let i = 0; i < content.length; i++) {
+        const name = content[i].name;
+
+        const findName = await this.findName(name);
+
+        if (findName) {
+          throw new SyntaxError(
+            'It was not possible to add the data because of repeated data'
+          );
+        }
+
+        await this.store(content[i]);
+      }
 
       return content;
     } catch (error) {
@@ -99,7 +108,7 @@ class BreweriesService {
     }
   }
 
-  async store(brewery: BrewelyInterface, next: NextFunction | void) {
+  async store(brewery: BrewelyInterface) {
     try {
       const errors: string[] = [];
 

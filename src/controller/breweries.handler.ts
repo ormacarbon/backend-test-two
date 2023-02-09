@@ -58,7 +58,7 @@ class BreweriesHandlerController {
       next(error);
     }
   }
-  async findAndDelete(req: Request, res: Response, next: NextFunction) {
+  async delete(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
 
     /**
@@ -78,9 +78,9 @@ class BreweriesHandlerController {
 
       await BreweriesService.delete(id);
 
-      return res.status(200).json({
+      return res.status(204).json({
         message: 'deleted with success;',
-        statusCode: 200
+        statusCode: 204
       });
     } catch (error) {
       next(error);
@@ -114,6 +114,8 @@ class BreweriesHandlerController {
         if (content) {
           const response = await BreweriesService.storeWithJSONFile(content);
 
+          console.log(response);
+
           return res.status(201).json({
             message: response,
             statusCode: 201
@@ -121,7 +123,7 @@ class BreweriesHandlerController {
         }
       }
 
-      throw new Error('Error: unknown file');
+      throw new InvalidArgumentError('Error: unknown file');
     } catch (error) {
       next(error);
     }

@@ -6,7 +6,7 @@ import { Filters } from '../interfaces/Filters.interface';
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 import { InternalServerError } from '../services/err/Errors';
 
-const BrewerieSchema = new Schema({
+export const BrewerySchema = new Schema({
   abv: Number,
   address: String,
   category: String,
@@ -27,8 +27,8 @@ const BrewerieSchema = new Schema({
   path: String
 });
 
-class BreweriesModel {
-  brewerie = model('breweries', BrewerieSchema);
+class BreweryModel {
+  brewerie = model('breweries', BrewerySchema);
 
   async findAllBreweries() {
     return await this.brewerie.find();
@@ -126,6 +126,14 @@ class BreweriesModel {
       cacthErrosFunctions(error);
     }
   }
+
+  async deleteMany() {
+    try {
+      await this.brewerie.deleteMany();
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
 }
 
-export default new BreweriesModel();
+export default new BreweryModel();

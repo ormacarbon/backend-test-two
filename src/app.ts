@@ -7,8 +7,6 @@ dotenv.config();
 import connection from './config/database/connection';
 const app = express();
 
-const PORT = process.env.PORT || 3000;
-
 (async () => {
   /**
    * Database connection function.
@@ -27,6 +25,4 @@ const PORT = process.env.PORT || 3000;
  */
 appConfig(app);
 
-app.listen(PORT, async () => {
-  console.log(`Listening port ${PORT}`);
-});
+export default app;

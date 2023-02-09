@@ -7,3 +7,11 @@ services:
       - POSTGRES_USER = docker
       - POSTGRES_PASSWORD= ignite
       - POSTGRES_DB= search_engine
+  database_test:
+    image: mongo
+    ports:
+      - "5005:27017"
+    environment:
+      - POSTGRES_USER = docker
+      - POSTGRES_PASSWORD= ignite
+      - POSTGRES_DB= search_engine
