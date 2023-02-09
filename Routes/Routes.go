@@ -5,8 +5,7 @@ import(
 	"test-two/companyx/Controllers"
 
 	"github.com/gin-gonic/gin"
-	"net/http"
-
+	
 )
 
 // Sets up routes using Gin.
@@ -15,11 +14,11 @@ func SetupRouter() *gin.Engine {
 	
 	r := gin.Default()
 
-	r.GET( "ping", func( c *gin.Context ) {
-		c.JSON( http.StatusOK, "pong" )
-	})
-
 	r.POST( "/beers", Controllers.CreateBeer )
+	r.GET( "/beers", Controllers.GetBeers )
+	r.GET( "/beers/:id", Controllers.GetBeer )
+	r.PUT( "/beers/:id", Controllers.UpdateBeer )
+	r.DELETE( "/beers/:id", Controllers.DeleteBeer )
 
 	return r
 	

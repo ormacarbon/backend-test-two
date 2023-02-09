@@ -9,16 +9,16 @@
 ---------------------------------------------------------------------
 
 # Endpoints
-## NOT DONE YET
 
-## List all products
+## List all beers
 
 `GET`
-    /beer
+    /beers
 
 ### Response
 
     {
+        "id":1,
         "abv":1.918797384901016,
         "address":"1 Test Street",
         "category":"Test one",
@@ -32,6 +32,7 @@
         "website":"http://www.testone.com"
     }
     {
+        "id":2,
         "abv":2.918797384901016,
         "address":"2 Test Street",
         "category":"Test two",
@@ -46,14 +47,15 @@
     }
     {...}
 
-## List a single product
+## List a single beer
 
 `GET`
-    /beer/{id}
+    /beers/{id}
 
 ### Response
 
     {
+        "id":1,
         "abv":1.918797384901016,
         "address":"1 Test Street",
         "category":"Test one",
@@ -67,10 +69,10 @@
         "website":"http://www.testone.com"
     }
 
-## Create a new product
+## Create a new beer
 
 `POST`
-    /beer
+    /beers
 
 ### Response
 
@@ -89,10 +91,10 @@
         "website":"http://www.testthree.com.br"
     }
 
-## Update a product
+## Update a beer
 
 `PUT`
-    /beer/{id}
+    /beers/{id}
 
 ### Response
 
@@ -111,11 +113,13 @@
         "website":"http://www.testone.com"
     }
 
-## Delete a product
+## Delete a beer
 
 `DELETE`
-    /beer/{id}
+    /beers/{id}
 
 ### Response
 
-    {"message":"User {id} deleted"}
+    {
+        "response": "Beer deleted"
+    }
