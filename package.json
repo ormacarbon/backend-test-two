@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node dist/main/server.js",
     "test": "jest --passWithNoTests --no-cache",
+    "test:watch": "jest --watch",
     "build": "tsc",
     "dev": "ts-node src/main/server.ts",
     "seed": "ts-node prisma/seed.ts"
