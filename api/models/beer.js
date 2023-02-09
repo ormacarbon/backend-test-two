@@ -17,7 +17,15 @@ module.exports = (sequelize, DataTypes) => {
       address: DataTypes.STRING,
       category: DataTypes.STRING,
       city: DataTypes.STRING,
-      coordinates: DataTypes.JSON,
+      coordinates: {
+        type: DataTypes.TEXT,
+        get: function() {
+          return JSON.parse(this.getDataValue('coordinates'));
+        },
+        set: function(val) {
+          return this.setDataValue('coordinates', JSON.stringify(val));
+        }
+      },
       country: DataTypes.STRING,
       description: DataTypes.STRING,
       ibu: DataTypes.INTEGER,

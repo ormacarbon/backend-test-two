@@ -10,7 +10,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       abv: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.DOUBLE,
+        allowNull: false
       },
       address: {
         type: Sequelize.STRING
@@ -22,7 +23,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       coordinates: {
-        type: DataTypes.JSON
+        type: Sequelize.TEXT
       },
       country: {
         type: Sequelize.STRING
@@ -31,7 +32,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       ibu: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       name: {
         type: Sequelize.STRING
