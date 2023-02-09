@@ -3,6 +3,7 @@ import { IBeers } from '../interfaces/IBeers';
 import { IModel } from '../interfaces/IModel';
 
 const ErrorMsgExist = 'Cerveja já cadastrada';
+const ErrorMsgNotFound = 'Nenhum cerveja encontrada';
 
 class BeersService implements IBeersService<IBeers> { 
   private beers:IModel<IBeers>;
@@ -22,6 +23,12 @@ class BeersService implements IBeersService<IBeers> {
   public async readAll():Promise<IBeers[]> {
     const result = await this.beers.readAll();
     return result;
+  }
+
+  public async update(_id:string, obj:Partial<IBeers>):Promise<IBeers> {
+    const resultUpdate = await this.beers.update(_id, obj);
+    if (!resultUpdate) throw new Error(ErrorMsgNotFound);
+    return resultUpdate;
   }
 }
 
