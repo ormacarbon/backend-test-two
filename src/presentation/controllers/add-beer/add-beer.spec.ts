@@ -6,7 +6,7 @@ const makeAddBeer = (): AddBeer => {
   class AddBeerStub implements AddBeer {
     add(data: AddBeerData): Promise<BeerModels> {
       const fakeBeer = {
-        id: 1,
+        id: "Object_id",
         name: "Stone House Stout",
         abv: 8.918797384901016,
         address:"141 South Main Street",
@@ -381,7 +381,7 @@ describe("AddBeer Controller", () => {
 
     expect(httpResponse.statusCode).toBe(201);
     expect(httpResponse.body).toEqual({
-      id: 1,
+      id: "Object_id",
       name: "Stone House Stout",
       abv:8.918797384901016,
       address:"141 South Main Street",

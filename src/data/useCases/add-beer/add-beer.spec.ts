@@ -21,7 +21,7 @@ const makeAddBeerRepository = (): AddBeerRepository => {
   class AddBeerRepositoryStub implements AddBeerRepository {
     add(beerData: AddBeerData): Promise<BeerModels> {
       const fakeBeer = {
-        id: 1,
+        id: "Object_id",
         ...fakeBeerData
       }
 
@@ -65,7 +65,7 @@ describe("AddBeer", () => {
     const response = await sut.add(fakeBeerData);
 
     expect(response).toEqual({
-      id: 1,
+      id: "Object_id",
       ...fakeBeerData
     });
   })
