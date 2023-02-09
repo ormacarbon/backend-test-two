@@ -1,4 +1,4 @@
-import { Model } from 'mongoose';
+import { isValidObjectId, Model, UpdateQuery } from 'mongoose';
 import { IModel } from '../interfaces/IModel';
 
 abstract class MongoModel<T> implements IModel<T> {
@@ -18,6 +18,17 @@ abstract class MongoModel<T> implements IModel<T> {
 
   public async readAll():Promise<T[]> {
     return this.model.find();
+  }
+
+  public async update(_id:string, obj:Partial<T>):Promise<T | null> {
+    if (!isValidObjectId(_id)) throw new Error('InvalidMongoId'); 
+    
+    const result = this.model.findByIdAndUpdate(
+      { _id },
+      { ...obj } as UpdateQuery<T>,
+      { new: true },
+    );
+    return result;
   }
 }
 
