@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  orma-carbon:
+    image: orma-carbon
+    build:
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+      PORT: 8080
+    ports:
+      - 8080:8080

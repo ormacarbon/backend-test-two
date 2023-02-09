@@ -1,61 +1,159 @@
-# **TESTE DE BACKEND**
+<h1>Orma Carbon</h1>
 
-## SITUAÇÃO-PROBLEMA
+<p align="center">
+  <img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"/>
+  <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Esbuild-100000?style=for-the-badge&logo=esbuild&logoColor=white&labelColor=black&color=ffcf00"/>
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"/>
+</p>
 
-Você acabou de ser contratado para uma vaga de desenvolvedor backend de uma empresa que revende cervejas do mundo inteiro. O desenvolvedor anterior corrompeu completamente o banco de dados e a API anterior e sobrou apenas um arquivo .JSON com todas as informações do banco. Seu líder confiou a tarefa de recriar a API e o banco de dados a você.
+- [📑 About the project](#-about-the-project)
+- [📦 Dependencies](#-dependencies)
+- [📥 Package Manager](#-package-manager)
+- [📂 Project Structure](#-project-structure)
+- [🚀 Getting Started](#-getting-started)
+  - [Environment Variables](#environment-variables)
+  - [Install](#install)
+  - [Run](#run)
+  - [Running with docker 🐋](#running-with-docker-)
+- [⚙ Tests](#-tests)
+- [🔍 SonarQube](#-sonarqube)
+- [📖 Docs](#-docs)
+- [📝 License](#-license)
 
-Neste teste, você deverá criar uma API com endpoints a serem consumidos via REST e um banco de dados, utilizando os dados fornecidos no arquivo. ````db.json````.
+## 📑 About the project
 
----------------------------------------------------------------------
+The server uses [Winston](https://github.com/winstonjs/winston) and the native debug for log and debug.Winston is a logger for Node.js based on [log4J](https://logging.apache.org/log4J/2.x/).
 
-## REQUISITOS OBRIGATÓRIOS:
+The code written in TypeScript is transpilated to JavaScript using [Esbuild](https://esbuild.github.io/). Esbuild is an open source compiler that is faster than Babel. Written in GO, [tsx](https://github.com/esbuild-kit/tsx) was used for project automatic build.In addition, the [tsup](https://tsup.egoist.dev/) for server bundle, which is faster than [tsc](https://www.typescriptlang.org/docs/handbook/compilers-Options.html).
 
-- Seja original, projetos suspeitos de serem copiados serão descartados.
-- Queremos ver o seu código, e não o de outros.
-- Criar coleção no Postman (seu teste será testado por aqui).
+For communication, [Express](https://expressjs.com/en-br/) has been selected for being a lightweight, easy-to-use framework. In addition. With adding a Rate Limit Middleware layer for the routes [Express-rate-limit](https://github.com/express-limit/express-limit) and [Cors](https://github.com/expressjs/cors). And Helmet for security [Helmet](https://helmetjs.github.io/).
 
-## GIT
+Finally, for unit tests the [Jest](https://jestjs.io/) was the framework responsible for unit tests performed. In addition, the [supertest](https://github.com/ladjs/supertest) was used to test the routes with integration tests.
 
-- Faça um fork deste repositório.
-- Crie uma branch para codar as suas features.
-- Faça um pull-request quando o teste for finalizado.
+## 📦 Dependencies
 
-##### **NOTA: Será avaliado também se o nome da branch, títulos de commit, push e comentários possuem boa legibilidade.**
+- Server:
 
------------------------------------------------------
+  - Express
+  - Express-rate-limit
+  - Express-winston
+  - Helmet
 
-## FRAMEWORK -
+- Run, Build and Test:
 
-- Servidor: Express (Javascript/Typescript) *<u>**OU**</u>* Gin (Golang)
-- Banco de dados: MongoDB, DynamoDB, MySQL, Postgres...
+  - Tsx - Esbuild
+  - Tsup - Esbuild
+  - Jest
 
------------------------------------------------------
+- Base:
+  - Cors
+  - Debug
+  - Dotenv
+  - Eslint
+  - Prettier
+  - Typescript
 
-## PROJETO
+## 📥 Package Manager
 
-- Api deve conter pelo menos 1 endpoint para cada operação crud (Create, Read, Update, Delete).
-- Um endpoint para listagem de conteúdo.
-- Banco de dados a escolha do dev.
+The project was developed using [PNPM](https://pnpm.io/), but you can use any of the package managers below:
 
--------------------------------------------------------
+- [NPM](https://www.npmjs.com/)
+- [Yarn](https://yarnpkg.com/)
+- [PNPM](https://pnpm.io/)
 
-## REQUISITOS DIFERENCIAIS:
+## 📂 Project Structure
 
-- Seguir os princípios de SOLID.
-- Fazer o teste em GoLang.
-- Codar um código performático.
-- Utilizar inglês no projeto todo.
-- Utilizar Injeção de dependências.
-- Criar um frontend que consuma a API
-- Fazer deploy do mesmo (heroku, aws, google cloud ou outro da preferência).
+the root directory is src/ and contains the following files:
 
+```bash
+-> Middlewares         # Validations, authentication, sanitization, etc.
+  -> Controllers       # Endpoints, dice, etc.
+    -> Services        # Business rules, logic, etc.
+```
 
+```bash
+├── __tests__/        # Integration tests
+├── common/           # Common: general project core files
+│   ├── config/         # Config files, like env variables
+│   ├── constants/      # Constants files, like enums
+│   ├── interfaces/     # Interfaces files
+│   ├── types/          # Types files
+│   └── utils/          # Utility files, like rules, logger, etc
+├── modules/          # Modules: main fragments of the project
+│   └── Beer/
+│       ├── beer.controller.ts  # Controller with the endpoints
+│       ├── beer.middleware.ts  # Middleware with the handlers
+│       ├── beer.service.ts     # Service with the main business
+│       └── __tests__/  # Unit tests of module
+├─ app.controller.ts    # Controller file with all endpoints
+├─ app.middleware.ts    # Middleware file with general handlers
+├─ app.service.ts       # General services, like docs, static files...
+└─ main.ts              # Bootstrap the application
+```
 
----
+## 🚀 Getting Started
 
-## ENTREGA
+Start by defining the environment variables:
 
-- Faça um pull request e nomeie-o como no ex.: Teste de (Seu nome aqui).
-- Envie um email para schmidt@repenso.eco e kevin@repenso.eco com o link do pull request, do deploy (tanto do front quanto do back se feito), e anexe a coleção do postman.
-- Assim que avaliarmos seu teste, enviaremos uma devolutiva de sucesso ou falha, e caso seja aprovado, um link para agendar sua entrevista técnica.
+### Environment Variables
 
+- PORT=3000
+
+### Install
+
+```bash
+npm install
+```
+
+### Run
+
+```bash
+npm run dev
+```
+
+### Running with docker 🐋
+
+Just run:
+
+```bash
+docker-compose up -d
+```
+
+## ⚙ Tests
+
+```bash
+npm run test
+
+# And use test:watch for watch mode
+npm run test:watch
+
+# And use test:coverage for generate coverage report
+npm run test:coverage
+```
+
+## 🔍 SonarQube
+
+```bash
+npm run sonar
+```
+
+## 📖 Docs
+
+The REST API documentation is based on Openapi/Swagger is available at:
+
+[http://localhost:8080/docs](http://localhost:8080/docs)
+
+## 📝 License
+
+This project is under the MIT license.
+
+<p align="center">
+  <strong> Maded with 💜 by: </strong>
+  <p align="center">
+    <a href="https://github.com/ZauJulio">
+      <img src="https://github.com/ZauJulio.png" width="50" height="50" alt="OakAnderson" />
+    </a>
+  </p>
+</p>
+````
