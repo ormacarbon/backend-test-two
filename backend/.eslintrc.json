@@ -19,6 +19,7 @@
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/return-await": "off",
         "@typescript-eslint/naming-convention": "off",
-        "@typescript-eslint/no-misused-promises": "off"
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/consistent-type-imports": "off"
     }
 }
