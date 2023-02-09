@@ -26,4 +26,18 @@ export default class BeersController {
     const customers = await this.service.readAll();
     return res.status(200).json(customers);
   }
+
+  public async update(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const obj = req.body;
+      const { id } = obj;
+      const beer = await this.service.update(id, obj);
+      return res.status(200).json(beer);
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
+    }
+  }
 }
