@@ -18,7 +18,7 @@ const errorHandler: ErrorRequestHandler = (err: Error | ZodError, _req, res,) =>
   }
 
   // eslint-disable-next-line no-console
-  console.error(err);
+  // console.error(err);
   return res.status(500).json({ message: 'internal error' });
 };
 

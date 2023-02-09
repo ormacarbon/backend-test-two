@@ -14,4 +14,10 @@ export default class BeerService implements IService<IBeer> {
     if (!beer) throw new Error(ErrorTypes.NotFound);
     return beer;
   }
+
+  public async delete(id: string): Promise<void> {
+    const beer = await BeerModel.findByPk(id);
+    if (!beer) throw new Error(ErrorTypes.NotFound);
+    await BeerModel.destroy({ where: { id } });
+  }
 }
