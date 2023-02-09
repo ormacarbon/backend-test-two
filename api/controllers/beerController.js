@@ -71,7 +71,7 @@ class BeerController {
         const { id } = req.params
         const newData = req.body
         try {
-            await database.Funcionario.update(newData, {
+            await database.Beer.update(newData, {
                 where: {
                     id: Number(id)
                 }
