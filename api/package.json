@@ -4,6 +4,7 @@
   "description": "api project that references the loss of data from the beer company",
   "main": "index.js",
   "scripts": {
+    "start":"npm i && npm run start_bd && nodemon index.js",
     "init": "npm i && npm i -g nodemon && nodemon index.js",
     "start_bd": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "gitconfig": "git config --local user.name \"Maria Fernanda Oliveira\" && git config --local user.email \"mariafernanda.oliveira281@gmail.com\"",
