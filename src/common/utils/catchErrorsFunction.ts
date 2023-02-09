@@ -3,7 +3,7 @@ import {
   InvalidArgumentError
 } from '../../services/err/Errors';
 
-export default function cacthErrosFunctions<T>(error: T): void {
+export default function catchErrorsFunctions<T>(error: T) {
   if (error instanceof SyntaxError) {
     if (error.message.includes('JSON')) {
       throw new InvalidArgumentError(`Verify integrations of your file.`);

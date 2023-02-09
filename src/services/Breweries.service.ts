@@ -1,15 +1,16 @@
-import cacthErrosFunctions from './common/utils/catchErrorsFunction';
-import { LowerCaseFunction } from './common/utils/LowerCaseFunction';
+import { NextFunction } from 'express';
+import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
+import { LowerCaseFunction } from '../common/utils/LowerCaseFunction';
 
 import BrewelyInterface, {
   constructorBreweryInterface,
   ResponseBreweryInterface
-} from './interfaces/Breweries/Brewery.interface';
-import { BreweriesUpdateInterface } from './interfaces/Breweries/BreweryUptade.interface';
-import { Filters } from './interfaces/Filters.interface';
-import BreweriesModel from './model/Breweries.Schema';
-import { InvalidArgumentError } from './services/err/Errors';
-import MenuService from './services/Menu.service';
+} from '../interfaces/Breweries/Brewery.interface';
+import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
+import { Filters } from '../interfaces/Filters.interface';
+import BreweriesModel from '../model/Breweries.Schema';
+import { InvalidArgumentError } from '../services/err/Errors';
+import MenuService from '../services/Menu.service';
 
 class BreweriesService {
   async findBrewelers(filters: Filters) {
@@ -89,16 +90,16 @@ class BreweriesService {
       const content: constructorBreweryInterface[] = JSON.parse(data);
 
       content.forEach(async (value: constructorBreweryInterface) => {
-        await this.store(value);
+        return await this.store(value);
       });
 
-      return `Data added with success`;
+      return content;
     } catch (error) {
       cacthErrosFunctions(error);
     }
   }
 
-  async store(brewery: BrewelyInterface) {
+  async store(brewery: BrewelyInterface, next: NextFunction | void) {
     try {
       const errors: string[] = [];
 
