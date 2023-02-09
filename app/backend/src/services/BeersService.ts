@@ -18,6 +18,11 @@ class BeersService implements IBeersService<IBeers> {
     const result = await this.beers.create(obj);
     return result;
   }
+
+  public async readAll():Promise<IBeers[]> {
+    const result = await this.beers.readAll();
+    return result;
+  }
 }
 
 export default BeersService;
