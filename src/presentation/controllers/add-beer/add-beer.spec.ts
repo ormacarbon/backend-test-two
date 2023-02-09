@@ -2,7 +2,7 @@ import { BeerModels } from "../../../domain/models/beer";
 import { AddBeer, AddBeerData, MissingParamError, ServerError, ValidateBody } from "./add-beer-protocols"
 import { AddBeerController } from "./add-beer";
 
-const makeBodyValidator = (): ValidateBody => {
+export const makeBodyValidator = (): ValidateBody => {
   class ValidateBeerBodyStub implements ValidateBody {
     validate(data: any): string | void {}
   }

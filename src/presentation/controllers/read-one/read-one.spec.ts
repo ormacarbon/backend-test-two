@@ -17,7 +17,7 @@ const fakeReturn: BeerModels = {
   website:"http://www.northcountrybrewing.com"
 }
 
-const makeReadOne = (): ReadOne => {
+export const makeReadOne = (): ReadOne => {
   class ReadOneStrub implements ReadOne {
     read(name: string): Promise<BeerModels> {
       return new Promise(resolve => resolve(fakeReturn))

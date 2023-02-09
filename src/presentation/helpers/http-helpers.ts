@@ -23,6 +23,13 @@ export const serverError = (): HttpResponse => {
   }
 }
 
+export const noContent = (): HttpResponse => {
+  return {
+    statusCode: 204,
+    body: true
+  }
+}
+
 export const created = (data: any): HttpResponse => {
   return {
     statusCode: 201,
