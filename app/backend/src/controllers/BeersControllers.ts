@@ -18,4 +18,12 @@ export default class BeersController {
         .json({ message: err.message });
     }
   }
+
+  public async readAll(
+    _req: Request,
+    res: Response,
+  ) {
+    const customers = await this.service.readAll();
+    return res.status(200).json(customers);
+  }
 }
