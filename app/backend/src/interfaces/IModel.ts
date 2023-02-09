@@ -1,4 +1,5 @@
 export interface IModel <T> {
   create(obj:T):Promise<T>,
-  readBeer(name: string):Promise<T>
+  readBeer(name: string):Promise<T>,
+  readAll():Promise<T[]>
 }
