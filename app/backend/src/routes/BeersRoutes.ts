@@ -19,4 +19,6 @@ route.post(
   (req, res) => beersController.create(req, res),
 );
 
+route.get('/beers', (req, res) => beersController.readAll(req, res));
+
 export default route;
