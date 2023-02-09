@@ -1,0 +1,173 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "My project test two",
+        "description": "Documentation from test Orma Cabon",
+        "version": "1.0.0"
+    },
+    "basePath": "/",
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "paths": {
+        "/beers": {
+            "post": {
+                "description": "Cadastrar uma cerveja",
+                "tags": [
+                    "Beer"
+                ],
+                "summary": "Create beer",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                
+                                    "abv": {
+                                        "type": "number"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "type": "string"
+                                    },
+                                    "coordinates": {
+                                        "type": "array"
+                                    },
+                                    "country": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "ibu": {
+                                        "type": "number"
+                                    },
+                                    "state": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "website": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "abv": 10,
+                                    "address": "porto velho rondonia",
+                                    "category": "cerveja atersanal",
+                                    "city": "porto velho",
+                                    "coordinates": [10, 80],
+                                    "country": "brasil",
+                                    "description": "cerveja muito boa criada para portovelhenses",
+                                    "ibu": 10,
+                                    "state": "rondonia",
+                                    "name": "madeira",
+                                    "website": "www.google.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "fields required"
+                    },
+                    "201": {
+                        "description": "Return object beer created successfully"
+                    }
+                }
+            },
+        "get": {
+                "description": "Ler todas as cervejas",
+                "tags": [
+                    "Beer"
+                ],
+                "summary": "Read all beer",
+                "responses": {
+                    "400": {
+                        "description": "err.message"
+                    },
+                    "200": {
+                        "description": "Return all beers API"
+                    }
+                }
+            },
+        "put": {
+                "description": "Atualiza uma cerveja",
+                "tags": [
+                    "Beer"
+                ],
+                "summary": "Update beer",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                
+                                    "abv": {
+                                        "type": "number"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "abv": 10,
+                                    "name": "Skoll"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "err.message"
+                    },
+                    "200": {
+                        "description": "returns an updated beer"
+                    }
+                }
+            }
+        },
+        "/beers/{id}": {
+            "delete": {
+              "tags": [
+                "Beer"
+              ],
+              "summary": "Delete beer",
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "id",
+                  "required": true,
+                  "schema": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "responses": {
+                "400": {
+                    "description": "err.message"
+                },
+                "200": {
+                    "description": "Return a deleted beer"
+                }
+            }
+            }
+          }
+    }
+}

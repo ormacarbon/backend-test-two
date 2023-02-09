@@ -3,6 +3,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import Beers from './routes/BeersRoutes';
+import swaggerUI from 'swagger-ui-express';
+import swaggerDocs from '../swagger.json';
+
 
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
@@ -12,6 +15,7 @@ const limiter = rateLimit({
 
 const app = express();
 app.use(express.json());
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use(limiter);
 app.use(Beers);
 app.use(helmet());
