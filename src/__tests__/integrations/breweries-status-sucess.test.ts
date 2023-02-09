@@ -69,4 +69,10 @@ describe('Should return errors codes response of routes relational with brewerie
 
     expect(response.statusCode).toBe(200);
   });
+
+  it('Shoud return 200 to find All with filters', async () => {
+    const response = await supertest(app).get('/api/v1/brewelies/');
+
+    expect(response.statusCode).toBe(200);
+  });
 });

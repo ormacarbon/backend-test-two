@@ -4,19 +4,19 @@ import multer from '../config/multer.config';
 import menuHandler from '../controller/menu.handler';
 const routes = Router();
 
-routes.get('/api/v1/brewelers', breweriesHandler.findAllBrewelers);
+routes.get('/api/v1/breweries', breweriesHandler.findAllBrewelers);
 
-routes.get('/api/v1/brewelers/:id', breweriesHandler.find);
-routes.post('/api/v1/brewelers', breweriesHandler.store);
+routes.get('/api/v1/breweries/:id', breweriesHandler.find);
+routes.post('/api/v1/breweries', breweriesHandler.store);
 
 routes.post(
-  '/api/v1/brewelers/file',
+  '/api/v1/breweries/file',
   multer.single('data'),
   breweriesHandler.storeWithJSONFile
 );
 
-routes.delete('/api/v1/brewelers/:id', breweriesHandler.delete);
-routes.put('/api/v1/brewelers/:id', breweriesHandler.uptade);
+routes.delete('/api/v1/brewery/:id', breweriesHandler.delete);
+routes.put('/api/v1/brewery/:id', breweriesHandler.uptade);
 
 routes.get('/api/v1/brewely/:name', breweriesHandler.findByName);
 
