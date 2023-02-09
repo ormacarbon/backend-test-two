@@ -13,13 +13,15 @@
         "project": ["./backend/tsconfig.json"]
     },
     "rules": {
-        "@typescript-eslint/consistent-type-definitions": "warn",
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/no-extraneous-class": "off",
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/return-await": "off",
         "@typescript-eslint/naming-convention": "off",
         "@typescript-eslint/no-misused-promises": "off",
-        "@typescript-eslint/consistent-type-imports": "off"
+        "@typescript-eslint/consistent-type-imports": "off",
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "indent": [2, "tab"],
+        "no-tabs": 0
     }
 }
