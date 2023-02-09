@@ -1,9 +1,22 @@
 <div class="product">
   <h3>
     {{ product.name }}
- </h3>
- <div>
- <app-button text="Details"></app-button>
- <app-button text="Remove"></app-button>
+  </h3>
+  <div>
+    <app-button text="Details" (click)="onDetails(product)"></app-button>
+    <app-button text="Remove" (click)="onDelete(product)"></app-button>
+  </div>
 </div>
+<div *ngIf="showProductDetails">
+  <p>Name: {{ product.name || "Missing information" }}</p>
+  <p>ABV: {{ product.abv || "Missing information" }}</p>
+  <p>Ibu: {{ product.ibu || "Missing information" }}</p>
+  <p>Category: {{ product.category || "Missing information" }}</p>
+  <p>Description: {{ product.description || "Missing information" }}</p>
+  <p>Website: {{ product.website || "Missing information" }}</p>
+  <p>Country: {{ product.country || "Missing information" }}</p>
+  <p>City: {{ product.city || "Missing information" }}</p>
+  <p>State: {{ product.state || "Missing information" }}</p>
+  <p>Address: {{ product.address || "Missing information" }}</p>
+  <app-button text="Close" (click)="hideDetails(product)"></app-button>
 </div>

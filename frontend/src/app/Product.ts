@@ -1,4 +1,5 @@
 export interface Product {
+    product: any;
     _id: string;
     abv: number;
     address?: string;
