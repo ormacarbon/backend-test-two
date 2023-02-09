@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { ZodError } from 'zod';
 
 interface ErrorExtension {
   statusCode: number;
@@ -11,7 +12,14 @@ const errorHandler = <T extends ErrorExtension>(
   res: Response,
   next: NextFunction
 ) => {
-  if (err && err.statusCode) {
+  if (err instanceof ZodError) {
+    return res.status(403).json({
+      message: err.issues,
+      statusCode: 403
+    });
+  }
+
+  if (err) {
     res.status(err.statusCode).json({
       message: err.message,
       status: err.statusCode,

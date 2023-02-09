@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { catchContent } from '../common/utils/readFileJSON';
-import BreweriesDTO from '../dtos/BreweriesDTO';
-import BreweryUpdateDTO from '../dtos/BreweryUpdate.dto';
+import BreweriesDTO from '../dtos/breweries/BreweriesDTO';
+import BreweryUpdateDTO from '../dtos/breweries/BreweryUpdate.dto';
 
 import BreweriesService, { Filters } from '../services/Breweries.service';
 import { InvalidArgumentError } from '../services/err/Errors';
@@ -78,11 +78,11 @@ class BreweriesHandlerController {
   }
 
   async uptade(req: Request, res: Response, next: NextFunction) {
-    const body = BreweryUpdateDTO.parse(req.body);
-    const { id } = req.params;
-    body.id = id;
-
     try {
+      const body = BreweryUpdateDTO.parse(req.body);
+      const { id } = req.params;
+      body.id = id;
+
       const data = await BreweriesService.update(body);
 
       res.status(200).json(data);
