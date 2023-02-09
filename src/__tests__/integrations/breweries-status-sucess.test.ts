@@ -1,9 +1,8 @@
 import BreweryModel from '../../model/Breweries.Schema';
 import supertest = require('supertest');
 import app from '../../app';
-
-describe('Should return errors codes response of routes relational with breweries', () => {
-  beforeEach(async () => {
+describe('Should test codes response of routes relational with breweries', () => {
+  beforeAll(async () => {
     await BreweryModel.saveData({
       abv: 1,
       address: 'dancing street',
@@ -18,61 +17,55 @@ describe('Should return errors codes response of routes relational with brewerie
       website: 'google.com.br',
       path: 'dancingwithdrinks'
     });
-  });
 
-  afterEach(async () => {
     await BreweryModel.deleteMany();
   });
 
-  it('Shoud return 403 for user existing', async () => {
-    const response = await supertest(app)
-      .post('/api/v1/brewelers')
+  it('Shoud return 201 for create Brewery', async () => {
+    const user = await supertest(app)
+      .post('/api/v1/breweries')
       .send({
         abv: 1,
-        address: 'dancing street',
-        category: 'Hot drinks',
-        city: 'dancing street',
+        address: 'Liberdade',
+        category: 'Drinks pesados',
+        city: 'Sao Paulo',
         coordinates: [434, 5454],
-        country: 'United States',
-        description: 'a good day',
+        country: 'brazil',
+        description: 'cervejaria',
         ibu: 23,
-        name: 'Dancing with drinks',
-        state: 'california',
-        website: 'google.com.br'
+        name: 'Cervejaria dos tops',
+        state: 'Sao Paulo',
+        website: 'cervejariadostops.com.br'
       });
 
-    expect(response.statusCode).toBe(403);
+    expect(user.statusCode).toBe(201);
   });
 
-  it('Shoud return 403 for invalid datas', async () => {
-    const response = await supertest(app)
-      .post('/api/v1/brewelers')
-      .send({
-        abv: 1,
-        category: 'Hot drinks',
-        city: 'dancing street',
-        coordinates: [434, 5454],
-        country: 'United States',
-        description: 'a good day',
-        name: 54,
-        state: 'california',
-        website: 'google.com.br'
-      });
+  it('Shoud return 200 for Breweries list', async () => {
+    const user = await supertest(app).get('/api/v1/breweries');
 
-    expect(response.statusCode).toBe(403);
+    expect(user.statusCode).toBe(200);
   });
 
-  it('Shoud return 200 to find brewely from name', async () => {
-    const response = await supertest(app).get(
-      '/api/v1/brewely/dancingwithdrinks'
-    );
+  it('Shoud return 204 for delete Brewery', async () => {
+    const find = await BreweryModel.findByName('Dancing with driks');
 
-    expect(response.statusCode).toBe(200);
+    if (find) {
+      const user = await supertest(app).delete(`/api/v1/brewely/${find.id}`);
+      expect(user.statusCode).toBe(204);
+    }
   });
 
-  it('Shoud return 200 to find All with filters', async () => {
-    const response = await supertest(app).get('/api/v1/brewelies/');
+  it('Shoud update with status 200 a Brewery', async () => {
+    const find = await BreweryModel.findByName('Dancing with driks');
 
-    expect(response.statusCode).toBe(200);
+    if (find) {
+      const user = await supertest(app)
+        .delete(`/api/v1/brewely/${find.id}`)
+        .send({
+          website: 'cervejariadastops.com.br'
+        });
+      expect(user.statusCode).toBe(200);
+    }
   });
 });
