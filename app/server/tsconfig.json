@@ -1,15 +1,23 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "outDir": "dist",
+    "target": "es2019",
+    "module": "commonjs",
+    "sourceMap": true,                     
+    "outDir": "./build",
+    "rootDir": "./src",
     "strict": true,
-    "lib": [
-      "esnext"
-    ],
-    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "baseUrl": ".", 
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "target": "esnext",
-    "moduleResolution": "Node",
-  }
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true,
+    "paths": {
+      "*": ["node_modules/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/tests"]
 }

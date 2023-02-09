@@ -1,0 +1,55 @@
+'use strict';
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('beers', {
+      abv: {
+        allowNull: true,
+        type: Sequelize.DECIMAL(22, 20)
+      },
+      address: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      category: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      coordinates: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      country: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      ibu: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      state: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      website: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+    });
+  },
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('beers');
+  }
+};

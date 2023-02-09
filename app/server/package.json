@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsnd src/index.ts",
+    "dev": "nodemon src/index.ts",
     "build": "tsc",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "predev": "npm run build && npm run db:reset",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,6 +31,7 @@
     "express": "^4.18.2",
     "mysql2": "^3.1.2",
     "sequelize": "^6.28.0",
+    "sequelize-cli": "^6.6.0",
     "sequelize-typescript": "^2.1.5"
   }
 }
