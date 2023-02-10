@@ -4,7 +4,7 @@ const config: Config = {
   preset: 'ts-jest/presets/default-esm',
   moduleNameMapper: {
     '^#/(.*)\\.jsx?$': '<rootDir>/src/$1',
-    '#/api/db.json': '<rootDir>/src/modules/beer/services/mock-db.json',
+    '#/api/db.json': '<rootDir>/src/api/mock-db.json',
   },
   transform: {
     '^.+.(png|svg|jpg|gif|webp)$': 'jest-transform-stub',
