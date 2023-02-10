@@ -61,6 +61,7 @@
     "@prisma/client": "4.10.1",
     "auto-bind": "^5.0.1",
     "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.7.0"
   }
