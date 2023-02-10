@@ -1,4 +1,4 @@
-import { UpdateBeer, UpdateBeerById } from '../../../domain/use-cases/update-beer-by-id'
+import { UpdateBeerById, UpdateBeerParams } from '../../../domain/use-cases/update-beer-by-id'
 import { UpdateBeerByIdRepository } from '../../protocols/db/update-beer-by-id-repository'
 
 export class DbUpdateBeerById implements UpdateBeerById {
@@ -7,7 +7,7 @@ export class DbUpdateBeerById implements UpdateBeerById {
 		this.updateBeerByIdRepository = updateBeerRepository
 	}
 
-	async update (id: string, beerRawData: UpdateBeer): Promise<void> {
+	async update (id: string, beerRawData: UpdateBeerParams): Promise<void> {
 		await this.updateBeerByIdRepository.update(id, beerRawData)
 	}
 }

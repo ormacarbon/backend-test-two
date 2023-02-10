@@ -1,4 +1,4 @@
-export type UpdateBeer = {
+export type UpdateBeerParams = {
   abv?: number
   address?: string
 	category?: string
@@ -15,5 +15,5 @@ export type UpdateBeer = {
 
 export interface UpdateBeerById {
   // to update a beer we need both its id and the fields that will be updated
-  update: (id: string, beerRawData: UpdateBeer) => Promise<void>
+  update: (id: string, beerRawData: UpdateBeerParams) => Promise<void>
 }
