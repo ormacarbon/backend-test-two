@@ -1,10 +1,13 @@
 import BreweryModel from '../../model/Breweries.Schema';
+import BreweriesService from '../../services/Breweries.service';
 import supertest = require('supertest');
 import app from '../../app';
 
 describe('Should return errors codes response of routes relational with breweries', () => {
   beforeEach(async () => {
-    await BreweryModel.saveData({
+    await BreweryModel.deleteMany();
+
+    await BreweriesService.store({
       abv: 1,
       address: 'dancing street',
       category: 'Hot drinks',
@@ -13,14 +16,9 @@ describe('Should return errors codes response of routes relational with brewerie
       country: 'United States',
       description: 'a good day',
       ibu: 23,
-      name: 'Dancing with drinks',
+      name: 'dancinngcomsweetdrinks',
       state: 'california',
-      external_urls: {
-        website: 'google.com.br',
-        href: `${process.env.ENDPOINT}/dancingwithdrinks`
-      },
-      website: 'google.com.br',
-      path: 'dancingwithdrinks'
+      website: 'google.com.br'
     });
   });
 
@@ -39,7 +37,8 @@ describe('Should return errors codes response of routes relational with brewerie
         coordinates: [434, 5454],
         country: 'United States',
         state: 'california',
-        website: 'google.com.br'
+        website: 'google.com.br',
+        name: 'Dancing with drink'
       });
 
     expect(response.statusCode).toBe(403);
@@ -61,19 +60,5 @@ describe('Should return errors codes response of routes relational with brewerie
       });
 
     expect(response.statusCode).toBe(403);
-  });
-
-  it('Shoud return 200 to find brewely from name', async () => {
-    const response = await supertest(app).get('/api/v1/dancingwithdrinks');
-
-    expect(response.statusCode).toBe(200);
-  });
-
-  it('Shoud return 200 to find All with filters', async () => {
-    const response = await supertest(app).get(
-      '/api/v1/breweries?country=united+states&state=california&city=las+vegas'
-    );
-
-    expect(response.statusCode).toBe(200);
   });
 });

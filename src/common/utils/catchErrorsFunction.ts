@@ -21,6 +21,7 @@ export default function catchErrorsFunctions<T>(error: T) {
 
   if (error) {
     console.log(error);
+
     throw new InternalServerError('unexpected error');
   }
 }

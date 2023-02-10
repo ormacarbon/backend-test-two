@@ -1,9 +1,13 @@
 import BreweryModel from '../../model/Breweries.Schema';
 import supertest = require('supertest');
 import app from '../../app';
+import BreweriesService from '../../services/Breweries.service';
+
 describe('Should test codes response of routes relational with breweries', () => {
   beforeEach(async () => {
-    await BreweryModel.saveData({
+    await BreweryModel.deleteMany();
+
+    await BreweriesService.store({
       abv: 1,
       address: 'dancing street',
       category: 'Hot drinks',
@@ -12,14 +16,9 @@ describe('Should test codes response of routes relational with breweries', () =>
       country: 'United States',
       description: 'a good day',
       ibu: 23,
-      name: 'Dancing with drinks',
+      name: 'Dancing with drink',
       state: 'california',
-      external_urls: {
-        website: 'google.com.br',
-        href: `${process.env.ENDPOINT}/dancingwithdrinks`
-      },
-      website: 'google.com.br',
-      path: 'dancingwithdrinks'
+      website: 'google.com.br'
     });
   });
 
@@ -31,17 +30,17 @@ describe('Should test codes response of routes relational with breweries', () =>
     const user = await supertest(app)
       .post('/api/v1/breweries')
       .send({
-        abv: 1,
-        address: 'Liberdade',
-        category: 'Drinks pesados',
-        city: 'Sao Paulo',
+        abv: 2,
+        address: 'Vila do Rosario',
+        category: 'Bebidas geladas',
+        city: 'Angra do reis',
         coordinates: [434, 5454],
         country: 'brazil',
         description: 'cervejaria',
         ibu: 23,
-        name: 'Cervejaria dos tops',
-        state: 'Sao Paulo',
-        website: 'cervejariadostops.com.br'
+        name: 'BebidinhaGeladinhaGostosinha',
+        state: 'Rio de Janeiro',
+        website: 'bebidasgeladas.com.br'
       });
 
     expect(user.statusCode).toBe(201);
@@ -54,7 +53,7 @@ describe('Should test codes response of routes relational with breweries', () =>
   });
 
   it('Shoud return 204 for delete Brewery', async () => {
-    const find = await BreweryModel.findByName('Dancing with driks');
+    const find = await BreweryModel.findByName('Dancing with drink');
 
     if (find) {
       const user = await supertest(app).delete(`/api/v1/brewery/${find.id}`);
@@ -63,7 +62,7 @@ describe('Should test codes response of routes relational with breweries', () =>
   });
 
   it('Shoud update with status 200 a Brewery', async () => {
-    const find = await BreweryModel.findByName('Dancing with driks');
+    const find = await BreweryModel.findByName('Dancing with drink');
 
     if (find) {
       const user = await supertest(app)
@@ -73,5 +72,17 @@ describe('Should test codes response of routes relational with breweries', () =>
         });
       expect(user.statusCode).toBe(200);
     }
+  });
+
+  it('Shoud return 200 to find brewely from name', async () => {
+    await supertest(app).get('/api/v1/dancingwithdrink').expect(200);
+  });
+
+  it('Shoud return 200 to find All with filters', async () => {
+    const response = await supertest(app).get(
+      '/api/v1/breweries?country=united+states&state=california&city=las+vegas'
+    );
+
+    expect(response.statusCode).toBe(200);
   });
 });

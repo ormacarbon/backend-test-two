@@ -5,6 +5,7 @@ import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.
 import { Filters } from '../interfaces/Filters.interface';
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 import { InternalServerError } from '../services/err/Errors';
+import catchErrorsFunctions from '../common/utils/catchErrorsFunction';
 
 export const BrewerySchema = new Schema({
   abv: Number,
@@ -49,7 +50,7 @@ class BreweryModel {
     }
   }
 
-  async saveData(brewerie: constructorBreweryInterface) {
+  async create(brewerie: constructorBreweryInterface) {
     try {
       const data = await this.brewerie
         .create(brewerie)
@@ -61,7 +62,7 @@ class BreweryModel {
 
       throw new InternalServerError('ERROR');
     } catch (error) {
-      console.log(error);
+      catchErrorsFunctions(error);
     }
   }
 

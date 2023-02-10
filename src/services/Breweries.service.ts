@@ -116,10 +116,10 @@ class BreweriesService {
         throw new InvalidArgumentError(JSON.stringify(errors));
       }
 
-      const brewelyStored = await BreweriesModel.saveData(data);
+      const brewelyStored = await BreweriesModel.create(data);
       await MenuService.store(brewelyStored?.id);
 
-      return data;
+      return brewelyStored;
     } catch (error) {
       cacthErrosFunctions(error);
     }
