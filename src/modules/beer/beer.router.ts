@@ -3,7 +3,8 @@ import { inject, injectable } from 'tsyringe';
 
 import type { IValidatorMiddleware } from '#/middlewares/validator.middleware.js';
 import type { IBeerController } from '#/modules/beer/beer.controller.js';
-import { BeerCreateDtoSchema } from '#/modules/beer/dtos/create.dto.js';
+import { BeerCreateSchema } from '#/modules/beer/dtos/create.dto.js';
+import { BeerGetManySchema } from '#/modules/beer/dtos/get-many.dto.js';
 
 export interface IBeerRouter {
   router: Router;
@@ -18,11 +19,8 @@ export class BeerRouter implements IBeerRouter {
     @inject('IValidatorMiddleware') private readonly validatorMw: IValidatorMiddleware,
   ) {
     this.router.get('/seed', this.beerController.seed);
-    this.router.post(
-      '/',
-      this.validatorMw.validate(BeerCreateDtoSchema),
-      this.beerController.create,
-    );
+    this.router.post('/', this.validatorMw.validate(BeerCreateSchema), this.beerController.create);
     this.router.get('/:id', this.beerController.getOne);
+    this.router.get('/', this.validatorMw.validate(BeerGetManySchema), this.beerController.getMany);
   }
 }
