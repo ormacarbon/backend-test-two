@@ -8,6 +8,7 @@ import { ValidatorMiddleware } from '#/middlewares/validator.middleware.js';
 import { BeerController } from '#/modules/beer/beer.controller.js';
 import { BeerRouter } from '#/modules/beer/beer.router.js';
 import { BeerServiceCreate } from '#/modules/beer/services/create.service.js';
+import { BeerServiceGetOne } from '#/modules/beer/services/get-one.service.js';
 import { BeerServiceSeed } from '#/modules/beer/services/seed.service.js';
 import { EnvService } from '#/modules/shared/env.service.js';
 
@@ -22,6 +23,7 @@ container.register('IPrismaService', { useValue: new PrismaClient() });
 // modules
 container.register('IBeerServiceSeed', { useClass: BeerServiceSeed });
 container.register('IBeerServiceCreate', { useClass: BeerServiceCreate });
+container.register('IBeerServiceGetOne', { useClass: BeerServiceGetOne });
 container.register('IBeerController', { useClass: BeerController });
 container.register('IBeerRouter', { useClass: BeerRouter });
 

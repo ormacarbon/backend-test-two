@@ -23,5 +23,6 @@ export class BeerRouter implements IBeerRouter {
       this.validatorMw.validate(BeerCreateDtoSchema),
       this.beerController.create,
     );
+    this.router.get('/:id', this.beerController.getOne);
   }
 }
