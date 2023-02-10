@@ -24,6 +24,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
+    "@golevelup/ts-jest": "^0.3.4",
     "@jest/globals": "^29.4.2",
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "@types/jest": "^29.4.0",
