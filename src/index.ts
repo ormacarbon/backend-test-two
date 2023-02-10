@@ -1,0 +1,26 @@
+import { PrismaClient } from '@prisma/client';
+import 'reflect-metadata';
+import { container } from 'tsyringe';
+
+import { Server } from '#/api/server.js';
+import { ErrorHandlerMiddleware } from '#/middlewares/error-handler.middleware.js';
+import { BeerController } from '#/modules/beer/beer.controller.js';
+import { BeerRouter } from '#/modules/beer/beer.router.js';
+import { BeerServiceSeed } from '#/modules/beer/services/seed.service.js';
+import { EnvService } from '#/modules/shared/env.service.js';
+
+// middlewares
+container.register('IErrorHandlerMiddleware', { useClass: ErrorHandlerMiddleware });
+
+// shared services
+container.register('IEnvService', { useClass: EnvService });
+container.register('IPrismaService', { useValue: new PrismaClient() });
+
+// modules
+container.register('IBeerServiceSeed', { useClass: BeerServiceSeed });
+container.register('IBeerController', { useClass: BeerController });
+container.register('IBeerRouter', { useClass: BeerRouter });
+
+const server = container.resolve(Server);
+
+server.start();
