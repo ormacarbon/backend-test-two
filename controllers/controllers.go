@@ -15,18 +15,20 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
- var mongoEnv = "MONGO_ATLAS_URI"
- var database = "backend"
- var collection = "backend-test"
+var mongoEnv = "MONGO_ATLAS_URI"
+var database = "backend"
+var collection = "backend-test"
 
+// API CONTROLLERS
 func CreateLocation(c *gin.Context) {
 	//Connect to Atlas
 	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client := initializers.ConnectToAtlas(uri)
 
-	var location = models.Location{}
+	var location models.Location
 
 	if err := c.BindJSON(&location); err != nil {
+		fmt.Println(location)
 		c.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
@@ -34,18 +36,19 @@ func CreateLocation(c *gin.Context) {
 
 	res, err := coll.InsertOne(context.Background(), location)
 
-	if err != nil{
-		panic(err)
-	}else{
-
-		c.IndentedJSON(http.StatusAccepted, gin.H{"Location": res})
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(res)
+		fmt.Println(c.ClientIP())
+		c.IndentedJSON(http.StatusOK, gin.H{"message": "location inserted."})
 	}
 
 	//Disconnect from Atlas
 	initializers.DisconnectFromAtlas(*client)
 }
 
-func GetAllLocations(c *gin.Context){
+func GetAllLocations(c *gin.Context) {
 	//Connect to Atlas
 	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client := initializers.ConnectToAtlas(uri)
@@ -54,8 +57,8 @@ func GetAllLocations(c *gin.Context){
 
 	findOptions := options.Find()
 
-	cur, err := coll.Find(context.TODO(),bson.D{},findOptions)
-	if err != nil{
+	cur, err := coll.Find(context.TODO(), bson.D{}, findOptions)
+	if err != nil {
 		panic(err)
 	}
 	var documents []models.Location
@@ -75,14 +78,14 @@ func GetAllLocations(c *gin.Context){
 	initializers.DisconnectFromAtlas(*client)
 }
 
-func GetLocationById(c *gin.Context){
+func GetLocationById(c *gin.Context) {
 	//Connect to Atlas
 	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client := initializers.ConnectToAtlas(uri)
 
 	//Configure parameters
 	locationId := c.Param("id")
-	
+
 	locationIdPrimitive, err := primitive.ObjectIDFromHex(locationId)
 	if err != nil {
 		fmt.Println(err)
@@ -92,17 +95,17 @@ func GetLocationById(c *gin.Context){
 	sr := coll.FindOne(context.TODO(), bson.M{"_id": locationIdPrimitive})
 	if sr.Err() != nil {
 		fmt.Println(sr.Err())
-	}else{
+	} else {
 		var location models.Location
 		sr.Decode(&location)
-		c.IndentedJSON(http.StatusOK, gin.H{"message": location})
+		c.IndentedJSON(http.StatusOK, gin.H{"location": location})
 	}
 
 	//Disconnect from Atlas
 	initializers.DisconnectFromAtlas(*client)
 }
 
-func UpdateLocationsById(c *gin.Context){
+func UpdateLocationsById(c *gin.Context) {
 	//Connect to Atlas
 	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client := initializers.ConnectToAtlas(uri)
@@ -111,7 +114,7 @@ func UpdateLocationsById(c *gin.Context){
 	locationId := c.Param("id")
 	var update models.Location
 	err := c.BindJSON(&update)
-	if err != nil{
+	if err != nil {
 		fmt.Println(err)
 	}
 	locationIdPrimitive, err := primitive.ObjectIDFromHex(locationId)
@@ -121,10 +124,10 @@ func UpdateLocationsById(c *gin.Context){
 
 	//Update location and send response
 	coll := client.Database(database).Collection(collection)
-	sr, err := coll.UpdateByID(context.Background(), locationIdPrimitive, bson.M{"$set" : update})
+	sr, err := coll.UpdateByID(context.Background(), locationIdPrimitive, bson.M{"$set": update})
 	if err != nil {
 		fmt.Println(err)
-	}else{
+	} else {
 		c.IndentedJSON(http.StatusOK, gin.H{"message": sr.MatchedCount, "update": update})
 	}
 
@@ -132,7 +135,7 @@ func UpdateLocationsById(c *gin.Context){
 	initializers.DisconnectFromAtlas(*client)
 }
 
-func DeleteLocationById(c *gin.Context){
+func DeleteLocationById(c *gin.Context) {
 	//Connect to Atlas
 	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client := initializers.ConnectToAtlas(uri)
@@ -140,18 +143,23 @@ func DeleteLocationById(c *gin.Context){
 	//Configure parameters
 	localtionId := c.Param("id")
 	localtionIdPrimitive, err := primitive.ObjectIDFromHex(localtionId)
-	if err != nil{
+	if err != nil {
 		fmt.Println(err)
 	}
 
 	//Delete location
 	coll := client.Database(database).Collection(collection)
 	dr, err := coll.DeleteOne(context.TODO(), bson.M{"_id": localtionIdPrimitive})
-	if err != nil{
+	if err != nil {
 		fmt.Println(err)
 	}
 	c.IndentedJSON(http.StatusOK, gin.H{"message": dr.DeletedCount})
 
 	//Disconnect from Atlas
 	initializers.DisconnectFromAtlas(*client)
+}
+
+// FRONTEND CONTROLLERS
+func Index(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.html", gin.H{"content": "homepage"})
 }
