@@ -1,6 +1,6 @@
 export type BreweryEntity = {
   abv: number
-  adress?: string
+  address?: string
   category?: string
   city?: string
   coordinates?: number[]
