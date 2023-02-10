@@ -23,9 +23,10 @@ var collection = "backend-test"
 // API CONTROLLERS
 func CreateLocation(c *gin.Context) {
 	//Connect to Atlas
-	uri := helpers.GetEnviromentalVariable(mongoEnv)
-	client := initializers.ConnectToAtlas(uri)
-
+	uri, err := helpers.GetEnviromentalVariable(mongoEnv)
+	helpers.HandleError(err)
+	client, err := initializers.ConnectToAtlas(uri)
+	helpers.HandleError(err)
 	var location *models.Location
 
 	if err := c.BindJSON(&location); err != nil {
@@ -57,8 +58,10 @@ func CreateLocation(c *gin.Context) {
 
 func GetAllLocations(c *gin.Context) {
 	//Connect to Atlas
-	uri := helpers.GetEnviromentalVariable(mongoEnv)
-	client := initializers.ConnectToAtlas(uri)
+	uri, err := helpers.GetEnviromentalVariable(mongoEnv)
+	helpers.HandleError(err)
+	client, err := initializers.ConnectToAtlas(uri)
+	helpers.HandleError(err)
 
 	coll := client.Database(database).Collection(collection)
 
@@ -66,7 +69,7 @@ func GetAllLocations(c *gin.Context) {
 
 	cur, err := coll.Find(context.TODO(), bson.D{}, findOptions)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	var documents []models.Location
 
@@ -87,8 +90,10 @@ func GetAllLocations(c *gin.Context) {
 
 func GetLocationById(c *gin.Context) {
 	//Connect to Atlas
-	uri := helpers.GetEnviromentalVariable(mongoEnv)
-	client := initializers.ConnectToAtlas(uri)
+	uri, err := helpers.GetEnviromentalVariable(mongoEnv)
+	helpers.HandleError(err)
+	client, err := initializers.ConnectToAtlas(uri)
+	helpers.HandleError(err)
 
 	//Configure parameters
 	locationId := c.Param("id")
@@ -117,22 +122,19 @@ func GetLocationById(c *gin.Context) {
 }
 
 func UpdateLocationsById(c *gin.Context) {
-	//Connect to Atlas
-	uri := helpers.GetEnviromentalVariable(mongoEnv)
-	client := initializers.ConnectToAtlas(uri)
 
-	//Configure parameters
+	uri, err := helpers.GetEnviromentalVariable(mongoEnv)
+	helpers.HandleError(err)
+	client, err := initializers.ConnectToAtlas(uri)
+	helpers.HandleError(err)
 	locationId := c.Param("id")
 	var update models.Location
-	err := c.BindJSON(&update)
+	err = c.BindJSON(&update)
+	helpers.HandleError(err)
 
-	//Check if there is a body
 	if err != nil {
-		fmt.Println(err)
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "no location found on request."})
 	} else {
-
-		//Check if the location is filled
 		if cmp.Equal(&update, &models.Location{}) {
 
 			c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "location is empty."})
@@ -163,13 +165,16 @@ func UpdateLocationsById(c *gin.Context) {
 	}
 
 	//Disconnect from Atlas
-	initializers.DisconnectFromAtlas(*client)
+	err = initializers.DisconnectFromAtlas(*client)
+	helpers.HandleError(err)
 }
 
 func DeleteLocationById(c *gin.Context) {
 	//Connect to Atlas
-	uri := helpers.GetEnviromentalVariable(mongoEnv)
-	client := initializers.ConnectToAtlas(uri)
+	uri, err := helpers.GetEnviromentalVariable(mongoEnv)
+	helpers.HandleError(err)
+	client, err := initializers.ConnectToAtlas(uri)
+	helpers.HandleError(err)
 
 	//Configure parameters
 	localtionId := c.Param("id")

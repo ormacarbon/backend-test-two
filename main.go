@@ -9,12 +9,10 @@ import (
 
 func main() {
 
+	//CONFIG
 	router := gin.Default()
-
 	router.Use(cors.Default())
-
 	router.Static("/statics", "./statics/")
-
 	router.LoadHTMLGlob("./views/*.html")
 
 	//API
@@ -24,9 +22,10 @@ func main() {
 	router.PUT("/api/location/:id", controllers.UpdateLocationsById)
 	router.DELETE("/api/location/:id", controllers.DeleteLocationById)
 
-	//FRONTEND
+	//PAGES
 	router.GET("/", controllers.Index)
 
+	//RUN
 	router.Run("localhost:9090")
 
 }
