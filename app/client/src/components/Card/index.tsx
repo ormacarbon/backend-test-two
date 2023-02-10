@@ -26,7 +26,7 @@ function Card({beer, handleDeleteBeer}: Props) {
         <Button>
           <Link to={`/${beer.id}/edit`}>EDIT</Link>
         </Button>
-        <Button onClick={() => (handleDeleteBeer(beer.id))}>
+        <Button onClick={() => (handleDeleteBeer(beer.id as string))}>
           DELETE
         </Button>
       </div>

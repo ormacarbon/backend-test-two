@@ -44,7 +44,6 @@ function Edit() {
     if (beerWebsiteRef.current?.value != '') {updateInfo["website"] = beerWebsiteRef.current?.value}
 
     axios.put(`http://localhost:3005/beers/${id}`, updateInfo).then(data => {
-      console.log(data)
       if (data.status == 200) {
         axios.get(`http://localhost:3005/beers/${id}`).then(data => {
           setBeerUpdated(data.data)

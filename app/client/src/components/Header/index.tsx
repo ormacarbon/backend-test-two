@@ -11,7 +11,7 @@ function Header({setInputNameBeers}: Props) {
     <header>
       <Link to="/">Home</Link>
       <Input placeholder="search beer" onChange={(e) => {setInputNameBeers(e.target.value)}}/>
-      <Button>NEW</Button>
+      <Button><Link to='/new'>NEW</Link></Button>
     </header>
   );
 }
