@@ -9,14 +9,14 @@ datasource db {
 
 model Beer {
   id          String  @id @default(uuid())
-  abv         Float?
+  abv         Float
   address     String?
   category    String?
   city        String?
   coordinates Float[]
   country     String?
   description String?
-  ibu         Int?
+  ibu         Int
   name        String?
   state       String?
   website     String?
