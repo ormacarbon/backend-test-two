@@ -14,6 +14,15 @@ class BeerController {
       return next(error);
     }
   };
+
+  public readAll = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const allBeers = await this._service.readAll();
+      return res.status(200).json(allBeers);
+    } catch (error) {
+      return next(error);
+    }
+  };
 }
 
 export default BeerController;
