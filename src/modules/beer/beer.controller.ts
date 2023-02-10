@@ -52,8 +52,9 @@ export class BeerController implements IBeerController {
   async getMany(req: Request<{}, {}, {}, BeerGetManyDto>, res: Response): Promise<Response> {
     const { query } = req;
     const result = await this.beerServiceGetMany.getMany(query);
+    const { results, ...rest } = result;
 
-    return res.json(result);
+    return res.json({ ...rest, results: results.map(this.stripNulls) });
   }
 
   private stripNulls(beer: Beer) {
