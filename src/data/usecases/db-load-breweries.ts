@@ -5,7 +5,7 @@ import { LoadBreweriesRepository } from '../protocols/db/load-breweries-reposito
 export class DbLoadBreweries implements LoadBreweries {
   constructor (private readonly loadBreweriesRepository: LoadBreweriesRepository) {}
   async handle (): Promise<BreweryEntity[]> {
-    await this.loadBreweriesRepository.handle()
-    return []
+    const result = await this.loadBreweriesRepository.handle()
+    return result
   }
 }
