@@ -1,9 +1,15 @@
-import express from "express";
+import app from "./app";
+import connectToDatabase from "./models/Connection";
 
-const app = express();
+const PORT = 8000;
 
-const port = 8000;
-
-app.get("/", (req, res) => res.send("xD"));
-
-app.listen(port, () => console.log(`listening on port ${port}!`));
+connectToDatabase()
+  .then(() => {
+    app.listen(PORT, () => console.log(`Running server on port: ${PORT}`));
+  })
+  .catch((error) => {
+    console.log("Connection with database generated an error:\r\n");
+    console.error(error);
+    console.log("\r\nServer initialization cancelled");
+    process.exit(0);
+  });
