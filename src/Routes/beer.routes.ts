@@ -19,4 +19,6 @@ beerRoute.post(
   beerController.create,
 );
 
+beerRoute.get('/', beerController.readAll);
+
 export default beerRoute;
