@@ -1,0 +1,4 @@
+{
+  "*.(ts|tsx)": ["yarn check-types", "yarn lint", "yarn format", "yarn test-staged"],
+  "*.json": ["yarn format"]
+}
