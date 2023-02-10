@@ -21,9 +21,18 @@ export default class BeerService implements IService<IBeer> {
     if (!parsed.success) throw parsed.error;
 
     const id = uuidv4()
-    const data = {...beer, id}
-    const newBeer = await BeerModel.create(data);
+    const newBeer = await BeerModel.create({...beer, id});
     return newBeer;
+  }
+
+  public async update(id: string, beer: IBeer): Promise<void> {
+    const parsed = beerZodSchema.safeParse(beer);
+    if (!parsed.success) throw parsed.error;
+
+    const findBeer = await BeerModel.findByPk(id);
+    if (!findBeer) throw new Error(ErrorTypes.NotFound);
+
+    await BeerModel.update(beer, {where: {id}});
   }
 
   public async delete(id: string): Promise<void> {
