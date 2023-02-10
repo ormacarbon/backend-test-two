@@ -1,5 +1,5 @@
 import { LoadBreweriesController } from '../../../src/presentation/controllers/load-breweries-controller'
-import { serverError } from '../../../src/presentation/helpers/http-helper'
+import { ok, serverError } from '../../../src/presentation/helpers/http-helper'
 import { throwError } from '../../domain/mocks/test-helpers'
 import { LoadBreweriesSpy } from '../mocks/mock-brewery'
 
@@ -26,5 +26,11 @@ describe('LoadBreweries Controller', () => {
     jest.spyOn(loadBreweriesSpy, 'handle').mockImplementationOnce(throwError)
     const httpResponse = await sut.handle()
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  it('Should return 200 on success', async () => {
+    const { sut, loadBreweriesSpy } = makeSut()
+    const httpResponse = await sut.handle()
+    expect(httpResponse).toEqual(ok([loadBreweriesSpy.result]))
   })
 })
