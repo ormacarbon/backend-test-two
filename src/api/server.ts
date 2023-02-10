@@ -36,6 +36,6 @@ export class Server {
   }
 
   start() {
-    return this.httpServer.listen(this.envService.get('API_PORT'));
+    return this.httpServer.listen(process.env.PORT || this.envService.get('API_PORT'));
   }
 }
