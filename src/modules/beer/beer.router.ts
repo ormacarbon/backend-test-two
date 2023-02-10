@@ -22,5 +22,6 @@ export class BeerRouter implements IBeerRouter {
     this.router.post('/', this.validatorMw.validate(BeerCreateSchema), this.beerController.create);
     this.router.get('/:id', this.beerController.getOne);
     this.router.get('/', this.validatorMw.validate(BeerGetManySchema), this.beerController.getMany);
+    this.router.delete('/:id', this.beerController.delete);
   }
 }

@@ -7,6 +7,7 @@ import { BeerCreateDto } from '#/modules/beer/dtos/create.dto.js';
 import { BeerGetManyDto } from '#/modules/beer/dtos/get-many.dto.js';
 import { SeedResponseDto } from '#/modules/beer/dtos/seed-response.dto.js';
 import type { IBeerServiceCreate } from '#/modules/beer/services/create.service.js';
+import type { IBeerServiceDelete } from '#/modules/beer/services/delete.service.js';
 import type { IBeerServiceGetMany } from '#/modules/beer/services/get-many.service.js';
 import type { IBeerServiceGetOne } from '#/modules/beer/services/get-one.service.js';
 import type { IBeerServiceSeed } from '#/modules/beer/services/seed.service.js';
@@ -16,6 +17,7 @@ export interface IBeerController {
   create: RequestHandler;
   getOne: RequestHandler;
   getMany: RequestHandler;
+  delete: RequestHandler;
 }
 
 @injectable()
@@ -25,6 +27,7 @@ export class BeerController implements IBeerController {
     @inject('IBeerServiceCreate') private readonly beerServiceCreate: IBeerServiceCreate,
     @inject('IBeerServiceGetOne') private readonly beerServiceGetOne: IBeerServiceGetOne,
     @inject('IBeerServiceGetMany') private readonly beerServiceGetMany: IBeerServiceGetMany,
+    @inject('IBeerServiceDelete') private readonly beerServiceDelete: IBeerServiceDelete,
   ) {
     autoBind(this);
   }
@@ -55,6 +58,13 @@ export class BeerController implements IBeerController {
     const { results, ...rest } = result;
 
     return res.json({ ...rest, results: results.map(this.stripNulls) });
+  }
+
+  async delete(req: Request<{ [key: string]: string }>, res: Response): Promise<void> {
+    const { params } = req;
+    await this.beerServiceDelete.delete(params.id);
+
+    res.status(204).end();
   }
 
   private stripNulls(beer: Beer) {

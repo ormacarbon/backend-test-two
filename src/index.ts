@@ -8,6 +8,7 @@ import { ValidatorMiddleware } from '#/middlewares/validator.middleware.js';
 import { BeerController } from '#/modules/beer/beer.controller.js';
 import { BeerRouter } from '#/modules/beer/beer.router.js';
 import { BeerServiceCreate } from '#/modules/beer/services/create.service.js';
+import { BeerServiceDelete } from '#/modules/beer/services/delete.service.js';
 import { BeerServiceGetMany } from '#/modules/beer/services/get-many.service.js';
 import { BeerServiceGetOne } from '#/modules/beer/services/get-one.service.js';
 import { BeerServiceSeed } from '#/modules/beer/services/seed.service.js';
@@ -26,6 +27,7 @@ container.register('IBeerServiceSeed', { useClass: BeerServiceSeed });
 container.register('IBeerServiceCreate', { useClass: BeerServiceCreate });
 container.register('IBeerServiceGetOne', { useClass: BeerServiceGetOne });
 container.register('IBeerServiceGetMany', { useClass: BeerServiceGetMany });
+container.register('IBeerServiceDelete', { useClass: BeerServiceDelete });
 container.register('IBeerController', { useClass: BeerController });
 container.register('IBeerRouter', { useClass: BeerRouter });
 
