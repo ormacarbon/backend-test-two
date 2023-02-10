@@ -12,7 +12,7 @@
   "scripts": {
     "prebuild": "yarn rimraf build",
     "build": "yarn tsc -p tsconfig.build.json && yarn tsc-alias -p tsconfig.build.json",
-    "dev": "yarn tsx src/index.ts",
+    "dev": "yarn tsx --watch src/index.ts",
     "start": "node build",
     "lint": "yarn eslint --fix",
     "format": "yarn prettier --write",
