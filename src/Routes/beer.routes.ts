@@ -10,6 +10,13 @@ const beerRepository = new BeerMongooseRepository();
 const beerService = new BeerService(beerRepository);
 const beerController = new BeerController(beerService);
 
-beerRoute.post('/', BeerValidations.propertiesToCreate, beerController.create);
+beerRoute.post(
+  '/',
+  BeerValidations.propertiesToCreate,
+
+  BeerValidations.checkProperties,
+
+  beerController.create,
+);
 
 export default beerRoute;
