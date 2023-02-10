@@ -13,7 +13,7 @@ export const MenuSchema = new Schema({
       name: String,
       description: String,
       ingredients: [],
-      id: String
+      id_menu: String
     }
   ]
 });
@@ -46,7 +46,7 @@ class MenuModel {
               name: data.name,
               description: data.description,
               ingredients: data.ingredients,
-              id: data.id
+              id_menu: data.id
             }
           }
         }

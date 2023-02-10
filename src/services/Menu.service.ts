@@ -63,8 +63,6 @@ class MenuService {
 
       const item = await this.findItemInMenu(data);
 
-      console.log(item);
-
       if (!item) {
         errors.push('Error: Item not found');
       }
@@ -110,10 +108,8 @@ class MenuService {
       if (findBrewery) {
         const menu = await this.findMenu(findBrewery.id);
 
-        console.log(menu);
-
         if (menu) {
-          return menu;
+          return menu.menu;
         }
       }
 
