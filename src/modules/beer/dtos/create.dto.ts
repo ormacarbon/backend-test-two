@@ -1,4 +1,11 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  ArrayMaxSize,
+  ArrayMinSize,
+  IsArray,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 import { RequestSchema } from '#/api/request-schema.js';
 
@@ -14,6 +21,9 @@ export class BeerCreateDto {
   @IsOptional()
   category?: string;
 
+  @ArrayMaxSize(2)
+  @ArrayMinSize(2)
+  @IsArray()
   @IsNumber({}, { each: true })
   @IsOptional()
   coordinates?: number[];
