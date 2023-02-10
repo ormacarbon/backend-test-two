@@ -2,6 +2,7 @@ import Beer from '../Domain/Beer';
 import IBeerRepository from '../Interfaces/IBeerRepository';
 import IBeer from '../Interfaces/IBeer';
 import IBeerService from '../Interfaces/IBeerService';
+import BadRequestError from '../Utils/ErrorsTypes/BadRequestError';
 
 class BeerService implements IBeerService<IBeer> {
   private _repository: IBeerRepository<Beer, IBeer>;
@@ -27,7 +28,7 @@ class BeerService implements IBeerService<IBeer> {
       return beerDomain;
     }
 
-    throw new Error('Missing properties to create domain.');
+    throw new BadRequestError('Missing properties to create domain.');
   };
 
   public async create(beer: IBeer) {
