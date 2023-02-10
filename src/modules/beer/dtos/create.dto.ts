@@ -52,4 +52,4 @@ export class BeerCreateDto {
   website?: string;
 }
 
-export const BeerCreateDtoSchema = new RequestSchema(BeerCreateDto);
+export const BeerCreateSchema = new RequestSchema(BeerCreateDto);
