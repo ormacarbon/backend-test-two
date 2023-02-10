@@ -32,6 +32,10 @@ class BeersODM {
   public async create(beer: IBeer) {
     return this.model.create({ ...beer });
   }
+
+  public async readAll() {
+    return this.model.find({});
+  }
 }
 
 export default BeersODM;
