@@ -19,6 +19,11 @@ export default class beerController {
     return res.status(200).json(getOne);
   }
 
+  public async create(req: Request, res: Response<IBeer>) {
+    const newBeer = await this._beerService.create(req.body) as IBeer;
+    return res.status(201).json(newBeer);
+  }
+
   public async delete(req: Request, res: Response<void>) {
     await this._beerService.delete(req.params.id);
     return res.status(204).json();

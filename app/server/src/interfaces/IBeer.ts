@@ -3,13 +3,13 @@ import { z } from 'zod';
 const beerZodSchema = z.object({
   id: z
   .string({
-    required_error: "id is required",
     invalid_type_error: "id must be a number",
-  }),
+  })
+  .optional(),
   abv: z
-  .number({
+  .string({
     required_error: "abv is required",
-    invalid_type_error: "abv must be a number",
+    invalid_type_error: "abv must be a string",
   }),
   address: z
     .string({
@@ -28,9 +28,9 @@ const beerZodSchema = z.object({
     }),
   coordinates: z
     .string({
-      required_error: "coordinates is required",
       invalid_type_error: "coordinates must be a string",
-    }),
+    })
+    .optional(),
   country: z
     .string({
       required_error: "country is required",

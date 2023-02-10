@@ -10,7 +10,7 @@ module.exports = {
       },
       abv: {
         allowNull: true,
-        type: Sequelize.DECIMAL(22, 20)
+        type: Sequelize.STRING,
       },
       address: {
         type: Sequelize.STRING,

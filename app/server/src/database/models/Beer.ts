@@ -3,7 +3,7 @@ import db from '.';
 
 class Beer extends Model {
   public id: string;
-  public abv: number;
+  public abv: string;
   public address: string;
   public category: string;
   public city: string;
@@ -40,8 +40,8 @@ Beer.init({
     allowNull: false,
   },
   coordinates: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
-    allowNull: false,
+    type: DataTypes.STRING,
+    allowNull: true,
   },
   country: {
     type: DataTypes.STRING,
