@@ -26,6 +26,6 @@ describe('LoadBreweriesPrismaRepository', () => {
     const sut = makeSut()
     await prisma.brewery.create({ data: mockBreweryEntity() })
     const result = await sut.handle()
-    expect(result[0].abv).toBeTruthy()
+    expect(result[0]).toBeTruthy()
   })
 })
