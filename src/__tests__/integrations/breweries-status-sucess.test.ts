@@ -75,7 +75,9 @@ describe('Should test codes response of routes relational with breweries', () =>
   });
 
   it('Shoud return 200 to find brewely from name', async () => {
-    await supertest(app).get('/api/v1/dancingwithdrink').expect(200);
+    const data = await supertest(app).get('/api/v1/dancingwithdrink');
+
+    expect(data.statusCode).toBe(200);
   });
 
   it('Shoud return 200 to find All with filters', async () => {

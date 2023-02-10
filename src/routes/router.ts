@@ -3,6 +3,8 @@ import breweriesHandler from '../controller/breweries.handler';
 import multer from '../config/multer.config';
 import menuHandler from '../controller/menu.handler';
 import couponsHandler from '../controller/coupons.handler';
+import userHandler from '../controller/user.handler';
+import reputationHandler from '../controller/reputation.handler';
 const routes = Router();
 
 routes.get('/api/v1/breweries', breweriesHandler.findAllBrewelers);
@@ -22,6 +24,11 @@ routes.post(
   multer.single('data'),
   breweriesHandler.storeWithJSONFile
 );
+
+routes.get('/api/v1/user', userHandler.findAll);
+routes.post('/api/v1/user', userHandler.store);
+
+routes.get('/api/v1/reputation/:reputation', reputationHandler.add);
 
 routes.get('/api/v1/coupons', couponsHandler.findAll);
 routes.post('/api/v1/coupons', couponsHandler.create);

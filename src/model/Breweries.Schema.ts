@@ -28,6 +28,10 @@ export const BrewerySchema = new Schema({
   external_urls: {
     type: Object,
     website: String
+  },
+  reputation: {
+    type: Array,
+    default: []
   }
 });
 
@@ -135,6 +139,16 @@ class BreweryModel {
       await this.brewerie.deleteMany();
     } catch (error) {
       cacthErrosFunctions(error);
+    }
+  }
+
+  async reputation(id: string) {
+    try {
+      const data = await this.brewerie.findOne({ id });
+
+      return data?.reputation;
+    } catch (error) {
+      catchErrorsFunctions(error);
     }
   }
 }
