@@ -22,6 +22,8 @@ class BeersODM {
       name: { type: String, required: false },
       state: { type: String, required: false },
       website: { type: String, required: false },
+    }, {
+      versionKey: false, // You should be aware of the outcome after set to false
     });
 
     this.model = models.Beers || model('Beer', this.schema);
