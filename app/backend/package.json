@@ -8,7 +8,7 @@
     "test:dev": "mocha -r ts-node/register src/tests/unit/**/*.test.ts --exit -t 60000",
     "test:coverage": "nyc npm run test:dev",
     "test": "jest -i --forceExit --verbose",
-    "dev": "/bin/sh ./scripts/upbd.sh && nodemon --watch \"./src/**\" ./src/server.ts"
+    "dev": "/bin/sh ./scripts/downbd.sh && /bin/sh ./scripts/upbd.sh && nodemon --watch \"./src/**\" ./src/server.ts"
   },
   "keywords": [],
   "author": "",
