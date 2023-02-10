@@ -1,15 +1,18 @@
-import { IsNumberString, IsOptional, IsString, Matches, Min } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsNumber, IsOptional, IsString, Matches, Min } from 'class-validator';
 
 import { RequestSchema } from '#/api/request-schema.js';
 
 export class BeerGetManyDto {
-  @IsNumberString()
-  @Min(1)
   @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(1)
   page?: number;
 
-  @IsNumberString()
   @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
   abv?: number;
 
   @IsString()
@@ -32,8 +35,9 @@ export class BeerGetManyDto {
   @IsOptional()
   description?: string;
 
-  @IsNumberString()
   @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
   ibu?: number;
 
   @IsString()

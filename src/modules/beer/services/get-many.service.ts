@@ -1,4 +1,5 @@
 import { Beer } from '@prisma/client';
+import { plainToInstance } from 'class-transformer';
 import { inject, injectable } from 'tsyringe';
 
 import { AppError, AppErrorType } from '#/api/app-error.js';
@@ -10,7 +11,7 @@ export type SearchResult = {
   totalPages: number;
   beersPerPage: number;
   currentPage: number;
-  search: Beer[];
+  results: Beer[];
 };
 
 export interface IBeerServiceGetMany {
@@ -23,24 +24,28 @@ export class BeerServiceGetMany implements BeerServiceGetMany {
 
   async getMany(input: BeerGetManyDto): Promise<SearchResult> {
     try {
-      const { page, ...rest } = input;
+      const parsed = plainToInstance(BeerGetManyDto, input);
+      const { page, ...rest } = parsed;
       const { coordinates, ...where } = rest;
       const coords = coordinates ? coordinates.split(',').map((v) => +v) : [];
       const currentPage = page || 1;
+      const beersPerPage = 10;
 
-      const totalBeers = await this.prismaService.beer.count();
+      const totalBeers = await this.prismaService.beer.count({
+        where: { ...where, coordinates: coordinates ? { hasEvery: coords } : undefined },
+      });
       const result = await this.prismaService.beer.findMany({
-        where: { ...where, coordinates: { hasEvery: coords } },
-        take: 10,
-        skip: (currentPage - 1) * 5,
+        where: { ...where, coordinates: coordinates ? { hasEvery: coords } : undefined },
+        take: beersPerPage,
+        skip: (currentPage - 1) * beersPerPage,
       });
 
       return {
         totalBeers,
-        totalPages: Math.ceil(totalBeers / 10),
-        beersPerPage: 10,
+        totalPages: Math.ceil(totalBeers / beersPerPage),
+        beersPerPage,
         currentPage,
-        search: result,
+        results: result,
       };
     } catch (err) {
       throw new AppError(AppErrorType.INTERNAL, (err as Error).message);

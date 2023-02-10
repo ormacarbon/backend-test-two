@@ -22,7 +22,7 @@ describe('get-many.service.ts', () => {
       totalPages: 1,
       beersPerPage: 10,
       currentPage: 1,
-      search: [{ abv: 1, ibu: 1 } as Beer],
+      results: [{ abv: 1, ibu: 1 } as Beer],
     });
   });
 
