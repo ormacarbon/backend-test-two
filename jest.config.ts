@@ -14,7 +14,7 @@ const config: Config = {
   testRegex: '.(spec|test).(ts|tsx)$',
   testEnvironment: 'node',
   coverageDirectory: 'coverage',
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!**/index.ts', '!**/*.interface.ts'],
   coverageProvider: 'v8',
   setupFiles: ['<rootDir>/jest.setup.ts'],
 };
