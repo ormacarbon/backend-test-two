@@ -1,7 +1,9 @@
 import { Router } from 'express';
 import { inject, injectable } from 'tsyringe';
 
+import type { IValidatorMiddleware } from '#/middlewares/validator.middleware.js';
 import type { IBeerController } from '#/modules/beer/beer.controller.js';
+import { BeerCreateDtoSchema } from '#/modules/beer/dtos/create.dto.js';
 
 export interface IBeerRouter {
   router: Router;
@@ -11,7 +13,15 @@ export interface IBeerRouter {
 export class BeerRouter implements IBeerRouter {
   router = Router();
 
-  constructor(@inject('IBeerController') private readonly beerController: IBeerController) {
-    this.router.use('/seed', this.beerController.seed);
+  constructor(
+    @inject('IBeerController') private readonly beerController: IBeerController,
+    @inject('IValidatorMiddleware') private readonly validatorMw: IValidatorMiddleware,
+  ) {
+    this.router.get('/seed', this.beerController.seed);
+    this.router.post(
+      '/',
+      this.validatorMw.validate(BeerCreateDtoSchema),
+      this.beerController.create,
+    );
   }
 }

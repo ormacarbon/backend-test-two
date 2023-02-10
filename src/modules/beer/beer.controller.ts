@@ -1,3 +1,4 @@
+import { Beer } from '@prisma/client';
 import autoBind from 'auto-bind';
 import { Request, RequestHandler, Response } from 'express';
 import { inject, injectable } from 'tsyringe';
@@ -31,6 +32,13 @@ export class BeerController implements IBeerController {
     const { body } = req;
     const result = await this.beerServiceCreate.create(body);
 
-    return res.status(201).json(result);
+    return res.status(201).json(this.stripNulls(result));
+  }
+
+  private stripNulls(beer: Beer) {
+    const stripped = Object.fromEntries(Object.entries(beer).filter(([_, v]) => v !== null));
+    if (!beer.coordinates.length) delete stripped.coordinates;
+
+    return stripped;
   }
 }

@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 
 import { Server } from '#/api/server.js';
 import { ErrorHandlerMiddleware } from '#/middlewares/error-handler.middleware.js';
+import { ValidatorMiddleware } from '#/middlewares/validator.middleware.js';
 import { BeerController } from '#/modules/beer/beer.controller.js';
 import { BeerRouter } from '#/modules/beer/beer.router.js';
 import { BeerServiceCreate } from '#/modules/beer/services/create.service.js';
@@ -12,6 +13,7 @@ import { EnvService } from '#/modules/shared/env.service.js';
 
 // middlewares
 container.register('IErrorHandlerMiddleware', { useClass: ErrorHandlerMiddleware });
+container.register('IValidatorMiddleware', { useClass: ValidatorMiddleware });
 
 // shared services
 container.register('IEnvService', { useClass: EnvService });

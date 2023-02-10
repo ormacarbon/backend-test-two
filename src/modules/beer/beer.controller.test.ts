@@ -25,12 +25,26 @@ describe('beer.controller.ts', () => {
   });
 
   test('create', async () => {
-    jest.spyOn(beerServiceCreate, 'create').mockResolvedValue({} as Beer);
+    // with coords
+    jest.spyOn(beerServiceCreate, 'create').mockResolvedValue({ coordinates: [1, 3] } as Beer);
     const req = createMock<Request>();
     // https://mattiaerre.medium.com/express-req-res-and-chaining-1a9da1dc00e0
     const res: Response = createMock<Response>({ json: jest.fn(), status: jest.fn(() => res) });
 
     await controller.create(req, res, jest.fn());
+
+    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.json).toHaveBeenCalledWith({ coordinates: [1, 3] });
+
+    // without coords
+    jest
+      .spyOn(beerServiceCreate, 'create')
+      .mockResolvedValue({ coordinates: [] } as unknown as Beer);
+    const req2 = createMock<Request>();
+    // https://mattiaerre.medium.com/express-req-res-and-chaining-1a9da1dc00e0
+    const res2: Response = createMock<Response>({ json: jest.fn(), status: jest.fn(() => res) });
+
+    await controller.create(req2, res2, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({});
