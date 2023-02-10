@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import BadRequestError from '../Utils/ErrorsTypes/BadRequestError';
+import UnprocessableEntityError from '../Utils/ErrorsTypes/UnprocessableEntityError';
+import ValidationsInputs from './Validations/ValidationInputs';
 
 class BeerValidations {
   public static propertiesToCreate(req: Request, _res: Response, next: NextFunction) {
@@ -13,6 +15,18 @@ class BeerValidations {
       });
 
       return next();
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  public static checkProperties(req: Request, _res: Response, next: NextFunction) {
+    const beer = req.body;
+    try {
+      const { isError, message } = ValidationsInputs.validateBeerObject(beer);
+      if (!isError) return next();
+
+      throw new UnprocessableEntityError(message);
     } catch (error) {
       return next(error);
     }
