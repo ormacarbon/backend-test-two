@@ -49,37 +49,21 @@ class BreweriesService {
     }
   }
 
-  async update(breweryUptade: BreweriesUpdateInterface) {
+  async update(id: string, breweryUptade: BreweriesUpdateInterface) {
     try {
       const errors = [];
 
-      if (breweryUptade.id) {
-        const findBrewery = await BreweriesModel.find(breweryUptade.id);
+      const findBrewery = await BreweriesModel.find(id);
 
-        if (!findBrewery) {
-          errors.push('Error: Brewery not found');
-        }
-      }
-
-      if (breweryUptade.website) {
-        const verifyWebSiteHref = await this.verifyWebSite(
-          breweryUptade.website
-        );
-
-        if (verifyWebSiteHref) {
-          errors.push('Error: Website Duplicate');
-        }
-      }
-
-      const update = await BreweriesModel.update(breweryUptade);
-
-      if (!update) {
-        errors.push('Error: Not possible uptade the data;');
+      if (!findBrewery) {
+        errors.push('Error: Brewery not found');
       }
 
       if (errors.length > 0) {
         throw new InvalidArgumentError(JSON.stringify(errors));
       }
+
+      await BreweriesModel.update(id, breweryUptade);
     } catch (error) {
       cacthErrosFunctions(error);
     }

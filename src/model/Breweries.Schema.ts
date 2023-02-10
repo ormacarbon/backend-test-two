@@ -95,9 +95,9 @@ class BreweryModel {
     }
   }
 
-  async update(brewerieUpdate: BreweriesUpdateInterface) {
+  async update(id: string, brewerieUpdate: BreweriesUpdateInterface) {
     try {
-      return await this.brewerie.updateOne(brewerieUpdate);
+      return await this.brewerie.findOneAndUpdate({ _id: id }, brewerieUpdate);
     } catch (error) {
       cacthErrosFunctions(error);
     }

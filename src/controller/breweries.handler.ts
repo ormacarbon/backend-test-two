@@ -90,10 +90,10 @@ class BreweriesHandlerController {
   async uptade(req: Request, res: Response, next: NextFunction) {
     try {
       const body = BreweryUpdateDTO.parse(req.body);
-      const { id } = req.params;
-      body.id = id;
 
-      await BreweriesService.update(body);
+      const { id } = req.params;
+
+      await BreweriesService.update(id, body);
 
       res.status(200).json({
         message: 'Updated with sucess.',

@@ -11,8 +11,7 @@ const BreweryUpdateDTO = z.object({
   description: z.string().optional(),
   ibu: z.number().optional(),
   name: z.string().optional(),
-  state: z.string().optional(),
-  website: z.string().optional()
+  state: z.string().optional()
 });
 
 export default BreweryUpdateDTO;
