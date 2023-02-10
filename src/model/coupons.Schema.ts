@@ -6,9 +6,7 @@ import {
 } from '../interfaces/Coupons/Coupon.interface';
 
 export const CoupounSchema = new Schema({
-  name: {
-    type: Schema.Types.ObjectId
-  },
+  name: String,
   description: String,
   discount_max: {
     type: Number,
@@ -17,7 +15,8 @@ export const CoupounSchema = new Schema({
   created_by: {
     type: String
   },
-  avaliable: {
+  status: String,
+  found_on: {
     type: Object,
     name: {
       type: String,
@@ -27,7 +26,6 @@ export const CoupounSchema = new Schema({
       type: String
     }
   },
-  found_on: String,
   created_at: {
     type: Date,
     default: Date.now()
@@ -35,7 +33,7 @@ export const CoupounSchema = new Schema({
 });
 
 class CoupounsModel {
-  Coupon = model('coupons', CoupounSchema);
+  private readonly Coupon = model('coupons', CoupounSchema);
 
   async create(Coupon: CouponInterface) {
     try {
@@ -47,7 +45,9 @@ class CoupounsModel {
 
   async deleteById(id: string) {
     try {
-      return await this.Coupon.create(id);
+      return await this.Coupon.deleteOne({
+        _id: id
+      });
     } catch (error) {
       catchErrorsFunctions(error);
     }
@@ -69,6 +69,14 @@ class CoupounsModel {
         },
         couponUpdate
       );
+    } catch (error) {
+      catchErrorsFunctions(error);
+    }
+  }
+
+  async findById(id: string) {
+    try {
+      return await this.Coupon.findById(id);
     } catch (error) {
       catchErrorsFunctions(error);
     }

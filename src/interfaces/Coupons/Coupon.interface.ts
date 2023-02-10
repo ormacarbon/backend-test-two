@@ -1,10 +1,10 @@
 export interface CouponInterface {
   name: string;
-  description: string;
+  description?: string;
   discount_max: number;
+  found_on: FoundOn;
+  status: 'ACTIVE' | 'CLOSED';
   created_by: string;
-  avaliable: Avaliable;
-  found_on: string;
 }
 
 export interface CouponUpdateInterface {
@@ -12,11 +12,11 @@ export interface CouponUpdateInterface {
   description?: string;
   discount_max?: number;
   created_by?: string;
-  avaliable?: Avaliable;
-  found_on?: string;
+  status?: 'ACTIVE' | 'CLOSED';
+  found_on: FoundOn;
 }
 
-type Avaliable = {
+type FoundOn = {
   name: string;
   website: string;
 };
