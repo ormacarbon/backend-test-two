@@ -1,0 +1,22 @@
+{
+  "name": "ormacarbon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mkvlrn/ormacarbon-backend-test",
+  "author": "Mike Valeriano <mkvlrn@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "prebuild": "yarn rimraf build",
+    "build": "yarn tsc -p tsconfig.build.json && yarn tsc-alias -p tsconfig.build.json",
+    "dev": "yarn tsx src/index.ts",
+    "start": "node build"
+  },
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "cross-env": "^7.0.3",
+    "rimraf": "^4.1.2",
+    "tsx": "^3.12.3",
+    "typescript": "^4.9.5"
+  }
+}
