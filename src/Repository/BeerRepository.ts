@@ -3,7 +3,7 @@ import IBeerRepository from '../Interfaces/IBeerRepository';
 import Beer from '../Domain/Beer';
 import IBeer from '../Interfaces/IBeer';
 
-export default class BeerMongooseRepository implements IBeerRepository<Beer, IBeer> {
+class BeerMongooseRepository implements IBeerRepository<Beer, IBeer> {
   constructor(private _persistence = new BeersODM()) {}
 
   public async create(beer: Beer): Promise<IBeer> {
@@ -22,3 +22,5 @@ export default class BeerMongooseRepository implements IBeerRepository<Beer, IBe
     return this._persistence.create(beerDTO);
   }
 }
+
+export default BeerMongooseRepository;
