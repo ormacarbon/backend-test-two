@@ -28,4 +28,10 @@ describe('LoadBreweriesPrismaRepository', () => {
     const result = await sut.handle()
     expect(result[0]).toBeTruthy()
   })
+
+  it('Should return [] if database is empty', async () => {
+    const sut = makeSut()
+    const result = await sut.handle()
+    expect(result).toEqual([])
+  })
 })
