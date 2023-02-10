@@ -1,0 +1,31 @@
+{
+  "name": "backend-test-two",
+  "version": "1.0.0",
+  "description": "Recreation of a management system and stock for InterBeer-Company",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "test": "npm start test",
+    "import-data": "node migrations/migrations.js --import",
+    "delete-data": "node migrations/migrations.js --delete"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasBarboza-maker/backend-test-two.git"
+  },
+  "author": "Lucas Barboza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucasBarboza-maker/backend-test-two/issues"
+  },
+  "homepage": "https://github.com/LucasBarboza-maker/backend-test-two#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^5.0.0",
+    "mongoose": "^6.9.1",
+    "pm2": "^5.2.2"
+  }
+}
