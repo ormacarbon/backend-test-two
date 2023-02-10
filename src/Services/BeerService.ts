@@ -35,6 +35,10 @@ class BeerService implements IBeerService<IBeer> {
     const beerDomain = this.createBeerDomain(beer);
     return this._repository.create(beerDomain);
   }
+
+  public async readAll(): Promise<IBeer[]> {
+    return this._repository.readAll();
+  }
 }
 
 export default BeerService;
