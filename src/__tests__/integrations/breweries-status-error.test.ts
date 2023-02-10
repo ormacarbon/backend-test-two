@@ -15,6 +15,10 @@ describe('Should return errors codes response of routes relational with brewerie
       ibu: 23,
       name: 'Dancing with drinks',
       state: 'california',
+      external_urls: {
+        website: 'google.com.br',
+        href: `${process.env.ENDPOINT}/dancingwithdrinks`
+      },
       website: 'google.com.br',
       path: 'dancingwithdrinks'
     });
@@ -60,9 +64,7 @@ describe('Should return errors codes response of routes relational with brewerie
   });
 
   it('Shoud return 200 to find brewely from name', async () => {
-    const response = await supertest(app).get(
-      '/api/v1/brewely/dancingwithdrinks'
-    );
+    const response = await supertest(app).get('/api/v1/dancingwithdrinks');
 
     expect(response.statusCode).toBe(200);
   });

@@ -9,7 +9,8 @@ export interface Menu {
   ingredients: string[];
 }
 
-export interface RemoveItemMenu {
+export interface ItemMenu {
   owner: string;
-  id: string;
+  name: string;
+  id?: string;
 }

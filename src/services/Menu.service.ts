@@ -2,7 +2,7 @@ import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 import { MenuDTOInterface } from '../dtos/menu/Menu.dto';
 import BreweriesService from './Breweries.service';
 import MenuModel from '../model/Menu.Schema';
-import { RemoveItemMenu } from '../interfaces/Menu/Menu.interface';
+import { ItemMenu } from '../interfaces/Menu/Menu.interface';
 import { InvalidArgumentError } from './err/Errors';
 import { randomUUID } from 'crypto';
 
@@ -51,7 +51,7 @@ class MenuService {
     }
   }
 
-  async delete(data: RemoveItemMenu) {
+  async delete(data: ItemMenu) {
     try {
       const errors = [];
 
@@ -62,6 +62,8 @@ class MenuService {
       }
 
       const item = await this.findItemInMenu(data);
+
+      console.log(item);
 
       if (!item) {
         errors.push('Error: Item not found');
@@ -77,7 +79,7 @@ class MenuService {
     }
   }
 
-  async findItemInMenu(data: RemoveItemMenu) {
+  async findItemInMenu(data: ItemMenu) {
     try {
       return await MenuModel.findItemInMenuById(data);
     } catch (error) {
@@ -108,8 +110,10 @@ class MenuService {
       if (findBrewery) {
         const menu = await this.findMenu(findBrewery.id);
 
+        console.log(menu);
+
         if (menu) {
-          return menu.menu;
+          return menu;
         }
       }
 

@@ -2,7 +2,7 @@ import BreweryModel from '../../model/Breweries.Schema';
 import supertest = require('supertest');
 import app from '../../app';
 describe('Should test codes response of routes relational with breweries', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await BreweryModel.saveData({
       abv: 1,
       address: 'dancing street',
@@ -14,10 +14,16 @@ describe('Should test codes response of routes relational with breweries', () =>
       ibu: 23,
       name: 'Dancing with drinks',
       state: 'california',
+      external_urls: {
+        website: 'google.com.br',
+        href: `${process.env.ENDPOINT}/dancingwithdrinks`
+      },
       website: 'google.com.br',
       path: 'dancingwithdrinks'
     });
+  });
 
+  afterEach(async () => {
     await BreweryModel.deleteMany();
   });
 
@@ -51,7 +57,7 @@ describe('Should test codes response of routes relational with breweries', () =>
     const find = await BreweryModel.findByName('Dancing with driks');
 
     if (find) {
-      const user = await supertest(app).delete(`/api/v1/brewely/${find.id}`);
+      const user = await supertest(app).delete(`/api/v1/brewery/${find.id}`);
       expect(user.statusCode).toBe(204);
     }
   });

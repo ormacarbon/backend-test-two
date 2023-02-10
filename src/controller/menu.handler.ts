@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import MenuDTO, { MenuDTOInterface } from '../dtos/menu/Menu.dto';
-import { RemoveItemMenu } from '../interfaces/Menu/Menu.interface';
+import { ItemMenu } from '../interfaces/Menu/Menu.interface';
 
 import MenuService from '../services/Menu.service';
 
@@ -40,16 +40,16 @@ class MenuHandler {
 
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
-      const data: RemoveItemMenu = {
+      const data: ItemMenu = {
         owner: req.params.id,
-        id: req.params.id_item
+        name: req.params.name_item
       };
 
       await MenuService.delete(data);
 
-      return res.status(200).json({
+      return res.status(204).json({
         message: 'Removed with sucess...',
-        statusCode: 200
+        statusCode: 204
       });
     } catch (error) {
       next(error);
@@ -57,10 +57,10 @@ class MenuHandler {
   }
 
   async findMenuFromOwner(req: Request, res: Response, next: NextFunction) {
-    const { brewely_name } = req.params;
+    const { brewery_name } = req.params;
 
     try {
-      const data = await MenuService.findMenuFromOwner(brewely_name);
+      const data = await MenuService.findMenuFromOwner(brewery_name);
 
       res.status(200).json(data);
     } catch (error) {

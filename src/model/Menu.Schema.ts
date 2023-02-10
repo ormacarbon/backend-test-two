@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { MenuDTOInterface } from '../dtos/menu/Menu.dto';
-import { RemoveItemMenu } from '../interfaces/Menu/Menu.interface';
+import { ItemMenu } from '../interfaces/Menu/Menu.interface';
 import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 
 export const MenuSchema = new Schema({
@@ -64,28 +64,26 @@ class MenuModel {
     }
   }
 
-  async delete(data: RemoveItemMenu) {
+  async delete(data: ItemMenu) {
     try {
-      return await this.menu.deleteMany(
+      const result = await this.menu.updateOne(
+        { owner: data.owner },
         {
-          owner: data.owner
-        },
-        {
-          $pop: {
-            id: data.id
-          }
+          $pull: { menu: { ['name']: data.name } }
         }
       );
+
+      return result;
     } catch (error) {
       cacthErrosFunctions(error);
     }
   }
 
-  async findItemInMenuById(data: RemoveItemMenu) {
+  async findItemInMenuById(data: ItemMenu) {
     try {
       const result = await this.menu.findOne({
         owner: data.owner,
-        'menu.id': data.id
+        'menu.name': data.name
       });
 
       return result;
@@ -107,11 +105,13 @@ class MenuModel {
     }
   }
 
-  async findMenu(brewely: string) {
+  async findMenu(id: string) {
     try {
-      return await this.menu.findOne({
-        owner: brewely
+      const data = await this.menu.findOne({
+        owner: id
       });
+
+      return data;
     } catch (error) {
       cacthErrosFunctions(error);
     }

@@ -23,8 +23,11 @@ export const BrewerySchema = new Schema({
     unique: true
   },
   state: String,
-  website: String,
-  path: String
+  path: String,
+  external_urls: {
+    type: Object,
+    website: String
+  }
 });
 
 class BreweryModel {
@@ -96,7 +99,6 @@ class BreweryModel {
     try {
       return await this.brewerie.updateOne(brewerieUpdate);
     } catch (error) {
-      console.log(error);
       cacthErrosFunctions(error);
     }
   }

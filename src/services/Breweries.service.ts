@@ -2,8 +2,7 @@ import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
 import { LowerCaseFunction } from '../common/utils/LowerCaseFunction';
 
 import BrewelyInterface, {
-  constructorBreweryInterface,
-  ResponseBreweryInterface
+  constructorBreweryInterface
 } from '../interfaces/Breweries/Brewery.interface';
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import { Filters } from '../interfaces/Filters.interface';
@@ -19,7 +18,9 @@ class BreweriesService {
           Object.entries(filters).filter(([, value]) => value != 'undefined')
         );
 
-        return BreweriesModel.findBreweryWithFilter(filteredObject);
+        const result = BreweriesModel.findBreweryWithFilter(filteredObject);
+
+        return result;
       }
 
       return BreweriesModel.findAllBreweries();
@@ -86,23 +87,15 @@ class BreweriesService {
 
   async storeWithJSONFile(data: string) {
     try {
-      const content: constructorBreweryInterface[] = JSON.parse(data);
+      const content: BrewelyInterface[] = JSON.parse(data);
 
       for (let i = 0; i < content.length; i++) {
-        const name = content[i].name;
+        const findName = await this.findName(content[i].name);
 
-        const findName = await this.findName(name);
-
-        if (findName) {
-          throw new SyntaxError(
-            'It was not possible to add the data because of repeated data'
-          );
+        if (!findName) {
+          await this.store(content[i]);
         }
-
-        await this.store(content[i]);
       }
-
-      return content;
     } catch (error) {
       cacthErrosFunctions(error);
     }
@@ -129,7 +122,10 @@ class BreweriesService {
       const data: constructorBreweryInterface = {
         ...brewery,
         path: href_contructor,
-        website: brewery.website
+        external_urls: {
+          website: brewery.website,
+          href: `${process.env.ENDPOINT}/${href_contructor}`
+        }
       };
 
       if (errors.length > 0) {
@@ -139,15 +135,7 @@ class BreweriesService {
       const brewelyStored = await BreweriesModel.saveData(data);
       await MenuService.store(brewelyStored?.id);
 
-      const response: ResponseBreweryInterface = {
-        ...brewery,
-        external_url: {
-          website: brewery.website,
-          href: `${process.env.ENDPOINT}/brewely/${href_contructor}`
-        }
-      };
-
-      return response;
+      return data;
     } catch (error) {
       cacthErrosFunctions(error);
     }

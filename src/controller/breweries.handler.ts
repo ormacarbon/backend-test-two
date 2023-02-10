@@ -112,13 +112,11 @@ class BreweriesHandlerController {
         const content = await catchContent(file.path);
 
         if (content) {
-          const response = await BreweriesService.storeWithJSONFile(content);
-
-          console.log(response);
+          await BreweriesService.storeWithJSONFile(content);
 
           return res.status(201).json({
-            message: response,
-            statusCode: 201
+            message: 'Datas added..',
+            statusCode: 200
           });
         }
       }
