@@ -1,5 +1,5 @@
 export type IBeer = {
-  id: string,
+  id?: string,
   abv?: string,
   address?: string,
   category?: string,

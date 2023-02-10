@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { IBeer } from "../../interfaces/IBeer";
 import { Button } from "../Button";
 
@@ -23,7 +24,7 @@ function Card({beer, handleDeleteBeer}: Props) {
       </div>
       <div>
         <Button>
-          EDIT
+          <Link to={`/${beer.id}/edit`}>EDIT</Link>
         </Button>
         <Button onClick={() => (handleDeleteBeer(beer.id))}>
           DELETE
