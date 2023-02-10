@@ -1,6 +1,5 @@
 import { Router } from 'express';
-// import BeerMongooseRepository from '../Repository/BeerMongooseRepository';
-import BeerMongooseRepository from '../Repository/BeerRepository';
+import BeerMongooseRepository from '../Repository/BeerMongooseRepository';
 import BeerService from '../Services/BeerService';
 import BeerController from '../Controllers/BeerController';
 import BeerValidations from '../Middlewares/BeerValidations';
