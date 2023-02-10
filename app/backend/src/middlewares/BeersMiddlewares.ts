@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 export default class BeersMiddlewares {
   validBeersName = (req: Request, res: Response, next: NextFunction) => {
-    const obj = req.body;
+    const { obj } = req.body;
     const { name } = obj;
     if (!name) {
       return res.status(400).json({ message: 'Name is required' });
@@ -12,7 +12,7 @@ export default class BeersMiddlewares {
   };
 
   validCaracterBeer = (req: Request, res: Response, next: NextFunction) => {
-    const obj = req.body;
+    const { obj } = req.body;
     const {
       abv, ibu, description, category, 
     } = obj;
@@ -24,7 +24,7 @@ export default class BeersMiddlewares {
   };
 
   validAddressBeer = (req: Request, res: Response, next: NextFunction) => {
-    const obj = req.body;
+    const { obj } = req.body;
     const {
       address, city, coordinates, country, state, 
     } = obj;

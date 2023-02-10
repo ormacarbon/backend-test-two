@@ -10,9 +10,9 @@ export default class BeersController {
     res: Response,
   ) {
     try {
-      const beer = req.body;
-      const objcreate = await this.service.create(beer);
-      return res.status(201).json({ message: objcreate });
+      const { obj } = req.body;
+      const objcreate = await this.service.create(obj);
+      return res.status(201).json(objcreate);
     } catch (err) {
       return res.status(400)
         .json({ message: err.message });
@@ -32,8 +32,8 @@ export default class BeersController {
     res: Response,
   ) {
     try {
-      const obj = req.body;
-      const { id } = obj;
+      const { obj } = req.body;
+      const { id } = req.params;
       const beer = await this.service.update(id, obj);
       return res.status(200).json(beer);
     } catch (err) {
