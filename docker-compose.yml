@@ -19,6 +19,13 @@ services:
       - MONGO_URI=mongodb://mongodb:27017/Beers
 
 
+  # Serviço que popula o banco de dados do mongodb
+  mongo-seed:
+    build: ./src/Database/Seeders/mongo-seed
+    depends_on:
+      - mongodb
+
+
   # Serviço que irá rodar o mongodb
   mongodb:
     image: mongo:5.0.7
