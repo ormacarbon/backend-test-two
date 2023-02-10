@@ -4,7 +4,7 @@ import { BreweryEntity } from '../../../src/domain/entities/brewery'
 export const mockBreweryEntity = (): BreweryEntity => ({
   abv: faker.datatype.number(),
   ibu: faker.datatype.number(),
-  adress: faker.address.streetAddress(),
+  address: faker.address.streetAddress(),
   category: faker.commerce.department(),
   city: faker.address.cityName(),
   coordinates: [faker.datatype.float(), faker.datatype.float()],
