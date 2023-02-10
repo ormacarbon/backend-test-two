@@ -21,6 +21,10 @@ class BeerMongooseRepository implements IBeerRepository<Beer, IBeer> {
     };
     return this._persistence.create(beerDTO);
   }
+
+  public async readAll(): Promise<IBeer[]> {
+    return this._persistence.readAll();
+  }
 }
 
 export default BeerMongooseRepository;
