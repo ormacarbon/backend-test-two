@@ -65,6 +65,7 @@
                                     }
                                 },
                                 "example": {
+                                    "obj":  {
                                     "abv": 10,
                                     "address": "porto velho rondonia",
                                     "category": "cerveja atersanal",
@@ -77,6 +78,7 @@
                                     "name": "madeira",
                                     "website": "www.google.com"
                                 }
+                            }
                             }
                         }
                     }
@@ -104,13 +106,25 @@
                         "description": "Return all beers API"
                     }
                 }
-            },
-        "put": {
+            }
+        },
+        "/beers/{idput}": {
+            "put": {
                 "description": "Atualiza uma cerveja",
                 "tags": [
                     "Beer"
                 ],
                 "summary": "Update beer",
+                "parameters": [
+                    {
+                      "in": "path",
+                      "name": "idput",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -126,9 +140,11 @@
                                     }
                                 },
                                 "example": {
+                                    "obj": {
                                     "abv": 10,
                                     "name": "Skoll"
                                 }
+                            }
                             }
                         }
                     }
@@ -155,7 +171,7 @@
                   "name": "id",
                   "required": true,
                   "schema": {
-                    "type": "number"
+                    "type": "string"
                   }
                 }
               ],
