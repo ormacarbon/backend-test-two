@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  # Serviço que irá rodar o node
+  node:
+    image: node:16.14
+    container_name: beers
+    build: ./ 
+    command: bash
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./:/app
+    depends_on:
+      - mongodb
+    ports:
+      - 3001:3001
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/Beers
+
+
+  # Serviço que irá rodar o mongodb
+  mongodb:
+    image: mongo:5.0.7
+    container_name: beers_db
+    volumes:
+      - ./:/app
+    restart: always
+    ports:
+      - 27017:27017
+
+
+networks:
+  default:
+    name: beers_net
