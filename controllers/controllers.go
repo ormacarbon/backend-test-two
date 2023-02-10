@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/go-cmp/cmp"
 	_ "github.com/mitchellh/mapstructure"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -25,25 +26,31 @@ func CreateLocation(c *gin.Context) {
 	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client := initializers.ConnectToAtlas(uri)
 
-	var location models.Location
+	var location *models.Location
 
 	if err := c.BindJSON(&location); err != nil {
 		fmt.Println(location)
-		c.AbortWithError(http.StatusBadRequest, err)
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "no location found on request."})
 		return
-	}
-	coll := client.Database(database).Collection(collection)
-
-	res, err := coll.InsertOne(context.Background(), location)
-
-	if err != nil {
-		fmt.Println(err)
 	} else {
-		fmt.Println(res)
-		fmt.Println(c.ClientIP())
-		c.IndentedJSON(http.StatusOK, gin.H{"message": "location inserted."})
-	}
+		if cmp.Equal(location, &models.Location{}) {
+			c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "location is empty."})
+		} else {
 
+			coll := client.Database(database).Collection(collection)
+
+			res, err := coll.InsertOne(context.Background(), location)
+
+			if err != nil {
+				fmt.Println(err)
+			} else {
+				fmt.Println(res)
+				fmt.Println(c.ClientIP())
+				c.IndentedJSON(http.StatusOK, gin.H{"message": "location inserted."})
+			}
+		}
+
+	}
 	//Disconnect from Atlas
 	initializers.DisconnectFromAtlas(*client)
 }
@@ -95,9 +102,13 @@ func GetLocationById(c *gin.Context) {
 	sr := coll.FindOne(context.TODO(), bson.M{"_id": locationIdPrimitive})
 	if sr.Err() != nil {
 		fmt.Println(sr.Err())
+		if sr.Err().Error() == "mongo: no documents in result" {
+			c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "location does not exist."})
+		}
 	} else {
 		var location models.Location
 		sr.Decode(&location)
+
 		c.IndentedJSON(http.StatusOK, gin.H{"location": location})
 	}
 
@@ -114,21 +125,41 @@ func UpdateLocationsById(c *gin.Context) {
 	locationId := c.Param("id")
 	var update models.Location
 	err := c.BindJSON(&update)
-	if err != nil {
-		fmt.Println(err)
-	}
-	locationIdPrimitive, err := primitive.ObjectIDFromHex(locationId)
-	if err != nil {
-		fmt.Println(err)
-	}
 
-	//Update location and send response
-	coll := client.Database(database).Collection(collection)
-	sr, err := coll.UpdateByID(context.Background(), locationIdPrimitive, bson.M{"$set": update})
+	//Check if there is a body
 	if err != nil {
 		fmt.Println(err)
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "no location found on request."})
 	} else {
-		c.IndentedJSON(http.StatusOK, gin.H{"message": sr.MatchedCount, "update": update})
+
+		//Check if the location is filled
+		if cmp.Equal(&update, &models.Location{}) {
+
+			c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "location is empty."})
+
+		} else {
+
+			locationIdPrimitive, err := primitive.ObjectIDFromHex(locationId)
+
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			//Update location and send response
+			coll := client.Database(database).Collection(collection)
+
+			sr, err := coll.UpdateByID(context.Background(), locationIdPrimitive, bson.M{"$set": update})
+
+			if err != nil {
+				fmt.Println(err)
+			} else {
+				if sr.MatchedCount == 0 {
+					c.IndentedJSON(http.StatusOK, gin.H{"message": fmt.Sprintf("id %v does not exists.", locationId)})
+				} else {
+					c.IndentedJSON(http.StatusOK, gin.H{"message": "location updated successfully."})
+				}
+			}
+		}
 	}
 
 	//Disconnect from Atlas
@@ -153,7 +184,11 @@ func DeleteLocationById(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	c.IndentedJSON(http.StatusOK, gin.H{"message": dr.DeletedCount})
+	if dr.DeletedCount == 0 {
+		c.IndentedJSON(http.StatusOK, gin.H{"message": fmt.Sprintf("id %v does not exists.", localtionId)})
+	} else {
+		c.IndentedJSON(http.StatusOK, gin.H{"message": "location delted successfully."})
+	}
 
 	//Disconnect from Atlas
 	initializers.DisconnectFromAtlas(*client)
