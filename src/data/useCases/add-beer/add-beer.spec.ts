@@ -47,7 +47,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe("AddBeer", () => {
+describe("DbAddBeer", () => {
   it("Should throw if AddBeerRepository throws", async () => {
     const { sut, addBeerRepositoryStub } = makeSut();
 
