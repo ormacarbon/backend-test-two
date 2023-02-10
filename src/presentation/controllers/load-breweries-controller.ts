@@ -7,8 +7,8 @@ export class LoadBreweriesController implements Controller {
   constructor (private readonly loadBreweries: LoadBreweries) {}
   async handle (): Promise<HttpResponse> {
     try {
-      await this.loadBreweries.handle()
-      return ok({})
+      const breweries = await this.loadBreweries.handle()
+      return ok(breweries)
     } catch (error: any) {
       return serverError(error)
     }
