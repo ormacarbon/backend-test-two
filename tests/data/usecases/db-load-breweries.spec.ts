@@ -26,4 +26,10 @@ describe('DbLoadBreweries Usecase', () => {
     const result = sut.handle()
     await expect(result).rejects.toThrow()
   })
+
+  it('Should return breweries on success', async () => {
+    const { sut, loadBreweriesRepositorySpy } = makeSut()
+    const result = await sut.handle()
+    expect(result).toEqual(loadBreweriesRepositorySpy.result)
+  })
 })
