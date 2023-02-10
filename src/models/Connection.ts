@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MONGO_DB_URL = "mongodb://localhost:27017/Beer";
+const MONGO_DB_URL = "mongodb://localhost:27017/MyEnterprise";
 
 const connectToDatabase = (
   mongoDatabaseURL: string = MONGO_DB_URL
