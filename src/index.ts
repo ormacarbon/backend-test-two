@@ -12,6 +12,7 @@ import { BeerServiceDelete } from '#/modules/beer/services/delete.service.js';
 import { BeerServiceGetMany } from '#/modules/beer/services/get-many.service.js';
 import { BeerServiceGetOne } from '#/modules/beer/services/get-one.service.js';
 import { BeerServiceSeed } from '#/modules/beer/services/seed.service.js';
+import { BeerServiceUpdate } from '#/modules/beer/services/update.service.js';
 import { EnvService } from '#/modules/shared/env.service.js';
 
 // middlewares
@@ -27,6 +28,7 @@ container.register('IBeerServiceSeed', { useClass: BeerServiceSeed });
 container.register('IBeerServiceCreate', { useClass: BeerServiceCreate });
 container.register('IBeerServiceGetOne', { useClass: BeerServiceGetOne });
 container.register('IBeerServiceGetMany', { useClass: BeerServiceGetMany });
+container.register('IBeerServiceUpdate', { useClass: BeerServiceUpdate });
 container.register('IBeerServiceDelete', { useClass: BeerServiceDelete });
 container.register('IBeerController', { useClass: BeerController });
 container.register('IBeerRouter', { useClass: BeerRouter });

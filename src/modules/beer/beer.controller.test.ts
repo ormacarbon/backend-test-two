@@ -9,18 +9,21 @@ import { IBeerServiceDelete } from '#/modules/beer/services/delete.service.js';
 import { IBeerServiceGetMany } from '#/modules/beer/services/get-many.service.js';
 import { IBeerServiceGetOne } from '#/modules/beer/services/get-one.service.js';
 import { IBeerServiceSeed } from '#/modules/beer/services/seed.service.js';
+import { IBeerServiceUpdate } from '#/modules/beer/services/update.service.js';
 
 describe('beer.controller.ts', () => {
   const beerServiceSeed = createMock<IBeerServiceSeed>();
   const beerServiceCreate = createMock<IBeerServiceCreate>();
   const beerServiceGetOne = createMock<IBeerServiceGetOne>();
   const beerServiceGetMany = createMock<IBeerServiceGetMany>();
+  const beerServiceUpdate = createMock<IBeerServiceUpdate>();
   const beerServiceDelete = createMock<IBeerServiceDelete>();
   const controller: IBeerController = new BeerController(
     beerServiceSeed,
     beerServiceCreate,
     beerServiceGetOne,
     beerServiceGetMany,
+    beerServiceUpdate,
     beerServiceDelete,
   );
 
@@ -94,6 +97,19 @@ describe('beer.controller.ts', () => {
       currentPage: 1,
       results: [{ id: 'test-get-one', coordinates: [1, 2] } as Beer],
     });
+  });
+
+  test('update', async () => {
+    jest
+      .spyOn(beerServiceUpdate, 'update')
+      .mockResolvedValue({ abv: 420, coordinates: [1, 2] } as Beer);
+    const req = createMock<Request>();
+    // https://mattiaerre.medium.com/express-req-res-and-chaining-1a9da1dc00e0
+    const res: Response = createMock<Response>({ json: jest.fn(), status: jest.fn(() => res) });
+
+    await controller.update(req, res, jest.fn());
+
+    expect(res.json).toHaveBeenCalledWith({ abv: 420, coordinates: [1, 2] });
   });
 
   test('delete', async () => {

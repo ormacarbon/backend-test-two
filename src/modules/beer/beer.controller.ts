@@ -6,17 +6,20 @@ import { inject, injectable } from 'tsyringe';
 import { BeerCreateDto } from '#/modules/beer/dtos/create.dto.js';
 import { BeerGetManyDto } from '#/modules/beer/dtos/get-many.dto.js';
 import { SeedResponseDto } from '#/modules/beer/dtos/seed-response.dto.js';
+import { BeerUpdateDto } from '#/modules/beer/dtos/update.dto.js';
 import type { IBeerServiceCreate } from '#/modules/beer/services/create.service.js';
 import type { IBeerServiceDelete } from '#/modules/beer/services/delete.service.js';
 import type { IBeerServiceGetMany } from '#/modules/beer/services/get-many.service.js';
 import type { IBeerServiceGetOne } from '#/modules/beer/services/get-one.service.js';
 import type { IBeerServiceSeed } from '#/modules/beer/services/seed.service.js';
+import type { IBeerServiceUpdate } from '#/modules/beer/services/update.service.js';
 
 export interface IBeerController {
   seed: RequestHandler;
   create: RequestHandler;
   getOne: RequestHandler;
   getMany: RequestHandler;
+  update: RequestHandler;
   delete: RequestHandler;
 }
 
@@ -27,6 +30,7 @@ export class BeerController implements IBeerController {
     @inject('IBeerServiceCreate') private readonly beerServiceCreate: IBeerServiceCreate,
     @inject('IBeerServiceGetOne') private readonly beerServiceGetOne: IBeerServiceGetOne,
     @inject('IBeerServiceGetMany') private readonly beerServiceGetMany: IBeerServiceGetMany,
+    @inject('IBeerServiceUpdate') private readonly beerServiceUpdate: IBeerServiceUpdate,
     @inject('IBeerServiceDelete') private readonly beerServiceDelete: IBeerServiceDelete,
   ) {
     autoBind(this);
@@ -58,6 +62,16 @@ export class BeerController implements IBeerController {
     const { results, ...rest } = result;
 
     return res.json({ ...rest, results: results.map(this.stripNulls) });
+  }
+
+  async update(
+    req: Request<{ [key: string]: string }, {}, BeerUpdateDto>,
+    res: Response,
+  ): Promise<Response> {
+    const { body, params } = req;
+    const result = await this.beerServiceUpdate.update(body, params.id);
+
+    return res.json(this.stripNulls(result));
   }
 
   async delete(req: Request<{ [key: string]: string }>, res: Response): Promise<void> {

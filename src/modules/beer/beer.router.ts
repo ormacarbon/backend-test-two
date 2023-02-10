@@ -5,6 +5,7 @@ import type { IValidatorMiddleware } from '#/middlewares/validator.middleware.js
 import type { IBeerController } from '#/modules/beer/beer.controller.js';
 import { BeerCreateSchema } from '#/modules/beer/dtos/create.dto.js';
 import { BeerGetManySchema } from '#/modules/beer/dtos/get-many.dto.js';
+import { BeerUpdateSchema } from '#/modules/beer/dtos/update.dto.js';
 
 export interface IBeerRouter {
   router: Router;
@@ -22,6 +23,11 @@ export class BeerRouter implements IBeerRouter {
     this.router.post('/', this.validatorMw.validate(BeerCreateSchema), this.beerController.create);
     this.router.get('/:id', this.beerController.getOne);
     this.router.get('/', this.validatorMw.validate(BeerGetManySchema), this.beerController.getMany);
+    this.router.patch(
+      '/:id',
+      this.validatorMw.validate(BeerUpdateSchema),
+      this.beerController.update,
+    );
     this.router.delete('/:id', this.beerController.delete);
   }
 }
