@@ -10,7 +10,7 @@ export const Card = styled.div`
   background-color: #532D81;
   color: white;
   padding: 15px;
-  margin: 20px 0;
+  margin: 10px 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
   p {

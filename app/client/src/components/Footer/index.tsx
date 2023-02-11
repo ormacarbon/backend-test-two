@@ -1,8 +1,10 @@
+import * as S from "./styles";
+
 function Footer() {
   return (
-    <div>
-      Footer
-    </div>
+    <S.Footer>
+      Desafio Técnico - Dashboard API Beer 2023 - By: Debora Fantini
+    </S.Footer>
   );
 }
 

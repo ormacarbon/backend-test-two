@@ -4,6 +4,6 @@ export const Content = styled.main`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 50px auto;
+  margin: 20px auto;
   width: 80%;
 `;
