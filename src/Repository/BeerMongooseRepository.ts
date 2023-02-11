@@ -7,15 +7,16 @@ class BeerMongooseRepository implements IBeerRepository<Beer, IBeer> {
   constructor(private _persistence = new BeersODM()) {}
 
   public async create(beer: Beer): Promise<IBeer> {
-    const beerDTO = {
+    const beerDTO: IBeer = {
       abv: beer.abv,
       address: beer.address,
       category: beer.category,
       city: beer.city,
-      coordiantes: beer.coordinates,
+      coordinates: beer.coordinates,
       country: beer.country,
       ibu: beer.ibu,
       name: beer.name,
+      description: beer.description,
       state: beer.state,
       website: beer.website,
     };
