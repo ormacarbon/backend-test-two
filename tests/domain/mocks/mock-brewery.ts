@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker'
 import { BreweryEntity } from '../../../src/domain/entities/brewery'
 
 export const mockBreweryEntity = (): BreweryEntity => ({
+  id: faker.datatype.uuid(),
   abv: faker.datatype.number(),
   ibu: faker.datatype.number(),
   address: faker.address.streetAddress(),

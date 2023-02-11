@@ -1,4 +1,5 @@
 export type BreweryEntity = {
+  id?: string
   abv: number
   address?: string
   category?: string
