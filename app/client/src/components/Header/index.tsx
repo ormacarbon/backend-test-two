@@ -1,18 +1,17 @@
-import { Link } from "react-router-dom";
 import { Button } from "../Button";
 import { Input } from "../Input";
+import * as S from "./styles";
 
 type Props = {
   setInputNameBeers: (search: string) => void
 }
-
 function Header({setInputNameBeers}: Props) {
   return (
-    <header>
-      <Link to="/">Home</Link>
+    <S.Header>
+      <S.Navlink to="/">Home</S.Navlink>
       <Input placeholder="search beer" onChange={(e) => {setInputNameBeers(e.target.value)}}/>
-      <Button><Link to='/new'>NEW</Link></Button>
-    </header>
+      <Button><S.Navlink to='/new'>NEW</S.Navlink></Button>
+    </S.Header>
   );
 }
 
