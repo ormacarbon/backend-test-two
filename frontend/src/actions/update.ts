@@ -26,7 +26,7 @@ const UpdateBeer = (
           name: name,
           state: state
       }
-      fetch("http://localhost:5000/api/v1/beer/" +id, {method: "PUT", body: JSON.stringify(body)}).then(res => res.json().then(r => console.log(r)))
+      fetch("http://localhost:5000/api/v1/beer/" +id, {method: "PUT", body: JSON.stringify(body)}).then(res => res.json().then(r => r))
   }
   
   export default UpdateBeer

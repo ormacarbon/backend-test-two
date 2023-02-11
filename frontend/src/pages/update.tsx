@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import {useParams} from "react-router-dom"
-import {Button, Form} from "semantic-ui-react"
+import { Form} from "semantic-ui-react"
 import UpdateBeer from "../actions/update"
 import {Link} from "react-router-dom"
 const Update = () => {
