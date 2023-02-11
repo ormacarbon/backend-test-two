@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "a78ce2b3-3a22-46f0-b815-b45536581268",
+		"name": "Beers API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12536647"
+	},
+	"item": [
+		{
+			"name": "Get All Beers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/beer/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"beer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Bears with paginate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/beers?page=1&page_size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"beers"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "page_size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert a new beer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"abv\": 8.4,\r\n    \"address\": \"141 South Main Street\",\r\n    \"category\": \"British Alexandre\",\r\n    \"city\": \"Slippery Rock 2\",\r\n    \"coordinates\": [\r\n        41.0638,\r\n        -80.0556\r\n    ],\r\n    \"country\": \"United States\",\r\n    \"description\": \"This robust, hearty stout is as sturdy as its namesake.  Roasted barley is the trademark of stout, a bittersweet separation from its cousin Porter.  The deep character of roasted barley is further enhanced by the addition of oatmeal for an incredible silky finish.\",\r\n    \"ibu\": 104,\r\n    \"name\": \"Stone House Stout\",\r\n    \"state\": \"Pennsylvania\",\r\n    \"website\": \"http://www.northcountrybrewing.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/beer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"beer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a beer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"abv\": 8.4,\r\n    \"address\": \"141 South Main Street\",\r\n    \"category\": \"British Alexandre\",\r\n    \"city\": \"Slippery Rock 2\",\r\n    \"coordinates\": [\r\n        41.0638,\r\n        -80.0556\r\n    ],\r\n    \"country\": \"United States\",\r\n    \"description\": \"This robust, hearty stout is as sturdy as its namesake.  Roasted barley is the trademark of stout, a bittersweet separation from its cousin Porter.  The deep character of roasted barley is further enhanced by the addition of oatmeal for an incredible silky finish.\",\r\n    \"ibu\": 104,\r\n    \"name\": \"Stone House Stout\",\r\n    \"state\": \"Pennsylvania\",\r\n    \"website\": \"http://www.northcountrybrewing.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/beer/19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"beer",
+						"19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a beer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/beer/20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"beer",
+						"20"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
