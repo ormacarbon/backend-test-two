@@ -1,21 +1,37 @@
 import { BeerService } from '@modules/Beer/beer.service';
 
 describe('BeerService', () => {
-  const service = new BeerService({ name: 'hello' });
+  let beerService: BeerService;
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  beforeEach(() => {
+    beerService = new BeerService({
+      name: 'service-mock',
+      repository: {
+        find: jest.fn(),
+        count: () => new Promise((resolve) => resolve(2)),
+      } as unknown as any,
+    });
   });
 
-  it('should have a message method', () => {
-    expect(service.message).toBeDefined();
-  });
+  describe('list', () => {
+    it('should return a list of beers', async () => {
+      const items = [{ name: 'Pilsner' }, { name: 'IPA' }];
 
-  it('should return hello message', () => {
-    expect(
-      service.message({
-        name: 'Neith',
-      }),
-    ).toBe('Hello World, Neith');
+      beerService.repository.find = jest.fn().mockResolvedValue(items);
+
+      const result = await beerService.list(2, 0);
+
+      expect(result).toEqual({
+        items,
+        _opt: {
+          currentPage: 1,
+          hasMore: false,
+          nextPage: null,
+          prevPage: null,
+          total: 2,
+          totalPages: 1,
+        },
+      });
+    });
   });
 });
