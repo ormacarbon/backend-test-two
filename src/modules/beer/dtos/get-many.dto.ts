@@ -23,6 +23,10 @@ export class BeerGetManyDto {
   @IsOptional()
   category?: string;
 
+  @IsString()
+  @IsOptional()
+  city?: string;
+
   @Matches(/^\d*\.?\d*,\d*\.?\d*$/)
   @IsOptional()
   coordinates?: string;

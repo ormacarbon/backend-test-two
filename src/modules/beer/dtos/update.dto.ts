@@ -22,6 +22,10 @@ export class BeerUpdateDto {
   @IsOptional()
   category?: string;
 
+  @IsString()
+  @IsOptional()
+  city?: string;
+
   @ArrayMaxSize(2)
   @ArrayMinSize(2)
   @IsArray()
