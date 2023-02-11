@@ -17,10 +17,6 @@ export class BeerGetManyDto {
 
   @IsString()
   @IsOptional()
-  address?: string;
-
-  @IsString()
-  @IsOptional()
   category?: string;
 
   @IsString()
@@ -35,10 +31,6 @@ export class BeerGetManyDto {
   @IsOptional()
   country?: string;
 
-  @IsString()
-  @IsOptional()
-  description?: string;
-
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
@@ -51,10 +43,6 @@ export class BeerGetManyDto {
   @IsString()
   @IsOptional()
   state?: string;
-
-  @IsString()
-  @IsOptional()
-  website?: string;
 }
 
 export const BeerGetManySchema = new RequestSchema(undefined, BeerGetManyDto);
