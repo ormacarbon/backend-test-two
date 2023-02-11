@@ -27,7 +27,7 @@ export class BeerServiceGetMany implements BeerServiceGetMany {
       const parsed = plainToInstance(BeerGetManyDto, input);
       const { page, ...rest } = parsed;
       const { coordinates, ...where } = rest;
-      const coords = coordinates ? coordinates.split(',').map((v) => +v) : [];
+      const coords = coordinates ? coordinates.split(',').map(parseInt) : [];
       const currentPage = page || 1;
       const beersPerPage = 10;
 

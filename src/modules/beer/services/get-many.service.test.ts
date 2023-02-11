@@ -12,12 +12,29 @@ describe('get-many.service.ts', () => {
   const service = new BeerServiceGetMany(prismaService);
 
   test('get many ok', async () => {
+    // with coords
+    jest.spyOn(prismaService.beer, 'count').mockResolvedValue(1);
+    jest
+      .spyOn(prismaService.beer, 'findMany')
+      .mockResolvedValue([{ abv: 1, ibu: 1, coordinates: [1, 2] } as Beer]);
+
+    const result = await service.getMany({ coordinates: '1,2' });
+
+    expect(result).toMatchObject<SearchResult>({
+      totalBeers: 1,
+      totalPages: 1,
+      beersPerPage: 10,
+      currentPage: 1,
+      results: [{ abv: 1, ibu: 1, coordinates: [1, 2] } as Beer],
+    });
+
+    // without coords
     jest.spyOn(prismaService.beer, 'count').mockResolvedValue(1);
     jest.spyOn(prismaService.beer, 'findMany').mockResolvedValue([{ abv: 1, ibu: 1 } as Beer]);
 
-    const result = await service.getMany({});
+    const result2 = await service.getMany({});
 
-    expect(result).toMatchObject<SearchResult>({
+    expect(result2).toMatchObject<SearchResult>({
       totalBeers: 1,
       totalPages: 1,
       beersPerPage: 10,
