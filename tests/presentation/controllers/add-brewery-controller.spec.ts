@@ -18,7 +18,7 @@ const mockRequest = (): BreweryEntity => ({
 })
 
 describe('AddBrewery Controller', () => {
-  test('Should call AddBrewery with correct values', async () => {
+  it('Should call AddBrewery with correct values', async () => {
     const addBrewerySpy = new AddBrewerySpy()
     const sut = new AddBreweryController(addBrewerySpy)
     const request = mockRequest()
