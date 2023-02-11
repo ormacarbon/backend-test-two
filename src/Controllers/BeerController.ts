@@ -23,6 +23,17 @@ class BeerController {
       return next(error);
     }
   };
+
+  public update = async (req: Request, res: Response, next: NextFunction) => {
+    const entity = req.body;
+    const { id } = req.params;
+    try {
+      const updatedBeer = await this._service.update(id, entity);
+      return res.status(200).json(updatedBeer);
+    } catch (error) {
+      return next(error);
+    }
+  };
 }
 
 export default BeerController;
