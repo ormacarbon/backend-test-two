@@ -1,18 +1,16 @@
-import express from 'express';
-import swaggerUi from 'swagger-ui-express';
-
-import debug from 'debug';
+import { App, AppStatic, SwaggerDocs } from '@types';
+import { debug } from '@utils';
 
 export class AppService {
   log = debug('app:service');
 
-  constructor(private app: express.Application) {
+  constructor(private app: App) {
     this.buildStaticFiles();
     this.buildDocs();
   }
 
   buildStaticFiles() {
-    this.app.use(express.static('public'));
+    this.app.use(AppStatic('public'));
 
     this.log('Static files served from public folder');
   }
@@ -20,14 +18,16 @@ export class AppService {
   buildDocs() {
     this.app.use(
       '/docs',
-      swaggerUi.serve,
-      swaggerUi.setup(undefined, { swaggerOptions: { url: '/swagger.json' } }),
+      SwaggerDocs.serve,
+      SwaggerDocs.setup(undefined, {
+        swaggerOptions: { url: '/openapi.yaml' },
+      }),
     );
 
     this.log('Swagger docs served from /docs');
   }
 }
 
-export function registerAppService(props: { app: express.Application }) {
+export function registerAppService(props: { app: App }) {
   return new AppService(props.app);
 }

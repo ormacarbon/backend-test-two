@@ -1,16 +1,16 @@
 import * as winston from 'winston';
 import helmet from 'helmet';
-import express from 'express';
 import cors from 'cors';
 
 import * as expressWinston from 'express-winston';
 import rateLimit from 'express-rate-limit';
 import * as bodyparser from 'body-parser';
 
-import debug from 'debug';
+import { debug } from '@utils';
+import { App, AppHandler } from '@types';
 
 export class AppMiddlewares {
-  handlers: express.Handler[] = [];
+  handlers: AppHandler[] = [];
   log = debug('app:middleware');
 
   constructor() {
@@ -75,7 +75,7 @@ export class AppMiddlewares {
             winston.format.colorize(),
             winston.format.json(),
           ),
-        }) as unknown as express.Handler,
+        }) as unknown as AppHandler,
       );
     }
 
@@ -83,6 +83,6 @@ export class AppMiddlewares {
   }
 }
 
-export function registerAppMiddleware(props: { app: express.Application }) {
+export function registerAppMiddleware(props: { app: App }) {
   props.app.use(new AppMiddlewares().handlers);
 }

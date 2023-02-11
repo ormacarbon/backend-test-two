@@ -1,15 +1,12 @@
-import express, { Request, Response } from 'express';
-import { Server as HttpServer } from 'http';
-import debug from 'debug';
-
 import { BaseModule } from '@core';
-import { loadModules } from '@utils';
+import { loadModules, debug } from '@utils';
+import { App, HttpServer, Request, Response, Router } from '@types';
 
 class AppController {
   server: HttpServer;
 
   log = debug('app:controller');
-  router = express.Router();
+  router = Router();
 
   constructor(props: { server: HttpServer }) {
     this.server = props.server;
@@ -38,7 +35,7 @@ class AppController {
     }
   }
 
-  logRoutes(_moduleInstance: BaseModule<any, any, any>) {
+  logRoutes(_moduleInstance: BaseModule<any, any, any, any, any>) {
     for (const _layer of _moduleInstance.router.stack) {
       const _path = _layer.route?.path;
       const _methods = Object.keys(_layer.route?.methods).join(', ');
@@ -48,9 +45,6 @@ class AppController {
   }
 }
 
-export function registerAppController(props: {
-  app: express.Application;
-  server: HttpServer;
-}) {
+export function registerAppController(props: { app: App; server: HttpServer }) {
   props.app.use(new AppController(props).router);
 }
