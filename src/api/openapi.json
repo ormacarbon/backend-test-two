@@ -6,8 +6,11 @@
     "version": "1.0.0"
   },
   "servers": [
-    { "description": "dev server", "url": "http://localhost:4000" },
-    { "description": "prod server", "url": "http://localhost:3000" }
+    {
+      "description": "prod server",
+      "url": "https://mkvlrn-ormacarbon-backend-test.up.railway.app"
+    },
+    { "description": "dev server", "url": "http://localhost:4000" }
   ],
 
   "paths": {
