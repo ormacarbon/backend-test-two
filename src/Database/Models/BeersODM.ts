@@ -16,7 +16,7 @@ class BeersODM {
       address: { type: String, required: false },
       category: { type: String, required: false },
       city: { type: String, required: false },
-      coordinates: [Number], // MUST BE ARRAY OF NUMBERS
+      coordinates: { type: [Number], required: false }, // MUST BE ARRAY OF NUMBERS
       country: { type: String, required: false },
       ibu: { type: Number, required: true },
       name: { type: String, required: false },
