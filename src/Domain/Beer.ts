@@ -8,6 +8,7 @@ export default class Beer {
   private _country: string | undefined;
   private _ibu: number; // international bittering units
   private _name: string;
+  private _description: string | undefined;
   private _state: string | undefined;
   private _website: string | undefined;
 
@@ -43,7 +44,7 @@ export default class Beer {
     return this._address;
   }
 
-  public setAddress(value: string) {
+  public setAddress(value: string | undefined) {
     this._address = value;
   }
 
@@ -51,7 +52,7 @@ export default class Beer {
     return this._category;
   }
 
-  public setCategory(value: string) {
+  public setCategory(value: string | undefined) {
     this._category = value;
   }
 
@@ -59,7 +60,7 @@ export default class Beer {
     return this._city;
   }
 
-  public setCity(value: string) {
+  public setCity(value: string | undefined) {
     this._city = value;
   }
 
@@ -67,7 +68,7 @@ export default class Beer {
     return this._coordinates;
   }
 
-  public setCoordinates(value: number[]) {
+  public setCoordinates(value: number[] | undefined) {
     this._coordinates = value;
   }
 
@@ -75,7 +76,7 @@ export default class Beer {
     return this._country;
   }
 
-  public setCountry(value: string) {
+  public setCountry(value: string | undefined) {
     this._country = value;
   }
 
@@ -95,11 +96,19 @@ export default class Beer {
     this._name = value;
   }
 
+  public get description() {
+    return this._description;
+  }
+
+  public setDescription(value: string | undefined) {
+    this._description = value;
+  }
+
   public get state() {
     return this._state;
   }
 
-  public setState(value: string) {
+  public setState(value: string | undefined) {
     this._state = value;
   }
 
@@ -107,7 +116,7 @@ export default class Beer {
     return this._website;
   }
 
-  public setWebsite(value: string) {
+  public setWebsite(value: string | undefined) {
     this._website = value;
   }
 }
