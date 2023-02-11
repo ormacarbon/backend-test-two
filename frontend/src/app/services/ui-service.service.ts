@@ -1,4 +1,3 @@
-import { Product } from './../Product';
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
@@ -6,19 +5,17 @@ import { Subject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UiService {
-  private showProductDetails: boolean = false;
+  private showAddProduct: boolean = false;
   private subject = new Subject<any>();
 
   constructor() {}
 
-  toggleProductDetails(): void {
-    this.showProductDetails = !this.showProductDetails;
-    this.subject.next(this.showProductDetails);
+  toggleAddProduct(): void {
+    this.showAddProduct = !this.showAddProduct;
+    this.subject.next(this.showAddProduct);
   }
 
   onToggle(): Observable<any> {
-
-      return this.subject.asObservable();
-    
+    return this.subject.asObservable();
   }
 }

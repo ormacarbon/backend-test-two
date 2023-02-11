@@ -1,7 +1,10 @@
 header {
-    display: flex;
-    direction: row;
-    justify-content: center;
-    align-items: center;
-    text-decoration: underline;
-  }
+  display: flex;
+  direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  text-decoration: underline;
+  margin-left: 20%;
+}
+
+

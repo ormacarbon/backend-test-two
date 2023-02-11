@@ -1,7 +1,7 @@
 export interface Product {
-    product: any;
-    _id: string;
-    abv: number;
+    product?: any;
+    _id?: string;
+    abv?: number;
     address?: string;
     category?: string;
     city?: string;

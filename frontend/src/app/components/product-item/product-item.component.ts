@@ -1,4 +1,3 @@
-import { UiService } from './../../services/ui-service.service';
 import { Product } from './../../Product';
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -13,10 +12,12 @@ export class ProductItemComponent {
   @Output() onDeleteProduct: EventEmitter<Product> = new EventEmitter();
   @Output() onProductDetail: EventEmitter<Product> = new EventEmitter();
   @Output() onHideProductDetails: EventEmitter<Product> = new EventEmitter();
+  @Output() onUpdateProduct: EventEmitter<Product> = new EventEmitter();
+  showFormUpdate: boolean;
   showProductDetails: boolean;
   subscription: Subscription;
 
-  constructor(private uiService: UiService) {}
+  constructor() {}
 
   onDelete(product: Product) {
     this.onDeleteProduct.emit(product);
@@ -30,5 +31,21 @@ export class ProductItemComponent {
   hideDetails(product: Product) {
     this.showProductDetails = false;
     this.onHideProductDetails.emit(product);
+  }
+
+  onShowFormUpdate() {
+    this.showProductDetails = false;
+    this.showFormUpdate = true;
+  }
+
+  onCloseFormUpdate() {
+    this.showProductDetails = true;
+    this.showFormUpdate = false;
+  }
+
+  onSubmit(product: Product) {
+    this.onUpdateProduct.emit(product);
+    this.showProductDetails = true;
+    this.showFormUpdate = false;
   }
 }

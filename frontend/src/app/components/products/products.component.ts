@@ -1,4 +1,3 @@
-import { UiService } from './../../services/ui-service.service';
 import { Subscription } from 'rxjs';
 import { Product } from './../../Product';
 import { Component } from '@angular/core';
@@ -12,41 +11,52 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductsComponent {
   object: any;
   products: Product[] = [];
-  showProductDetails: boolean = false;
+  showAddProduct: boolean = false;
   subscription: Subscription;
   product: Product;
 
-  constructor(
-    private productService: ProductService,
-    private uiService: UiService
-  ) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
+    this.getAll();
+  }
+
+  getAll() {
     this.productService.getAllProducts().subscribe((products) => {
       this.object = products;
       this.products = this.object.products;
     });
   }
+  addProduct(prod: Product) {
+    this.productService.addProduct(prod).subscribe((prod) => {
+      this.products.push(prod);
+      this.getAll();
+    });
+  }
 
-  deleteProduct(product: Product) {
+  updateProduct(prod: Product) {
+    this.productService.updateProduct(prod).subscribe((p) => {
+      this.product = p;
+    });
+    console.log('update');
+  }
+
+  deleteProduct(prod: Product) {
     this.productService
-      .deleteProduct(product)
+      .deleteProduct(prod)
       .subscribe(
-        () =>
-          (this.products = this.products.filter((p) => p._id !== product._id))
+        () => (this.products = this.products.filter((p) => p._id !== prod._id))
       );
   }
 
   productDetails(prod: Product) {
     this.productService.getProductById(prod).subscribe((p) => {
       this.product = p.product;
-      this.uiService.toggleProductDetails();
     });
   }
   hideProductDetails(prod: Product) {
     this.productService.getProductById(prod).subscribe((p) => {
       this.product = p.product;
-      this.uiService.toggleProductDetails();
     });
   }
 }
