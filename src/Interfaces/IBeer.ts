@@ -8,6 +8,7 @@ export default interface IBeer {
   country?: string; // SOME DOCUMENTS DO NOT HAVE THIS PROPERTY
   ibu: number; // international bittering units
   name?: string; // SOME DOCUMENTS DO NOT HAVE THIS PROPERTY
+  description?: string; // SOME DOCUMENTS DO NOT HAVE THIS PROPERTY
   state?: string; // SOME DOCUMENTS DO NOT HAVE THIS PROPERTY
   website?: string; // SOME DOCUMENTS DO NOT HAVE THIS PROPERTY
 }
