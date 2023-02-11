@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
 import { AppError, AppErrorType } from '#/api/app-error.js';
+import data from '#/api/db.json' assert { type: 'json' };
 import type { IPrismaService } from '#/modules/shared/prisma.interface.js';
 
 export interface ISeedService {
@@ -15,8 +16,7 @@ export class SeedService implements ISeedService {
     try {
       await this.prismaService.beer.deleteMany();
 
-      const data = await import('#/api/db.json', { assert: { type: 'json' } });
-      const { count } = await this.prismaService.beer.createMany({ data: data.default });
+      const { count } = await this.prismaService.beer.createMany({ data });
 
       return count;
     } catch (err) {
