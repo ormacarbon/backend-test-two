@@ -25,5 +25,9 @@ describe('Brewery Routes', () => {
       await PrismaHelper.prisma.brewery.create({ data: mockBreweryEntity() })
       await request(app).get('/api/brewery').expect(200)
     })
+
+    it('Should return 204 if there are no breweries in the database', async () => {
+      await request(app).get('/api/brewery').expect(204)
+    })
   })
 })
