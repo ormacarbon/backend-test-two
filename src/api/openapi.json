@@ -1,0 +1,499 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "mkvlrn@gmail.com - ormacarbon beers",
+    "description": "backend-test",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "description": "prod server",
+      "url": "https://mkvlrn-ormacarbon-backend-test.up.railway.app"
+    },
+    { "description": "dev server", "url": "http://localhost:4000" }
+  ],
+
+  "paths": {
+    "/beer/seed": {
+      "get": {
+        "tags": ["seed"],
+        "summary": "clears and add initial data to database",
+        "responses": {
+          "201": {
+            "description": "success - returns summary",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/seedResponse" } }
+            }
+          },
+          "500": {
+            "description": "error - internal server error",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error500" } }
+            }
+          }
+        }
+      }
+    },
+    "/beer": {
+      "post": {
+        "tags": ["crud"],
+        "summary": "create beer",
+        "requestBody": {
+          "description": "add beer to database and returns created object",
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/createRequest" } }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success - returns created object",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/createResponse" }
+              }
+            }
+          },
+          "400": {
+            "description": "error - bad request",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error400" } }
+            }
+          },
+          "500": {
+            "description": "error - internal server error",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error500" } }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["crud"],
+        "summary": "list of beers based on query params",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "beer page to show",
+            "schema": { "type": "number", "example": 1, "default": 1 }
+          },
+          {
+            "in": "query",
+            "name": "abv",
+            "description": "alcohol by volume",
+            "schema": { "type": "number", "example": 8.3000001907 }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "description": "beer category",
+            "schema": { "type": "string", "example": "North American Ale" }
+          },
+          {
+            "in": "query",
+            "name": "city",
+            "description": "beer page to show",
+            "schema": { "type": "string", "example": "Anchorage" }
+          },
+          {
+            "in": "query",
+            "name": "coordinates",
+            "description": "coordinates separated by a comma",
+            "schema": { "type": "string", "example": "61.1473,-149.844" }
+          },
+          {
+            "in": "query",
+            "name": "country",
+            "description": "country of origin",
+            "schema": { "type": "string", "example": "United States" }
+          },
+          {
+            "in": "query",
+            "name": "ibu",
+            "description": "international bitterness units",
+            "schema": { "type": "number", "example": 79 }
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "description": "coordinates separated by a comma",
+            "schema": { "type": "string", "example": "Obliteration II" }
+          },
+          {
+            "in": "query",
+            "name": "state",
+            "description": "state of origin",
+            "schema": { "type": "string", "example": "Alaska" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success - returns search items",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/getManyResponse" }
+              }
+            }
+          },
+          "400": {
+            "description": "error - bad request",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error400" } }
+            }
+          },
+          "500": {
+            "description": "error - internal server error",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error500" } }
+            }
+          }
+        }
+      }
+    },
+    "/beer/{id}": {
+      "get": {
+        "tags": ["crud"],
+        "summary": "get a single beer by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "beer id",
+            "schema": { "type": "string", "example": "123456" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success - returns beer",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/createResponse" } }
+            }
+          },
+          "404": {
+            "description": "error - not found",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error404" } }
+            }
+          },
+          "500": {
+            "description": "error - internal server error",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error500" } }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["crud"],
+        "summary": "update a single beer by id",
+        "requestBody": {
+          "description": "edit existing beer in database and returns updated object",
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/updateRequest" } }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "beer id",
+            "schema": { "type": "string", "example": "123456" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success - beer updated",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/createResponse" } }
+            }
+          },
+          "404": {
+            "description": "error - not found",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error404" } }
+            }
+          },
+          "500": {
+            "description": "error - internal server error",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error500" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["crud"],
+        "summary": "delete a single beer by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "beer id",
+            "schema": { "type": "string", "example": "123456" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success - no response"
+          },
+          "404": {
+            "description": "error - not found",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error404" } }
+            }
+          },
+          "500": {
+            "description": "error - internal server error",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/error500" } }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "seedResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "count": {
+            "type": "number",
+            "example": 5973
+          }
+        }
+      },
+      "createRequest": {
+        "type": "object",
+        "required": ["abv", "ibu"],
+        "properties": {
+          "abv": {
+            "type": "number",
+            "example": 8.3000001907
+          },
+          "address": {
+            "type": "string",
+            "example": "8111 Dimond Hook Drive"
+          },
+          "category": {
+            "type": "string",
+            "example": "North American Ale"
+          },
+          "city": {
+            "type": "string",
+            "example": "Anchorage"
+          },
+          "coordinates": {
+            "type": "array",
+            "example": [61.1473, -149.844]
+          },
+          "country": {
+            "type": "string",
+            "example": "United States"
+          },
+          "description": {
+            "type": "string",
+            "example": "With passion and purpose, we present this series of hop-centric beers. Using different hop varieties and brewing techniques, we aim to capture bold, distinct hop characteristics in aroma, flavor and finish. While we explore the world of hops, we invite you to learn along with us: these beers offer an incredible opportunity to experience the diversity of hops while engaging the palate and obliterating the senses. Obliteration II is yet another dynamic Double IPA. Its aroma is intense with fragrant notes of citrus, spice, pine and alcohol. A sturdy malt platform provides the perfect stage for showcasing these high alpha-acid hops, creating flavors and textures that entice then intrigue. Obliteration II finishes with poignant bitterness."
+          },
+          "ibu": {
+            "type": "number",
+            "example": 79
+          },
+          "name": {
+            "type": "string",
+            "example": "Obliteration II"
+          },
+          "state": {
+            "type": "string",
+            "example": "Alaska"
+          },
+          "website": {
+            "type": "string",
+            "example": "http://www.midnightsunbrewing.com/"
+          }
+        }
+      },
+      "createResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "002b1b28-3295-4db3-afc6-6a5e19b17755"
+          },
+          "abv": {
+            "type": "number",
+            "example": 8.3000001907
+          },
+          "address": {
+            "type": "string",
+            "example": "8111 Dimond Hook Drive"
+          },
+          "category": {
+            "type": "string",
+            "example": "North American Ale"
+          },
+          "city": {
+            "type": "string",
+            "example": "Anchorage"
+          },
+          "coordinates": {
+            "type": "array",
+            "example": [61.1473, -149.844]
+          },
+          "country": {
+            "type": "string",
+            "example": "United States"
+          },
+          "description": {
+            "type": "string",
+            "example": "With passion and purpose, we present this series of hop-centric beers. Using different hop varieties and brewing techniques, we aim to capture bold, distinct hop characteristics in aroma, flavor and finish. While we explore the world of hops, we invite you to learn along with us: these beers offer an incredible opportunity to experience the diversity of hops while engaging the palate and obliterating the senses. Obliteration II is yet another dynamic Double IPA. Its aroma is intense with fragrant notes of citrus, spice, pine and alcohol. A sturdy malt platform provides the perfect stage for showcasing these high alpha-acid hops, creating flavors and textures that entice then intrigue. Obliteration II finishes with poignant bitterness."
+          },
+          "ibu": {
+            "type": "number",
+            "example": 79
+          },
+          "name": {
+            "type": "string",
+            "example": "Obliteration II"
+          },
+          "state": {
+            "type": "string",
+            "example": "Alaska"
+          },
+          "website": {
+            "type": "string",
+            "example": "http://www.midnightsunbrewing.com/"
+          }
+        }
+      },
+      "getManyResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/createResponse"
+        }
+      },
+      "updateRequest": {
+        "type": "object",
+        "properties": {
+          "abv": {
+            "type": "number",
+            "example": 8.3000001907
+          },
+          "address": {
+            "type": "string",
+            "example": "8111 Dimond Hook Drive"
+          },
+          "category": {
+            "type": "string",
+            "example": "North American Ale"
+          },
+          "city": {
+            "type": "string",
+            "example": "Anchorage"
+          },
+          "coordinates": {
+            "type": "array",
+            "example": [61.1473, -149.844]
+          },
+          "country": {
+            "type": "string",
+            "example": "United States"
+          },
+          "description": {
+            "type": "string",
+            "example": "With passion and purpose, we present this series of hop-centric beers. Using different hop varieties and brewing techniques, we aim to capture bold, distinct hop characteristics in aroma, flavor and finish. While we explore the world of hops, we invite you to learn along with us: these beers offer an incredible opportunity to experience the diversity of hops while engaging the palate and obliterating the senses. Obliteration II is yet another dynamic Double IPA. Its aroma is intense with fragrant notes of citrus, spice, pine and alcohol. A sturdy malt platform provides the perfect stage for showcasing these high alpha-acid hops, creating flavors and textures that entice then intrigue. Obliteration II finishes with poignant bitterness."
+          },
+          "ibu": {
+            "type": "number",
+            "example": 79
+          },
+          "name": {
+            "type": "string",
+            "example": "Obliteration II"
+          },
+          "state": {
+            "type": "string",
+            "example": "Alaska"
+          },
+          "website": {
+            "type": "string",
+            "example": "http://www.midnightsunbrewing.com/"
+          }
+        }
+      },
+      "error400": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 400
+          },
+          "type": {
+            "type": "string",
+            "example": "BAD_REQUEST"
+          },
+          "message": {
+            "type": "string",
+            "example": "validation error(s)"
+          },
+          "details": {
+            "type": "array",
+            "example": ["ibu must be a number conforming to the specified constraints"]
+          }
+        }
+      },
+      "error404": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 404
+          },
+          "type": {
+            "type": "string",
+            "example": "NOT_FOUND"
+          },
+          "message": {
+            "type": "string",
+            "example": "beer with id 123456 not found"
+          },
+          "details": {
+            "type": "object",
+            "example": null
+          }
+        }
+      },
+      "error500": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 500
+          },
+          "type": {
+            "type": "string",
+            "example": "INTERNAL"
+          },
+          "message": {
+            "type": "string",
+            "example": "database exploded"
+          },
+          "details": {
+            "type": "object",
+            "example": null
+          }
+        }
+      }
+    }
+  }
+}
