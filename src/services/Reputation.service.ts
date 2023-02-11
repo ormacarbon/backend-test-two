@@ -18,7 +18,7 @@ class ReputationService {
         errors.push(`Error: The number ${reputation.reputation} not accepted `);
       }
 
-      await BreweriesService.findByID(reputation.id);
+      const brewery = await BreweriesService.findByID(reputation.id);
 
       if (errors.length) {
         throw new InvalidArgumentError(JSON.stringify(errors));
@@ -41,6 +41,15 @@ class ReputationService {
           await this.updateReputation(sendReputationData);
         }
       }
+
+      if (brewery) {
+        return {
+          message: `A new reputation was add for ${brewery.name}`,
+          statusCode: 200
+        };
+      }
+
+      return;
     } catch (error) {
       catchErrorsFunctions(error);
     }

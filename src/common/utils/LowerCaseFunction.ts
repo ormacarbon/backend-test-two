@@ -7,7 +7,7 @@ import BreweryInterface from '../../interfaces/Breweries/Brewery.interface';
  *
  */
 export function LowerCaseFunction(brewery: BreweryInterface): void {
-  brewery.city = String(brewery.city).toLowerCase();
-  brewery.country = String(brewery.country).toLowerCase();
-  brewery.state = String(brewery.state).toLowerCase();
+    brewery.city = String(brewery.city).toLowerCase();
+    brewery.country = String(brewery.country).toLowerCase();
+    brewery.state = String(brewery.state).toLowerCase();
 }

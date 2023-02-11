@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { catchContent } from '../common/utils/readFileJSON';
-import BreweryDTO from '../dtos/breweries/BreweryDTO';
+
+import BreweryDTO from '../dtos/breweries/Brewery.dto';
 import BreweryUpdateDTO from '../dtos/breweries/BreweryUpdate.dto';
 import { Filters } from '../interfaces/Filters.interface';
 
@@ -104,21 +104,23 @@ class BreweriesHandlerController {
     }
   }
 
-  async storeWithJSONFile(req: Request, res: Response, next: NextFunction) {
+  async storeJsonFile(req: Request, res: Response, next: NextFunction) {
     try {
       const { file } = req;
 
-      if (file) {
-        const content = await catchContent(file.path);
+      const fileJSON = file?.buffer.toString();
 
-        if (content) {
-          await BreweriesService.storeWithJSONFile(content);
+      if (fileJSON) {
+        const data = await BreweriesService.storeWithJSONFile(fileJSON);
 
-          return res.status(201).json({
-            message: 'Datas added..',
-            statusCode: 200
-          });
-        }
+        return res.status(201).json({
+          message: data
+            ? 'Data was added, but some duplicate keys were rejected, check your file;'
+            : 'Dadas was added with sucess.',
+          duplicateKeys: data,
+
+          statusCode: 200
+        });
       }
 
       throw new InvalidArgumentError('Error: unknown file');

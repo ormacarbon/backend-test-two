@@ -1,10 +1,14 @@
 import fs from 'fs';
-import Path = require('path');
 
 /**
  *
  * @param path Path from file recevied.
  * @summary Unlink the file recevied through of param.
+ *
+ *
+ *
+ * @
+ *
  */
 
 export function unlinkFile(path: string): void {
@@ -14,27 +18,11 @@ export function unlinkFile(path: string): void {
 /**
  * @param path Path from file recevied.
  * @summary Read the file recevied through of param.
- */
-
-function readFile(path: string): string | void {
-  return fs.readFileSync(path, { encoding: 'utf-8' });
-}
-
-/**
+ * @deprecated your use not necessary more, it was not removed because want your evolution,
+ * before, response in endpoint for save data json it was 13s with all validations. now, 5s with um file with 2MB
  *
- * @param path Path from file recevied.
- * @summary Read the file and return its data, before, respectively, calling the readFile and unlinkFile function.
  */
 
-export async function catchContent(path: string): Promise<string | void> {
-  path = Path.resolve(__dirname, '..', '..', '..', path);
-  const file = readFile(path);
-
-  if (file) {
-    unlinkFile(path);
-
-    return file;
-  }
-
-  return;
+export function readFile(path: string): string | void {
+  return fs.readFileSync(path, { encoding: 'utf-8' });
 }
