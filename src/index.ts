@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 
 import { Server } from '#/api/server.js';
 import { ErrorHandlerMiddleware } from '#/middlewares/error-handler.middleware.js';
+import { OpenApiMiddleware } from '#/middlewares/openapi.middleware.js';
 import { ValidatorMiddleware } from '#/middlewares/validator.middleware.js';
 import { BeerController } from '#/modules/beer/beer.controller.js';
 import { BeerRouter } from '#/modules/beer/beer.router.js';
@@ -16,6 +17,7 @@ import { BeerServiceUpdate } from '#/modules/beer/services/update.service.js';
 import { EnvService } from '#/modules/shared/env.service.js';
 
 // middlewares
+container.register('IOpenApiMiddleware', { useClass: OpenApiMiddleware });
 container.register('IErrorHandlerMiddleware', { useClass: ErrorHandlerMiddleware });
 container.register('IValidatorMiddleware', { useClass: ValidatorMiddleware });
 

@@ -6,6 +6,7 @@ import { AddressInfo } from 'net';
 import { inject, injectable } from 'tsyringe';
 
 import type { IErrorHandlerMiddleware } from '#/middlewares/error-handler.middleware.js';
+import type { IOpenApiMiddleware } from '#/middlewares/openapi.middleware.js';
 import type { IBeerRouter } from '#/modules/beer/beer.router.js';
 import type { IEnvService } from '#/modules/shared/env.service.js';
 
@@ -17,6 +18,7 @@ export class Server {
 
   constructor(
     @inject('IEnvService') private readonly envService: IEnvService,
+    @inject('IOpenApiMiddleware') private readonly openApiMw: IOpenApiMiddleware,
     @inject('IErrorHandlerMiddleware') private readonly errorHandlerMw: IErrorHandlerMiddleware,
     @inject('IBeerRouter') private readonly beerRouter: IBeerRouter,
   ) {
@@ -25,6 +27,7 @@ export class Server {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
 
+    this.app.use('/docs', this.openApiMw.server, this.openApiMw.docs);
     this.app.use('/beer', this.beerRouter.router);
     this.app.use(this.errorHandlerMw.handle);
 

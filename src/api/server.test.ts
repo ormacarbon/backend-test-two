@@ -12,6 +12,7 @@ describe('server.ts', () => {
     }),
     createMock(),
     createMock(),
+    createMock(),
   );
 
   afterAll(() => {
