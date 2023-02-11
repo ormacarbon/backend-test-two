@@ -5,6 +5,7 @@ const config: Config = {
   moduleNameMapper: {
     '^#/(.*)\\.jsx?$': '<rootDir>/src/$1',
     '#/api/db.json': '<rootDir>/src/api/mock-db.json',
+    '#/api/openapi.json': '<rootDir>/src/api/openapi.json',
   },
   transform: {
     '^.+.(png|svg|jpg|gif|webp)$': 'jest-transform-stub',

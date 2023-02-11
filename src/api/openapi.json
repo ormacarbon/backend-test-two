@@ -1,0 +1,138 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "mkvlrn@gmail.com - ormacarbon beers",
+    "description": "backend-test",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "description": "prod server",
+      "url": "http://localhost:3000"
+    },
+    {
+      "description": "dev server",
+      "url": "http://localhost:4000"
+    }
+  ],
+
+  "paths": {
+    "/beer/seed": {
+      "description": "seed data from json",
+      "get": {
+        "tags": ["seed"],
+        "summary": "auto seed",
+        "responses": {
+          "201": {
+            "description": "success - returns summary",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "500": {
+            "description": "error - internal server error"
+          }
+        }
+      }
+    },
+    "/beer": {
+      "description": "create new beer",
+      "post": {
+        "tags": ["crud"],
+        "summary": "beer creation",
+        "requestBody": {
+          "description": "add beer to database and returns created object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success - returns created object"
+          },
+          "400": {
+            "description": "error - bad request"
+          },
+          "500": {
+            "description": "error - internal server error"
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "seedResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "count": {
+            "type": "number",
+            "example": 5973
+          }
+        }
+      },
+      "create": {
+        "type": "object",
+        "required": ["abv", "ibu"],
+        "properties": {
+          "abv": {
+            "type": "number",
+            "example": 8.3000001907
+          },
+          "address": {
+            "type": "string",
+            "example": "8111 Dimond Hook Drive"
+          },
+          "category": {
+            "type": "string",
+            "example": "North American Ale"
+          },
+          "city": {
+            "type": "string",
+            "example": "Anchorage"
+          },
+          "coordinates": {
+            "type": "array",
+            "example": [61.1473, -149.844]
+          },
+          "country": {
+            "type": "string",
+            "example": "United States"
+          },
+          "description": {
+            "type": "string",
+            "example": "With passion and purpose, we present this series of hop-centric beers. Using different hop varieties and brewing techniques, we aim to capture bold, distinct hop characteristics in aroma, flavor and finish. While we explore the world of hops, we invite you to learn along with us: these beers offer an incredible opportunity to experience the diversity of hops while engaging the palate and obliterating the senses. Obliteration II is yet another dynamic Double IPA. Its aroma is intense with fragrant notes of citrus, spice, pine and alcohol. A sturdy malt platform provides the perfect stage for showcasing these high alpha-acid hops, creating flavors and textures that entice then intrigue. Obliteration II finishes with poignant bitterness."
+          },
+          "ibu": {
+            "type": "number",
+            "example": 79
+          },
+          "name": {
+            "type": "string",
+            "example": "Obliteration II"
+          },
+          "state": {
+            "type": "string",
+            "example": "Alaska"
+          },
+          "website": {
+            "type": "string",
+            "example": "http://www.midnightsunbrewing.com/"
+          }
+        }
+      }
+    }
+  }
+}
