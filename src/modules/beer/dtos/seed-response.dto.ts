@@ -1,5 +1,10 @@
 export class SeedResponseDto {
-  success = true;
+  success: boolean;
 
-  constructor(public count: number) {}
+  count: number;
+
+  constructor(count: number) {
+    this.success = true;
+    this.count = count;
+  }
 }
