@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: Orma Carbon
+  version: 0.1.0
+  contact:
+    {
+      name: 'Zaú Júlio',
+      email: 'zaujulio.dev@gmail.com',
+      url: 'https://github.com/zaujulio',
+    }
+servers:
+  - url: http://localhost:8080
+paths:
+  /beer:
+    get:
+      summary: list
+      description: list
+      operationId: list
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: number
+            example: 100
+        - name: offset
+          in: query
+          schema:
+            type: number
+            example: 200
+      responses:
+        '200':
+          description: 'Return a list of beers.'
+    post:
+      summary: create
+      description: create
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                abv:
+                  type: number
+                  example: 9
+                address:
+                  type: string
+                  example: 141 South Main Street
+                category:
+                  type: string
+                  example: British Ale - API_TEST
+                city:
+                  type: string
+                  example: Slippery Rock
+                coordinates:
+                  type: array
+                  items:
+                    type: number
+                    example: 41.0638
+                  example:
+                    - 41.0638
+                    - -80.0556
+                country:
+                  type: string
+                  example: United States
+                description:
+                  type: string
+                  example: This robust, hearty stout is as sturdy as its namesake - API_TEST.
+                ibu:
+                  type: number
+                  example: 104
+                name:
+                  type: string
+                  example: API_TEST
+                state:
+                  type: string
+                  example: Pennsylvania
+                website:
+                  type: string
+                  example: http://www.northcountrybrewing.com
+            example:
+              abv: 9
+              address: 141 South Main Street
+              category: British Ale - API_TEST
+              city: Slippery Rock
+              coordinates:
+                - 41.0638
+                - -80.0556
+              country: United States
+              description: This robust, hearty stout is as sturdy as its namesake - API_TEST.
+              ibu: 104
+              name: API_TEST
+              state: Pennsylvania
+              website: http://www.northcountrybrewing.com
+      responses:
+        '200':
+          description: 'Create a new beer.'
+  /beer/:id:
+    get:
+      summary: findById
+      description: findById
+      operationId: findbyid
+      responses:
+        '200':
+          description: 'Return a beer by id.'
+    patch:
+      summary: update
+      description: update
+      operationId: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: API_TEST_UPDATED_NAME
+            example:
+              name: API_TEST_UPDATED_NAME
+      responses:
+        '200':
+          description: 'Update a beer by id with partial data.'
+    delete:
+      summary: delete
+      description: delete
+      operationId: delete
+      responses:
+        '200':
+          description: 'Delete a beer by id.'
+    parameters:
+      - name: :id
+        in: path
+        required: true
+        schema:
+          type: string
+  /docs:
+    get:
+      summary: docs
+      description: docs
+      operationId: docs
+      responses:
+        '200':
+          description: 'Return this API docs.'
+tags: []
