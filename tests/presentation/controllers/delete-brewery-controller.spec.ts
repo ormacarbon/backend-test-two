@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { DeleteBreweryController, DeleteBreweryControllerRequest } from '../../../src/presentation/controllers/delete-brewery-controller'
 import { DeleteBrewerySpy } from '../mocks/mock-brewery'
+import { noContent } from '../../../src/presentation/helpers/http-helper'
 
 const mockRequest = (): DeleteBreweryControllerRequest => ({
   id: faker.datatype.uuid()
@@ -23,5 +24,11 @@ describe('DeleteBrewery Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(deleteBrewerySpy.params).toBe(request)
+  })
+
+  it('Should return 204 on success', async () => {
+    const { sut } = makeSut()
+    const result = await sut.handle(mockRequest())
+    expect(result).toEqual(noContent())
   })
 })
