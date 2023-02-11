@@ -40,6 +40,10 @@ class BeerService implements IBeerService<IBeer> {
   public async readAll(): Promise<IBeer[]> {
     return this._repository.readAll();
   }
+
+  public async update(id: string, beer: Partial<IBeer>): Promise<IBeer | null> {
+    return this._repository.update(id, beer);
+  }
 }
 
 export default BeerService;
