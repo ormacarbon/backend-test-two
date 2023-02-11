@@ -6,7 +6,7 @@ import { Filters } from '../interfaces/Filters.interface';
 import BreweriesModel from '../model/Breweries.Schema';
 import { InvalidArgumentError } from '../services/err/Errors';
 import MenuService from '../services/Menu.service';
-import { parseDataAndTransform } from '../common/test';
+import { parseDataAndTransform } from '../common/ParseDataAndTranforrmBrewery';
 
 class BreweriesService {
     async findBrewelers(filters: Filters) {
