@@ -1,61 +1,98 @@
-# **TESTE DE BACKEND**
+# mkvlrn/ormacarbon-backend-test
 
-## SITUAÇÃO-PROBLEMA
+## running in dev
 
-Você acabou de ser contratado para uma vaga de desenvolvedor backend de uma empresa que revende cervejas do mundo inteiro. O desenvolvedor anterior corrompeu completamente o banco de dados e a API anterior e sobrou apenas um arquivo .JSON com todas as informações do banco. Seu líder confiou a tarefa de recriar a API e o banco de dados a você.
+### pre-requisites to run locally
 
-Neste teste, você deverá criar uma API com endpoints a serem consumidos via REST e um banco de dados, utilizando os dados fornecidos no arquivo. ````db.json````.
+- node.js 18 (developed with v18.14.0)
+- yarn (developed with v1.22.19)
+- docker with compose (developed with docker v20.10.22 build 3a2c30b, compose v2.15.1)
+- postgres docker image
 
----------------------------------------------------------------------
+### how to
 
-## REQUISITOS OBRIGATÓRIOS:
+#### run development
 
-- Seja original, projetos suspeitos de serem copiados serão descartados.
-- Queremos ver o seu código, e não o de outros.
-- Criar coleção no Postman (seu teste será testado por aqui).
+after cloning, copy the contents of `.env.example` into a new `.env` file, then:
 
-## GIT
+```bash
+# install dependencies
+yarn install
 
-- Faça um fork deste repositório.
-- Crie uma branch para codar as suas features.
-- Faça um pull-request quando o teste for finalizado.
+# start db container
+docker compose up -d
 
-##### **NOTA: Será avaliado também se o nome da branch, títulos de commit, push e comentários possuem boa legibilidade.**
+# run db migrations, only needed once per schema change
+yarn prisma migrate dev
 
------------------------------------------------------
+# start app in dev mode
+yarn dev
+```
 
-## FRAMEWORK -
+#### run unit tests
 
-- Servidor: Express (Javascript/Typescript) *<u>**OU**</u>* Gin (Golang)
-- Banco de dados: MongoDB, DynamoDB, MySQL, Postgres...
+```bash
+yarn test
+```
 
------------------------------------------------------
+#### test using postman
 
-## PROJETO
+after starting dev mode, import the collection in this repo inside the `postman` dir
 
-- Api deve conter pelo menos 1 endpoint para cada operação crud (Create, Read, Update, Delete).
-- Um endpoint para listagem de conteúdo.
-- Banco de dados a escolha do dev.
+## running in prod
 
--------------------------------------------------------
+live version is deployed to <https://mkvlrn-ormacarbon-backend-test.up.railway.app>
 
-## REQUISITOS DIFERENCIAIS:
+## the project
 
-- Seguir os princípios de SOLID.
-- Fazer o teste em GoLang.
-- Codar um código performático.
-- Utilizar inglês no projeto todo.
-- Utilizar Injeção de dependências.
-- Criar um frontend que consuma a API
-- Fazer deploy do mesmo (heroku, aws, google cloud ou outro da preferência).
+express.js REST api written in typescript as an [esm module](https://nodejs.org/api/esm.html) (that's why node 18 is required) with a fully validated openapi/swagger documentation as frontend
 
+### mandatory requirements
 
+- [x] original project, with my own code
+- [x] postman collection for testing
+- [x] crud endpoints
+- [x] endpont for total listing
+- [x] db (postgres)
 
----
+### optional requirements
 
-## ENTREGA
+- [ ] solid principles - not quite, but just enough
+- [ ] use golang - nope
+- [x] performant code
+- [x] english in the entire project
+- [x] dependency injection
+- [x] frontend - i chose to create a fully validated openapi documentation that consumes the api, because i know you won't be dazzled by my mediocre react skills
+- [x] deploy somewhere - it's [here](https://mkvlrn-ormacarbon-backend-test.up.railway.app/)!
 
-- Faça um pull request e nomeie-o como no ex.: Teste de (Seu nome aqui).
-- Envie um email para schmidt@repenso.eco e kevin@repenso.eco com o link do pull request, do deploy (tanto do front quanto do back se feito), e anexe a coleção do postman.
-- Assim que avaliarmos seu teste, enviaremos uma devolutiva de sucesso ou falha, e caso seja aprovado, um link para agendar sua entrevista técnica.
+### some technical stuff
 
+#### project structure
+
+if you know [nest.js](https://nestjs.com/), you'll see a bit of it's convention in my code - i've been working with nest for the better part of the last 12 months, so it's in my brain
+
+#### choice of database and orm
+
+postgres is an easy choice for pretty much anything, and [prisma](https://prisma.io/) is so much better than [typeorm](https://typeorm.io/) that it becomes the default for me every time, although i can work with typeorm if needed
+
+#### vscode and all the devDependencies
+
+all my typescript projects tend to use the same tools to guarantee some sort of consistency, and i've created my own template/guide type thing to get it done each time
+
+it's done only once at the start of the project and you just don't think about it too much in the long run, but it helps a lot with quality
+
+my vscode config just allows for better - or more dynamic - typescript development, with linting and formatting done on the fly
+
+the other tools i've been using are:
+
+- [tsx](https://github.com/esbuild-kit/tsx) - blazing fast alternative to ts-node, it just works, and it's great with esm modules, since it allows for aliases out of the box
+- [eslint](https://github.com/eslint/eslint) - with a pretty comprehensive and well rounded configuration based on airbnb's guide, with a few tweaked rules
+- [prettier](https://github.com/prettier/prettier) - because your code needs to be 💄 **B E A U T I F U L** 💄
+- [commitlint](https://github.com/conventional-changelog/commitlint) - to lint commit messages using the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) spec
+- [jest](https://github.com/facebook/jest) - testing is life
+- [lint-staged](https://github.com/okonet/lint-staged) - to run all these tools on staged files
+- [husky](https://github.com/typicode/husky) - to tie up all tools and run lint-staged on commits
+
+## that's it
+
+thank you for the consideration
