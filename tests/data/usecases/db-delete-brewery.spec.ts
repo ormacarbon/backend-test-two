@@ -1,5 +1,6 @@
 import { DbDeleteBrewery } from '../../../src/data/usecases/db-delete-brewery'
 import { mockDeleteBreweryParams } from '../../domain/mocks/mock-brewery'
+import { throwError } from '../../domain/mocks/test-helpers'
 import { DeleteBreweryRepositorySpy } from '../mocks/mock-db-brewery'
 
 type SutTypes = {
@@ -19,5 +20,12 @@ describe('DbDeleteBrewery Usecase', () => {
     const params = mockDeleteBreweryParams()
     await sut.handle(params)
     expect(deleteBreweryRepositorySpy.params).toBe(params)
+  })
+
+  it('Should return if DeleteBreweryRepository throws', async () => {
+    const { sut, deleteBreweryRepositorySpy } = makeSut()
+    jest.spyOn(deleteBreweryRepositorySpy, 'handle').mockImplementationOnce(throwError)
+    const response = sut.handle(mockDeleteBreweryParams())
+    await expect(response).rejects.toThrow()
   })
 })
