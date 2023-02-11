@@ -17,8 +17,7 @@ func TestGetEnviromentalVariable(t *testing.T) {
 	} else {
 
 		//Act
-		result, err := helpers.GetEnviromentalVariable("MONGO_ATLAS_URI")
-		helpers.HandleError(err)
+		result := helpers.GetEnviromentalVariable("MONGO_URI")
 
 		//Assert
 		if result != envMap["MONGO_ATLAS_URI"] {

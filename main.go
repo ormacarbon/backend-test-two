@@ -13,7 +13,7 @@ func main() {
 	router := gin.Default()
 	router.Use(cors.Default())
 	router.Static("/statics", "./statics/")
-	router.LoadHTMLGlob("./views/*.html")
+	router.LoadHTMLGlob("views/*.html")
 
 	//API
 	router.POST("/api/location", controllers.CreateLocation)

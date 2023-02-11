@@ -7,10 +7,14 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func GetEnviromentalVariable(variableName string) (string, error) {
+func GetEnviromentalVariable(variableName string) string {
 	envMap, err := godotenv.Read(".env")
 
-	return envMap[variableName], err
+	if err != nil {
+		fmt.Println("YOU NEED TO CREATE AN .ENV FILE AND PUT 'MONGO_URI=<YOUR MONGO URI>'")
+	}
+
+	return envMap[variableName]
 }
 
 func HandleError(err error) {

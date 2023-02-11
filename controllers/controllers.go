@@ -16,15 +16,14 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-var mongoEnv = "MONGO_ATLAS_URI"
+var mongoEnv = "MONGO_URI"
 var database = "backend"
 var collection = "backend-test"
 
 // API CONTROLLERS
 func CreateLocation(c *gin.Context) {
 	//Connect to Atlas
-	uri, err := helpers.GetEnviromentalVariable(mongoEnv)
-	helpers.HandleError(err)
+	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client, err := initializers.ConnectToAtlas(uri)
 	helpers.HandleError(err)
 	var location *models.Location
@@ -58,8 +57,7 @@ func CreateLocation(c *gin.Context) {
 
 func GetAllLocations(c *gin.Context) {
 	//Connect to Atlas
-	uri, err := helpers.GetEnviromentalVariable(mongoEnv)
-	helpers.HandleError(err)
+	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client, err := initializers.ConnectToAtlas(uri)
 	helpers.HandleError(err)
 
@@ -90,8 +88,7 @@ func GetAllLocations(c *gin.Context) {
 
 func GetLocationById(c *gin.Context) {
 	//Connect to Atlas
-	uri, err := helpers.GetEnviromentalVariable(mongoEnv)
-	helpers.HandleError(err)
+	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client, err := initializers.ConnectToAtlas(uri)
 	helpers.HandleError(err)
 
@@ -123,8 +120,7 @@ func GetLocationById(c *gin.Context) {
 
 func UpdateLocationsById(c *gin.Context) {
 
-	uri, err := helpers.GetEnviromentalVariable(mongoEnv)
-	helpers.HandleError(err)
+	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client, err := initializers.ConnectToAtlas(uri)
 	helpers.HandleError(err)
 	locationId := c.Param("id")
@@ -171,8 +167,7 @@ func UpdateLocationsById(c *gin.Context) {
 
 func DeleteLocationById(c *gin.Context) {
 	//Connect to Atlas
-	uri, err := helpers.GetEnviromentalVariable(mongoEnv)
-	helpers.HandleError(err)
+	uri := helpers.GetEnviromentalVariable(mongoEnv)
 	client, err := initializers.ConnectToAtlas(uri)
 	helpers.HandleError(err)
 
