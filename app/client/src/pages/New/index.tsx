@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { IBeer } from "../../interfaces/IBeer";
+import * as S from "./styles";
 
 function New() {
   const [beer, setBeer] = useState<IBeer>()
@@ -33,6 +34,9 @@ function New() {
     if (beerStateRef.current?.value != '') {newBeer["state"] = beerStateRef.current?.value}
     if (beerWebsiteRef.current?.value != '') {newBeer["website"] = beerWebsiteRef.current?.value}
 
+    if (!("name" in newBeer)) return alert('Name is required')
+    if (!("abv" in newBeer)) return alert('ABV is required')
+    if (!("ibu" in newBeer)) return alert('IBU is required')
     axios.post(`http://localhost:3005/beers/`, newBeer).then(data => {
       if (data.status == 201) {
         axios.get(`http://localhost:3005/beers/${data.data.id}`).then(data => {
@@ -43,48 +47,54 @@ function New() {
   }
 
   if (!beer) return (
-    <div>
-      <header><Link to="/">HOME</Link></header>
-      <div><span>Name:</span><Input ref={beerNameRef}/></div>
-      <div><span>ABV:</span><Input ref={beerABVRef}/></div>
-      <div><span>Address:</span><Input ref={beerAddressRef}/></div>
-      <div><span>Category:</span><Input ref={beerCategoryRef}/></div>
-      <div><span>City:</span><Input ref={beerCityRef}/></div>
-      <div><span>Coordinates:</span><Input ref={beerCoordinatesRef}/></div>
-      <div><span>Country:</span><Input ref={beerCountryRef}/></div>
-      <div><span>Description:</span><Input ref={beerDescriptionRef}/></div>
-      <div><span>IBU:</span><Input ref={beerIBURef}/></div>
-      <div><span>State:</span><Input ref={beerStateRef}/></div>
-      <div><span>Website:</span><Input ref={beerWebsiteRef}/></div>
+    <>
+      <S.Header><Link to="/">HOME</Link></S.Header>
+      <S.Content>
+        <S.Form>
+          <div><span>Name:</span><Input ref={beerNameRef}/></div>
+          <div><span>ABV:</span><Input ref={beerABVRef}/></div>
+          <div><span>Address:</span><Input ref={beerAddressRef}/></div>
+          <div><span>Category:</span><Input ref={beerCategoryRef}/></div>
+          <div><span>City:</span><Input ref={beerCityRef}/></div>
+          <div><span>Coordinates:</span><Input ref={beerCoordinatesRef}/></div>
+          <div><span>Country:</span><Input ref={beerCountryRef}/></div>
+          <div><span>Description:</span><Input ref={beerDescriptionRef}/></div>
+          <div><span>IBU:</span><Input ref={beerIBURef}/></div>
+          <div><span>State:</span><Input ref={beerStateRef}/></div>
+          <div><span>Website:</span><Input ref={beerWebsiteRef}/></div>
+        </S.Form>
+        <S.Actions>
+          <S.CancelButton>
+            <Link to="/">CANCEL</Link>
+          </S.CancelButton>
+          <S.SaveButton onClick={handleNewBeer}>
+            SAVE
+          </S.SaveButton>
+        </S.Actions>
+      </S.Content>
 
-      <div>
-        <Button>
-          <Link to="/">CANCEL</Link>
-        </Button>
-        <Button onClick={handleNewBeer}>
-          SAVE
-        </Button>
-      </div>
-    </div>
+    </>
   );
 
   return (
     <div>
-      <header><Link to="/">HOME</Link></header>
-      New Beer Save Successfully
+      <S.Header><Link to="/">HOME</Link></S.Header>
 
-      <div>
-        {beer?.name ? <p><strong>Name:</strong>{beer.name}</p> : null}
-        {beer?.abv ? <p><strong>ABV:</strong>{beer.abv}</p> : null}
-        {beer?.address ? <p><strong>Address:</strong>{beer.address}</p> : null}
-        {beer?.category ? <p><strong>Category:</strong>{beer.category}</p> : null}
-        {beer?.city ? <p><strong>City:</strong>{beer.city}</p> : null}
-        {beer?.coordinates ? <p><strong>Coordinates:</strong>{beer.coordinates}</p> : null}
-        {beer?.description ? <p><strong>Description:</strong>{beer.description}</p> : null}
-        {beer?.ibu ? <p><strong>IBU:</strong>{beer.ibu}</p> : null}
-        {beer?.state ? <p><strong>State:</strong>{beer.state}</p> : null}
-        {beer?.website ? <p><strong>Website:</strong>{beer.website}</p> : null}
-      </div>
+      <S.NewBeer>
+        <h1>New Beer Save Successfully</h1>
+        <div>
+          {beer?.name ? <p><strong>Name:</strong>{beer.name}</p> : null}
+          {beer?.abv ? <p><strong>ABV:</strong>{beer.abv}</p> : null}
+          {beer?.address ? <p><strong>Address:</strong>{beer.address}</p> : null}
+          {beer?.category ? <p><strong>Category:</strong>{beer.category}</p> : null}
+          {beer?.city ? <p><strong>City:</strong>{beer.city}</p> : null}
+          {beer?.coordinates ? <p><strong>Coordinates:</strong>{beer.coordinates}</p> : null}
+          {beer?.description ? <p><strong>Description:</strong>{beer.description}</p> : null}
+          {beer?.ibu ? <p><strong>IBU:</strong>{beer.ibu}</p> : null}
+          {beer?.state ? <p><strong>State:</strong>{beer.state}</p> : null}
+          {beer?.website ? <p><strong>Website:</strong>{beer.website}</p> : null}
+        </div>
+      </S.NewBeer>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const Paginate = styled(ReactPaginate)`
   display: flex;
+  margin-bottom: 40px;
   width: 100%;
   justify-content: center;
   

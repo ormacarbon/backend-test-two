@@ -29,27 +29,21 @@ Beer.init({
   },
   address: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   category: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   city: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   coordinates: {
     type: DataTypes.STRING,
-    allowNull: true,
   },
   country: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   description: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   ibu: {
     type: DataTypes.NUMBER,
@@ -57,15 +51,12 @@ Beer.init({
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   state: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   website: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
 }, {
   underscored: true,
