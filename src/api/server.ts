@@ -1,5 +1,5 @@
 import autoBind from 'auto-bind';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import 'express-async-errors';
 import { createServer, Server as HttpServer } from 'http';
 import { AddressInfo } from 'net';
@@ -29,6 +29,7 @@ export class Server {
 
     this.app.use('/docs', this.openApiMw.server, this.openApiMw.docs);
     this.app.use('/beer', this.beerRouter.router);
+    this.app.use('/', (_req: Request, res: Response) => res.redirect('/docs'));
     this.app.use(this.errorHandlerMw.handle);
 
     this.httpServer = createServer(this.app);
