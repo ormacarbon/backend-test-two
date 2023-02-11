@@ -30,4 +30,11 @@ describe('Brewery Routes', () => {
       await request(app).get('/api/brewery').expect(204)
     })
   })
+
+  describe('DELETE /brewery/:id', () => {
+    it('Should return 204 on success', async () => {
+      const brewery = await PrismaHelper.prisma.brewery.create({ data: mockBreweryEntity() })
+      await request(app).delete('/api/brewery/' + brewery.id).expect(204)
+    })
+  })
 })
