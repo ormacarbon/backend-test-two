@@ -21,5 +21,6 @@ beerRoute.post(
 
 beerRoute.get('/', beerController.readAll);
 beerRoute.patch('/:id', BeerValidations.checkPropertiesToUpdate, beerController.update);
+beerRoute.delete('/:id', beerController.delete);
 
 export default beerRoute;
