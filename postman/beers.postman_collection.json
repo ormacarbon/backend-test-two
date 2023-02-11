@@ -125,7 +125,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": {}\n}"
+                  "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": null\n}"
                 }
               ]
             },
@@ -281,7 +281,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": {}\n}"
+                  "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": null\n}"
                 }
               ]
             },
@@ -397,7 +397,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": {}\n}"
+                  "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": null\n}"
                 }
               ]
             }
@@ -527,7 +527,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": {}\n}"
+              "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": null\n}"
             }
           ]
         },
@@ -776,7 +776,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": {}\n}"
+              "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": null\n}"
             }
           ]
         },
@@ -841,7 +841,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": {}\n}"
+              "body": "{\n  \"statusCode\": 500,\n  \"type\": \"INTERNAL\",\n  \"message\": \"database exploded\",\n  \"details\": null\n}"
             }
           ]
         }
