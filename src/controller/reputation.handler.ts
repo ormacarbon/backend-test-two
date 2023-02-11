@@ -20,9 +20,12 @@ class ReputationHandler {
         reputation: Number(reputation)
       };
 
-      const response = await ReputationService.add(data);
+      await ReputationService.add(data);
 
-      return res.status(200).json(response);
+      return res.status(200).json({
+        message: 'Reputation added with success',
+        alert: 'The reputation will be update soon'
+      });
     } catch (error) {
       next(error);
     }
