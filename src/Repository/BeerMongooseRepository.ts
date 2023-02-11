@@ -16,6 +16,10 @@ class BeerMongooseRepository implements IBeerRepository<IBeer> {
   public async update(id: string, beer: Partial<IBeer>): Promise<IBeer | null> {
     return this._persistence.update(id, beer);
   }
+
+  public async delete(id: string): Promise<{ deletedCount: number; }> {
+    return this._persistence.delete(id);
+  }
 }
 
 export default BeerMongooseRepository;
