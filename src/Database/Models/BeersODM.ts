@@ -45,6 +45,11 @@ class BeersODM {
       new: true,
     });
   }
+
+  public async delete(id: string) {
+    const filter = { _id: id };
+    return this.model.deleteOne(filter);
+  }
 }
 
 export default BeersODM;
