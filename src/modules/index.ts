@@ -1,1 +1,1 @@
-export { default as BeerModule } from './Beer';
+export { BeerModule } from './Beer';
