@@ -4,17 +4,20 @@ import Card from "../../components/Card";
 import Header from "../../components/Header";
 import { IBeer } from "../../interfaces/IBeer";
 
-function Home() {
-  const [beers, setBeers] = useState<IBeer[]>([])
+type Props = {
+  currentItems: IBeer[]
+}
+
+function Home({currentItems}: Props) {
   const [selectedBeers, setSelectedBeers] = useState<IBeer[]>([])
   const [inputNameBeers, setInputNameBeers] = useState<string>('')
+  const [beers, setBeers] = useState<IBeer[]>([])
 
   useEffect(() => {
     axios.get('http://localhost:3005/beers/').then(data => {
       setBeers(data.data)
       if (selectedBeers.length == 0) {
         setSelectedBeers(data.data)
-        console.log(selectedBeers.length)
       }
     }) as unknown as IBeer[];
   }, [])
@@ -39,7 +42,7 @@ function Home() {
       <Header setInputNameBeers={setInputNameBeers} />
       <main>
         {
-          selectedBeers.length > 0 ? (selectedBeers.map((beer) => (
+          currentItems && currentItems.length > 0 ? (currentItems.map((beer) => (
             <Card key={beer.id} beer={beer} handleDeleteBeer={handleDeleteBeer}/>
           ))) : null
         }

@@ -44,6 +44,7 @@ function New() {
 
   if (!beer) return (
     <div>
+      <header><Link to="/">HOME</Link></header>
       <div><span>Name:</span><Input ref={beerNameRef}/></div>
       <div><span>ABV:</span><Input ref={beerABVRef}/></div>
       <div><span>Address:</span><Input ref={beerAddressRef}/></div>
@@ -69,6 +70,7 @@ function New() {
 
   return (
     <div>
+      <header><Link to="/">HOME</Link></header>
       New Beer Save Successfully
 
       <div>
