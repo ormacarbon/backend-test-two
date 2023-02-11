@@ -19,5 +19,8 @@ export class OpenApiMiddleware implements IOpenApiMiddleware {
 
   server = serve;
 
-  docs = setup(openapi);
+  docs = setup(openapi, {
+    customSiteTitle: openapi.info.title,
+    customCss: '.swagger-ui .topbar { display: none }',
+  });
 }
