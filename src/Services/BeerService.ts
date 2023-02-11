@@ -3,6 +3,7 @@ import IBeerRepository from '../Interfaces/IBeerRepository';
 import IBeer from '../Interfaces/IBeer';
 import IBeerService from '../Interfaces/IBeerService';
 import BadRequestError from '../Utils/ErrorsTypes/BadRequestError';
+import NotFoundError from '../Utils/ErrorsTypes/NotFoundError';
 
 class BeerService implements IBeerService<IBeer> {
   private _repository: IBeerRepository<IBeer>;
@@ -58,6 +59,12 @@ class BeerService implements IBeerService<IBeer> {
   public async update(id: string, beer: Partial<IBeer>): Promise<IBeer | null> {
     const updateBeer = await this._repository.update(id, beer) as IBeer;
     return this.createBeerDomain(updateBeer);
+  }
+
+  public async delete(id: string): Promise<{ deleted: boolean; }> {
+    const { deletedCount } = await this._repository.delete(id);
+    if (deletedCount > 0) return { deleted: true };
+    throw new NotFoundError('The server cannot counter the requested resource.');
   }
 }
 
