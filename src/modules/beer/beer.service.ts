@@ -56,7 +56,7 @@ export class BeerService implements IBeerService {
       const parsed = plainToInstance(BeerGetManyDto, input);
       const { page, ...rest } = parsed;
       const { coordinates, ...where } = rest;
-      const coords = coordinates ? coordinates.split(',').map(parseInt) : [];
+      const coords = coordinates ? coordinates.split(',').map((v) => +v) : [];
       const currentPage = page || 1;
       const beersPerPage = 10;
 
