@@ -1,32 +1,62 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { BeerController } from '../beer.controller';
-import { BeerService } from '../beer.service';
-
-const controller = new BeerController({
-  name: 'beer-mock',
-  service: {
-    message: ({ name }) => 'Hello World, ' + name,
-    log: {} as any,
-  } as BeerService,
-});
+import { Request, Response } from '@types';
 
 describe('BeerController', () => {
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+  let controller: BeerController;
+  let mockResponse: Response;
+
+  beforeEach(() => {
+    mockResponse = (function () {
+      const res = {} as any;
+
+      res.status = jest.fn().mockReturnValue(res);
+      res.send = jest.fn().mockReturnValue(res);
+      res.next = jest.fn().mockReturnValue(res);
+
+      return res;
+    })();
+
+    controller = new BeerController({
+      name: 'controller-mock',
+      service: {
+        list: jest.fn(),
+      } as unknown as any,
+    });
   });
 
-  it('should have a message method', () => {
-    expect(controller.helloWorld).toBeDefined();
+  it('should create a beer', async () => {
+    const req = { body: { name: 'Pilsner' } } as unknown as Request;
+    const res = mockResponse as Response;
+
+    controller.service.create = jest
+      .fn()
+      .mockResolvedValue({ name: 'Pilsner' });
+
+    await controller.create(req, res);
+
+    expect(res.send).toHaveBeenCalledWith({ beer: { name: 'Pilsner' } });
   });
 
-  it('should call the service message method', () => {
-    const spy = jest.spyOn(controller.service, 'message');
+  it('should return a list of beers', async () => {
+    const items = [{ name: 'Pilsner' }, { name: 'IPA' }];
+    const req = { query: {} } as unknown as Request;
+    const res = mockResponse as Response;
 
-    const res = { status: () => ({ json: () => {}, send: () => {} }) };
-    const body = { name: 'Neith' };
+    controller.service.list = jest.fn().mockResolvedValue({ items, _opt: {} });
 
-    controller.helloWorld({ body } as any, res as any);
+    await controller.list(req, res);
 
-    expect(spy).toHaveBeenCalledWith(body);
+    expect(res.send).toHaveBeenCalledWith({ items, _opt: {} });
+  });
+
+  it('should delete a beer', async () => {
+    const req = { params: { id: '1' } } as unknown as Request;
+    const res = mockResponse as Response;
+
+    controller.service.delete = jest.fn().mockResolvedValue({});
+
+    await controller.delete(req, res);
+
+    expect(res.send).toHaveBeenCalledWith();
   });
 });
