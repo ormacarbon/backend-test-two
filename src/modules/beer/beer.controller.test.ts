@@ -4,7 +4,6 @@ import { Request, Response } from 'express';
 
 import { BeerController, IBeerController } from '#/modules/beer/beer.controller.js';
 import { IBeerService } from '#/modules/beer/beer.service.js';
-import { SeedResponseDto } from '#/modules/beer/dtos/seed-response.dto.js';
 import { ISeedService } from '#/modules/shared/seed.service.js';
 
 describe('beer.controller.ts', () => {
@@ -22,7 +21,7 @@ describe('beer.controller.ts', () => {
     await controller.seed(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(201);
-    expect(res.json).toHaveBeenCalledWith<[SeedResponseDto]>({ success: true, count: 5 });
+    expect(res.json).toHaveBeenCalledWith({ message: 'success', count: 5 });
   });
 
   test('create', async () => {

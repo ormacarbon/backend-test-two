@@ -6,7 +6,6 @@ import { inject, injectable } from 'tsyringe';
 import type { IBeerService } from '#/modules/beer/beer.service.js';
 import { BeerCreateDto } from '#/modules/beer/dtos/create.dto.js';
 import { BeerGetManyDto } from '#/modules/beer/dtos/get-many.dto.js';
-import { SeedResponseDto } from '#/modules/beer/dtos/seed-response.dto.js';
 import { BeerUpdateDto } from '#/modules/beer/dtos/update.dto.js';
 import type { ISeedService } from '#/modules/shared/seed.service.js';
 
@@ -29,9 +28,9 @@ export class BeerController implements IBeerController {
   }
 
   async seed(_req: Request, res: Response): Promise<Response> {
-    const result = await this.seedService.seed();
+    const count = await this.seedService.seed();
 
-    return res.status(201).json(new SeedResponseDto(result));
+    return res.status(201).json({ message: 'success', count });
   }
 
   async create(req: Request<{}, {}, BeerCreateDto>, res: Response): Promise<Response> {
