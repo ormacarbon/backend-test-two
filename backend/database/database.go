@@ -23,13 +23,13 @@ var (
 	DB_USER     string = readEnvs("DB_USER")
 	DB_PASSWORD string = readEnvs("DB_PASSWORD")
 	DB_HOST     string = readEnvs("DB_HOST")
-	DB_DATABASE string = readEnvs("DB_DATABASE")
+	DB_NAME     string = readEnvs("DB_NAME")
 	DB_POST     string = readEnvs("DB_POST")
 )
 
 func StartDB() {
 	url := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=America/Sao_Paulo",
-		DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_POST)
+		DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_POST)
 	database, err := gorm.Open(postgres.Open(url), &gorm.Config{SkipDefaultTransaction: true})
 	if err != nil {
 		log.Fatal("error :", err)
