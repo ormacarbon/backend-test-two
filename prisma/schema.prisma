@@ -12,7 +12,7 @@ datasource db {
 
 model brewery {
   id          String    @id @default(uuid())
-  abv         Float?
+  abv         Float
   address     String?
   category    String?
   city        String?
