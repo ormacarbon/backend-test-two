@@ -4,4 +4,6 @@ WORKDIR /api
 
 COPY ./package.json .
 
+COPY ./db.json  .
+
 RUN npm install --omit=dev
