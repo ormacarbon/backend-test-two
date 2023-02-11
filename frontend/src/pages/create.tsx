@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import { Link } from 'react-router-dom';
 
-import { Button, Form } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 
 const Create = () => {
     const [abv, setAbv] = useState(0.0);
