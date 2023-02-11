@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { BreweryEntity } from '../../../src/domain/entities/brewery'
+import { DeleteBreweryParams } from '../../../src/domain/usecases/delete-brewery'
 
 export const mockBreweryEntity = (): BreweryEntity => ({
   id: faker.datatype.uuid(),
@@ -14,4 +15,8 @@ export const mockBreweryEntity = (): BreweryEntity => ({
   name: faker.company.name(),
   state: faker.address.state(),
   website: faker.internet.domainName()
+})
+
+export const mockDeleteBreweryParams = (): DeleteBreweryParams => ({
+  id: faker.datatype.uuid()
 })
