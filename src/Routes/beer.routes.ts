@@ -20,5 +20,6 @@ beerRoute.post(
 );
 
 beerRoute.get('/', beerController.readAll);
+beerRoute.patch('/:id', beerController.update);
 
 export default beerRoute;
