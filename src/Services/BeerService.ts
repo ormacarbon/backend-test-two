@@ -5,9 +5,9 @@ import IBeerService from '../Interfaces/IBeerService';
 import BadRequestError from '../Utils/ErrorsTypes/BadRequestError';
 
 class BeerService implements IBeerService<IBeer> {
-  private _repository: IBeerRepository<Beer, IBeer>;
+  private _repository: IBeerRepository<IBeer>;
 
-  constructor(repository: IBeerRepository<Beer, IBeer>) {
+  constructor(repository: IBeerRepository<IBeer>) {
     this._repository = repository;
   }
 
@@ -33,8 +33,22 @@ class BeerService implements IBeerService<IBeer> {
   };
 
   public async create(beer: IBeer) {
-    const beerDomain = this.createBeerDomain(beer);
-    return this._repository.create(beerDomain);
+    const createdBeer = await this._repository.create(beer);
+    const beerDomain = this.createBeerDomain(createdBeer);
+    return {
+      id: beerDomain.id,
+      abv: beerDomain.abv,
+      address: beerDomain.address,
+      category: beerDomain.category,
+      city: beerDomain.city,
+      coordinates: beerDomain.coordinates?.length ? beerDomain.coordinates : undefined,
+      country: beerDomain.country,
+      ibu: beerDomain.ibu,
+      name: beerDomain.name,
+      description: beerDomain.description,
+      state: beerDomain.state,
+      website: beerDomain.website,
+    };
   }
 
   public async readAll(): Promise<IBeer[]> {
