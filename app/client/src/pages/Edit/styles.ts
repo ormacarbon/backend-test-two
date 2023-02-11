@@ -20,7 +20,7 @@ export const Header = styled.header`
 `;
 
 export const Content = styled.main`
-  min-height: 88vh;
+  min-height: 95vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,10 +66,10 @@ export const SaveButton = styled(Button)`
   background-color: #00BAFF;
 `;
 
-export const NewBeer = styled.main`
+export const UpdatedBeer = styled.main`
   height: 78vh;
   margin: 50px 0;
-  
+
   h1 {
     text-align: center;
   }

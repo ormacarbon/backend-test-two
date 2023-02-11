@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button";
-import Card from "../../components/Card";
 import { Input } from "../../components/Input";
 import { IBeer } from "../../interfaces/IBeer";
+import * as S from "./styles";
 
 function Edit() {
   const {id} = useParams();
@@ -54,8 +54,8 @@ function Edit() {
   }
 
   if (typeof(beer) != "boolean" && beer) return (
-    <div>
-      <div>
+    <S.Content>
+      <S.Form>
         {beer.name ? <div><span>Name:</span><Input placeholder={beer.name} ref={beerNameRef}/></div> : null}
         {beer.abv ? <div><span>ABV:</span><Input placeholder={beer.abv} ref={beerABVRef}/></div> : null}
         {beer.address ? <div><span>Address:</span><Input placeholder={beer.address} ref={beerAddressRef}/></div> : null}
@@ -67,34 +67,37 @@ function Edit() {
         {beer.ibu ? <div><span>IBU:</span><Input placeholder={beer.ibu.toString()} ref={beerIBURef}/></div> : null}
         {beer.state ? <div><span>State:</span><Input placeholder={beer.state} ref={beerStateRef}/></div> : null}
         {beer.website ? <div><span>Website:</span><Input placeholder={beer.website} ref={beerWebsiteRef}/></div> : null}
-      </div>
-      <div>
-        <Button>
+      </S.Form>
+      <S.Actions>
+        <S.CancelButton>
           <Link to="/">CANCEL</Link>
-        </Button>
-        <Button onClick={handleUpdateBeer}>
+        </S.CancelButton>
+        <S.SaveButton onClick={handleUpdateBeer}>
           SAVE
-        </Button>
-      </div>
-    </div>
+        </S.SaveButton>
+      </S.Actions>
+    </S.Content>
   )
 
   return (
     <div>
-      Beer Infos Updated Successfully
+      <S.Header><Link to="/">HOME</Link></S.Header>
+      <S.UpdatedBeer>
+        <h1>Beer Infos Updated Successfully</h1>
 
-      <div>
-        {beerUpdated?.name ? <p><strong>Name:</strong>{beerUpdated.name}</p> : null}
-        {beerUpdated?.abv ? <p><strong>ABV:</strong>{beerUpdated.abv}</p> : null}
-        {beerUpdated?.address ? <p><strong>Address:</strong>{beerUpdated.address}</p> : null}
-        {beerUpdated?.category ? <p><strong>Category:</strong>{beerUpdated.category}</p> : null}
-        {beerUpdated?.city ? <p><strong>City:</strong>{beerUpdated.city}</p> : null}
-        {beerUpdated?.coordinates ? <p><strong>Coordinates:</strong>{beerUpdated.coordinates}</p> : null}
-        {beerUpdated?.description ? <p><strong>Description:</strong>{beerUpdated.description}</p> : null}
-        {beerUpdated?.ibu ? <p><strong>IBU:</strong>{beerUpdated.ibu}</p> : null}
-        {beerUpdated?.state ? <p><strong>State:</strong>{beerUpdated.state}</p> : null}
-        {beerUpdated?.website ? <p><strong>Website:</strong>{beerUpdated.website}</p> : null}
-      </div>
+        <div>
+          {beerUpdated?.name ? <p><strong>Name:</strong>{beerUpdated.name}</p> : null}
+          {beerUpdated?.abv ? <p><strong>ABV:</strong>{beerUpdated.abv}</p> : null}
+          {beerUpdated?.address ? <p><strong>Address:</strong>{beerUpdated.address}</p> : null}
+          {beerUpdated?.category ? <p><strong>Category:</strong>{beerUpdated.category}</p> : null}
+          {beerUpdated?.city ? <p><strong>City:</strong>{beerUpdated.city}</p> : null}
+          {beerUpdated?.coordinates ? <p><strong>Coordinates:</strong>{beerUpdated.coordinates}</p> : null}
+          {beerUpdated?.description ? <p><strong>Description:</strong>{beerUpdated.description}</p> : null}
+          {beerUpdated?.ibu ? <p><strong>IBU:</strong>{beerUpdated.ibu}</p> : null}
+          {beerUpdated?.state ? <p><strong>State:</strong>{beerUpdated.state}</p> : null}
+          {beerUpdated?.website ? <p><strong>Website:</strong>{beerUpdated.website}</p> : null}
+        </div>
+      </S.UpdatedBeer>
     </div>
   )
 }
