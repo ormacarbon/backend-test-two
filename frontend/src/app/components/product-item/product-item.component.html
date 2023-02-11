@@ -1,0 +1,144 @@
+<div class="product">
+  <h3>
+    {{ product.name }}
+  </h3>
+  <div>
+    <app-button text="Details" (btnClick)="onDetails(product)"></app-button>
+    <app-button text="Remove" (btnClick)="onDelete(product)"></app-button>
+  </div>
+</div>
+<div *ngIf="showProductDetails" class="details">
+  <p>Name: {{ product.name || "Missing information" }}</p>
+  <p>ABV: {{ product.abv || "Missing information" }}</p>
+  <p>Ibu: {{ product.ibu || "Missing information" }}</p>
+  <p>Category: {{ product.category || "Missing information" }}</p>
+  <p>Description: {{ product.description || "Missing information" }}</p>
+  <p>Website: {{ product.website || "Missing information" }}</p>
+  <p>Country: {{ product.country || "Missing information" }}</p>
+  <p>City: {{ product.city || "Missing information" }}</p>
+  <p>State: {{ product.state || "Missing information" }}</p>
+  <p>Address: {{ product.address || "Missing information" }}</p>
+  <p>Coordinates: {{ product.coordinates || "Missing information" }}</p>
+  <app-button text="Close" (btnClick)="hideDetails(product)"></app-button>
+  <app-button text="Update" (btnClick)="onShowFormUpdate()"></app-button>
+</div>
+<div *ngIf="showFormUpdate">
+<form  (ngSubmit)="onSubmit(product)">
+  <div>
+    <label>Name: </label>
+    <input
+      type="text"
+      name="product.name"
+      [(ngModel)]="product.name"
+      id="product.name"
+      value="product.name"
+      required
+    />
+  </div>
+  <div>
+    <label>Abv: </label>
+    <input
+      type="number"
+      name="product.abv"
+      [(ngModel)]="product.abv"
+      id="product.abv"
+      value="product.abv"
+      required
+    />
+  </div>
+  <div>
+    <label>Ibu: </label>
+    <input
+      type="number"
+      name="product.ibu"
+      [(ngModel)]="product.ibu"
+      id="product.ibu"
+      value="product.ibu"
+      required
+    />
+  </div>
+  <div>
+    <label>Category: </label>
+    <input
+      type="text"
+      name="product.category"
+      [(ngModel)]="product.category"
+      id="product.category"
+      value="product.category"
+    />
+  </div>
+  <div>
+    <label>Description: </label>
+    <input
+      type="text"
+      name="product.description"
+      [(ngModel)]="product.description"
+      id="product.description"
+      value="product.description"
+    />
+  </div>
+  <div>
+    <label>Website: </label>
+    <input
+      type="text"
+      name="product.website"
+      [(ngModel)]="product.website"
+      id="product.website"
+      value="product.website"
+    />
+  </div>
+  <div>
+    <label>Country: </label>
+    <input
+      type="text"
+      name="product.country"
+      [(ngModel)]="product.country"
+      id="product.country"
+      value="product.country"
+      required
+    />
+  </div>
+  <div>
+    <label>City: </label>
+    <input
+      type="text"
+      name="product.city"
+      [(ngModel)]="product.city"
+      id="product.city"
+      value="product.city"
+    />
+  </div>
+  <div>
+    <label>State: </label>
+    <input
+      type="text"
+      name="product.state"
+      [(ngModel)]="product.state"
+      id="product.state"
+      value="product.state"
+    />
+  </div>
+  <div>
+    <label>Address: </label>
+    <input
+      type="text"
+      name="product.address"
+      [(ngModel)]="product.address"
+      id="product.address"
+      value="product.address"
+    />
+  </div>
+  <div>
+    <label>Coordinates: </label>
+    <input
+    type="[number, number]"
+      name="product.coordinates"
+      [(ngModel)]="product.coordinates"
+      id="product.coordinates"
+      value="product.coordinates"
+    />
+  </div>
+  <app-button type="submit" text="Update Product"></app-button>
+  <app-button text="Back to details" (btnClick)="onCloseFormUpdate()"></app-button>
+</form>
+</div>

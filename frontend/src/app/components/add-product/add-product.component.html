@@ -1,0 +1,117 @@
+<form *ngIf="showAddProduct" class="add-form" (ngSubmit)="onSubmit()">
+  <div class="form-control">
+    <label>Name</label>
+    <input
+      type="text"
+      name="name"
+      [(ngModel)]="name"
+      id="name"
+      placeholder="Name"
+      required
+    />
+  </div>
+  <div class="form-control">
+    <label>Abv</label>
+    <input
+      type="number"
+      name="abv"
+      [(ngModel)]="abv"
+      id="abv"
+      placeholder="Abv"
+      required
+    />
+  </div>
+  <div class="form-control">
+    <label>Ibu</label>
+    <input
+      type="number"
+      name="ibu"
+      [(ngModel)]="ibu"
+      id="ibu"
+      placeholder="Ibu"
+      required
+    />
+  </div>
+  <div class="form-control">
+    <label>Category</label>
+    <input
+      type="text"
+      name="category"
+      [(ngModel)]="category"
+      id="category"
+      placeholder="Category"
+    />
+  </div>
+  <div class="form-control">
+    <label>Description</label>
+    <input
+      type="text"
+      name="description"
+      [(ngModel)]="description"
+      id="description"
+      placeholder="Description"
+    />
+  </div>
+  <div class="form-control">
+    <label>Website</label>
+    <input
+      type="text"
+      name="website"
+      [(ngModel)]="website"
+      id="website"
+      placeholder="Website"
+    />
+  </div>
+  <div class="form-control">
+    <label>Country</label>
+    <input
+      type="text"
+      name="country"
+      [(ngModel)]="country"
+      id="country"
+      placeholder="Country"
+      required
+    />
+  </div>
+  <div class="form-control">
+    <label>City</label>
+    <input
+      type="text"
+      name="city"
+      [(ngModel)]="city"
+      id="city"
+      placeholder="City"
+    />
+  </div>
+  <div class="form-control">
+    <label>State</label>
+    <input
+      type="text"
+      name="state"
+      [(ngModel)]="state"
+      id="state"
+      placeholder="State"
+    />
+  </div>
+  <div class="form-control">
+    <label>Address</label>
+    <input
+      type="text"
+      name="address"
+      [(ngModel)]="address"
+      id="address"
+      placeholder="Address"
+    />
+  </div>
+  <div class="form-control">
+    <label>Coordinates</label>
+    <input
+      type="number"
+      name="coordinates"
+      [(ngModel)]="coordinates"
+      id="coordinates"
+      placeholder="Coordinates"
+    />
+  </div>
+  <input type="submit" value="Save Product" class="btn" />
+</form>

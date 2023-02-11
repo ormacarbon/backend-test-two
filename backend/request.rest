@@ -1,0 +1,31 @@
+POST http://localhost:3003/import-data
+
+###
+POST http://localhost:3003/register
+Content-Type: application/json
+
+ {
+    "abv": 8.3256485,
+    "city": "Luton",
+    "coordinates": [52.1357, -0.468],
+    "country": "United Kingdom",
+    "ibu": 100,
+    "name": "Strong Ale",
+    "state": "Bedford"
+  }
+
+###
+GET http://localhost:3003/get-products
+
+###
+GET http://localhost:3003/get-product/63e2a4eb0c7189189a592a55
+###
+PUT http://localhost:3003/update-product/63e2a4eb0c7189189a592a55
+Content-Type: application/json
+
+{
+  "state": "Texas"
+}
+
+###
+DELETE http://localhost:3003/delete-product/63e2a4eb0c7189189a592a55

@@ -1,0 +1,18 @@
+.product {
+  display: flex;
+  direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #f4f4f4;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+p{
+  margin-bottom: 5px;
+}
+
+input{
+  margin-bottom: 5px;
+}

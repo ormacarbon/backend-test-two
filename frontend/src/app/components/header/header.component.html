@@ -1,0 +1,9 @@
+<header>
+    <h2>{{ title }}</h2>
+    <app-button
+    *ngIf="hasRoute('/')"
+    text="{{ showAddProduct ? 'Close' : 'Add Product' }}"
+    (btnClick)="toggleAddProduct()"
+    class="button"
+  ></app-button>
+  </header>
