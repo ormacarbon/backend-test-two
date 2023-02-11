@@ -11,7 +11,7 @@ import { InvalidArgumentError } from './err/Errors';
 class UserService {
   async store(user: UserCreateInterface) {
     try {
-      const errors = [];
+      const errors: string[] = [];
 
       const emailAlreadyInUse = await this.findByEmail(user.email);
 
@@ -71,7 +71,7 @@ class UserService {
 
   async login(user: UserLoginInterface) {
     try {
-      const errors = [];
+      const errors: string[] = [];
 
       const findEmail = await this.findByEmail(user.email);
 

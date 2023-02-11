@@ -6,9 +6,9 @@ import UserService from '../../services/User.service';
 describe('Should test datas with status 200+', () => {
   beforeEach(async () => {
     const User: UserCreateInterface = {
-      email: 'emalzinhotopzinho@email.com',
+      email: 'havefaith@email.com',
       username: 'livewell',
-      password: 'senhaforte123'
+      password: 'bebrave123'
     };
 
     await UserService.store(User);
@@ -16,6 +16,16 @@ describe('Should test datas with status 200+', () => {
 
   afterEach(async () => {
     await UserService.deleteMany();
+  });
+
+  it('Shoud login user with status 200', async () => {
+    await supertest(app)
+      .post('/api/v1/login')
+      .send({
+        email: 'havefaith@email.com',
+        password: 'bebrave123'
+      })
+      .expect(200);
   });
 
   it('Should create user with status 200', () => {

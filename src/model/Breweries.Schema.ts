@@ -164,7 +164,7 @@ class BreweryModel {
     }
   }
 
-  async addReputation(reputation: Reputation) {
+  async addListReputation(reputation: Reputation) {
     try {
       const data = await this.brewerie.findByIdAndUpdate(reputation.id, {
         $push: {
@@ -183,9 +183,39 @@ class BreweryModel {
 
   async updateReputation(reputation: any) {
     try {
-      await this.brewerie.findByIdAndUpdate(reputation.id, {
-        reputation: reputation.reputation
+      await this.brewerie.updateOne(
+        {
+          _id: reputation.id
+        },
+        {
+          reputation: reputation.reputation
+        }
+      );
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async findUserInReputation(idUser: string) {
+    try {
+      return await this.brewerie.findOne({
+        'list_reputation.user_id': idUser
       });
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async updateReputationUser(idUser: string, reputation: number) {
+    try {
+      const data = await this.brewerie.updateOne(
+        { 'list_reputation.user_id': idUser },
+        { $set: { 'list_reputation.$.reputation': reputation } }
+      );
+
+      console.log(data);
+
+      return data;
     } catch (error) {
       cacthErrosFunctions(error);
     }

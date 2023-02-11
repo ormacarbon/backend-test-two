@@ -8,6 +8,7 @@ export interface ReputationUpdate {
   id: string;
   list_reputation: any[];
   user_id: string;
+  reputation?: number;
 }
 
 export interface ListReputationInterface {
