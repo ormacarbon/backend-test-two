@@ -1,7 +1,6 @@
 package paginate
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -24,7 +23,6 @@ func Paginate(c *gin.Context) func(db *gorm.DB) *gorm.DB {
 		}
 
 		offset := (page - 1) * pageSize
-		fmt.Println(offset)
 		return db.Offset(offset).Limit(pageSize)
 	}
 }

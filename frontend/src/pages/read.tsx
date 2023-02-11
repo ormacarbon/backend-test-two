@@ -71,7 +71,7 @@ const Read = () => {
         </Table.Body>
       </Table>
 
-      <Link to="/" className="home-button" onClick={() => DeleteBeer(beer?.ID)}>
+      <Link to="/list" className="home-button" onClick={() => DeleteBeer(beer?.ID)}>
         DELETE
       </Link>
       <Link to={"/update/" + beer?.ID} className="home-button" onClick={() => setData(beer)}>

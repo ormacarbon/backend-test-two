@@ -67,7 +67,7 @@ const List = () => {
       <Pagination
         activePage={activePage}
         onPageChange={onChange}
-        totalPages={Math.round(length / 10)}
+        totalPages={Math.ceil(length / 10)}
         ellipsisItem={null}
       />
     </div>
