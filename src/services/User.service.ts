@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from '../common/utils/auth/jwt';
-import catchErrorsFunctions from '../common/utils/catchErrorsFunction';
+import catchErrorsFunctions from '../common/utils/err/catchErrorsFunction';
 import {
   User,
   UserCreateInterface,

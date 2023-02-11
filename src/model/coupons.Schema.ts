@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import catchErrorsFunctions from '../common/utils/catchErrorsFunction';
+import catchErrorsFunctions from '../common/utils/err/catchErrorsFunction';
 import {
   CouponInterface,
   CouponUpdateInterface

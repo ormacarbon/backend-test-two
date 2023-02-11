@@ -1,7 +1,7 @@
 import {
   InternalServerError,
   InvalidArgumentError
-} from '../../services/err/Errors';
+} from '../../../services/err/Errors';
 
 export default function catchErrorsFunctions<T>(error: T) {
   if (error instanceof SyntaxError) {

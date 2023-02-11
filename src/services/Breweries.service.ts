@@ -1,4 +1,4 @@
-import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
+import cacthErrosFunctions from '../common/utils/err/catchErrorsFunction';
 import { LowerCaseFunction } from '../common/utils/LowerCaseFunction';
 
 import BrewelyInterface, {
@@ -39,7 +39,7 @@ class BreweriesService {
         errors.push(`Error: Brewery not found`);
       }
 
-      if (errors.length > 0) {
+      if (errors.length) {
         throw new InvalidArgumentError(JSON.stringify(errors));
       }
 

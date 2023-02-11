@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import catchErrorsFunctions from '../common/utils/catchErrorsFunction';
+import catchErrorsFunctions from '../common/utils/err/catchErrorsFunction';
 import { UserCreateInterface } from '../interfaces/User/User.interface';
 
 export const UserSchema = new Schema({

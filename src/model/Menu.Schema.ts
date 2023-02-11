@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { MenuDTOInterface } from '../dtos/menu/Menu.dto';
 import { ItemMenu } from '../interfaces/Menu/Menu.interface';
-import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
+import cacthErrosFunctions from '../common/utils/err/catchErrorsFunction';
 
 export const MenuSchema = new Schema({
   owner: {

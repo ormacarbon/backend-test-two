@@ -1,11 +1,13 @@
 import { Schema, model } from 'mongoose';
-import { handleErrorDatabase } from '../common/utils/errorDatabaseHandler';
+import { handleErrorDatabase } from '../common/utils/err/errorDatabaseHandler';
 import { constructorBreweryInterface } from '../interfaces/Breweries/Brewery.interface';
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import { Filters } from '../interfaces/Filters.interface';
-import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
+import cacthErrosFunctions from '../common/utils/err/catchErrorsFunction';
 import { InternalServerError } from '../services/err/Errors';
-import catchErrorsFunctions from '../common/utils/catchErrorsFunction';
+import catchErrorsFunctions from '../common/utils/err/catchErrorsFunction';
+
+import { Reputation } from '../interfaces/reputation/Reputation.interface';
 
 export const BrewerySchema = new Schema({
   abv: Number,
@@ -29,9 +31,19 @@ export const BrewerySchema = new Schema({
     type: Object,
     website: String
   },
+  list_reputation: [
+    {
+      reputation: Number,
+      user_id: String,
+      created_at: {
+        type: Date,
+        default: Date.now()
+      }
+    }
+  ],
   reputation: {
-    type: Array,
-    default: []
+    type: Number,
+    default: 0
   }
 });
 
@@ -149,6 +161,33 @@ class BreweryModel {
       return data?.reputation;
     } catch (error) {
       catchErrorsFunctions(error);
+    }
+  }
+
+  async addReputation(reputation: Reputation) {
+    try {
+      const data = await this.brewerie.findByIdAndUpdate(reputation.id, {
+        $push: {
+          list_reputation: {
+            user_id: reputation.user_id,
+            reputation: reputation.reputation
+          }
+        }
+      });
+
+      return data;
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async updateReputation(reputation: any) {
+    try {
+      await this.brewerie.findByIdAndUpdate(reputation.id, {
+        reputation: reputation.reputation
+      });
+    } catch (error) {
+      cacthErrosFunctions(error);
     }
   }
 }

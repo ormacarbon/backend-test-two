@@ -1,4 +1,4 @@
-import cacthErrosFunctions from '../common/utils/catchErrorsFunction';
+import cacthErrosFunctions from '../common/utils/err/catchErrorsFunction';
 import { MenuDTOInterface } from '../dtos/menu/Menu.dto';
 import BreweriesService from './Breweries.service';
 import MenuModel from '../model/Menu.Schema';

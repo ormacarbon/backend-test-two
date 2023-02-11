@@ -1,4 +1,4 @@
-import catchErrorsFunctions from '../common/utils/catchErrorsFunction';
+import catchErrorsFunctions from '../common/utils/err/catchErrorsFunction';
 import { CouponInterface } from '../interfaces/Coupons/Coupon.interface';
 import CoupounsModel from '../model/coupons.Schema';
 import { InvalidArgumentError } from './err/Errors';
