@@ -7,4 +7,4 @@ sonar-scanner \
   -Dsonar.projectKey=$PROJECT_NAME \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://0.0.0.0:9090 \
-  -Dsonar.login=$ORMA-CARBON-TOKEN
+  -Dsonar.login=$ORMA_CARBON_SONAR_TOKEN
