@@ -1,4 +1,9 @@
 {
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  },
   "compilerOptions": {
     "experimentalDecorators": true,
     "target": "es6",
@@ -23,6 +28,12 @@
       "@interfaces": [
         "common/interfaces"
       ],
+      "@database": [
+        "database"
+      ],
+      "@entity": [
+        "database/entity"
+      ],
       "@interfaces/*": [
         "common/interfaces/*"
       ],
@@ -35,6 +46,9 @@
       "@constants": [
         "common/constants"
       ],
+      "@utils/*": [
+        "common/utils/*"
+      ],
       "@utils": [
         "common/utils"
       ],
@@ -43,13 +57,6 @@
       ],
       "@modules/*": [
         "modules/*"
-      ],
-      "@core": [
-        "common/interfaces",
-        "common/utils",
-        "common/types",
-        "common/config",
-        "common/constants"
       ]
     },
     "rootDirs": [
@@ -59,6 +66,7 @@
     "allowJs": true,
     "declaration": true,
     "declarationMap": true,
+    "declarationDir": "dist/@types",
     "outDir": "dist",
     "inlineSourceMap": true,
     "inlineSources": true,
@@ -67,6 +75,7 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
+    "removeComments": true,
     "types": [
       "jest",
       "supertest"

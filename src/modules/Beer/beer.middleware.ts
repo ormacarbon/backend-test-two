@@ -1,5 +1,5 @@
 import { BeerEntity } from '@entity';
-import { BaseMiddleware } from '@core';
+import { BaseMiddleware } from '@interfaces';
 import { NextFunction, Request, Response } from '@types';
 
 import { BeerController } from './beer.controller';

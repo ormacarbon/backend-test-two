@@ -1,4 +1,4 @@
-import { BaseModule } from '@core';
+import { BaseModule } from '@interfaces';
 import { loadModules, debug } from '@utils';
 import { App, HttpServer, Request, Response, Router } from '@types';
 

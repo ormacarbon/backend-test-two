@@ -1,6 +1,6 @@
 import { BeerEntity } from '@entity';
-import { BaseController } from '@core';
 import { Request, Response } from '@types';
+import { BaseController } from '@interfaces';
 
 import { BeerService } from './beer.service';
 

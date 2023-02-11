@@ -4,8 +4,7 @@ import { BeerMiddleware } from './beer.middleware';
 import { BeerService } from './beer.service';
 
 import { BeerEntity } from '@entity';
-
-import { BaseModule } from '@core';
+import { BaseModule } from '@interfaces';
 
 export class BeerModule extends BaseModule<
   BeerMiddleware,
