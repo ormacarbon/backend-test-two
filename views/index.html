@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="../statics/styles/reset.css">
+        <link rel="stylesheet" type="text/css" href="../statics/styles/normalize.css">
+        <link rel="stylesheet" type="text/css" href="../statics/styles/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+            <img src="https://cdn.7tv.app/emote/60b2876f4f32610f15bfc5dc/4x.webp">
+            <h1>backend-test-two(2)</h1>
+        </header>
+        <main>
+            <section class="crud-section">
+                <div class="locationForm">
+                    <h1>Create or Update</h1>
+                    <div class="inputs-container">
+
+                        <input id="abv" type="text" name="abv" placeholder="Abv" />
+
+                        <input id="category" type="text" name="category" placeholder="Category" />
+
+                        <input id="city" type="text" name="city" placeholder="City" />
+
+                        <input id="latitude" type="text" name="latitude" placeholder="Latitude" />
+
+                        <input id="longitude" type="text" name="longitude" placeholder="Longitude" />
+
+                        <input id="country" type="text" name="country" placeholder="Country" />
+
+                        <input id="description" type="text" name="description" placeholder="Description" />
+
+                        <input id="ibu" type="text" name="ibu" placeholder="Ibu" />
+
+                        <input id="name" type="text" name="name" placeholder="Name" />
+
+                        <input id="state" type="text" name="state" placeholder="State" />
+
+                        <input id="website" type="text" name="website" placeholder="Website" />
+
+                        <input id="updateId" type="text" name="updateId" placeholder="Location Id to Update" />
+
+                    </div>
+
+                    <button id="createsubmit">Create</button>
+
+                    <button id="updatesubmit">Update</button>
+                </div>
+
+                <div class="getordeletebyid-container">
+                    <h1>Get or Delete by id</h1>
+                    <input id="id" type="text" placeholder="Location Id" />
+                    <button id="getbyid">Get</button>
+                    <button id="deletebyid">Delete</button>
+                    <ul id="locationbyid"></ul>
+                </div>
+            </section>
+            <section id="locations-section">
+                <h1>ALL LOCATIONS(only 20)</h1>
+                <div class="locations">
+            </section>
+        </main>
+    </body>
+    <script src="../statics/scripts/index.js"></script>
+
+</html>
