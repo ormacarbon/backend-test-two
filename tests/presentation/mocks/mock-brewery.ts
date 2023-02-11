@@ -13,10 +13,8 @@ export class LoadBreweriesSpy implements LoadBreweries {
 }
 
 export class DeleteBrewerySpy implements DeleteBrewery {
-  result = true
   params: DeleteBreweryParams
-  async handle (params: DeleteBreweryParams): Promise<boolean> {
+  async handle (params: DeleteBreweryParams): Promise<void> {
     this.params = params
-    return this.result
   }
 }
