@@ -16,7 +16,7 @@
     "start": "node build",
     "lint": "yarn eslint --fix",
     "format": "yarn prettier --write",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules yarn jest",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules yarn jest --maxWorkers=1",
     "check-types": "yarn tsc-files",
     "test-staged": "cross-env NODE_OPTIONS=--experimental-vm-modules yarn jest --bail --findRelatedTests",
     "prepare": "yarn husky install"
