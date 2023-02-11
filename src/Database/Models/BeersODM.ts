@@ -20,6 +20,7 @@ class BeersODM {
       country: { type: String, required: false },
       ibu: { type: Number, required: true },
       name: { type: String, required: false },
+      description: { type: String, required: false },
       state: { type: String, required: false },
       website: { type: String, required: false },
     }, {
@@ -35,6 +36,14 @@ class BeersODM {
 
   public async readAll() {
     return this.model.find({});
+  }
+
+  public async update(id: string, entity: Partial<IBeer>) {
+    const filter = { _id: id };
+    const update = { ...entity };
+    return this.model.findOneAndUpdate(filter, update, {
+      new: true,
+    });
   }
 }
 
