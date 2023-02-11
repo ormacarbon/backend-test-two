@@ -5,12 +5,19 @@ services:
     restart: on-failure
     depends_on:
       - fullstack-postgres
-    build: .
+    build: ./backend
     ports:
       - "5000:5000"
     networks:
       - fullstack
- 
+
+  front:
+    build: ./frontend
+    depends_on:
+      - app
+    ports:
+      - "3000:3000"
+
   fullstack-postgres:
     image: postgres:latest
     container_name: full_db_postgres
