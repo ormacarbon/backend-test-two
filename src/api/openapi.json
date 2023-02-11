@@ -128,7 +128,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "success - returns search items",
             "content": {
               "application/json": {
