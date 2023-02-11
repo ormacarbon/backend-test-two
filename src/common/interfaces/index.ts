@@ -6,10 +6,12 @@ export {
 
 export { BaseService, IService, IServiceFat } from './service.interface';
 
+export { BaseRepository, IRepository } from './repository.interface';
+
 export {
   BaseMiddleware,
   IMiddleware,
   IMiddlewareFat,
 } from './middleware.interface';
 
-export { BaseModule } from './module.interface';
+export { BaseModule, ModuleFactoryProps } from './module.interface';

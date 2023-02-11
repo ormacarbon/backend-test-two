@@ -1,29 +1,28 @@
-import { NextFunction, Request, Response } from 'express';
-import { debug, Debugger } from 'debug';
+import { debug, Debugger } from '@utils';
+import { IServiceFat } from '@interfaces';
+import { Request, Response, NextFunction } from '@types';
 
-import { IServiceFat } from '@core';
-
-export interface IController<T> {
+export interface IController<S> {
   signature:
     | ((req: Request, res: Response, next: NextFunction) => Promise<Response>)
     | Debugger
-    | T;
+    | S;
   props: {
-    service: IServiceFat<T>;
     name: string;
+    service: IServiceFat<S, any>;
   };
 }
 
-export type IControllerFat<T, U> = T extends BaseController<U> ? T : never;
+export type IControllerFat<C, S> = C extends BaseController<S> ? C : never;
 
-export abstract class BaseController<T> {
-  [key: string]: IController<T>['signature'];
+export abstract class BaseController<S> {
+  [key: string]: IController<S>['signature'];
 
   log: Debugger;
-  service: IServiceFat<T>;
+  service: IServiceFat<S, any>;
 
-  constructor(props: IController<T>['props']) {
-    this.log = debug(`app:${props.name}-controller`);
+  constructor(props: IController<S>['props']) {
+    this.log = debug(`Module:${props.name}-controller`);
     this.service = props.service;
   }
 }

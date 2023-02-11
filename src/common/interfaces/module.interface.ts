@@ -1,50 +1,69 @@
-import { Router } from 'express';
-import { Server } from 'http';
-import { debug, Debugger } from 'debug';
+import {
+  IMiddleware,
+  IController,
+  IService,
+  IMiddlewareFat,
+  IControllerFat,
+  IServiceFat,
+  BaseMiddleware,
+  BaseController,
+  BaseService,
+} from '@interfaces';
 
-import { IService, IServiceFat } from '@interfaces/service.interface';
-import { IController, IControllerFat } from '@interfaces/controller.interface';
-import { IMiddleware, IMiddlewareFat } from '@interfaces/middleware.interface';
+import { Router, HttpServer, BaseEntity, Repository } from '@types';
+import { debug, Debugger } from '@utils';
 
-export interface IModule<M, C, S> {
+export interface IModule<
+  M extends BaseMiddleware<C>,
+  C extends BaseController<S>,
+  S extends BaseService<R>,
+  R extends Repository<E>,
+  E extends BaseEntity,
+> {
   props: {
     name: string;
-    server: Server;
-    service: new (props: IService['props']) => IServiceFat<S>;
-    middleware: new (props: IMiddleware['props']) => IMiddlewareFat<M>;
+    server: HttpServer;
+    repository: R;
+    service: new (props: IService<R>['props']) => IServiceFat<S, R>;
     controller: new (props: IController<S>['props']) => IControllerFat<C, S>;
+    middleware: new (props: IMiddleware<C>['props']) => IMiddlewareFat<M, C>;
   };
 }
 
-export abstract class BaseModule<M, C, S> {
+export interface ModuleFactoryProps {
+  server: HttpServer;
+}
+
+export abstract class BaseModule<
+  M extends BaseMiddleware<C>,
+  C extends BaseController<S>,
+  S extends BaseService<R>,
+  R extends Repository<E>,
+  E extends BaseEntity,
+> {
   name: string;
   router: Router;
-  server: Server;
-  middleware: IMiddlewareFat<M>;
+  server: HttpServer;
+  middleware: IMiddlewareFat<M, C>;
   controller: IControllerFat<C, S>;
 
   log: Debugger;
 
-  constructor(props: IModule<M, C, S>['props']) {
-    this.name = props.name;
+  constructor(props: IModule<M, C, S, R, E>['props']) {
+    const { name, repository, server } = props;
+
+    this.name = name;
+    this.server = server;
     this.router = Router();
 
-    const service = new props.service({
-      name: props.name,
-    });
+    const service = new props.service({ name, repository });
 
-    this.controller = new props.controller({
-      name: props.name,
-      service,
-    });
+    const controller = new props.controller({ name, service });
 
-    this.middleware = new props.middleware({
-      name: props.name,
-    });
+    this.middleware = new props.middleware({ name, controller });
 
-    if (props.server) this.server = props.server;
-
-    this.log = debug(`app:${props.name}-module`);
+    this.controller = controller;
+    this.log = debug(`Module:${name}-builder`);
 
     this.routes();
   }
