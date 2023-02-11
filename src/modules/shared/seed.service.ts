@@ -3,12 +3,12 @@ import { inject, injectable } from 'tsyringe';
 import { AppError, AppErrorType } from '#/api/app-error.js';
 import type { IPrismaService } from '#/modules/shared/prisma.interface.js';
 
-export interface IBeerServiceSeed {
+export interface ISeedService {
   seed(): Promise<number>;
 }
 
 @injectable()
-export class BeerServiceSeed implements IBeerServiceSeed {
+export class SeedService implements ISeedService {
   constructor(@inject('IPrismaService') private readonly prismaService: IPrismaService) {}
 
   async seed(): Promise<number> {
