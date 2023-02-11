@@ -4,6 +4,7 @@ import { PrismaHelper } from './prisma-helper'
 
 export class LoadBreweriesPrismaRepository implements LoadBreweriesRepository {
   async handle (): Promise<BreweryEntity[]> {
-    return await PrismaHelper.prisma.brewery.findMany()
+    const breweries = await PrismaHelper.prisma.brewery.findMany()
+    return breweries.length ? breweries.map((brewery) => PrismaHelper.map(brewery)) : []
   }
 }
