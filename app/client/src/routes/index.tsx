@@ -8,7 +8,7 @@ import PaginatedItems from "../utils/PaginatedItems";
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<PaginatedItems itemsPerPage={2} />} />
+      <Route path="/" element={<PaginatedItems itemsPerPage={6} />} />
       <Route path="/:id/edit" element={<Edit />} />
       <Route path="/new" element={<New />} />
     </Routes>

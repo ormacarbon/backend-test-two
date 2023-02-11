@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import Header from "../../components/Header";
 import { IBeer } from "../../interfaces/IBeer";
+import * as S from "./styles";
 
 type Props = {
   currentItems: IBeer[]
@@ -40,13 +41,13 @@ function Home({currentItems}: Props) {
   return (
     <div>
       <Header setInputNameBeers={setInputNameBeers} />
-      <main>
+      <S.Content>
         {
           currentItems && currentItems.length > 0 ? (currentItems.map((beer) => (
             <Card key={beer.id} beer={beer} handleDeleteBeer={handleDeleteBeer}/>
           ))) : null
         }
-      </main>
+      </S.Content>
     </div>
   );
 }
