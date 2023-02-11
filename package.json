@@ -4,6 +4,7 @@
   "description": "Solução",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/src/main/server.js",
     "build": "rimraf dist && tsc",
     "dev": "tsnd src/main/server.ts",
     "test": "jest --watch --noStackTrace --runInBand",
