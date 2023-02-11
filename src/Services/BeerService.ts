@@ -19,12 +19,13 @@ class BeerService implements IBeerService<IBeer> {
     } = beer;
     if (abv && ibu && name) {
       const beerDomain = new Beer(abv, ibu, name, beer.id);
-      beerDomain.setAddress(beer.address || '');
-      beerDomain.setCategory(beer.category || '');
-      beerDomain.setCity(beer.city || '');
-      beerDomain.setCountry(beer.country || '');
-      beerDomain.setState(beer.state || '');
-      beerDomain.setWebsite(beer.website || '');
+      beerDomain.setAddress(beer.address || undefined);
+      beerDomain.setCategory(beer.category || undefined);
+      beerDomain.setCity(beer.city || undefined);
+      beerDomain.setCoordinates(beer.coordinates || undefined);
+      beerDomain.setCountry(beer.country || undefined);
+      beerDomain.setState(beer.state || undefined);
+      beerDomain.setWebsite(beer.website || undefined);
       return beerDomain;
     }
 
