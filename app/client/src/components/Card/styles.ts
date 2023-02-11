@@ -27,6 +27,7 @@ export const Actions = styled.div`
 
   button {
     padding: 10px;
+    background-color: #F73577;
 
     a {
       text-decoration: none;
@@ -37,7 +38,7 @@ export const Actions = styled.div`
 
 
 export const EditButton = styled(Button)`
-  background-color: #00BAFF;
+  background-color: #00BAFF!important;
 
   a {
     text-decoration: none;

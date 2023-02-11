@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { IBeer } from "../interfaces/IBeer";
 import Home from "../pages/Home";
+import * as S from "./styles";
 
 type Props = {
   itemsPerPage: number,
@@ -20,22 +21,18 @@ function PaginatedItems({ itemsPerPage }: Props) {
 
 
   const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = beers.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(beers.length / itemsPerPage);
 
   const handlePageClick = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % beers.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setItemOffset(newOffset);
   };
 
   return (
     <>
       <Home currentItems={currentItems} />
-      <ReactPaginate
+      <S.Paginate
         breakLabel="..."
         nextLabel="next >"
         onPageChange={handlePageClick}
