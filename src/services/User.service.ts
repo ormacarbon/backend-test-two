@@ -37,8 +37,10 @@ class UserService {
 
         return {
           user: {
+            id: userStore.id,
             username: userStore.username,
-            email: userStore.email
+            email: userStore.email,
+            created_at: userStore.created_at
           },
           access_key,
           reflesh_token
@@ -68,30 +70,41 @@ class UserService {
   }
 
   async login(user: UserLoginInterface) {
-    const errors = [];
+    try {
+      const errors = [];
 
-    const findEmail = await this.findByEmail(user.email);
+      const findEmail = await this.findByEmail(user.email);
 
-    if (!findEmail) {
-      errors.push('Email not found;');
-    }
+      if (!findEmail) {
+        errors.push('Email not found;');
+      } else {
+        const comparePassword = await bcrypt.compare(
+          user.password,
+          findEmail?.password as string
+        );
 
-    const comparePassword = await bcrypt.compare(
-      user.password,
-      findEmail?.password as string
-    );
+        if (!comparePassword) {
+          errors.push('Password invalid');
+        }
 
-    if (comparePassword) {
-      errors.push('Password invalid');
-    }
-    if (findEmail) {
-      const access_key = jwt.access_token(findEmail.id);
-      const reflesh_token = jwt.reflesh_token(findEmail.id);
+        if (errors.length) {
+          throw new InvalidArgumentError(JSON.stringify(errors));
+        }
 
-      return {
-        access_key,
-        reflesh_token
-      };
+        if (findEmail) {
+          const access_key = jwt.access_token(findEmail.id);
+          const reflesh_token = jwt.reflesh_token(findEmail.id);
+
+          return {
+            access_key,
+            reflesh_token
+          };
+        }
+      }
+
+      throw new InvalidArgumentError('Error: Email not found;');
+    } catch (error) {
+      catchErrorsFunctions(error);
     }
   }
 

@@ -9,7 +9,15 @@ class UserHandler {
       const body = UserCreateDTO.parse(req.body);
 
       const data = await UserService.store(body);
-      res.status(200).json(data);
+
+      if (data) {
+        res.setHeader('Authorization', data.access_key);
+        res.setHeader('reflesh_token', data.reflesh_token);
+
+        res.status(200).json({
+          user: data.user
+        });
+      }
     } catch (error) {
       next(error);
     }
@@ -42,7 +50,15 @@ class UserHandler {
 
       const data = await UserService.login(body);
 
-      return res.status(200).json(data);
+      if (data) {
+        res.setHeader('Authorization', data?.access_key);
+        res.setHeader('reflesh_token', data?.reflesh_token);
+
+        return res.status(200).json({
+          message: 'login acceppt.',
+          statusCode: 200
+        });
+      }
     } catch (error) {
       next(error);
     }
