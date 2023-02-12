@@ -2,7 +2,7 @@ import { readFile } from "fs/promises";
 import path from "path";
 import { AddBeerData } from "../domain/useCases/add-beer";
 
-export const readDbFile = async (): Promise<AddBeerData> => {
+export const readDbFile = async (): Promise<AddBeerData[]> => {
   try {
     const file = path.resolve("src", "..", "db.json");
 

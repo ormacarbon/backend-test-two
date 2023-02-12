@@ -2,7 +2,7 @@ import { readDbFile } from "./read-db-file"
 import fs from 'fs/promises';
 
 describe("readDbFile", () => {
-  it("Shoul return an array of objects", async () => {
+  it("Should return an array of objects", async () => {
     const data = await readDbFile();
 
     expect(data[0]).toHaveProperty("name");
