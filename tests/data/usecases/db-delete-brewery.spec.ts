@@ -22,7 +22,7 @@ describe('DbDeleteBrewery Usecase', () => {
     expect(deleteBreweryRepositorySpy.params).toBe(params)
   })
 
-  it('Should return if DeleteBreweryRepository throws', async () => {
+  it('Should throw if DeleteBreweryRepository throws', async () => {
     const { sut, deleteBreweryRepositorySpy } = makeSut()
     jest.spyOn(deleteBreweryRepositorySpy, 'handle').mockImplementationOnce(throwError)
     const response = sut.handle(mockDeleteBreweryParams())
