@@ -26,6 +26,8 @@ describe("AddBeerMongoRepository", () => {
   })
 
   afterAll(async () => {
+    const accountCollection = await MongoHelper.getCollection('beers');
+    await accountCollection.deleteMany({});
     await MongoHelper.disconnect();
   })
 
