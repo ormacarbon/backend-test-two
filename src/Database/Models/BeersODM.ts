@@ -39,6 +39,14 @@ class BeersODM {
     return this.model.find({});
   }
 
+  public async readById(id: string) {
+    try {
+      return await this.model.findById(id);
+    } catch (error) {
+      throw new NotFoundError('Document not found. Invalid Id.');
+    }
+  }
+
   public async update(id: string, entity: Partial<IBeer>) {
     try {
       const filter = { _id: id };
