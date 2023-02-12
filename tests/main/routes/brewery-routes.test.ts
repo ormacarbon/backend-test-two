@@ -2,7 +2,7 @@ import { PrismaHelper } from '../../../src/infra/db/prisma/prisma-helper'
 import { setupApp } from '../../../src/main/config/app'
 import request from 'supertest'
 import { Express } from 'express'
-import { mockBreweryEntity } from '../../domain/mocks/mock-brewery'
+import { mockAddBreweryParams, mockBreweryEntity } from '../../domain/mocks/mock-brewery'
 
 let app: Express
 
@@ -35,6 +35,12 @@ describe('Brewery Routes', () => {
     it('Should return 204 on success', async () => {
       const brewery = await PrismaHelper.prisma.brewery.create({ data: mockBreweryEntity() })
       await request(app).delete('/api/brewery/' + brewery.id).expect(204)
+    })
+  })
+
+  describe('POST /brewery', () => {
+    it('Should return 204 on success', async () => {
+      await request(app).post('/api/brewery').send({ ...mockAddBreweryParams() }).expect(204)
     })
   })
 })
