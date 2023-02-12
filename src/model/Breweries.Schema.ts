@@ -53,8 +53,8 @@ export const BrewerySchema = new Schema({
 class BreweryModel {
   brewerie = model('breweries', BrewerySchema);
 
-  async findAllBreweries() {
-    return await this.brewerie.find();
+  async findAllBreweries<T>(limit: T) {
+    return await this.brewerie.find().limit(limit as number);
   }
 
   async find(id: string) {
@@ -133,8 +133,8 @@ class BreweryModel {
     }
   }
 
-  async findBreweryWithFilter(filters: Filters) {
-    return await this.brewerie.find(filters);
+  async findBreweryWithFilter<T>(filters: Filters, limit: T) {
+    return await this.brewerie.find(filters).limit(limit as number);
   }
 
   async findName(name: string) {

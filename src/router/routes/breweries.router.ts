@@ -1,9 +1,14 @@
 import { Router } from 'express';
 import breweriesHandler from '../../controller/breweries.handler';
 import multer from '../../config/multer.config';
+import validateLimit from '../../middlewares/validationLimit';
 const routes = Router();
 
-routes.get('/api/v1/breweries', breweriesHandler.findAllBrewelers);
+routes.get(
+  '/api/v1/breweries',
+  validateLimit,
+  breweriesHandler.findAllBrewelers
+);
 routes.post('/api/v1/breweries', breweriesHandler.store);
 
 routes.post(

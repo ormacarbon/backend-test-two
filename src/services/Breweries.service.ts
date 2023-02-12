@@ -9,19 +9,20 @@ import MenuService from '../services/Menu.service';
 import { parseDataAndTransform } from '../common/ParseDataAndTranforrmBrewery';
 
 class BreweriesService {
-  async findBrewelers(filters: Filters) {
+  async findBrewelers<T>(filters: Filters, limit: T) {
     try {
-      if (filters) {
-        const filteredObject = Object.fromEntries(
-          Object.entries(filters).filter(([, value]) => value != 'undefined')
+      const filteredObject = Object.fromEntries(
+        Object.entries(filters).filter(([, value]) => value != 'undefined')
+      );
+
+      if (filteredObject) {
+        return await BreweriesModel.findBreweryWithFilter(
+          filteredObject,
+          limit
         );
-
-        const result = BreweriesModel.findBreweryWithFilter(filteredObject);
-
-        return result;
       }
 
-      return BreweriesModel.findAllBreweries();
+      return await BreweriesModel.findAllBreweries(limit);
     } catch (error) {
       cacthErrosFunctions(error);
     }

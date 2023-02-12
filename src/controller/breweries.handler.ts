@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import BreweryDTO from '../dtos/breweries/Brewery.dto';
 import BreweryUpdateDTO from '../dtos/breweries/BreweryUpdate.dto';
 import { Filters } from '../interfaces/Filters.interface';
+import { CustomLimitRequest } from '../middlewares/validationLimit';
 
 import BreweriesService from '../services/Breweries.service';
 import { InvalidArgumentError } from '../services/err/Errors';
@@ -43,7 +44,11 @@ class BreweriesHandlerController {
     }
   }
 
-  async findAllBrewelers(req: Request, res: Response, next: NextFunction) {
+  async findAllBrewelers(
+    req: CustomLimitRequest,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
       const filters: Filters = {
         city: String(req.query.city),
@@ -51,7 +56,9 @@ class BreweriesHandlerController {
         country: String(req.query.country)
       };
 
-      const data = await BreweriesService.findBrewelers(filters);
+      const { limit } = req;
+
+      const data = await BreweriesService.findBrewelers(filters, limit);
 
       return res.status(200).json(data);
     } catch (error) {
