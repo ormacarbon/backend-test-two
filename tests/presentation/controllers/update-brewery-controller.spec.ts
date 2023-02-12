@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker'
 import { UpdateBreweryParams } from '../../../src/domain/usecases/update-brewery'
 import { UpdateBreweryController } from '../../../src/presentation/controllers/update-brewery-controller'
 import { UpdateBrewerySpy } from '../mocks/mock-brewery'
+import { noContent } from '../../../src/presentation/helpers/http-helper'
 
 const mockRequest = (): UpdateBreweryParams => ({
   id: faker.datatype.uuid(),
@@ -35,5 +36,11 @@ describe('UpdateBrewery Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(updateBrewerySpy.params).toBe(request)
+  })
+
+  it('Should return 204 on success', async () => {
+    const { sut } = makeSut()
+    const result = await sut.handle(mockRequest())
+    expect(result).toEqual(noContent())
   })
 })
