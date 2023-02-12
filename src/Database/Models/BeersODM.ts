@@ -5,6 +5,7 @@ import {
   models,
 } from 'mongoose';
 import IBeer from '../../Interfaces/IBeer';
+import NotFoundError from '../../Utils/ErrorsTypes/NotFoundError';
 
 class BeersODM {
   private schema: Schema;
@@ -39,16 +40,24 @@ class BeersODM {
   }
 
   public async update(id: string, entity: Partial<IBeer>) {
-    const filter = { _id: id };
-    const update = { ...entity };
-    return this.model.findOneAndUpdate(filter, update, {
-      new: true,
-    });
+    try {
+      const filter = { _id: id };
+      const update = { ...entity };
+      return await this.model.findOneAndUpdate(filter, update, {
+        new: true,
+      });
+    } catch (error) {
+      throw new NotFoundError('Document Not Found. Invalid Id.');
+    }
   }
 
   public async delete(id: string) {
-    const filter = { _id: id };
-    return this.model.deleteOne(filter);
+    try {
+      const filter = { _id: id };
+      return await this.model.deleteOne(filter);
+    } catch (error) {
+      throw new NotFoundError('Document Not Found. Invalid Id.');
+    }
   }
 }
 
