@@ -64,7 +64,7 @@ class BeerService implements IBeerService<IBeer> {
   public async delete(id: string): Promise<{ deleted: boolean; }> {
     const { deletedCount } = await this._repository.delete(id);
     if (deletedCount > 0) return { deleted: true };
-    throw new NotFoundError('The server cannot counter the requested resource.');
+    throw new NotFoundError('The document has already been deleted.');
   }
 }
 
