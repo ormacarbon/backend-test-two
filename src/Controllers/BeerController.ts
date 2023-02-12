@@ -24,6 +24,16 @@ class BeerController {
     }
   };
 
+  public readById = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+      const beer = await this._service.readById(id);
+      return res.status(200).json(beer);
+    } catch (error) {
+      return next(error);
+    }
+  };
+
   public update = async (req: Request, res: Response, next: NextFunction) => {
     const entity = req.body;
     const { id } = req.params;
