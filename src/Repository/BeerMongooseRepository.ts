@@ -13,6 +13,10 @@ class BeerMongooseRepository implements IBeerRepository<IBeer> {
     return this._persistence.readAll();
   }
 
+  public async readById(id: string): Promise<IBeer | null> {
+    return this._persistence.readById(id);
+  }
+
   public async update(id: string, beer: Partial<IBeer>): Promise<IBeer | null> {
     return this._persistence.update(id, beer);
   }
