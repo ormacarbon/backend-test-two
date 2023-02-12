@@ -18,10 +18,20 @@ const mockRequest = (): UpdateBreweryParams => ({
   website: faker.internet.domainName()
 })
 
+type SutTypes = {
+  updateBrewerySpy: UpdateBrewerySpy
+  sut: UpdateBreweryController
+}
+
+const makeSut = (): SutTypes => {
+  const updateBrewerySpy = new UpdateBrewerySpy()
+  const sut = new UpdateBreweryController(updateBrewerySpy)
+  return { sut, updateBrewerySpy }
+}
+
 describe('UpdateBrewery Controller', () => {
   it('Should call UpdateBrewery with correct values', async () => {
-    const updateBrewerySpy = new UpdateBrewerySpy()
-    const sut = new UpdateBreweryController(updateBrewerySpy)
+    const { sut, updateBrewerySpy } = makeSut()
     const request = mockRequest()
     await sut.handle(request)
     expect(updateBrewerySpy.params).toBe(request)
