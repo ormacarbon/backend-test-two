@@ -97,6 +97,26 @@
                 "tags": [
                     "Beer"
                 ],
+                "parameters": [
+                    {
+                      "in": "query",
+                      "name": "skip",
+                      "required": true,
+                      "description": "value api pagination",
+                      "schema": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "limit beers for api pagination",
+                        "required": true,
+                        "schema": {
+                          "type": "string"
+                        }
+                      }
+                  ],
                 "summary": "Read all beer",
                 "responses": {
                     "400": {
