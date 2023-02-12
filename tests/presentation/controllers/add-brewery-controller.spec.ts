@@ -2,6 +2,8 @@ import { faker } from '@faker-js/faker'
 import { BreweryEntity } from '../../../src/domain/entities/brewery'
 import { AddBreweryController } from '../../../src/presentation/controllers/add-brewery-controller'
 import { AddBrewerySpy } from '../mocks/mock-brewery'
+import { serverError } from '../../../src/presentation/helpers/http-helper'
+import { throwError } from '../../domain/mocks/test-helpers'
 
 const mockRequest = (): BreweryEntity => ({
   abv: faker.datatype.float(),
@@ -34,5 +36,12 @@ describe('AddBrewery Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(addBrewerySpy.params).toBe(request)
+  })
+
+  it('Should return 500 if AddBrewery throws', async () => {
+    const { sut, addBrewerySpy } = makeSut()
+    jest.spyOn(addBrewerySpy, 'handle').mockImplementationOnce(throwError)
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
