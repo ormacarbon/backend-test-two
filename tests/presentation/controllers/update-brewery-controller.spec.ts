@@ -2,7 +2,8 @@ import { faker } from '@faker-js/faker'
 import { UpdateBreweryParams } from '../../../src/domain/usecases/update-brewery'
 import { UpdateBreweryController } from '../../../src/presentation/controllers/update-brewery-controller'
 import { UpdateBrewerySpy } from '../mocks/mock-brewery'
-import { noContent } from '../../../src/presentation/helpers/http-helper'
+import { noContent, serverError } from '../../../src/presentation/helpers/http-helper'
+import { throwError } from '../../domain/mocks/test-helpers'
 
 const mockRequest = (): UpdateBreweryParams => ({
   id: faker.datatype.uuid(),
@@ -42,5 +43,12 @@ describe('UpdateBrewery Controller', () => {
     const { sut } = makeSut()
     const result = await sut.handle(mockRequest())
     expect(result).toEqual(noContent())
+  })
+
+  it('Should return 500 if UpdateBrewery throws', async () => {
+    const { sut, updateBrewerySpy } = makeSut()
+    jest.spyOn(updateBrewerySpy, 'handle').mockImplementationOnce(throwError)
+    const result = await sut.handle(mockRequest())
+    expect(result).toEqual(serverError(new Error()))
   })
 })
