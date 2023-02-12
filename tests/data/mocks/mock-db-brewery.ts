@@ -4,6 +4,7 @@ import { DeleteBreweryRepository, DeleteBreweryRepositoryParams } from '../../..
 import { LoadBreweriesRepository } from '../../../src/data/protocols/db/load-breweries-repository'
 import { BreweryEntity } from '../../../src/domain/entities/brewery'
 import { mockBreweryEntity } from '../../domain/mocks/mock-brewery'
+import { UpdateBreweryRepository, UpdateBreweryRepositoryParams } from '../../../src/data/protocols/db/update-brewery-repository'
 
 export class LoadBreweriesRepositorySpy implements LoadBreweriesRepository {
   result = [mockBreweryEntity()]
@@ -30,6 +31,15 @@ export class AddBreweryRepositorySpy implements AddBreweryRepository {
     this.params = params
     this.result = params
     this.result.id = faker.datatype.uuid()
+    return this.result
+  }
+}
+
+export class UpdateBreweryRepositorySpy implements UpdateBreweryRepository {
+  params: UpdateBreweryRepositoryParams
+  result = mockBreweryEntity()
+  async handle (params: UpdateBreweryRepositoryParams): Promise<BreweryEntity> {
+    this.params = params
     return this.result
   }
 }
