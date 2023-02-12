@@ -56,6 +56,10 @@ class BeerService implements IBeerService<IBeer> {
     return this._repository.readAll();
   }
 
+  public async readById(id: string): Promise<IBeer | null> {
+    return this._repository.readById(id);
+  }
+
   public async update(id: string, beer: Partial<IBeer>): Promise<IBeer | null> {
     const updateBeer = await this._repository.update(id, beer) as IBeer;
     return this.createBeerDomain(updateBeer);
