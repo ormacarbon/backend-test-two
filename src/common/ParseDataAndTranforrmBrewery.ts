@@ -25,7 +25,14 @@ export async function parseDataAndTransform(
       external_urls: {
         website: brewery.website,
         href: `${process.env.ENDPOINT}/${href_contructor}`
-      }
+      },
+      tags: [
+        brewery.address.toLowerCase(),
+        brewery.city.toLowerCase(),
+        brewery.country.toLowerCase(),
+        brewery.state.toLowerCase(),
+        brewery.name.toLowerCase()
+      ]
     };
 
     return data;

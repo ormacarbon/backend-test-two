@@ -20,4 +20,5 @@ export interface constructorBreweryInterface extends BreweryInterface {
     website: string;
     href: string;
   };
+  tags: string[];
 }

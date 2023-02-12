@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt, { JsonWebTokenError, JwtPayload } from 'jsonwebtoken';
 
 class JWT {
   access_token(id: string): string {
@@ -19,8 +19,14 @@ class JWT {
     });
   }
 
-  decrypt(token: string): string | JwtPayload | null {
-    return jwt.decode(token);
+  decrypt(token: string): string | JwtPayload | null | JsonWebTokenError {
+    try {
+      const data = jwt.decode(token);
+
+      return data;
+    } catch (err) {
+      return err as JsonWebTokenError;
+    }
   }
 }
 

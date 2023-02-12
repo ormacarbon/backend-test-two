@@ -44,6 +44,9 @@ export const BrewerySchema = new Schema({
   reputation: {
     type: Number,
     default: 0
+  },
+  tags: {
+    type: Array
   }
 });
 

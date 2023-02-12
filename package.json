@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "## SITUAÇÃO-PROBLEMA",
   "scripts": {
-    "build": "npx tsc",
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "start": "npx tsc && dist/server.js",
+    "build": "tsc -p .",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts --resolveJsonModule",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "test": "NODE_ENV=test jest"
   },
@@ -48,6 +48,7 @@
     "@types/mongoose": "^5.11.97",
     "@types/multer": "^1.4.7",
     "@types/supertest": "^2.0.12",
+    "@types/swagger-ui-express": "^4.1.3",
     "@types/validator": "^13.7.12",
     "babel-jest": "^29.4.2",
     "bcrypt": "^5.1.0",

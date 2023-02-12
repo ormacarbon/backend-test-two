@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { JwtPayload } from 'jsonwebtoken';
+import { JsonWebTokenError, JwtPayload } from 'jsonwebtoken';
 import jwt from '../common/utils/auth/jwt';
 import { InvalidArgumentError } from '../services/err/Errors';
 import UserService from '../services/User.service';
@@ -21,7 +21,10 @@ class Authorization {
           throw new InvalidArgumentError('Invalid token');
         }
 
-        if (typeof decodedToken === 'object') {
+        if (
+          typeof decodedToken === 'object' &&
+          !(decodedToken instanceof JsonWebTokenError)
+        ) {
           const findUser = await UserService.findUserById(decodedToken.id);
 
           if (!findUser) {
