@@ -20,10 +20,11 @@ export default class BeersController {
   }
 
   public async readAll(
-    _req: Request,
+    req: Request,
     res: Response,
   ) {
-    const customers = await this.service.readAll();
+    const { limit, skip } = req.query;
+    const customers = await this.service.readAll(Number(limit), Number(skip));
     return res.status(200).json(customers);
   }
 

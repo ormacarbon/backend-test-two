@@ -152,7 +152,7 @@ describe('Beer Controller Update', () => {
     });
 });
 
-describe('Customer Controller readAll', () => {
+describe('Beer Controller readAll', () => {
     const beersModel = new BeersModel()
     const beersService = new BeerService(beersModel);
     const beersController = new BeersController(beersService);
@@ -160,7 +160,7 @@ describe('Customer Controller readAll', () => {
     const res = {} as Response;
 
     before(async () => {
-        req.body = {}
+        req.query = {limit: '1', skip: '1'};
         sinon.stub(beersService, 'readAll').resolves(BeersMocks);
         res.status = sinon.stub().returns(res);
         res.json = sinon.stub().returns(res);
@@ -170,7 +170,7 @@ describe('Customer Controller readAll', () => {
         sinon.restore()
     });
 
-    it('Clientes encontrados', async () => {
+    it('Cervejas encontrados', async () => {
         await beersController.readAll(req, res);
         expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
     });

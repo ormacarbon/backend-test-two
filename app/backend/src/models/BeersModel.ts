@@ -16,10 +16,10 @@ const frameMongooseSchema = new Schema<IBeers>({
   website: String,
 }, { versionKey: false });
 
-class User extends MongoModel<IBeers> {
+class Beer extends MongoModel<IBeers> {
   constructor(model = mongooseCreateModel('beers', frameMongooseSchema)) {
     super(model);
   }
 }
 
-export default User;
+export default Beer;

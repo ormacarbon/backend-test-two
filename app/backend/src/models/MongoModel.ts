@@ -16,8 +16,8 @@ abstract class MongoModel<T> implements IModel<T> {
     return this.model.findOne({ name });
   }
 
-  public async readAll():Promise<T[]> {
-    return this.model.find();
+  public async readAll(limit: number, skip: number):Promise<T[]> {
+    return this.model.find().limit(limit).skip(skip * 10);
   }
 
   public async update(_id:string, obj:Partial<T>):Promise<T | null> {

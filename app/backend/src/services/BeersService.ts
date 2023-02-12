@@ -20,8 +20,8 @@ class BeersService implements IBeersService<IBeers> {
     return result;
   }
 
-  public async readAll():Promise<IBeers[]> {
-    const result = await this.beers.readAll();
+  public async readAll(limit: number, skip: number):Promise<IBeers[]> {
+    const result = await this.beers.readAll(limit, skip);
     return result;
   }
 

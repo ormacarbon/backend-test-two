@@ -43,7 +43,7 @@ describe('Beers Service', () => {
 
     describe('Buscando varias cervejas', () => {
         it('cervejas existem', async () => {
-            const result = await beerService.readAll();
+            const result = await beerService.readAll(1, 1);
             expect(result).to.be.deep.equal(BeersMocks);
         });
     });
