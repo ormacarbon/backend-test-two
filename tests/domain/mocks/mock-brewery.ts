@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { BreweryEntity } from '../../../src/domain/entities/brewery'
 import { DeleteBreweryParams } from '../../../src/domain/usecases/delete-brewery'
+import { AddBreweryParams } from '../../../src/domain/usecases/add-brewery'
 
 export const mockBreweryEntity = (): BreweryEntity => ({
   id: faker.datatype.uuid(),
@@ -19,4 +20,18 @@ export const mockBreweryEntity = (): BreweryEntity => ({
 
 export const mockDeleteBreweryParams = (): DeleteBreweryParams => ({
   id: faker.datatype.uuid()
+})
+
+export const mockAddBreweryParams = (): AddBreweryParams => ({
+  abv: faker.datatype.number(),
+  ibu: faker.datatype.number(),
+  address: faker.address.streetAddress(),
+  category: faker.commerce.department(),
+  city: faker.address.cityName(),
+  coordinates: [faker.datatype.float(), faker.datatype.float()],
+  country: faker.address.country(),
+  description: faker.lorem.paragraph(),
+  name: faker.company.name(),
+  state: faker.address.state(),
+  website: faker.internet.domainName()
 })

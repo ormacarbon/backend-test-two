@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker'
+import { AddBreweryRepository, AddBreweryRepositoryParams } from '../../../src/data/protocols/db/add-brewery-repository'
 import { DeleteBreweryRepository, DeleteBreweryRepositoryParams } from '../../../src/data/protocols/db/delete-brewery-repository'
 import { LoadBreweriesRepository } from '../../../src/data/protocols/db/load-breweries-repository'
 import { BreweryEntity } from '../../../src/domain/entities/brewery'
@@ -17,6 +19,17 @@ export class DeleteBreweryRepositorySpy implements DeleteBreweryRepository {
   params: DeleteBreweryRepositoryParams
   async handle (params: DeleteBreweryRepositoryParams): Promise<BreweryEntity> {
     this.params = params
+    return this.result
+  }
+}
+
+export class AddBreweryRepositorySpy implements AddBreweryRepository {
+  params: AddBreweryRepositoryParams
+  result: BreweryEntity
+  async handle (params: AddBreweryRepositoryParams): Promise<BreweryEntity> {
+    this.params = params
+    this.result = params
+    this.result.id = faker.datatype.uuid()
     return this.result
   }
 }
