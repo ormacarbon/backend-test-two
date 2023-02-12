@@ -13,11 +13,11 @@ const limiter = rateLimit({
 });
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use(limiter);
 app.use(Beers);
 app.use(helmet());
-app.use(cors());
 
 export default app;
