@@ -1,4 +1,4 @@
-const BeerModel = require('../Models/BeerModels');
+const BeerModel = require('../Models/BeerModel');
 
 class BeerController{
     async create(req, res){
