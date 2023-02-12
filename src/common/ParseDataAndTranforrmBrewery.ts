@@ -1,3 +1,5 @@
+import natural from 'natural';
+
 import BreweryInterface, {
   constructorBreweryInterface
 } from '../interfaces/Breweries/Brewery.interface';
@@ -19,6 +21,13 @@ export async function parseDataAndTransform(
 
     const href_contructor = brewery.name.replace(/ /g, '').toLowerCase();
 
+    const tokenizer = new natural.WordTokenizer();
+
+    const processedCountry = tokenizer.tokenize(brewery.country.toLowerCase());
+    const processedName = tokenizer.tokenize(brewery.name.toLowerCase());
+    const processedState = tokenizer.tokenize(brewery.state.toLowerCase());
+    const processCity = tokenizer.tokenize(brewery.city.toLowerCase());
+
     const data: constructorBreweryInterface = {
       ...brewery,
       path: href_contructor,
@@ -26,12 +35,12 @@ export async function parseDataAndTransform(
         website: brewery.website,
         href: `${process.env.ENDPOINT}/${href_contructor}`
       },
+
       tags: [
-        brewery.address.toLowerCase(),
-        brewery.city.toLowerCase(),
-        brewery.country.toLowerCase(),
-        brewery.state.toLowerCase(),
-        brewery.name.toLowerCase()
+        ...processedCountry,
+        ...processCity,
+        ...processedName,
+        ...processedState
       ]
     };
 

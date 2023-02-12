@@ -4,8 +4,9 @@ import couponsRouter from './routes/coupons.router';
 import menuRouter from './routes/menu.router';
 import reputationRouter from './routes/reputation.router';
 import useRouter from './routes/user.router';
-
+import searchRouter from './routes/search.router';
 export function useRoutes(app: Application): void {
+  app.use(searchRouter);
   app.use(couponsRouter);
   app.use(menuRouter);
   app.use(reputationRouter);

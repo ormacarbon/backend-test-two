@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import BreweryDTO from '../dtos/breweries/Brewery.dto';
 import BreweryUpdateDTO from '../dtos/breweries/BreweryUpdate.dto';
+import SearchDTO from '../dtos/search/search.dto';
 import { Filters } from '../interfaces/Filters.interface';
 import { CustomLimitRequest } from '../middlewares/validationLimit';
 
@@ -143,6 +144,18 @@ class BreweriesHandlerController {
       const data = await BreweriesService.findByName(name);
 
       res.status(200).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async search(req: Request, res: Response, next: NextFunction) {
+    try {
+      const body = SearchDTO.parse(req.body);
+
+      const data = await BreweriesService.searchByTags(body.search);
+
+      return res.status(200).json(data);
     } catch (error) {
       next(error);
     }

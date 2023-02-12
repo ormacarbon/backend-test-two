@@ -223,6 +223,15 @@ class BreweryModel {
       cacthErrosFunctions(error);
     }
   }
+  async findByTag(search: string) {
+    try {
+      return await this.brewerie.find({
+        tags: search
+      });
+    } catch (error) {
+      catchErrorsFunctions(error);
+    }
+  }
 }
 
 export default new BreweryModel();

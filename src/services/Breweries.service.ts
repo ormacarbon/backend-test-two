@@ -7,6 +7,7 @@ import BreweriesModel from '../model/Breweries.Schema';
 import { InvalidArgumentError } from '../services/err/Errors';
 import MenuService from '../services/Menu.service';
 import { parseDataAndTransform } from '../common/ParseDataAndTranforrmBrewery';
+import e from 'express';
 
 class BreweriesService {
   async findBrewelers<T>(filters: Filters, limit: T) {
@@ -186,6 +187,20 @@ class BreweriesService {
   async findUserInReputation(idUser: string) {
     try {
       return BreweriesModel.findUserInReputation(idUser);
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async searchByTags(data: string[]) {
+    try {
+      const captureResponse = data.map((search) =>
+        BreweriesModel.findByTag(search).then((data) => data)
+      );
+
+      return Promise.all(captureResponse).then((resolvedData) => {
+        return resolvedData;
+      });
     } catch (error) {
       cacthErrosFunctions(error);
     }
