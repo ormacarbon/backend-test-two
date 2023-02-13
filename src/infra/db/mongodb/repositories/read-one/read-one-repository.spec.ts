@@ -24,7 +24,7 @@ const makeSut = (): ReadOneMongoRepository => {
   return new ReadOneMongoRepository();
 }
 
-describe("ReadAllMongoRepository", () => {
+describe("ReadOneMongoRepository", () => {
   beforeAll(async () => {
     await MongoHelper.connect();
     await addRepository.add(fakeBeer);

@@ -53,7 +53,7 @@ describe("UpdateBeer Controller", () => {
   it("Should return 400 if no name is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
-      params: {
+      query: {
         
       }
     }
@@ -67,7 +67,7 @@ describe("UpdateBeer Controller", () => {
   it("Should return 400 if Beer not found", async () => {
     const { sut, readOneStub } = makeSut();
     const httpResquest = {
-      params: {
+      query: {
         name: "Bohemia"
       }
     }
@@ -86,7 +86,7 @@ describe("UpdateBeer Controller", () => {
       body: {
         name: "Stone House Stout"
       },
-      params: {
+      query: {
         name: "Stone House Stout"
       }
     }
@@ -102,7 +102,7 @@ describe("UpdateBeer Controller", () => {
     const { sut, updateBeerStub } = makeSut();
     const httpResquest = {
       body: fakeBeerData,
-      params: {
+      query: {
         name: "Stone House Stout"
       }
     }
@@ -119,7 +119,7 @@ describe("UpdateBeer Controller", () => {
   it("Should return 204 on success", async () => {
     const { sut } = makeSut();
     const httpRequest = {
-      params: {
+      query: {
         name: "Stone House Stout"
       },
       body: fakeBeerData

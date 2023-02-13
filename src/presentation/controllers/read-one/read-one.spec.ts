@@ -46,7 +46,7 @@ describe("ReadOne Controller", () => {
   it("Should return 400 if no name is provided", async () => {
     const { sut } = makeSut();
     const httpResquest = {
-      params: {
+      query: {
         
       }
     }
@@ -60,7 +60,7 @@ describe("ReadOne Controller", () => {
   it("Should return 400 if Beer not found", async () => {
     const { sut, readOneStub } = makeSut();
     const httpResquest = {
-      params: {
+      query: {
         name: "Bohemia"
       }
     }
@@ -91,7 +91,7 @@ describe("ReadOne Controller", () => {
   it('Should call read of ReadOne with name', async () => {
     const { sut, readOneStub } = makeSut();
     const httpRequest = {
-      params: {
+      query: {
         name: "Stone House Stout"
       }
     }
@@ -99,13 +99,13 @@ describe("ReadOne Controller", () => {
     const createSpy = jest.spyOn(readOneStub, "read");
     sut.handle(httpRequest);
 
-    expect(createSpy).toHaveBeenCalledWith(httpRequest.params.name);
+    expect(createSpy).toHaveBeenCalledWith(httpRequest.query.name);
   })
 
   it('Should return 200 if valid values is provided.', async () => {
     const { sut } = makeSut();
     const httpRequest = {
-      params: {
+      query: {
         name: "Stone House Stout"
       }
     }

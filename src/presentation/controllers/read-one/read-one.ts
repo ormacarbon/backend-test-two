@@ -5,11 +5,11 @@ export class ReadOneController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      if (!httpRequest.params.name) {
+      if (!httpRequest.query.name) {
         return badRequest(new MissingParamError("name"));
       }
 
-      const { name } = httpRequest.params;
+      const { name } = httpRequest.query;
       const beer = await this.readOne.read(name);
 
       if (!beer) {
