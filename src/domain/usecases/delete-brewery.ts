@@ -4,4 +4,4 @@ export type DeleteBreweryParams = {
   id: string
 }
 
-export type DeleteBrewery = Usecase<DeleteBreweryParams, void>
+export type DeleteBrewery = Usecase<DeleteBreweryParams, boolean>
