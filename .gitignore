@@ -128,5 +128,10 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Sonnar
 .scannerwork/.sonar_lock
 .scannerwork/report-task.txt
+
+# Docker Volume
+mongo-data/*
