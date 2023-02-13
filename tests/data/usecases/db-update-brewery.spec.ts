@@ -1,5 +1,6 @@
 import { DbUpdateBrewery } from '../../../src/data/usecases/db-update-brewery'
 import { mockUpdateBreweryParams } from '../../domain/mocks/mock-brewery'
+import { throwError } from '../../domain/mocks/test-helpers'
 import { LoadBreweryRepositorySpy, UpdateBreweryRepositorySpy } from '../mocks/mock-db-brewery'
 
 type SutTypes = {
@@ -32,6 +33,13 @@ describe('DbUpdateBrewery Usecase', () => {
     const params = mockUpdateBreweryParams()
     await sut.handle(params)
     expect(loadBreweryRepositorySpy.params).toEqual({ id: params.id })
+  })
+
+  it('Should throw if LoadBreweryRepository throws', async () => {
+    const { sut, loadBreweryRepositorySpy } = makeSut()
+    jest.spyOn(loadBreweryRepositorySpy, 'handle').mockImplementationOnce(throwError)
+    const response = sut.handle(mockUpdateBreweryParams())
+    await expect(response).rejects.toThrow()
   })
 
   it('Should return true on success', async () => {
