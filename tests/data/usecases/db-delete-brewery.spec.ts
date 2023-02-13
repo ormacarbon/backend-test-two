@@ -44,4 +44,10 @@ describe('DbDeleteBrewery Usecase', () => {
     const response = sut.handle(mockDeleteBreweryParams())
     await expect(response).rejects.toThrow()
   })
+
+  it('Should return true on success', async () => {
+    const { sut } = makeSut()
+    const response = await sut.handle(mockDeleteBreweryParams())
+    expect(response).toBe(true)
+  })
 })
