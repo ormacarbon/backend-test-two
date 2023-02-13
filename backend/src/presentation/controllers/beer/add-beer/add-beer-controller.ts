@@ -57,7 +57,7 @@ export class AddBeerController implements Controller {
 				created_at: new Date()
 			})
 
-			return ok({ beer })
+			return ok(beer)
 		} catch (err: any) {
 			return serverError(err)
 		}

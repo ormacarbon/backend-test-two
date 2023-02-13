@@ -36,10 +36,10 @@ describe('DeleteBeerById Controller', () => {
 
 	test('Should call DeleteBeerById with correct values', async () => {
 		const { sut, deleteBeerByIdStub } = makeSut()
-		const addSpy = jest.spyOn(deleteBeerByIdStub, 'deleteById')
+		const deleteSpy = jest.spyOn(deleteBeerByIdStub, 'deleteById')
 		const httpRequest = makeFakeRequest()
 		await sut.handle(httpRequest)
-		expect(addSpy).toHaveBeenCalledWith(httpRequest.body)
+		expect(deleteSpy).toHaveBeenCalledWith(httpRequest.body)
 	})
 
 	test('Should return 500 if DeleteBeerById throws', async () => {

@@ -2,28 +2,14 @@ import mockdate from 'mockdate'
 import { throwError } from '../../../../data/test/test-helper'
 import { mockBeerModel } from '../../../../domain/test/mock-beer'
 import { LoadBeerById } from '../../../../domain/use-cases/load-beer-by-id'
-import { serverError } from '../../../../presentation/helpers/http/http-helper'
+import { ok, serverError } from '../../../../presentation/helpers/http/http-helper'
 import { mockLoadBeerById } from '../../../../presentation/test'
 import { HttpRequest } from '../../../protocols'
 import { LoadBeerByIdController } from './load-beer-by-id-controller'
 
 const makeFakeRequest = (): HttpRequest => ({
-	body: {
-		abv: 8.918797384901016,
-		address: 'any_address',
-		category: 'any_category',
-		city: 'any_city',
-		coordinates: [
-			41.0638,
-			-80.0556
-		],
-		country: 'any_country',
-		description: 'any_description',
-		ibu: 104,
-		name: 'any_name',
-		state: 'any_state',
-		website: 'any_state',
-		created_at: new Date()
+	params: {
+		id: 'any_id'
 	}
 })
 
@@ -53,10 +39,10 @@ describe('LoadBeerById Controller', () => {
 
 	test('Should call LoadBeerById with correct values', async () => {
 		const { sut, loadBeerByIdStub } = makeSut()
-		const addSpy = jest.spyOn(loadBeerByIdStub, 'loadById')
+		const loadByIdSpy = jest.spyOn(loadBeerByIdStub, 'loadById')
 		const httpRequest = makeFakeRequest()
 		await sut.handle(httpRequest)
-		expect(addSpy).toHaveBeenCalledWith(httpRequest.body)
+		expect(loadByIdSpy).toHaveBeenCalledWith('any_id')
 	})
 
 	test('Should return 500 if LoadBeerById throws', async () => {
@@ -67,9 +53,9 @@ describe('LoadBeerById Controller', () => {
 		expect(httpResponse).toEqual(serverError(new Error()))
 	})
 
-	test('Should return 204 on success', async () => {
+	test('Should return 200 on success', async () => {
 		const { sut } = makeSut()
 		const httpResponse = await sut.handle(makeFakeRequest())
-		expect(httpResponse).toEqual(mockBeerModel())
+		expect(httpResponse).toEqual(ok(mockBeerModel()))
 	})
 })

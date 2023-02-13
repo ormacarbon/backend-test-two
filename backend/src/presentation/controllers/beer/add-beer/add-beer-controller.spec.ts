@@ -1,3 +1,4 @@
+import { mockBeerModel } from '../../../../domain/test/mock-beer'
 import mockdate from 'mockdate'
 import { throwError } from '../../../../data/test/test-helper'
 import { AddBeer } from '../../../../domain/use-cases/add-beer'
@@ -87,6 +88,6 @@ describe('AddBeer Controller', () => {
 	test('Should return 200 on success', async () => {
 		const { sut } = makeSut()
 		const httpResponse = await sut.handle(makeFakeRequest())
-		expect(httpResponse).toEqual(ok(httpResponse))
+		expect(httpResponse).toEqual(ok(mockBeerModel()))
 	})
 })

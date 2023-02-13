@@ -31,9 +31,9 @@ describe('LoadBeers Controller', () => {
 	})
 	test('Should call LoadBeers', async () => {
 		const { sut, loadBeersStub } = makeSut()
-		const loadSpy = jest.spyOn(loadBeersStub, 'loadAll')
+		const loadAllSpy = jest.spyOn(loadBeersStub, 'loadAll')
 		await sut.handle({})
-		expect(loadSpy).toHaveBeenCalled()
+		expect(loadAllSpy).toHaveBeenCalled()
 	})
 
 	test('Should return 200 on success', async () => {

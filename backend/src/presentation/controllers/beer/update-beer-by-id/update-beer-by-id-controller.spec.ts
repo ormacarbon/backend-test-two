@@ -39,9 +39,9 @@ describe('UpdateBeerById Controller', () => {
 	})
 	test('Should call UpdateBeerById', async () => {
 		const { sut, updateBeerByIdStub } = makeSut()
-		const loadSpy = jest.spyOn(updateBeerByIdStub, 'update')
-		await sut.handle({})
-		expect(loadSpy).toHaveBeenCalled()
+		const updateSpy = jest.spyOn(updateBeerByIdStub, 'update')
+		await sut.handle(makeFakeRequest())
+		expect(updateSpy).toHaveBeenCalled()
 	})
 
 	test('Should return 204 if UpdateBeerById succeds', async () => {
