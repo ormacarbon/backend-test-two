@@ -11,7 +11,7 @@ export class BeerRepository implements IBeerRepository {
         try {
 
             const database = await connect();
-            await database.collection("beers").insertOne({ abv, address, category, city, coordinates, country, description, ibu, name, state, website })
+            await database.collection(process.env.DATABASE_COLLECTION).insertOne({ abv, address, category, city, coordinates, country, description, ibu, name, state, website })
 
             console.log("BEER CREATED");
         } catch (err) {
@@ -44,7 +44,7 @@ export class BeerRepository implements IBeerRepository {
         try {
 
             const database = await connect();
-            const beer = await database.collection("beers").findOne({ _id: new ObjectId(id) });
+            const beer = await database.collection(process.env.DATABASE_COLLECTION).findOne({ _id: new ObjectId(id) });
 
             if(!beer)  throw new ApplicationError("Beer not found", 500);
             return beer;
@@ -62,7 +62,7 @@ export class BeerRepository implements IBeerRepository {
 
         try {
             const database = await connect();
-            await database.collection("beers").deleteOne({ _id: new ObjectId(id) })
+            await database.collection(process.env.DATABASE_COLLECTION).deleteOne({ _id: new ObjectId(id) })
 
             console.log("BEER DELETED")
         } catch (err) {
@@ -78,10 +78,10 @@ export class BeerRepository implements IBeerRepository {
         try {
 
             const database = await connect();
-            await database.collection("beers").updateOne({ _id: new ObjectId(id) },
+            await database.collection(process.env.DATABASE_COLLECTION).updateOne({ _id: new ObjectId(id) },
                 { $set: { abv, address, category, city, coordinates, country, description, ibu, name, state, website } });
 
-            const beer = await database.collection("beers").findOne({ _id: new ObjectId(id) });
+            const beer = await database.collection(process.env.DATABASE_COLLECTION).findOne({ _id: new ObjectId(id) });
             return beer;
         } catch (err) {
 
