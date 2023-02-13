@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { FindBeersService } from "../services/FindBeersService";
+import { getPaginatedData } from "../utils/pagination";
 
 class BeerController {
 
@@ -10,7 +11,9 @@ class BeerController {
             const findBeerService = container.resolve(FindBeersService);
             const beers = await findBeerService.execute();
 
-            return res.status(200).json(beers);
+            const pages = getPaginatedData(req.query.page,req.query.pageSize,beers);
+
+            return res.status(200).json(pages);
         } catch (err) {
             throw new Error(err);
         }

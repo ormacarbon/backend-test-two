@@ -12,7 +12,7 @@ export class BeerRepository implements IBeerRepository{
         try {
 
             const database = await connect();
-            const beers = await database.collection("beers").find({}).toArray();
+            const beers = await database.collection(process.env.DATABASE_COLLECTION).find({}).toArray();
 
             return beers;
         } catch (err) {
