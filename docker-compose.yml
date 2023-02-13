@@ -8,11 +8,28 @@ services:
       - '5432:5432'
     restart: always
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      POSTGRES_DB: postgres
+      POSTGRES_DB: brewery
+
+  app:
+    build: .
+    container_name: 'app'
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://root:root@db:5432/brewery
+      - PORT=3002
+    volumes:
+      - .:/app
+    ports:
+      - '3002:3002'
+    links:
+      - db
+    depends_on:
+      - db  
+    command: /app/config.sh
 
 volumes:
-  postgres-data:
+  postgres:
