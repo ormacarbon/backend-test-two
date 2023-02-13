@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { ApplicationError } from "../error/ApplicationError";
 import { IBeerRepository } from "../repositories/IBeerRepository";
 
 
@@ -19,7 +20,7 @@ class FindBeersService{
         } catch (err) {
 
             console.log(err)
-            throw new Error("Something wrong happened!")
+            throw new ApplicationError("Something wrong happened!", 500)
         }
        
     }

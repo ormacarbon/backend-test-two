@@ -1,11 +1,25 @@
 import { connect, disconnect } from "../config/database/database";
+import { ApplicationError } from "../error/ApplicationError";
 import { Beer } from "../models/Beer";
 import { IBeerRepository } from "./IBeerRepository";
 
 
 export class BeerRepository implements IBeerRepository{
-    insertOne({ abv, address, category, city, coordinates, country, description, ibu, name, state, website }: Beer): Promise<void> {
-        throw new Error("Method not implemented.");
+  
+    async insertOne({ abv, address, category, city, coordinates, country, description, ibu, name, state, website }: Beer) {
+        try {
+
+            const database = await connect();
+            await database.collection("beers").insertOne({ abv, address, category, city, coordinates, country, description, ibu, name, state, website })
+
+            console.log("BEER CREATED");
+        } catch (err) {
+
+            console.log(err)
+            disconnect();
+            throw new ApplicationError("Something wrong happened", 500);
+        }
+
     }
   
     async find() {
@@ -19,7 +33,7 @@ export class BeerRepository implements IBeerRepository{
 
             console.log(err)
             disconnect();
-            throw new Error("Something wrong happened");
+            throw new ApplicationError("Something wrong happened", 500);
         }
 
     }
