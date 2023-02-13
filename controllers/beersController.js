@@ -25,6 +25,20 @@ class BeerController {
         })
     }
 
+    static getBeerByName = (req, res) => {
+        const name = req.query.name;
+
+        beers.find({ 'name': name }, {}, (err, beers) => {
+            if (err) {
+                res.status(500).send({ message: `${err.message} - Error while searching record, check if the name is right` })
+            } else if (beers.length === 0) {
+                res.status(404).send({ message: `Record with name '${name}' not found` },)
+            } else {
+                res.status(200).send(beers)
+            }
+        })
+    }
+
     static createBeer = (req, res) => {
         let beer = new beers(req.body);
 
@@ -55,9 +69,9 @@ class BeerController {
         beers.findByIdAndDelete(id, (err, deletedBeer) => {
             if (err) {
                 res.status(500).send({ message: `${err.message} - Error while deleting record, record not found` },)
-            } else if (!deletedBeer){
+            } else if (!deletedBeer) {
                 res.status(404).send({ message: `Record with ID ${id} not found` },)
-            }  else {
+            } else {
                 res.status(200).send({ message: 'Beer deleted successfully' })
             }
         })

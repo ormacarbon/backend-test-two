@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
     .get("/beers", BeerController.getBeers)
+    .get("/beers/search", BeerController.getBeerByName)
     .get("/beers/:id", BeerController.getBeerById)
     .post("/beers", BeerController.createBeer)
     .put("/beers/:id", BeerController.updateBeer)

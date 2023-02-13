@@ -85,6 +85,41 @@
                 }
             }
         },
+        "/beers/search": {
+            "get": {
+                "summary": "Get beer by name",
+                "description": "Find a beer by name",
+                "tags": [
+                    "Beers"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "beer name",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/JSON": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Beer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/Not Found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            }
+        },
         "/beers/{id}": {
             "get": {
                 "summary": "Get beer by ID",
@@ -210,7 +245,7 @@
                         "$ref": "#/components/responses/Not Found"
                     },
                     "500": {
-                        "$ref":"#/components/responses/GeneralError"
+                        "$ref": "#/components/responses/GeneralError"
                     }
                 }
             }
