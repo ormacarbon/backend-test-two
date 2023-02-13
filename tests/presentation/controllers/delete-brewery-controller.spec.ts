@@ -1,8 +1,9 @@
 import { faker } from '@faker-js/faker'
 import { DeleteBreweryController, DeleteBreweryControllerRequest } from '../../../src/presentation/controllers/delete-brewery-controller'
 import { DeleteBrewerySpy } from '../mocks/mock-brewery'
-import { noContent, serverError } from '../../../src/presentation/helpers/http-helper'
+import { forbidden, noContent, serverError } from '../../../src/presentation/helpers/http-helper'
 import { throwError } from '../../domain/mocks/test-helpers'
+import { InvalidParamError } from '../../../src/presentation/errors/invalid-param-error'
 
 const mockRequest = (): DeleteBreweryControllerRequest => ({
   id: faker.datatype.uuid()
@@ -31,6 +32,13 @@ describe('DeleteBrewery Controller', () => {
     const { sut } = makeSut()
     const result = await sut.handle(mockRequest())
     expect(result).toEqual(noContent())
+  })
+
+  it('Should return 403 if not exists brewery in database', async () => {
+    const { sut, deleteBrewerySpy } = makeSut()
+    deleteBrewerySpy.result = false
+    const result = await sut.handle(mockRequest())
+    expect(result).toEqual(forbidden(new InvalidParamError('breweryId')))
   })
 
   it('Should return 500 if DeleteBrewery throws', async () => {

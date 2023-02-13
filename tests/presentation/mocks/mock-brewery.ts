@@ -16,8 +16,10 @@ export class LoadBreweriesSpy implements LoadBreweries {
 
 export class DeleteBrewerySpy implements DeleteBrewery {
   params: DeleteBreweryParams
-  async handle (params: DeleteBreweryParams): Promise<void> {
+  result = true
+  async handle (params: DeleteBreweryParams): Promise<boolean> {
     this.params = params
+    return this.result
   }
 }
 
