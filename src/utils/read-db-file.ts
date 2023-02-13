@@ -4,7 +4,7 @@ import { AddBeerData } from "../domain/useCases/add-beer";
 
 export const readDbFile = async (): Promise<AddBeerData[]> => {
   try {
-    const file = path.resolve("src", "..", "db.json");
+    const file = path.resolve("db.json");
 
     const data = await readFile(file, { encoding: "utf-8" });
 
