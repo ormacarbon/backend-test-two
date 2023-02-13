@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "f1c5797f-2c44-4734-b936-1ca8c6fd656e",
+		"name": "orma-carbon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24892984"
+	},
+	"item": [
+		{
+			"name": "list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/beer?limit=100",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"beer"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findById",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/beer/63e66817d55eefafa96c1c9f",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"beer",
+						"63e66817d55eefafa96c1c9f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"API_TEST\",\n  \"category\": \"British Ale - API_TEST\",\n  \"description\": \"This robust, hearty stout is as sturdy as its namesake - API_TEST.\",\n  \"website\": \"http://www.northcountrybrewing.com\",\n  \"abv\": 9,\n  \"ibu\": 104,\n  \"address\": \"141 South Main Street\",\n  \"city\": \"Slippery Rock\",\n  \"state\": \"Pennsylvania\",\n  \"coordinates\": [\n    41.0638,\n    -80.0556\n  ],\n  \"country\": \"United States\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/beer",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"beer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const URL = pm.variables.get(\"URL\");",
+							"",
+							"pm.sendRequest({",
+							"    url: `${URL}/beer`,",
+							"    method: 'POST',",
+							"    header: { 'Content-type': 'application/json' },",
+							"    header: { 'Content-type': 'application/json' },",
+							"    body: {",
+							"        mode: 'application/json',",
+							"        raw: JSON.stringify({",
+							"            \"name\": \"API_TEST\",",
+							"            \"category\": \"British Ale - API_TEST\",",
+							"            \"description\": \"This robust, hearty stout is as sturdy as its namesake - API_TEST.\",",
+							"            \"website\": \"http://www.northcountrybrewing.com\",",
+							"            \"abv\": 9,",
+							"            \"ibu\": 104,",
+							"            \"address\": \"141 South Main Street\",",
+							"            \"city\": \"Slippery Rock\",",
+							"            \"state\": \"Pennsylvania\",",
+							"            \"coordinates\": [",
+							"                41.0638,",
+							"                -80.0556",
+							"            ],",
+							"            \"country\": \"United States\"",
+							"        })",
+							"    }",
+							"}, function (err, res) {",
+							"    pm.environment.set(\"NEW_BEER_ID\", res.json().beer._id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}/beer/{{NEW_BEER_ID}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"beer",
+						"{{NEW_BEER_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const URL = pm.variables.get(\"URL\");",
+							"",
+							"pm.sendRequest({",
+							"    url: `${URL}/beer`,",
+							"    method: 'POST',",
+							"    header: { 'Content-type': 'application/json' },",
+							"    header: { 'Content-type': 'application/json' },",
+							"    body: {",
+							"        mode: 'application/json',",
+							"        raw: JSON.stringify({",
+							"            \"name\": \"API_TEST\",",
+							"            \"category\": \"British Ale - API_TEST\",",
+							"            \"description\": \"This robust, hearty stout is as sturdy as its namesake - API_TEST.\",",
+							"            \"website\": \"http://www.northcountrybrewing.com\",",
+							"            \"abv\": 9,",
+							"            \"ibu\": 104,",
+							"            \"address\": \"141 South Main Street\",",
+							"            \"city\": \"Slippery Rock\",",
+							"            \"state\": \"Pennsylvania\",",
+							"            \"coordinates\": [",
+							"                41.0638,",
+							"                -80.0556",
+							"            ],",
+							"            \"country\": \"United States\"",
+							"        })",
+							"    }",
+							"}, function (err, res) {",
+							"    pm.environment.set(\"NEW_BEER_ID\", res.json().beer._id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"API_TEST_UPDATED_NAME\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/beer/{{NEW_BEER_ID}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"beer",
+						"{{NEW_BEER_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "docs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/docs",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"docs"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:8080"
+		}
+	]
+}

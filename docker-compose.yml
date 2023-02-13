@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  orma-carbon:
+    image: orma-carbon
+    build:
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+      PORT: 8080
+      DATABASE_HOST: 172.17.0.2
+      DATABASE_PORT: 27017
+    ports:
+      - 8080:8080
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-data:/data/db
+    networks:
+      - mongo-compose-network
+
+networks:
+  mongo-compose-network:
+    driver: bridge

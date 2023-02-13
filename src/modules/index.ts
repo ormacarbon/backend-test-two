@@ -1,0 +1,1 @@
+export { BeerModule } from './Beer';

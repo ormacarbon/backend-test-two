@@ -1,0 +1,112 @@
+{
+    "info": {
+        "name": "orma-carbon",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "list",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{URL}}/beer?limit=100",
+                    "query": [
+                        {
+                            "key": "limit",
+                            "value": "100"
+                        }
+                    ],
+                    "variable": [],
+                    "path": [
+                        "beer"
+                    ],
+                    "host": [
+                        "{{url}}"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "findById",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{URL}}/beer/63e66817d55eefafa96c1c9f",
+                    "path": [
+                        "beer",
+                        "63e66817d55eefafa96c1c9f"
+                    ],
+                    "host": [
+                        "{{url}}"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "create",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "{{URL}}/beer",
+                    "path": [
+                        "beer"
+                    ],
+                    "host": [
+                        "{{url}}"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"name\": \"API_TEST\",\n  \"category\": \"British Ale - API_TEST\",\n  \"description\": \"This robust, hearty stout is as sturdy as its namesake - API_TEST.\",\n  \"website\": \"http://www.northcountrybrewing.com\",\n  \"abv\": 9,\n  \"ibu\": 104,\n  \"address\": \"141 South Main Street\",\n  \"city\": \"Slippery Rock\",\n  \"state\": \"Pennsylvania\",\n  \"coordinates\": [\n    41.0638,\n    -80.0556\n  ],\n  \"country\": \"United States\"\n}"
+                }
+            }
+        },
+        {
+            "name": "delete",
+            "request": {
+                "method": "DELETE",
+                "url": {
+                    "raw": "{{URL}}/beer/{{NEW_BEER_ID}}",
+                    "path": [
+                        "beer",
+                        "{{NEW_BEER_ID}}"
+                    ],
+                    "host": [
+                        "{{url}}"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "update",
+            "request": {
+                "method": "PATCH",
+                "url": {
+                    "raw": "{{URL}}/beer/{{NEW_BEER_ID}}",
+                    "path": [
+                        "beer",
+                        "{{NEW_BEER_ID}}"
+                    ],
+                    "host": [
+                        "{{url}}"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"name\": \"API_TEST_UPDATED_NAME\"\n}"
+                }
+            }
+        }
+    ]
+}

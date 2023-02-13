@@ -1,0 +1,10 @@
+{
+  "cli": {
+    "migrationsDir": "src/database/migrations",
+    "entitiesDir": "src/database/entities"
+  },
+  "entities": [
+    "**/**/*.entity.{js,ts}"
+  ],
+  "autoLoadEntities": true
+}
