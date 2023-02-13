@@ -46,6 +46,7 @@ export class BeerRepository implements IBeerRepository {
             const database = await connect();
             const beer = await database.collection("beers").findOne({ _id: new ObjectId(id) });
 
+            if(!beer)  throw new ApplicationError("Beer not found", 500);
             return beer;
         } catch (err) {
 
@@ -57,9 +58,21 @@ export class BeerRepository implements IBeerRepository {
     }
 
 
-    deleteOne(id: string) {
-        throw new Error("Method not implemented.");
+    async deleteOne(id: string) {
+
+        try {
+            const database = await connect();
+            await database.collection("beers").deleteOne({ _id: new ObjectId(id) })
+
+            console.log("BEER DELETED")
+        } catch (err) {
+
+            console.log(err)
+            disconnect();
+            throw new ApplicationError("Something wrong happened", 500);
+        }
     }
+
     updateOne(id: string, { abv, address, category, city, coordinates, country, description, ibu, name, state, website }: Beer) {
         throw new Error("Method not implemented.");
     }

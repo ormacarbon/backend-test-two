@@ -7,6 +7,7 @@ const beerRouter = Router();
 const beerController = new BeerController();
 
 beerRouter.get("/:id", beerController.findOneBeer)
+beerRouter.delete("/:id", beerController.deleteOneBeer);
 beerRouter.get("/", beerController.findBeers);
 beerRouter.post("/", validateBeerSchema, beerController.insertOneBeer);
 
