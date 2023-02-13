@@ -37,4 +37,11 @@ describe('DbDeleteBrewery Usecase', () => {
     const response = sut.handle(mockDeleteBreweryParams())
     await expect(response).rejects.toThrow()
   })
+
+  it('Should throw if LoadBreweryRepository throws', async () => {
+    const { sut, loadBreweryRepositorySpy } = makeSut()
+    jest.spyOn(loadBreweryRepositorySpy, 'handle').mockImplementationOnce(throwError)
+    const response = sut.handle(mockDeleteBreweryParams())
+    await expect(response).rejects.toThrow()
+  })
 })
