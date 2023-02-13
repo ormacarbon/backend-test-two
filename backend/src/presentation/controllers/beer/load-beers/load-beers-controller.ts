@@ -1,5 +1,5 @@
 import { LoadBeers } from '../../../../domain/use-cases/load-beers'
-import { ok, serverError } from '../../../helpers/http/http-helper'
+import { noContent, ok, serverError } from '../../../helpers/http/http-helper'
 import { Controller } from '../../../protocols/controller'
 import { HttpRequest, HttpResponse } from '../../../protocols/http'
 
@@ -14,7 +14,7 @@ export class LoadBeersController implements Controller {
 		try {
 			const beers = await this.loadBeers.loadAll()
 
-			return ok(beers)
+			return beers.length ? ok(beers) : noContent()
 		} catch (err: any) {
 			return serverError(err)
 		}

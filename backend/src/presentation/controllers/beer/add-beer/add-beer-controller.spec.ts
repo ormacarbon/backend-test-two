@@ -1,7 +1,7 @@
 import mockdate from 'mockdate'
 import { throwError } from '../../../../data/test/test-helper'
 import { AddBeer } from '../../../../domain/use-cases/add-beer'
-import { badRequest, noContent, serverError } from '../../../../presentation/helpers/http/http-helper'
+import { badRequest, ok, serverError } from '../../../../presentation/helpers/http/http-helper'
 import { mockAddBeer, mockValidation } from '../../../../presentation/test'
 import { HttpRequest, Validation } from '../../../protocols'
 import { AddBeerController } from './add-beer-controller'
@@ -84,9 +84,9 @@ describe('AddBeer Controller', () => {
 		expect(httpResponse).toEqual(serverError(new Error()))
 	})
 
-	test('Should return 204 on success', async () => {
+	test('Should return 200 on success', async () => {
 		const { sut } = makeSut()
 		const httpResponse = await sut.handle(makeFakeRequest())
-		expect(httpResponse).toEqual(noContent())
+		expect(httpResponse).toEqual(ok(httpResponse))
 	})
 })

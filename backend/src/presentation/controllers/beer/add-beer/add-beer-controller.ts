@@ -1,15 +1,13 @@
 import { AddBeer } from '../../../../domain/use-cases/add-beer'
 import {
-	badRequest,
-	noContent,
+	badRequest, ok,
 	serverError
 } from '../../../../presentation/helpers/http/http-helper'
 
 import {
-	Validation,
 	Controller,
 	HttpRequest,
-	HttpResponse
+	HttpResponse, Validation
 } from '../../../protocols'
 
 export class AddBeerController implements Controller {
@@ -44,7 +42,7 @@ export class AddBeerController implements Controller {
 				website
 			} = httpRequest.body
 
-			await this.addBeer.add({
+			const beer = await this.addBeer.add({
 				abv,
 				address,
 				category,
@@ -59,7 +57,7 @@ export class AddBeerController implements Controller {
 				created_at: new Date()
 			})
 
-			return noContent()
+			return ok({ beer })
 		} catch (err: any) {
 			return serverError(err)
 		}
