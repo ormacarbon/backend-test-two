@@ -17,7 +17,7 @@ export class UpdateBeerByIdController implements Controller {
 			} = httpRequest.params
 
 			const beerCreateRequest = httpRequest.body
-
+			console.log(beerCreateRequest)
 			await this.updateBeer.update(id, beerCreateRequest)
 
 			return noContent()

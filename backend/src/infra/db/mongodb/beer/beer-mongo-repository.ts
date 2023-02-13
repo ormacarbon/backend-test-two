@@ -12,8 +12,10 @@ import { mongoHelper } from '../helper/mongo-helper'
 export class BeerMongoRepository implements AddBeerRepository, LoadBeersRepository, LoadBeerByIdRepository, UpdateBeerByIdRepository, DeleteBeerByIdRepository {
 	async add (beerData: AddBeerParams): Promise<BeerModel> {
 		const beerCollection = await mongoHelper.getCollection('beer')
-		const beer = await beerCollection.insertOne(beerData)
-		return beer && mongoHelper.map(beer)
+		const result = await beerCollection.insertOne(beerData)
+		const insertedId = result.insertedId
+		const beer = await beerCollection.findOne({ _id: insertedId })
+		return mongoHelper.map(beer)
 	}
 
 	async loadAll (): Promise<BeerModel[]> {
@@ -30,7 +32,7 @@ export class BeerMongoRepository implements AddBeerRepository, LoadBeersReposito
 
 	async update (id: string, beerData: UpdateBeerParams): Promise<void> {
 		const beerCollection = await mongoHelper.getCollection('beer')
-		await beerCollection.updateOne({ _id: new ObjectId(id) }, { beerData })
+		await beerCollection.updateOne({ _id: new ObjectId(id) }, { $set: beerData })
 	}
 
 	async deleteById (id: string): Promise<void> {
