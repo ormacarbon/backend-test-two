@@ -5,6 +5,7 @@ import { LoadBreweriesRepository } from '../../../src/data/protocols/db/load-bre
 import { BreweryEntity } from '../../../src/domain/entities/brewery'
 import { mockBreweryEntity } from '../../domain/mocks/mock-brewery'
 import { UpdateBreweryRepository, UpdateBreweryRepositoryParams } from '../../../src/data/protocols/db/update-brewery-repository'
+import { LoadBreweryRepository, LoadBreweryRepositoryParams } from '../../../src/data/protocols/db/load-brewery-repository'
 
 export class LoadBreweriesRepositorySpy implements LoadBreweriesRepository {
   result = [mockBreweryEntity()]
@@ -39,6 +40,15 @@ export class UpdateBreweryRepositorySpy implements UpdateBreweryRepository {
   params: UpdateBreweryRepositoryParams
   result = mockBreweryEntity()
   async handle (params: UpdateBreweryRepositoryParams): Promise<BreweryEntity> {
+    this.params = params
+    return this.result
+  }
+}
+
+export class LoadBreweryRepositorySpy implements LoadBreweryRepository {
+  result = mockBreweryEntity()
+  params: LoadBreweryRepositoryParams
+  async handle (params: LoadBreweryRepositoryParams): Promise<BreweryEntity> {
     this.params = params
     return this.result
   }

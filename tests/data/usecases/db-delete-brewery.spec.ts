@@ -1,17 +1,19 @@
 import { DbDeleteBrewery } from '../../../src/data/usecases/db-delete-brewery'
 import { mockDeleteBreweryParams } from '../../domain/mocks/mock-brewery'
 import { throwError } from '../../domain/mocks/test-helpers'
-import { DeleteBreweryRepositorySpy } from '../mocks/mock-db-brewery'
+import { DeleteBreweryRepositorySpy, LoadBreweryRepositorySpy } from '../mocks/mock-db-brewery'
 
 type SutTypes = {
   sut: DbDeleteBrewery
   deleteBreweryRepositorySpy: DeleteBreweryRepositorySpy
+  loadBreweryRepositorySpy: LoadBreweryRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
+  const loadBreweryRepositorySpy = new LoadBreweryRepositorySpy()
   const deleteBreweryRepositorySpy = new DeleteBreweryRepositorySpy()
-  const sut = new DbDeleteBrewery(deleteBreweryRepositorySpy)
-  return { deleteBreweryRepositorySpy, sut }
+  const sut = new DbDeleteBrewery(deleteBreweryRepositorySpy, loadBreweryRepositorySpy)
+  return { deleteBreweryRepositorySpy, sut, loadBreweryRepositorySpy }
 }
 
 describe('DbDeleteBrewery Usecase', () => {
@@ -20,6 +22,13 @@ describe('DbDeleteBrewery Usecase', () => {
     const params = mockDeleteBreweryParams()
     await sut.handle(params)
     expect(deleteBreweryRepositorySpy.params).toBe(params)
+  })
+
+  it('Should call LoadBreweryRepository with correct values', async () => {
+    const { sut, loadBreweryRepositorySpy } = makeSut()
+    const params = mockDeleteBreweryParams()
+    await sut.handle(params)
+    expect(loadBreweryRepositorySpy.params).toEqual({ id: params.id })
   })
 
   it('Should throw if DeleteBreweryRepository throws', async () => {
