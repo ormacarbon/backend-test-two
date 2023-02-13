@@ -49,6 +49,11 @@ describe('Brewery Routes', () => {
       const brewery = await PrismaHelper.prisma.brewery.create({ data: mockBreweryEntity() })
       await request(app).delete('/api/brewery/?id=' + brewery.id).expect(204)
     })
+
+    it('Should return 403 if the id is not valid', async () => {
+      const id = faker.datatype.uuid()
+      await request(app).delete('/api/brewery/?id=' + id).expect(403)
+    })
   })
 
   describe('POST /brewery', () => {
