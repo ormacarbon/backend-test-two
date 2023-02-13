@@ -57,7 +57,9 @@ class BeerService implements IBeerService<IBeer> {
   }
 
   public async readById(id: string): Promise<IBeer | null> {
-    return this._repository.readById(id);
+    const beer = await this._repository.readById(id);
+    if (beer) return beer;
+    throw new NotFoundError('Unable to find the requested document');
   }
 
   public async update(id: string, beer: Partial<IBeer>): Promise<IBeer | null> {
