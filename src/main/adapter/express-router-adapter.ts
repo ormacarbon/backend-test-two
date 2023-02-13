@@ -5,7 +5,8 @@ import { Controller } from "../../presentation/protocols/controller";
 export const adapterRoute = (controller: Controller) => {
   return async (req: Request, res: Response) => {
     const httpRequest: HttpRequest = {
-      body: req.body
+      body: req.body,
+      query: req.query
     }
     
     const httpResponse = await controller.handle(httpRequest);

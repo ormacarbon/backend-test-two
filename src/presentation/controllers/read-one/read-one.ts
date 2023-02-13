@@ -8,7 +8,6 @@ export class ReadOneController implements Controller {
       if (!httpRequest.query.name) {
         return badRequest(new MissingParamError("name"));
       }
-
       const { name } = httpRequest.query;
       const beer = await this.readOne.read(name);
 
