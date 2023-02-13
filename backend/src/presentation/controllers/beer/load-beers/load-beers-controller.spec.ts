@@ -1,18 +1,22 @@
+import mockdate from 'mockdate'
+import { throwError } from '../../../../data/test/test-helper'
+import { mockBeers } from '../../../../domain/test/mock-beer'
 import { LoadBeers } from '../../../../domain/use-cases/load-beers'
+import { noContent, ok, serverError } from '../../../helpers/http/http-helper'
 import { mockLoadBeers } from '../../../test'
 import { LoadBeersController } from './load-beers-controller'
 
 type SutTypes = {
   sut: LoadBeersController
-  LoadBeersStub: LoadBeers
+  loadBeersStub: LoadBeers
 }
 
 const makeSut = (): SutTypes => {
-	const LoadBeersStub = mockLoadBeers()
-	const sut = new LoadBeersController(LoadBeersStub)
+	const loadBeersStub = mockLoadBeers()
+	const sut = new LoadBeersController(loadBeersStub)
 
 	return {
-		LoadBeersStub,
+		loadBeersStub,
 		sut
 	}
 }
@@ -26,8 +30,8 @@ describe('LoadBeers Controller', () => {
 		mockdate.reset()
 	})
 	test('Should call LoadBeers', async () => {
-		const { sut, LoadBeersStub } = makeSut()
-		const loadSpy = jest.spyOn(LoadBeersStub, 'load')
+		const { sut, loadBeersStub } = makeSut()
+		const loadSpy = jest.spyOn(loadBeersStub, 'loadAll')
 		await sut.handle({})
 		expect(loadSpy).toHaveBeenCalled()
 	})
@@ -35,19 +39,19 @@ describe('LoadBeers Controller', () => {
 	test('Should return 200 on success', async () => {
 		const { sut } = makeSut()
 		const httpResponse = await sut.handle({})
-		expect(httpResponse).toEqual(ok(mockSurveys()))
+		expect(httpResponse).toEqual(ok(mockBeers()))
 	})
 
 	test('Should return 204 if LoadBeers returns empty', async () => {
-		const { sut, LoadBeersStub } = makeSut()
-		jest.spyOn(LoadBeersStub, 'load').mockReturnValueOnce(Promise.resolve([]))
+		const { sut, loadBeersStub } = makeSut()
+		jest.spyOn(loadBeersStub, 'loadAll').mockReturnValueOnce(Promise.resolve([]))
 		const httpResponse = await sut.handle({})
 		expect(httpResponse).toEqual(noContent())
 	})
 
 	test('Should return 500 if LoadSurvey throws', async () => {
-		const { sut, LoadBeersStub } = makeSut()
-		jest.spyOn(LoadBeersStub, 'load').mockImplementationOnce(throwError)
+		const { sut, loadBeersStub } = makeSut()
+		jest.spyOn(loadBeersStub, 'loadAll').mockImplementationOnce(throwError)
 		const httpResponse = await sut.handle({})
 		expect(httpResponse).toEqual(serverError(new Error()))
 	})
