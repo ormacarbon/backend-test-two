@@ -5,6 +5,7 @@ import { CreateBeerService } from "../services/CreateBeerService";
 import { DeleteOneBeerService } from "../services/DeleteOneBeerService";
 import { FindBeersService } from "../services/FindBeersService";
 import { FindOneBeerService } from "../services/FindOneBeerService";
+import { UpdateOneBeerService } from "../services/UpdateOneBeerService";
 import { getPaginatedData } from "../utils/pagination";
 
 class BeerController {
@@ -62,6 +63,19 @@ class BeerController {
             throw new ApplicationError(err, 400);
         }
     }
+
+    async updateOneBeer(req: Request, res: Response) {
+        try {
+
+            const updateOneBeerService = container.resolve(UpdateOneBeerService);
+            const beer = await updateOneBeerService.execute(req.params.id,req.body);
+            return res.status(200).json(beer);
+
+        } catch (err) {
+            throw new ApplicationError(err, 400);
+        }
+    }
+
 
 }
 

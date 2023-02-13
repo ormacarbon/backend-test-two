@@ -73,8 +73,22 @@ export class BeerRepository implements IBeerRepository {
         }
     }
 
-    updateOne(id: string, { abv, address, category, city, coordinates, country, description, ibu, name, state, website }: Beer) {
-        throw new Error("Method not implemented.");
+    async updateOne(id: string, { abv, address, category, city, coordinates, country, description, ibu, name, state, website }: Beer) {
+
+        try {
+
+            const database = await connect();
+            await database.collection("beers").updateOne({ _id: new ObjectId(id) },
+                { $set: { abv, address, category, city, coordinates, country, description, ibu, name, state, website } });
+
+            const beer = await database.collection("beers").findOne({ _id: new ObjectId(id) });
+            return beer;
+        } catch (err) {
+
+            console.log(err)
+            disconnect();
+            throw new ApplicationError("Something wrong happened", 500);
+        }
     }
 
 }

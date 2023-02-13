@@ -8,8 +8,9 @@ const beerController = new BeerController();
 
 beerRouter.get("/:id", beerController.findOneBeer)
 beerRouter.delete("/:id", beerController.deleteOneBeer);
-beerRouter.get("/", beerController.findBeers);
+beerRouter.put("/:id", validateBeerSchema, beerController.updateOneBeer);
 beerRouter.post("/", validateBeerSchema, beerController.insertOneBeer);
+beerRouter.get("/", beerController.findBeers);
 
 
 export { beerRouter }
