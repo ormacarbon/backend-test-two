@@ -1,5 +1,5 @@
 import app from "./app";
-import connectToDatabase from "./models/Connection";
+import connectToDatabase from "./database/Connection";
 
 const PORT = 8000;
 
