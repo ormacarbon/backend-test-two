@@ -32,7 +32,7 @@ docker-compose up -d --build
 npm install
 ```
 
-5. A aplicação backend estará rodando na porta 3001, e o front-end está rodando na porta 3000. Sendo assim, utilize o endereço: http://localhost:3000 para acessar o site, e caso queira checar informações do backend utilize o endereço: http://localhost:3001.
+5. A aplicação backend estará rodando na porta 3001, sendo assim utilize: http://localhost:3001 para consulta de dados.
 
 <br />
 <br />
