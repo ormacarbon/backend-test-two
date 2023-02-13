@@ -15,4 +15,4 @@ export type UpdateBreweryParams = {
   website?: string
 }
 
-export type UpdateBrewery = Usecase<UpdateBreweryParams, void>
+export type UpdateBrewery = Usecase<UpdateBreweryParams, boolean>

@@ -4,8 +4,11 @@ import { UpdateBreweryRepository } from '../protocols/db/update-brewery-reposito
 
 export class DbUpdateBrewery implements UpdateBrewery {
   constructor (private readonly updateBreweryRepository: UpdateBreweryRepository, private readonly loadBreweryRepository: LoadBreweryRepository) {}
-  async handle (params: UpdateBreweryParams): Promise<void> {
-    await this.loadBreweryRepository.handle({ id: params.id })
-    await this.updateBreweryRepository.handle(params)
+  async handle (params: UpdateBreweryParams): Promise<boolean> {
+    const breweryExists = await this.loadBreweryRepository.handle({ id: params.id })
+    if (breweryExists) {
+      await this.updateBreweryRepository.handle(params)
+    }
+    return !!breweryExists
   }
 }
