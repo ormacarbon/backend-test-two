@@ -48,8 +48,10 @@ class BeerController {
   public delete = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     try {
-      await this._service.delete(id);
-      return res.status(204).json({ message: 'Document deleted.' });
+      const { deleted } = await this._service.delete(id);
+      console.log(deleted);
+
+      if (deleted) return res.sendStatus(204);
     } catch (error) {
       return next(error);
     }
