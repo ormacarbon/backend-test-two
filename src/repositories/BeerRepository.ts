@@ -3,7 +3,7 @@ import { Beer } from "../models/Beer";
 import { IBeerRepository } from "./IBeerRepository";
 
 
-class BeerRepository implements IBeerRepository{
+export class BeerRepository implements IBeerRepository{
     insertOne({ abv, address, category, city, coordinates, country, description, ibu, name, state, website }: Beer): Promise<void> {
         throw new Error("Method not implemented.");
     }
