@@ -48,66 +48,77 @@ function Form() {
 
   return (
     <div>
+      <p>ABV: </p>
       <Input
         type="abv"
         placeholder="Abv"
         value={ abv }
         onChange={ (event) => setAbv(event.target.value) }
       />
+      <p>Endereço: </p>
       <Input
         type="address"
         placeholder="Endereço da cerveja"
         value={ address }
         onChange={ (event) => setAddress(event.target.value) }
       />
+       <p>Categoria: </p>
       <Input
         type="category"
         placeholder="Categoria da cerveja"
         value={ category }
         onChange={ (event) => setCategory(event.target.value) }
       />
+      <p>Cidade: </p>
       <Input
         type="city"
         placeholder="Cidade da cerveja"
         value={ city }
         onChange={ (event) => setCity(event.target.value) }
       />
+      <p>Coodernadas: </p>
       <Input
         type="coordinates"
         placeholder="Coodernadas da cerveja"
         value={ coordinates }
         onChange={ (event) => setCoordinates(event.target.value) }
       />
+       <p>País: </p>
       <Input
         type="country"
         placeholder="País da cerveja"
         value={ country }
         onChange={ (event) => setCountry(event.target.value) }
       />
+       <p>Descrição: </p>
       <Input
         type="description"
         placeholder="Descrição da cerveja"
         value={ description }
         onChange={ (event) => setDescription(event.target.value) }
       />
+       <p>Taxa de Ibu: </p>
       <Input
         type="ibu"
         placeholder="Ibu"
         value={ ibu }
         onChange={ (event) => setIbu(event.target.value) }
       />
+      <p>Estado: </p>
       <Input
         type="state"
         placeholder="Estado da cerveja"
         value={ state }
         onChange={ (event) => setState(event.target.value) }
       />
+      <p>Nome da Cerveja: </p>
       <Input
         type="name"
         placeholder="Nome da cerveja"
         value={ name }
         onChange={ (event) => setName(event.target.value) }
       />
+       <p>Site: </p>
       <Input
         type="website"
         placeholder="Site"
