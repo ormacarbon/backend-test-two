@@ -3,6 +3,7 @@ import { setupApp } from '../../../src/main/config/app'
 import request from 'supertest'
 import { Express } from 'express'
 import { mockAddBreweryParams, mockBreweryEntity, mockUpdateBreweryParams } from '../../domain/mocks/mock-brewery'
+import { faker } from '@faker-js/faker'
 
 let app: Express
 
@@ -35,6 +36,11 @@ describe('Brewery Routes', () => {
     it('Should return 204 on success', async () => {
       const brewery = await PrismaHelper.prisma.brewery.create({ data: mockBreweryEntity() })
       await request(app).delete('/api/brewery/' + brewery.id).expect(204)
+    })
+
+    it('Should return 403 if the id is not valid', async () => {
+      const id = faker.datatype.uuid()
+      await request(app).delete('/api/brewery/' + id).expect(403)
     })
   })
 
