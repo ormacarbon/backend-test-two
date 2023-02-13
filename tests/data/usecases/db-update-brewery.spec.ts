@@ -39,4 +39,11 @@ describe('DbUpdateBrewery Usecase', () => {
     const result = await sut.handle(mockUpdateBreweryParams())
     expect(result).toBe(true)
   })
+
+  it('Should return false if not exists brewery in database', async () => {
+    const { sut, loadBreweryRepositorySpy } = makeSut()
+    loadBreweryRepositorySpy.result = null
+    const result = await sut.handle(mockUpdateBreweryParams())
+    expect(result).toBe(false)
+  })
 })
