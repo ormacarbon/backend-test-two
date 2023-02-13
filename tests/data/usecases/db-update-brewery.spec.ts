@@ -28,6 +28,13 @@ describe('DbUpdateBrewery Usecase', () => {
     expect(updateBrewerySpy.params).toBe(params)
   })
 
+  it('Should throw if UpdateBreweryRepository throws', async () => {
+    const { sut, updateBrewerySpy } = makeSut()
+    jest.spyOn(updateBrewerySpy, 'handle').mockImplementationOnce(throwError)
+    const response = sut.handle(mockUpdateBreweryParams())
+    await expect(response).rejects.toThrow()
+  })
+
   it('Should call LoadBreweryRepository with correct values', async () => {
     const { sut, loadBreweryRepositorySpy } = makeSut()
     const params = mockUpdateBreweryParams()
