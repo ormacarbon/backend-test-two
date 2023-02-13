@@ -33,4 +33,10 @@ describe('DbUpdateBrewery Usecase', () => {
     await sut.handle(params)
     expect(loadBreweryRepositorySpy.params).toEqual({ id: params.id })
   })
+
+  it('Should return true on success', async () => {
+    const { sut } = makeSut()
+    const result = await sut.handle(mockUpdateBreweryParams())
+    expect(result).toBe(true)
+  })
 })
