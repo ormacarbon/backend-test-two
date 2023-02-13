@@ -57,5 +57,10 @@ describe('Brewery Routes', () => {
       requestBody.id = brewery.id
       await request(app).put('/api/brewery').send(requestBody).expect(204)
     })
+
+    it('Should return 403 if the id is not valid', async () => {
+      const requestBody = mockUpdateBreweryParams()
+      await request(app).put('/api/brewery').send(requestBody).expect(403)
+    })
   })
 })
