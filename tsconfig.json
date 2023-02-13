@@ -9,7 +9,7 @@
     "strictNullChecks": false,
     "esModuleInterop": true
   },
-  "include": ["src", "tests"],
+  "include": ["src"],
   "exclude": [
     "prisma"
   ]
