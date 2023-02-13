@@ -8,6 +8,7 @@ import { makeUpdateBreweryController } from '../factories/controllers/update-bre
 export default (router: Router): void => {
   router.get('/brewery', adaptRoute(makeLoadBreweriesController()))
   router.delete('/brewery/:id', adaptRoute(makeDeleteBreweryController()))
+  router.delete('/brewery', adaptRoute(makeDeleteBreweryController()))
   router.post('/brewery', adaptRoute(makeAddBreweryController()))
   router.put('/brewery', adaptRoute(makeUpdateBreweryController()))
 }

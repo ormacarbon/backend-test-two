@@ -44,6 +44,13 @@ describe('Brewery Routes', () => {
     })
   })
 
+  describe('DELETE /brewery/?id=breweryId', () => {
+    it('Should return 204 on success', async () => {
+      const brewery = await PrismaHelper.prisma.brewery.create({ data: mockBreweryEntity() })
+      await request(app).delete('/api/brewery/?id=' + brewery.id).expect(204)
+    })
+  })
+
   describe('POST /brewery', () => {
     it('Should return 204 on success', async () => {
       await request(app).post('/api/brewery').send({ ...mockAddBreweryParams() }).expect(204)
