@@ -1,8 +1,9 @@
-import { calculateReputation } from '../../common/calculateReputation';
+import { CalculateReputation } from '../../common/calculateReputation';
 import catchErrorsFunctions from '../../common/utils/err/catchErrorsFunction';
 import {
   Reputation,
-  ReputationUpdate
+  ReputationUpdate,
+  updateReputationUserAlreadyReted
 } from '../../interfaces/reputation/Reputation.interface';
 import BreweriesModel from '../../model/Breweries.Schema';
 import BreweriesService from '../Breweries.service';
@@ -24,26 +25,30 @@ class ReputationService {
       );
 
       const checkIfUserHasAlreadyRated =
-        await ReputationsFunction.CheckIfUserHasAlreadyRated(reputation);
+        await ReputationsFunction.CheckIfUserHasAlreadyRated(
+          reputation.user_id
+        );
 
-      if (!checkIfUserHasAlreadyRated) {
-        const data = {
-          list_reputation: brewery.list_reputation,
-          reputation: reputation.reputation,
-          user_id: reputation.user_id,
-          id: reputation.id
-        };
-
-        await BreweriesModel.addListReputation({
-          user_id: reputation.user_id,
-          id: reputation.id,
-          reputation: reputation.reputation
-        });
-        await ReputationsFunction.updateReputationFunction(data);
-
-        return;
+      if (checkIfUserHasAlreadyRated) {
+        return await ReputationsFunction.updateReputationUser(reputation);
       } else {
-        return;
+        const findAndAddUserInReputationList =
+          await this.FindAndAddItemInListReputaiton(reputation);
+
+        const reputations = findAndAddUserInReputationList?.list_reputation
+          .map((value) => value.reputation)
+          .filter((x) => x !== undefined) as number[];
+
+        if (reputations) {
+          const reputationsCalculateUptaded = CalculateReputation(reputations);
+
+          const updatedReputation = await this.updateReputation({
+            id: reputation.id,
+            reputation: reputationsCalculateUptaded
+          });
+
+          return updatedReputation;
+        }
       }
     } catch (error) {
       catchErrorsFunctions(error);
@@ -51,24 +56,24 @@ class ReputationService {
   }
 
   async updateReputation(reputation: ReputationUpdate) {
-    if (reputation.list_reputation.length > 0) {
-      const calculate = calculateReputation(reputation.list_reputation);
-
-      return BreweriesModel.updateReputation({
-        id: reputation.id,
-        reputation: calculate
-      });
-    }
-
-    return BreweriesModel.updateReputation({
-      id: reputation.id,
-      reputation: reputation
-    });
+    return BreweriesModel.updateReputation(reputation);
   }
 
-  async updateReputationUser(idUser: string, reputation: number) {
+  async FindAndAddItemInListReputaiton(reputation: Reputation) {
     try {
-      return await BreweriesModel.updateReputationUser(idUser, reputation);
+      return BreweriesModel.addListReputation(reputation);
+    } catch (error) {
+      catchErrorsFunctions(error);
+    }
+  }
+
+  async updateListReputationUserAlreadyRated(
+    updateReputationUserAlreadyReted: updateReputationUserAlreadyReted
+  ) {
+    try {
+      return await BreweriesModel.updateListReputationUserAlreadyRated(
+        updateReputationUserAlreadyReted
+      );
     } catch (error) {
       catchErrorsFunctions(error);
     }

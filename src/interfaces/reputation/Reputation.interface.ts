@@ -5,13 +5,11 @@ export interface Reputation {
 }
 
 export interface ReputationUpdate {
-  id: string;
-  list_reputation: any[];
-  user_id: string;
-  reputation?: number;
-}
-
-export interface ListReputationInterface {
-  user_id: string;
   reputation: number;
+  id: string;
+}
+export interface updateReputationUserAlreadyReted {
+  reputation: number;
+  user_id: string;
+  id: string;
 }

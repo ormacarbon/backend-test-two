@@ -7,7 +7,6 @@ import BreweriesModel from '../model/Breweries.Schema';
 import { InvalidArgumentError } from '../services/err/Errors';
 import MenuService from '../services/Menu.service';
 import { parseDataAndTransform } from '../common/ParseDataAndTranforrmBrewery';
-import e from 'express';
 
 class BreweriesService {
   async findBrewelers<T>(filters: Filters, limit: T) {

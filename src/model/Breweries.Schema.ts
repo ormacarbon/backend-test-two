@@ -7,7 +7,11 @@ import cacthErrosFunctions from '../common/utils/err/catchErrorsFunction';
 import { InternalServerError } from '../services/err/Errors';
 import catchErrorsFunctions from '../common/utils/err/catchErrorsFunction';
 
-import { Reputation } from '../interfaces/reputation/Reputation.interface';
+import {
+  Reputation,
+  ReputationUpdate,
+  updateReputationUserAlreadyReted
+} from '../interfaces/reputation/Reputation.interface';
 
 export const BrewerySchema = new Schema({
   abv: Number,
@@ -184,7 +188,7 @@ class BreweryModel {
     }
   }
 
-  async updateReputation(reputation: any) {
+  async updateReputation(reputation: ReputationUpdate) {
     try {
       await this.brewerie.updateOne(
         {
@@ -201,22 +205,31 @@ class BreweryModel {
 
   async findUserInReputation(idUser: string) {
     try {
-      return await this.brewerie.findOne({
+      const data = await this.brewerie.findOne({
         'list_reputation.user_id': idUser
       });
+
+      return data;
     } catch (error) {
       cacthErrosFunctions(error);
     }
   }
 
-  async updateReputationUser(idUser: string, reputation: number) {
+  async updateListReputationUserAlreadyRated(
+    updateReputationUserAlreadyReted: updateReputationUserAlreadyReted
+  ) {
     try {
-      const data = await this.brewerie.updateOne(
-        { 'list_reputation.user_id': idUser },
-        { $set: { 'list_reputation.$.reputation': reputation } }
-      );
+      console.log(updateReputationUserAlreadyReted);
 
-      console.log(data);
+      const data = await this.brewerie.findOneAndUpdate(
+        { 'list_reputation.user_id': updateReputationUserAlreadyReted.user_id },
+        {
+          $set: {
+            'list_reputation.$.reputation':
+              updateReputationUserAlreadyReted.reputation
+          }
+        }
+      );
 
       return data;
     } catch (error) {

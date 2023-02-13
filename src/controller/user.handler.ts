@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { JsonWebTokenError } from 'jsonwebtoken';
+import { find } from 'rxjs';
 import jwt from '../common/utils/auth/jwt';
 
 import { UserCreateDTO, UserLoginDTO } from '../dtos/User/User.dto';
@@ -17,8 +18,12 @@ class UserHandler {
         res.setHeader('Authorization', data.access_key);
         res.setHeader('reflesh_token', data.reflesh_token);
 
-        res.status(200).json({
-          user: data.user
+        res.status(201).json({
+          user: data.user,
+          token: {
+            authorization: data.access_key,
+            reflesh_token: data.reflesh_token
+          }
         });
       }
     } catch (error) {
@@ -91,6 +96,8 @@ class UserHandler {
           if (!findUser) {
             throw new InvalidArgumentError('Error: User not find');
           }
+
+          delete findUser.password;
 
           return res.status(200).json(findUser);
         }
