@@ -50,22 +50,48 @@ export default class BeerODM {
       state,
       website,
     });
-    return newBeer;
+    const { _id } = newBeer;
+    return {
+      id: _id.toHexString(),
+      abv: newBeer.abv,
+      address: newBeer.address,
+      category: newBeer.category,
+      city: newBeer.city,
+      coordinates: newBeer.coordinates,
+      country: newBeer.country,
+      description: newBeer.description,
+      ibu: newBeer.ibu,
+      name: newBeer.name,
+      state: newBeer.state,
+      website: newBeer.website,
+    };
   }
 
   public async read(): Promise<IBeer[]> {
     const beers = await this.model.find();
-    return beers;
+    const beersWithId = beers.map((beer) => ({
+      id: beer._id.toHexString(),
+      abv: beer.abv,
+      address: beer.address,
+      category: beer.category,
+      city: beer.city,
+      coordinates: beer.coordinates,
+      country: beer.country,
+      description: beer.description,
+      ibu: beer.ibu,
+      name: beer.name,
+      state: beer.state,
+      website: beer.website,
+    }));
+    return beersWithId;
   }
 
   public async update(
     id: string,
     update: Partial<IBeer>
   ): Promise<IBeer | null> {
-    const updatedBeer = await this.model.findByIdAndUpdate(
-      { _id: id },
-      { ...update }
-    );
+    await this.model.findByIdAndUpdate({ _id: id }, { ...update });
+    const updatedBeer = await this.model.findById(id);
     return updatedBeer;
   }
 

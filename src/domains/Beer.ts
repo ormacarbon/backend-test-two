@@ -1,7 +1,7 @@
 import IBeer from "../interfaces/IBeer";
 
 export default class Beer {
-  id?: string;
+  id: string | undefined;
   abv: number;
   address: string;
   category: string;

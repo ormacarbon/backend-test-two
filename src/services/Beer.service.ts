@@ -3,6 +3,7 @@ import IController from "../interfaces/IController";
 import BeerODM from "../database/models/BeerODM";
 import StatusHttp from "../utils/StatusHttp";
 import { schemaNewBeer } from "../utils/JoiValidations";
+import Beer from "../domains/Beer";
 
 export default class BeerService {
   private model: BeerODM;
@@ -11,9 +12,14 @@ export default class BeerService {
     this.model = new BeerODM();
   }
 
+  public createBeerDomain(beer: IBeer | null): Beer | null {
+    if (beer) return new Beer(beer);
+    return null;
+  }
+
   public async create(
     beer: IBeer
-  ): Promise<IController<IBeer | string | Error>> {
+  ): Promise<IController<Beer | string | Error | null>> {
     if (!beer)
       return {
         status: StatusHttp.BAD_REQUEST,
@@ -27,7 +33,10 @@ export default class BeerService {
       };
     try {
       const newBeer = await this.model.create(beer);
-      return { status: StatusHttp.CREATED, message: newBeer };
+      return {
+        status: StatusHttp.CREATED,
+        message: this.createBeerDomain(newBeer),
+      };
     } catch (error) {
       return {
         status: StatusHttp.INTERNAL_SERVER_ERROR,
@@ -37,10 +46,13 @@ export default class BeerService {
     }
   }
 
-  public async read(): Promise<IController<IBeer[] | string>> {
+  public async read(): Promise<IController<string | Beer[] | null | unknown>> {
     try {
       const beers = await this.model.read();
-      return { status: StatusHttp.OK, message: beers };
+      return {
+        status: StatusHttp.OK,
+        message: beers.map((beer) => this.createBeerDomain(beer)),
+      };
     } catch (error) {
       return {
         status: StatusHttp.INTERNAL_SERVER_ERROR,
@@ -53,7 +65,7 @@ export default class BeerService {
   public async update(
     id: string,
     update: Partial<IBeer>
-  ): Promise<IController<IBeer | null | string>> {
+  ): Promise<IController<Beer | null | string>> {
     if (!id)
       return {
         status: StatusHttp.BAD_REQUEST,
@@ -66,7 +78,10 @@ export default class BeerService {
       };
     try {
       const updatedBeer = await this.model.update(id, update);
-      return { status: StatusHttp.OK, message: updatedBeer };
+      return {
+        status: StatusHttp.OK,
+        message: this.createBeerDomain(updatedBeer),
+      };
     } catch (error) {
       return { status: StatusHttp.NOT_FOUND, message: "id not found" };
     }
