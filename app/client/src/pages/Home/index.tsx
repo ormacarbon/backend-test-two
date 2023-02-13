@@ -11,27 +11,31 @@ type Props = {
 
 function Home({currentItems}: Props) {
   const [selectedBeers, setSelectedBeers] = useState<IBeer[]>([])
+  const [beers, setBeers] = useState<IBeer[]>([])
   const [inputNameBeers, setInputNameBeers] = useState<string>('')
 
   useEffect(() => {
     setSelectedBeers(currentItems)
-  }, [])
+    setBeers(currentItems)
+  }, [currentItems])
 
   useEffect(() => {
-      const filteredBeers = currentItems.filter((beer) => beer.name?.toLowerCase().includes(inputNameBeers.toLowerCase()))
+    setSelectedBeers(beers)
+  }, [beers])
+
+  useEffect(() => {
+      const filteredBeers = beers.filter((b) => b.name?.toLowerCase().includes(inputNameBeers.toLowerCase()))
       setSelectedBeers(filteredBeers)
   }, [inputNameBeers])
 
   function handleDeleteBeer(id: string) {
     axios.delete(`http://localhost:3005/beers/${id}`).then(data => {
       if (data.status == 204) {
-        axios.get('http://localhost:3005/beers/').then(data => {
-          setSelectedBeers(data.data)
-        }) as unknown as IBeer[];
+        const removeBeer = beers.filter((b) => b.id != id)
+        setBeers(removeBeer);
       }
     });
   }
-
   return (
     <div>
       <Header setInputNameBeers={setInputNameBeers} />
