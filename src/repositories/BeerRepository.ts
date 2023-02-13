@@ -1,11 +1,12 @@
+import { ObjectId } from "mongodb";
 import { connect, disconnect } from "../config/database/database";
 import { ApplicationError } from "../error/ApplicationError";
 import { Beer } from "../models/Beer";
 import { IBeerRepository } from "./IBeerRepository";
 
 
-export class BeerRepository implements IBeerRepository{
-  
+export class BeerRepository implements IBeerRepository {
+
     async insertOne({ abv, address, category, city, coordinates, country, description, ibu, name, state, website }: Beer) {
         try {
 
@@ -21,7 +22,7 @@ export class BeerRepository implements IBeerRepository{
         }
 
     }
-  
+
     async find() {
         try {
 
@@ -37,9 +38,25 @@ export class BeerRepository implements IBeerRepository{
         }
 
     }
-    findOne(id: string) {
-        throw new Error("Method not implemented.");
+
+    
+    async findOne(id: string) {
+        try {
+
+            const database = await connect();
+            const beer = await database.collection("beers").findOne({ _id: new ObjectId(id) });
+
+            return beer;
+        } catch (err) {
+
+            console.log(err)
+            disconnect();
+            throw new ApplicationError("Something wrong happened", 500);
+        }
+
     }
+
+
     deleteOne(id: string) {
         throw new Error("Method not implemented.");
     }
