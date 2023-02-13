@@ -32,7 +32,9 @@ export class AddBrewerySpy implements AddBrewery {
 
 export class UpdateBrewerySpy implements UpdateBrewery {
   params: UpdateBreweryParams
-  async handle (params: UpdateBreweryParams): Promise<void> {
+  result = true
+  async handle (params: UpdateBreweryParams): Promise<boolean> {
     this.params = params
+    return this.result
   }
 }
