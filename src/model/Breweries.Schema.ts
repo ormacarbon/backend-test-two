@@ -4,7 +4,7 @@ import { constructorBreweryInterface } from '../interfaces/Breweries/Brewery.int
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import { Filters } from '../interfaces/Filters.interface';
 import cacthErrosFunctions from '../common/utils/err/catchErrorsFunction';
-import { InternalServerError } from '../services/err/Errors';
+
 import catchErrorsFunctions from '../common/utils/err/catchErrorsFunction';
 
 import {
@@ -79,11 +79,7 @@ class BreweryModel {
         .create(brewerie)
         .catch(handleErrorDatabase);
 
-      if (data) {
-        return data;
-      }
-
-      throw new InternalServerError('ERROR');
+      return data;
     } catch (error) {
       catchErrorsFunctions(error);
     }

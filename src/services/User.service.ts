@@ -18,15 +18,16 @@ class UserService {
         errors.push('Email already in use');
       }
 
-      if (errors.length) {
-        throw new InvalidArgumentError(JSON.stringify(errors));
-      }
       const saltRounds = 10;
       const salt = await bcrypt.genSalt(saltRounds);
 
       const cryptPassword = await bcrypt.hash(user.password, salt);
 
       user.password = cryptPassword;
+
+      if (errors.length) {
+        throw new InvalidArgumentError(JSON.stringify(errors));
+      }
 
       const userStore = await UserModel.store(user);
 
