@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './input.module.scss';
 
 interface InputsProps {
     value?: string;
@@ -14,6 +15,7 @@ function Input(object: InputsProps) {
     <div>
       <input
         type={ type }
+        className={style.fieldclass}
         value={ value }
         name={ name }
         placeholder={ placeholder }

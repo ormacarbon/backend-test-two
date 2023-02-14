@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '../Button';
 import Input from '../Input';
 import { apiCreateBeer } from '../../utils/Apis';
+import style from './form.module.scss';
 
 function Form() {
 
@@ -43,11 +44,13 @@ function Form() {
     if (!api.response) {
       setSuccess(true);
       setTimeout(() => { setSuccess(false); }, TIME_SUCCESS);
+      window.location.reload();
     }
   }
 
   return (
-    <div>
+    <div className={style.formclass}>
+      <div className={style.divclass}>
       <p>ABV: </p>
       <Input
         type="abv"
@@ -55,6 +58,8 @@ function Form() {
         value={ abv }
         onChange={ (event) => setAbv(event.target.value) }
       />
+      </div>
+      <div className={style.divclass}>
       <p>Endereço: </p>
       <Input
         type="address"
@@ -62,6 +67,8 @@ function Form() {
         value={ address }
         onChange={ (event) => setAddress(event.target.value) }
       />
+      </div>
+      <div className={style.divclass}>
        <p>Categoria: </p>
       <Input
         type="category"
@@ -69,6 +76,8 @@ function Form() {
         value={ category }
         onChange={ (event) => setCategory(event.target.value) }
       />
+      </div>
+      <div className={style.divclass}>
       <p>Cidade: </p>
       <Input
         type="city"
@@ -76,6 +85,8 @@ function Form() {
         value={ city }
         onChange={ (event) => setCity(event.target.value) }
       />
+      </div>
+      <div className={style.divclass}>
       <p>Coodernadas: </p>
       <Input
         type="coordinates"
@@ -83,6 +94,8 @@ function Form() {
         value={ coordinates }
         onChange={ (event) => setCoordinates(event.target.value) }
       />
+      </div>
+      <div className={style.divclass}>
        <p>País: </p>
       <Input
         type="country"
@@ -90,6 +103,8 @@ function Form() {
         value={ country }
         onChange={ (event) => setCountry(event.target.value) }
       />
+      </div>
+      <div className={style.divclass}>
        <p>Descrição: </p>
       <Input
         type="description"
@@ -97,6 +112,8 @@ function Form() {
         value={ description }
         onChange={ (event) => setDescription(event.target.value) }
       />
+      </div>
+      <div className={style.divclass}>
        <p>Taxa de Ibu: </p>
       <Input
         type="ibu"
@@ -104,6 +121,8 @@ function Form() {
         value={ ibu }
         onChange={ (event) => setIbu(event.target.value) }
       />
+      </div>
+      <div className={style.divclass}>
       <p>Estado: </p>
       <Input
         type="state"
@@ -111,6 +130,8 @@ function Form() {
         value={ state }
         onChange={ (event) => setState(event.target.value) }
       />
+      </div>
+      <div className={style.divclass}>
       <p>Nome da Cerveja: </p>
       <Input
         type="name"
@@ -118,6 +139,8 @@ function Form() {
         value={ name }
         onChange={ (event) => setName(event.target.value) }
       />
+      </div>
+      <div className={style.divclass}>
        <p>Site: </p>
       <Input
         type="website"
@@ -125,8 +148,10 @@ function Form() {
         value={ website }
         onChange={ (event) => setWebsite(event.target.value) }
       />
-      <div className="btn">
+      </div>
+      <div className={style.divbuttom}>
         <Button
+          style = {style.button}
           name="Cadastrar"
           onClick={ () => handleSubmitUpdate() }
         />

@@ -7,6 +7,7 @@ import React, {
   import usePaginations from '../../hooks/usePagination';
 import Buttons from '../Buttons';
 import FormEdit from '../FormEdit';
+import style from './beers.module.scss';
   
   function Beers() {
     const [beers, setBeers] = useState<IBeers[]>([]);
@@ -48,8 +49,10 @@ import FormEdit from '../FormEdit';
         setEditBeers = {setEditBeers}
         name = {String(beersUpdate?.name)}
         website = {String(beersUpdate?.website)} />}
+        <div  className={style.cards}>
         {beers.length >= 1  && !editbeers && beers.map((e, _index) => (
-          <div key={ e._id }>
+          <div  className={style.card} key={ e._id }>
+            <div className={style.container}>
             <p>Nome da cerveja : {e.name}</p>
             <p>Grau ABV: {e.abv}</p>
             <p>Endereço: {e.address}</p>
@@ -61,20 +64,22 @@ import FormEdit from '../FormEdit';
             <p>taxa IBU: {e.ibu}</p>
             <p>Estado: {e.state}</p>
             <p>Site: {e.website}</p>
-            <div className="btn">
+            </div>
+            <div className={style.divButton}>
               <Button
                 name="Deletar"
+                style={style.buttom}
                 onClick={ () => handleSubmitDelete(e._id) }
               />
-            </div>
-            <div className="btn">
               <Button
                 name="Editar"
+                style={style.buttom}
                 onClick={ () => handleSubmitUpdate(e) }
               />
             </div>
           </div>
         ))}
+        </div>
         {!editbeers &&  <Buttons  setActualPage= {setActualPage} actualPage={actualPage}/> }
       </div>
     );

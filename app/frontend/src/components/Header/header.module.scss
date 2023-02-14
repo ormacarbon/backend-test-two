@@ -1,0 +1,21 @@
+.header {
+    background-color:rgba(15, 15, 15, 0.973);
+    color: white;
+    padding: 20px;
+    font-weight: bold;
+    justify-content: space-evenly;
+    display: flex;
+    font-size: 15px
+}
+
+.buttom {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    color: white;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-weight: bold;
+    font-size: 15px
+}

@@ -3,6 +3,7 @@ import Button from '../Button';
 import Input from '../Input';
 import { apiupdateBeers } from '../../utils/Apis';
 import { IFormEdit } from '../../interfaces/IFormEdit';
+import style from './formedit.module.scss';
 
 function FormEdit(object : IFormEdit) {
    const { _id,
@@ -66,7 +67,8 @@ function FormEdit(object : IFormEdit) {
   }
 
   return (
-    <div>
+    <div className={style.formclass}>
+    <div  className={style.divclass}>
         <p>ABV: </p>
       <Input
         type="abv"
@@ -144,32 +146,33 @@ function FormEdit(object : IFormEdit) {
         value={ newwebsite }
         onChange={ (event) => setNewWebsite(event.target.value) }
       />
-      <div className="btn">
+      <div className={style.divButton}>
         <Button
+          style = {style.buttom}
           name="Salvar"
           onClick={ () => handleSubmitUpdate() }
         />
-      </div>
-      <div className="btn">
         <Button
           name="Cancelar"
+          style = {style.buttom}
           onClick={ () => handleSubmitCancel() }
         />
       </div>
       {error && (
           <div className="error-message">
             <p>
-              Não foi possivel cadastrar a cerveja.
+              Não foi possivel atualizar a cerveja.
             </p>
           </div>
         )}
       {success && (
           <div>
             <p>
-              Cerveja cadastrada com sucesso.
+              Cerveja atualizada com sucesso.
             </p>
           </div>
         )}
+    </div>
     </div>
   );
 }

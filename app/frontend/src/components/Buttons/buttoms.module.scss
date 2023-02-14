@@ -1,0 +1,25 @@
+.previous {
+    background-color: #f1f1f1;
+    color: black;
+  }
+  
+.next {
+    color: white;
+    height: 50%;
+    border-style: none;
+    background-color: black;
+    padding: 8px 10px;
+    font-family: 'system-ui';
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin: 10px;
+    margin-top: 10px;
+    box-shadow: 2px 2px 5px rgb(0,0,0,0.2);
+    cursor: pointer;
+  }
+
+.divButton {
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+}

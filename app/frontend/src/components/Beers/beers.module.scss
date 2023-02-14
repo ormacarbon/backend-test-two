@@ -1,0 +1,105 @@
+.fieldclass {
+    width: 50%;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px 0px;
+    text-indent: 6px;
+    margin-top: 50px;
+    margin-left: 25%;
+    margin-bottom: 20px;
+    font-family: 'system-ui';
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 1rem 5vw;
+    padding: 0;
+    list-style-type: none;
+  }
+
+.card__image {      
+    width: 40%;
+    height: auto;
+    margin-left: 25%;
+  }
+  
+.card {
+    position: relative;
+    display: block;
+    margin-left: 50px;
+    height: 100%;  
+    border-radius: calc(var(--curve) * 1px);
+    overflow: hidden;
+    text-decoration: none;
+  }
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+.container {
+    margin: 20px;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;   
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+  a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+  }
+  
+  a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .previous {
+    background-color: #f1f1f1;
+    color: black;
+  }
+  
+.next {
+    color: white;
+    border-radius: 50%;
+    height: 100%;
+    border-style: none;
+    background-color: black;
+    padding: 8px 20px;
+    font-family: 'system-ui';
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin: 10px;
+    margin-top: 10px;
+    box-shadow: 2px 2px 5px rgb(0,0,0,0.2);
+    cursor: pointer;
+  }
+  
+  .round {
+    border-radius: 50%;
+  }
+
+.divButton {
+    display: flex;
+    justify-content: center;
+    margin-right: 100px;
+}
+
+.buttom {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    color: black;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-weight: bold;
+    font-size: 15px
+}
