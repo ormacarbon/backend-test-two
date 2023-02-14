@@ -1,61 +1,93 @@
-# **TESTE DE BACKEND**
+<div align="center">
+<h1> 🍺 Teste Orma Carbon 🍺 </h1>
+<span> Desenvolvedor Back-End </span>
+</div>
+  
+<p align="center">
+  Olá!! Esse é o teste da Orma Carbon, que se consiste em criar uma API 
+  com endpoints a serem consumidos via REST e um banco de dados, 
+  utilizando os dados fornecidos no arquivo. db.json.
+</p>
+  
+<p>💻 As tecnologias usadas no projeto foram:
+   
+<p>
+<br> - TypeScript
+<br> - CSS
+<br> - HTML
+<br> - React.js
+<br> - React Router
+<br> - React Icons
+<br> - Node.js
+<br> - Express
+<br> - Axios
+<br> - Cors
+<br> - MongoDB
+<br> - Mongoose
+<br> - yup
+<br> - Ts-node-dev
+<br> - eslint
+<br> - dotenv
+<br> - Material UI
+</p>
 
-## SITUAÇÃO-PROBLEMA
-
-Você acabou de ser contratado para uma vaga de desenvolvedor backend de uma empresa que revende cervejas do mundo inteiro. O desenvolvedor anterior corrompeu completamente o banco de dados e a API anterior e sobrou apenas um arquivo .JSON com todas as informações do banco. Seu líder confiou a tarefa de recriar a API e o banco de dados a você.
-
-Neste teste, você deverá criar uma API com endpoints a serem consumidos via REST e um banco de dados, utilizando os dados fornecidos no arquivo. ````db.json````.
-
----------------------------------------------------------------------
-
-## REQUISITOS OBRIGATÓRIOS:
-
-- Seja original, projetos suspeitos de serem copiados serão descartados.
-- Queremos ver o seu código, e não o de outros.
-- Criar coleção no Postman (seu teste será testado por aqui).
-
-## GIT
-
-- Faça um fork deste repositório.
-- Crie uma branch para codar as suas features.
-- Faça um pull-request quando o teste for finalizado.
-
-##### **NOTA: Será avaliado também se o nome da branch, títulos de commit, push e comentários possuem boa legibilidade.**
-
------------------------------------------------------
-
-## FRAMEWORK -
-
-- Servidor: Express (Javascript/Typescript) *<u>**OU**</u>* Gin (Golang)
-- Banco de dados: MongoDB, DynamoDB, MySQL, Postgres...
-
------------------------------------------------------
-
-## PROJETO
-
-- Api deve conter pelo menos 1 endpoint para cada operação crud (Create, Read, Update, Delete).
-- Um endpoint para listagem de conteúdo.
-- Banco de dados a escolha do dev.
-
--------------------------------------------------------
-
-## REQUISITOS DIFERENCIAIS:
-
-- Seguir os princípios de SOLID.
-- Fazer o teste em GoLang.
-- Codar um código performático.
-- Utilizar inglês no projeto todo.
-- Utilizar Injeção de dependências.
-- Criar um frontend que consuma a API
-- Fazer deploy do mesmo (heroku, aws, google cloud ou outro da preferência).
+<br><br>
 
 
+<h3>
+  Link do Postman: https://documenter.getpostman.com/view/25854787/2s93CEvFpW
+</h3>
 
----
+<h2>Overview</h2>
+<p>
+  Sobre o projeto, ele lista todas as informações do banco sendo possivél editar, excluir ou adicionar um novo item, tendo 4 páginas no total e sendo completamente
+  responsivo.
+</p>
 
-## ENTREGA
+<h2>Como usar</h2>
+<p>
+  Para instaladas as dependencias é preciso executar o comando npm install tanto na pasta raiz, quanto na pasta "client" do react, 
+  todas as dependências em sua versão tipada foram instaladas como devDependencies, após é necessário abrir 2 terminais.
+</p>
+<p>
+  No primeiro terminal estando na raiz aplique o comando "npm run start:dev" para executar o servidor.
+</p>
+<p>
+  No segundo terminal estando na raiz, vá a pasta "src" depois "client" e aplique o comando "npm start" para executar o front do projeto.
+</p>
 
-- Faça um pull request e nomeie-o como no ex.: Teste de (Seu nome aqui).
-- Envie um email para schmidt@repenso.eco e kevin@repenso.eco com o link do pull request, do deploy (tanto do front quanto do back se feito), e anexe a coleção do postman.
-- Assim que avaliarmos seu teste, enviaremos uma devolutiva de sucesso ou falha, e caso seja aprovado, um link para agendar sua entrevista técnica.
+<h2>Página Home</h2>
+<p>
+  Na página Home há duas opções, ir para a lista ou criar uma nova cerveja.
+</p>
+<img src=https://user-images.githubusercontent.com/95176596/218800515-ac125692-d337-4cc8-94d5-568119e840c9.png />
+
+<h2>Página Lista</h2>
+<p>
+  A página Lista é onde ficam todos os itens do banco, por lá você pode navegar entre eles, editar e excluir um item,
+  caso você decida criar um novo item ele irá para o final da lista.
+</p>
+<img src=https://user-images.githubusercontent.com/95176596/218801660-d5b1eaa1-b609-45f9-b90b-36d5c65ddbda.png />
+
+<h2>Página Nova Cerveja</h2>
+<p>
+  Nessa página você poderá inserir um novo item no banco, alguns itens são necessários ter seu preenchimento 
+  para que possa concluir o processo de registro como: Name, AVB, IBU, Country e City.
+  Os inputs possuem mascaras e caso o usuário envie um dado incorreto ou faltando há uma validação que retorna um
+  erro visula para o próprio.
+</p>
+<img src=https://user-images.githubusercontent.com/95176596/218803127-5b6e43f6-ee6a-4cff-8695-691e21f8ab27.png />
+
+<h2>Página de Edição</h2>
+<p>
+  A página de Edição é igual a página de Nova Cerveja em vários aspectos, porém sua diferença é que os inputs já vem preenchidos com os dados
+  do item a ser editado.
+</p>
+<img src=https://user-images.githubusercontent.com/95176596/218803923-f8042ca5-1a0e-4e5b-859a-b7f03a9fe66a.png />
+
+<h2>No Mobile</h2>
+<div align="center">
+  <img src=https://user-images.githubusercontent.com/95176596/218805063-5f61745c-75bb-431a-a730-82d48abbe4ea.gif />
+  <img src=https://user-images.githubusercontent.com/95176596/218808005-c9ee2b8b-f5d7-450b-b06f-a849aef36d2c.gif />
+</div>
 

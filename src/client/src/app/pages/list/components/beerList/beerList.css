@@ -1,0 +1,32 @@
+/* -----> Table <----- */
+table {
+    width: 95%;
+    min-width: 1000px;
+    height: 610px;
+    text-align: center;
+    border-collapse: collapse;
+    margin: auto;
+}
+thead th:first-child{
+    border-left: none; 
+}
+thead th:last-child{
+    border-right: none; 
+}
+thead th {
+    color: #23a013;
+    border: 1px solid #000; 
+    border-top: none;
+}
+tbody td:first-child{
+    border-left: none; 
+}
+tbody td:last-child{
+    border-right: none; 
+}
+tbody td {
+    border: 1px solid #000; 
+    border-top: none;
+    font-size: 12px;
+    padding: 5px 2px;
+}
