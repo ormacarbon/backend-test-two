@@ -266,8 +266,6 @@ class BreweryModel {
         "external_urls.href" : href
       })
 
-      console.log(update)
-
       return update
     } catch (error) {
       catchErrorsFunctions(error)

@@ -1,4 +1,4 @@
-import BreweriesService from '../Breweries.service';
+import BreweriesService from '../breweries/Breweries.service';
 import ReputationService from './Reputation.service';
 import { updateReputationUserAlreadyReted } from '../../interfaces/reputation/Reputation.interface';
 

@@ -7,7 +7,8 @@ import SearchDTO from '../dtos/search/search.dto';
 
 import { Filters } from '../interfaces/Filters.interface';
 import { CustomLimitRequest } from '../middlewares/validationLimit';
-import BreweriesService from '../services/Breweries.service';
+import BreweriesService from '../services/breweries/Breweries.service';
+import tagsService from '../services/breweries/tags.service';
 
 import { InvalidArgumentError } from '../services/err/Errors';
 
@@ -146,7 +147,7 @@ class BreweriesController {
     try {
       const body = SearchDTO.parse(req.body);
 
-      const data = await BreweriesService.searchByTags(body.search);
+      const data = await tagsService.searchByTags(body.search);
 
       return res.status(200).json(data);
     } catch (error) {

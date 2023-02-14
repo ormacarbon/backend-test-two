@@ -6,7 +6,7 @@ import {
   updateReputationUserAlreadyReted
 } from '../../interfaces/reputation/Reputation.interface';
 import BreweriesModel from '../../model/Breweries.Schema';
-import BreweriesService from '../Breweries.service';
+import BreweriesService from '../breweries/Breweries.service';
 
 import { InvalidArgumentError } from '../err/Errors';
 import ReputationsFunction from './ReputationsFunctions.service';

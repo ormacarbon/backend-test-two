@@ -1,15 +1,17 @@
-import cacthErrosFunctions from '../common/utils/err/catchErrorsFunction';
+import cacthErrosFunctions from '../../common/utils/err/catchErrorsFunction';
 
-import BrewelyInterface from '../interfaces/Breweries/Brewery.interface';
-import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
-import { Filters } from '../interfaces/Filters.interface';
+import BrewelyInterface from '../../interfaces/Breweries/Brewery.interface';
+import { BreweriesUpdateInterface } from '../../interfaces/Breweries/BreweryUptade.interface';
+import { Filters } from '../../interfaces/Filters.interface';
 
-import { InvalidArgumentError } from '../services/err/Errors';
-import MenuService from '../services/Menu.service';
-import { parseDataAndTransform } from '../common/ParseDataAndTranforrmBrewery';
+import { InvalidArgumentError } from '../err/Errors';
+import MenuService from '../Menu.service';
+import { parseDataAndTransform } from '../../common/ParseDataAndTranforrmBrewery';
 
-import BreweriesModel from '../model/Breweries.Schema';
+import BreweriesModel from '../../model/Breweries.Schema';
 import natural from 'natural';
+import tagsService from './tags.service';
+import hrefService from './href.service';
 
 class BreweriesService {
   async findBreweleries<T>(filters: Filters, limit: T) {
@@ -78,8 +80,8 @@ class BreweriesService {
           breweryUptade.name.toLowerCase()
         );
 
-        await this.updateTags(id, processedName);
-        await this.updateHref(id, `${process.env.ENDPOINT}/${href_contructor}`)
+        await tagsService.updateTags(id, processedName);
+        await hrefService.updateHref(id, `${process.env.ENDPOINT}/${href_contructor}`)
       }
 
       const data = await BreweriesModel.update(id, breweryUptade);
@@ -200,36 +202,8 @@ class BreweriesService {
     }
   }
 
-  async searchByTags(data: string[]) {
-    try {
-      const captureResponse = data.map((search) =>
-        BreweriesModel.searchByTags(search).then((data) => data)
-      );
 
-      return Promise.all(captureResponse).then((resolvedData) => {
-        return resolvedData;
-      });
-    } catch (error) {
-      cacthErrosFunctions(error);
-    }
-  }
 
-  async updateTags(id: string, data: string[]) {
-    try {
-      data.forEach(async (tag) => {
-        await BreweriesModel.addTag(id, tag);
-      });
-    } catch (error) {
-      cacthErrosFunctions(error);
-    }
-  }
-  async updateHref(id: string, href: string) {
-    try {
-      return await BreweriesModel.updateHref(id, href)
-    } catch (error) {
-      
-    }
-  }
 }
 
 export default new BreweriesService();

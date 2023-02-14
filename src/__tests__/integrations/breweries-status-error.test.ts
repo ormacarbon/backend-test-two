@@ -1,5 +1,5 @@
 import BreweryModel from '../../model/Breweries.Schema';
-import BreweriesService from '../../services/Breweries.service';
+import BreweriesService from '../../services/breweries/Breweries.service';
 import supertest = require('supertest');
 import app from '../../app';
 

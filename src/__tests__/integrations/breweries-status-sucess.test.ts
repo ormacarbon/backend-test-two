@@ -1,7 +1,7 @@
 import BreweryModel from '../../model/Breweries.Schema';
 import supertest = require('supertest');
 import app from '../../app';
-import BreweriesService from '../../services/Breweries.service';
+import BreweriesService from '../../services/breweries/Breweries.service';
 
 describe('Should test codes response of routes relational with breweries', () => {
   beforeEach(async () => {

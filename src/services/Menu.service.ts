@@ -1,6 +1,6 @@
 import cacthErrosFunctions from '../common/utils/err/catchErrorsFunction';
 import { MenuDTOInterface } from '../dtos/menu/Menu.dto';
-import BreweriesService from './Breweries.service';
+import BreweriesService from './breweries/Breweries.service';
 import MenuModel from '../model/Menu.Schema';
 import { ItemMenu } from '../interfaces/Menu/Menu.interface';
 import { InvalidArgumentError } from './err/Errors';
