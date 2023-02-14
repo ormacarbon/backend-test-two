@@ -26,8 +26,7 @@ export const BrewerySchema = new Schema({
   description: String,
   ibu: Number,
   name: {
-    type: String,
-    unique: true
+    type: String
   },
   state: String,
   path: String,
@@ -75,9 +74,7 @@ class BreweryModel {
 
   async store(brewerie: constructorBreweryInterface) {
     try {
-      const data = await this.brewerie
-        .create(brewerie)
-        .catch(handleErrorDatabase);
+      const data = await this.brewerie.create(brewerie);
 
       return data;
     } catch (error) {
@@ -139,11 +136,9 @@ class BreweryModel {
 
   async findName(name: string) {
     try {
-      const nameFind = await this.brewerie.findOne({
-        name
+      return await this.brewerie.findOne({
+        name: name
       });
-
-      return nameFind;
     } catch (error) {
       cacthErrosFunctions(error);
     }

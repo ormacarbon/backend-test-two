@@ -1,5 +1,6 @@
 export default interface BreweryInterface {
   abv: number;
+  id?: string;
   address: string;
   category: string;
   city: string;

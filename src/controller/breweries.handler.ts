@@ -116,14 +116,16 @@ class BreweriesController {
       const fileJSON = file?.buffer.toString();
 
       if (fileJSON) {
-        const data = await BreweriesService.storeWithJSONFile(fileJSON);
-        console.log(data);
-        return res.status(201).json(data);
+        await BreweriesService.storeWithJSONFile(fileJSON);
+        return res.status(201).json({
+          message: 'Data created.',
+          attempt: 'Duplicate dates are discarded',
+          statusCode: 201
+        });
       } else {
         throw new InvalidArgumentError('Error: unknown file');
       }
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

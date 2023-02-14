@@ -95,20 +95,22 @@ class BreweriesService {
     try {
       const content: BrewelyInterface[] = JSON.parse(data);
 
-      content.forEach(async (element) => {
-        const errors: string[] = [];
+      const promises = content.map(async (brewery) => {
+        const findName = await BreweriesModel.findName(brewery.name);
 
-        const data = await parseDataAndTransform(errors, element);
+        if (!findName) {
+          const tranformData = await parseDataAndTransform(brewery);
 
-        if (!errors.length) {
-          if (data) {
-            const createrewery = await BreweriesModel.store(data);
-            if (createrewery) {
-              await MenuService.store(createrewery.id);
+          if (tranformData) {
+            const storagedUser = await BreweriesModel.store(tranformData);
+            if (storagedUser) {
+              await MenuService.store(storagedUser.id);
             }
           }
         }
       });
+
+      await Promise.all(promises);
 
       return;
     } catch (error) {
@@ -120,7 +122,13 @@ class BreweriesService {
     try {
       const errors: string[] = [];
 
-      const data = await parseDataAndTransform(errors, brewery);
+      const findName = await this.findNameNotValidation(brewery.name);
+
+      if (findName) {
+        errors.push('Error: Brewery already exists');
+      }
+
+      const data = await parseDataAndTransform(brewery);
 
       if (errors.length > 0) {
         throw new InvalidArgumentError(JSON.stringify(errors));

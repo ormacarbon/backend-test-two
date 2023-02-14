@@ -5,8 +5,7 @@ import cacthErrosFunctions from '../common/utils/err/catchErrorsFunction';
 
 export const MenuSchema = new Schema({
   owner: {
-    type: Schema.Types.ObjectId,
-    unique: true
+    type: Schema.Types.ObjectId
   },
   menu: [
     {
