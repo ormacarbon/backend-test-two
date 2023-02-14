@@ -18,6 +18,10 @@ Beer api made for the backend test on Orma Carbon.
 
 # Installation
 
+## Need to have
+- node.js 16.14.2
+- npm 8.5.0
+
 ## Clone this project
 
 ```bash
