@@ -61,6 +61,12 @@ Agora é so rodar o script de inicialização que o frontend estará disponível
 npm run dev
 yarn dev
 ```
+### Testes
+Foi realizado alguns testes unitários e para rodar basta executar o comando:
+```
+npm run test
+```
+
 Qualquer duvida só me chamar pelo linkedin
 ```
 https://www.linkedin.com/in/gabriel-rodrigues-aaa352207/
