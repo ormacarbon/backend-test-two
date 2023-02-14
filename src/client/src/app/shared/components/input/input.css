@@ -1,0 +1,21 @@
+/* -----> Input <----- */
+.Input-container p {
+    margin-left: 10px;
+}
+.Input-container input {
+    padding: 7px 15px;
+    border-radius: 16px;
+    border: none;
+    color: #F7F7F7;
+    background-color: #222;
+}
+.Input-container input::placeholder {
+    color: #999;
+}
+
+/* -----> Media Query <----- */
+@media (max-width: 540px) {
+    .Input-container input {
+        width: 100%;
+    }
+}

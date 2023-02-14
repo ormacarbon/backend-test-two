@@ -1,0 +1,24 @@
+/* -----> Table Buttons <----- */
+.BeerList-buttons {
+    border-right: none;
+}
+.BeerList-edit,
+.BeerList-remove {
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.BeerList-edit {
+    margin-right: 10px;
+    color: #2664c2;
+}
+.BeerList-edit:hover {
+    color: #3c86e7;
+}
+.BeerList-remove {
+    margin-left: 10px;
+    color: #c22626;
+}
+.BeerList-remove:hover {
+    color: #eb3535;
+}

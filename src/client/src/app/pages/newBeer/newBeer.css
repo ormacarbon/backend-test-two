@@ -1,0 +1,51 @@
+/* -----> NewBeer Container <----- */
+.NewBeer-background {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    background: #15312C;
+}
+.NewBeer-container {
+    width: 500px;
+    padding: 30px 20px;
+    margin-top: 40px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #f7f7f7;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* -----> Icons <----- */
+.NewBeer-social-media {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.NewBeer-social-media > div {
+    cursor: pointer;
+    transition: 0.3s;
+    color: #ccc;
+}
+.NewBeer-social-media svg {
+    margin: 20px 0;
+    transition: 0.3s;
+} 
+.NewBeer-social-media > div svg:hover {
+    transform: scale(1.1);
+    color: #fff;
+}
+
+/* -----> Media Query <----- */
+@media (max-width: 540px) {
+    .NewBeer-container {
+        width: 90%;
+        padding: 30px;
+    }
+}

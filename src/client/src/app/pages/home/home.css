@@ -1,0 +1,125 @@
+/* -----> Home Container <----- */
+.Home-container {
+    min-height: 100vh;
+    position: relative;
+}
+
+/* -----> Background <----- */
+.Home-background {
+    min-height: 100vh;
+    min-width: 100vw;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    background-image: url("../../shared/images/background.jpg");
+    background-size: cover;
+    background-position: center;
+}
+.Home-background-shadow {
+    height: 100vh;
+    height: 100vh;
+    background: linear-gradient(to right, #15312cb7  5%, #00000000 95%);
+}
+
+/* -----> Card <----- */
+.Home-card-container {
+    max-width: 900px;
+    height: 100vh;
+    padding: 0px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.Home-card-container > div:first-of-type {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+.Home-card {
+    width: 40%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 11px;
+    transform: scale(1);
+    transition: 0.3s;
+    background-color: #15312C
+}
+.Home-card:hover {
+    transform: scale(1.1);  
+}
+.Home-card div {
+    display: flex;
+    align-items: end;
+    gap: 20px;
+}
+
+/* -----> Icons <----- */
+.Home-card-container > div:last-of-type {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    transition: 0.3s;
+    color: #ccc;
+}
+.Home-card-container > div svg:last-of-type {
+    transition: 0.3s;
+}
+.Home-card-container > div svg:last-of-type:hover {
+    transform: scale(1.1);
+    color: #fff;
+}
+
+/* -----> Arrow <----- */
+.Home-arrow-new-beer,
+.Home-arrow-list {
+    margin-right: 30px;
+    transition: 0.3s;
+    color: #ccc;
+}
+.Home-card:hover .Home-arrow-new-beer,
+.Home-card:hover .Home-arrow-list {
+    margin-right: -30px;
+}
+
+/* -----> Text <----- */
+.Home-card-container h1 {
+    text-align: center;
+    font-size: 45px;
+    letter-spacing: 4px;
+    color: #fff;
+}
+.Home-card-container h2 {
+    color: #ddd;
+}
+.Home-card-container p {
+    width: 80%;
+    font-size: 13px;
+    color: #ccc; 
+}
+
+/* -----> Media Query <----- */
+@media (max-width: 1100px) {
+    .Home-card-container {
+        margin: auto;
+    }
+}
+@media (max-width: 750px) {
+    .Home-card {
+        width: 330px;
+    }
+    .Home-card-container > div:first-of-type {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+@media (max-height: 840px) {
+    .Home-card {
+        height: auto;
+        gap: 20px;
+    }
+}
