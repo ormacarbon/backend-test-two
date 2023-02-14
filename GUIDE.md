@@ -1,8 +1,11 @@
 # The project proposal
 
+
 <h3>The project is based on a place that brings together breweries with user interaction. Users can rate breweries and distribute coupons among beer connoisseurs.
 In order not to deviate from the proposal, the main ones are the Breweries, where you can find, find their menu, receive your information, such as the website, your location and make your disclosure.
 Technologies chosen for the project</h3>
+
+<p>The idea is to promote something different and original and also cool.</p>
 
 ### Featured languages:
 

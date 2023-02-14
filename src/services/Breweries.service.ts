@@ -79,6 +79,7 @@ class BreweriesService {
         );
 
         await this.updateTags(id, processedName);
+        await this.updateHref(id, `${process.env.ENDPOINT}/${href_contructor}`)
       }
 
       const data = await BreweriesModel.update(id, breweryUptade);
@@ -220,6 +221,13 @@ class BreweriesService {
       });
     } catch (error) {
       cacthErrosFunctions(error);
+    }
+  }
+  async updateHref(id: string, href: string) {
+    try {
+      return await BreweriesModel.updateHref(id, href)
+    } catch (error) {
+      
     }
   }
 }

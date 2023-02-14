@@ -257,6 +257,22 @@ class BreweryModel {
       catchErrorsFunctions(error);
     }
   }
+  async updateHref(id: string, href: string) {
+    try {
+      
+      const update =  this.brewerie.updateOne({
+        _id: id 
+      }, {
+        "external_urls.href" : href
+      })
+
+      console.log(update)
+
+      return update
+    } catch (error) {
+      catchErrorsFunctions(error)
+    }
+  }
 }
 
 export default new BreweryModel();

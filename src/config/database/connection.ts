@@ -1,5 +1,11 @@
 import mongoose from 'mongoose';
+import catchErrorsFunctions from '../../common/utils/err/catchErrorsFunction';
 
+
+/**
+ * @returns {void}
+ * @description Function to connect with mongodb database
+ */
 async function connection(): Promise<void> {
   try {
     mongoose.set('strictQuery', false);
@@ -10,7 +16,7 @@ async function connection(): Promise<void> {
       await mongoose.connect(process.env.DATABASE_CONNECTION as string);
     }
   } catch (error) {
-    console.log(error);
+    catchErrorsFunctions(error)
   }
 }
 
