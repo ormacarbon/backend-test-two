@@ -1,5 +1,7 @@
 # Beers API
 
+![Postman Collection](postman-colection.png)
+
 # Context
 
 Project of a beers CRUD API created using the SOLID principles, POO and TDD.
