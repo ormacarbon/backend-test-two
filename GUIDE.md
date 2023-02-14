@@ -1,12 +1,10 @@
 # The project proposal
 
-### The project are based in a place  in which it brings together the breweries with interating of users. The users can to assess  breweries and   to disclose cupons between lovers the beer.
+<h3>The project is based on a place that brings together breweries with user interaction. Users can rate breweries and distribute coupons among beer connoisseurs.
+In order not to deviate from the proposal, the main ones are the Breweries, where you can find, find their menu, receive your information, such as the website, your location and make your disclosure.
+Technologies chosen for the project</h3>
 
-### For dont scape of proposal, the principal are the Breweries, where can find, find your menus, recevied your informations, how website, your location.
-
-## Technologies
-
-Technologies chosen for the project
+### Featured languages:
 
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) 
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
@@ -17,14 +15,15 @@ Technologies chosen for the project
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
+### Others:
 
-Have libs as natural (used for tokenize words and storage)
+Have libs as natural (used for tokenize words and storage), 
+concurrently(using for commits), 
+Zod(Use for validate parameters from request, we can say, used like DTO)
+Multer (Used for receive files from request).
+Bcrypt, Used for hashing password
 
 </br>
-
-
-
-
 
 
 ## Using Docker (Recommended)
@@ -46,6 +45,7 @@ just run the project and access  <strong>/docs</strong>
 http://localhost:3000/docs /// default
 ```
 
+<br/>
 
 ## Instalation
 
@@ -71,6 +71,9 @@ If you choose the container, feel free to run the command
 ```npm
 $ docker run -d -p 27017:27017 mongo
 ```
+
+<br/>
+
 ## Collection
 
 You can find db.json file and collection postman in directory data
