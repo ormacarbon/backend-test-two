@@ -8,7 +8,7 @@ const swaggerDocs = require("../src/docs/swagger.json");
 
 const routes = (app) => {
     app.route('/').get((req, res) => {
-        res.status(200).send("Beer api")
+        res.status(200).send("Beer api - go to '/api-docs'")
     })
 
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)) 

@@ -216,15 +216,6 @@
                         "required": true
                     }
                 ],
-                "requestBody": {
-                    "content": {
-                        "application/JSON": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Beer"
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Deleted successfully",
@@ -243,6 +234,35 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/Not Found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            }
+        },
+        "/beers/insertData": {
+            "post": {
+                "summary": "Insert beers",
+                "description": "Insert beers of 'db.json' file",
+                "tags": [
+                    "Beers"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Data inserted successfully",
+                        "content": {
+                            "application/JSON": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500": {
                         "$ref": "#/components/responses/GeneralError"
@@ -293,8 +313,7 @@
                         "required": true
                     },
                     "city": {
-                        "type": "string",
-                        "required": true
+                        "type": "string"
                     },
                     "coordinates": {
                         "type": "array",
@@ -304,8 +323,7 @@
                         "required": true
                     },
                     "country": {
-                        "type": "string",
-                        "required": true
+                        "type": "string"
                     },
                     "description": {
                         "type": "string"
@@ -315,12 +333,10 @@
                         "required": true
                     },
                     "name": {
-                        "type": "string",
-                        "required": true
+                        "type": "string"
                     },
                     "state": {
-                        "type": "string",
-                        "required": true
+                        "type": "string"
                     },
                     "website": {
                         "type": "string"

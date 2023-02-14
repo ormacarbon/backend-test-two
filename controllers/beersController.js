@@ -1,4 +1,8 @@
 import beers from "../src/models/Beer.js";
+// import JSON
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const beerData = require("../db.json");
 
 class BeerController {
 
@@ -19,6 +23,8 @@ class BeerController {
         beers.findById(id, (err, beers) => {
             if (err) {
                 res.status(400).send({ message: `${err.message} - Error while searching record, check if your id is right` })
+            } else if (beers === null || beers.length === 0 ) {
+                res.status(404).send({ message: `Record with ID '${id}' not found` },)
             } else {
                 res.status(200).send(beers)
             }
@@ -74,6 +80,19 @@ class BeerController {
             } else {
                 res.status(200).send({ message: 'Beer deleted successfully' })
             }
+        })
+    }
+
+    static insertData = (req, res) => {
+        const data = beerData;
+
+        beers.insertMany(data, (err, r) => {
+            if (err) {
+                res.status(500).send({ message: `${err.message} - Error while inserting records` },)
+            } else {
+                res.status(201).send({ message: 'Data inserted successfully' })
+            }
+
         })
     }
 }
