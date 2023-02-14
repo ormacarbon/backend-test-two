@@ -6,29 +6,28 @@ services:
      - 3000:3000
     volumes:
       - ".:/usr/app"
+    networks:
+      - application-network
+    environment:
+      - DATABASE_CONNECTION=mongodb://172.17.0.1:27017/Application
+      - DATABASE_CONNECTION_TEST=mongodb://172.17.0.1:5005/Application
 
     depends_on:
       - database
       - database_test
-    networks:
-      - application_network    
   database:
     image: mongo
-    container_name: MONGODB_APP
     ports:
-      - 27017:27017
+      - "27017:27017"
     networks:
-      - application_network
-
+      - application-network
   database_test:
     image: mongo
-    container_name: MONGODB_APP_TEST
     ports:
-      - 5005:5005
+      - "5005:5005"
     networks:
-      - application_network
-
-
+      - application-network
+  
 networks:
-  application_network:
+  application-network:
     driver: bridge
