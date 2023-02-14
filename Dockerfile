@@ -2,11 +2,11 @@ FROM node:19.3.0
 
 LABEL maintainer="Victor Santos"
 
-WORKDIR /usr/app
+WORKDIR /app
 
-ADD package.json /usr/app
+ADD package.json /app
 RUN npm install 
-ADD . /usr/app
+ADD . .
 
 
 
@@ -17,4 +17,3 @@ ENV DATABASE_CONNECTION_TEST=mongodb://172.17.0.1:5005/Application
 EXPOSE 3000
 
 CMD ["npm","run", "dev"]
-
