@@ -1,5 +1,4 @@
 import { Express } from "express";
-import "express-async-errors";
 import { bodyParser, cors } from "../middlewares";
 import { contentType } from '../middlewares/content-types/content-types';
 

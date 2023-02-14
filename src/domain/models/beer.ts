@@ -6,7 +6,7 @@ export interface BeerModels {
   city: string
   coordinates: number[]
   country: string
-  description: string
+  description?: string
   ibu: number
   name: string
   state: string

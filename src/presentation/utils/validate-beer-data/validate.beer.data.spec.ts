@@ -144,26 +144,6 @@ describe("ValidateBeerData", () => {
 
     expect(response).toBe('country');
   })
-  
-  it("Should return 400 if no description is provided", () => {
-    const sut = makeSut();
-    const body = {
-        name: "Stone House Stout",
-        abv:8.918797384901016,
-        address:"141 South Main Street",
-        category:"British Ale",
-        city:"Slippery Rock",
-        coordinates:[41.0638,-80.0556],
-        country:"United States",
-        ibu:104,
-        state:"Pennsylvania",
-        website:"http://www.northcountrybrewing.com"
-      }
-
-    const response = sut.validate(body);
-
-    expect(response).toBe('description');
-  })
 
   it("Should return 400 if no ibu is provided", () => {
     const sut = makeSut();
