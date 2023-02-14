@@ -19,7 +19,7 @@ class MenuService {
     try {
       const errors = [];
 
-      const brewery = await BreweriesService.findByID(data.owner);
+      const brewery = await BreweriesService.findById(data.owner);
 
       if (!brewery) {
         errors.push('Error: Brewery not find');
@@ -55,7 +55,7 @@ class MenuService {
     try {
       const errors = [];
 
-      const brewery = await BreweriesService.findByID(data.owner);
+      const brewery = await BreweriesService.findById(data.owner);
 
       if (!brewery) {
         errors.push('Error: Brewery not found');

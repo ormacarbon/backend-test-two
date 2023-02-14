@@ -3,13 +3,14 @@ import { NextFunction, Request, Response } from 'express';
 import BreweryDTO from '../dtos/breweries/Brewery.dto';
 import BreweryUpdateDTO from '../dtos/breweries/BreweryUpdate.dto';
 import SearchDTO from '../dtos/search/search.dto';
+
 import { Filters } from '../interfaces/Filters.interface';
 import { CustomLimitRequest } from '../middlewares/validationLimit';
-
 import BreweriesService from '../services/Breweries.service';
+
 import { InvalidArgumentError } from '../services/err/Errors';
 
-class BreweriesHandlerController {
+class BreweriesController {
   async store(req: Request, res: Response, next: NextFunction) {
     try {
       const body = BreweryDTO.parse(req.body);
@@ -37,7 +38,7 @@ class BreweriesHandlerController {
         );
       }
 
-      const brewerie = await BreweriesService.findByID(id);
+      const brewerie = await BreweriesService.findById(id);
 
       return res.json(brewerie);
     } catch (error) {
@@ -59,7 +60,10 @@ class BreweriesHandlerController {
 
       const { limit } = req;
 
-      const data = await BreweriesService.findBrewelers(filters, limit);
+      const data = await BreweriesService.findBreweleries(
+        filters,
+        limit as number
+      );
 
       return res.status(200).json(data);
     } catch (error) {
@@ -100,6 +104,10 @@ class BreweriesHandlerController {
       const body = BreweryUpdateDTO.parse(req.body);
 
       const { id } = req.params;
+
+      if (!Object.keys(body).length) {
+        throw new InvalidArgumentError('Error: Not arguments');
+      }
 
       await BreweriesService.update(id, body);
 
@@ -162,4 +170,4 @@ class BreweriesHandlerController {
   }
 }
 
-export default new BreweriesHandlerController();
+export default new BreweriesController();

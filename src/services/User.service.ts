@@ -138,7 +138,7 @@ class UserService {
 
   private async findById(id: string) {
     try {
-      return await UserModel.findById(id);
+      return await UserModel.findUserById(id);
     } catch (error) {
       catchErrorsFunctions(error);
     }

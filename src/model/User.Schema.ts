@@ -29,7 +29,7 @@ class UserModel {
       catchErrorsFunctions(error);
     }
   }
-  async findById(id: string) {
+  async findUserById(id: string) {
     try {
       return await this.User.findById(id);
     } catch (error) {

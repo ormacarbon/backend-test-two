@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { JsonWebTokenError } from 'jsonwebtoken';
-import { find } from 'rxjs';
+
 import jwt from '../common/utils/auth/jwt';
 
 import { UserCreateDTO, UserLoginDTO } from '../dtos/User/User.dto';

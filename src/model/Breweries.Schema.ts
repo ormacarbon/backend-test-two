@@ -61,7 +61,7 @@ class BreweryModel {
     return await this.brewerie.find().limit(limit as number);
   }
 
-  async find(id: string) {
+  async findById(id: string) {
     try {
       const brewery = await this.brewerie
         .findById(id)
@@ -73,7 +73,7 @@ class BreweryModel {
     }
   }
 
-  async create(brewerie: constructorBreweryInterface) {
+  async store(brewerie: constructorBreweryInterface) {
     try {
       const data = await this.brewerie
         .create(brewerie)
@@ -137,7 +137,7 @@ class BreweryModel {
     }
   }
 
-  async findBreweryWithFilter<T>(filters: Filters, limit: T) {
+  async findBreweleries<T>(filters: Filters, limit: T) {
     return await this.brewerie.find(filters).limit(limit as number);
   }
 
@@ -203,7 +203,7 @@ class BreweryModel {
     }
   }
 
-  async findUserInReputation(idUser: string) {
+  async findUserByIdReputation(idUser: string) {
     try {
       const data = await this.brewerie.findOne({
         'list_reputation.user_id': idUser
@@ -236,11 +236,28 @@ class BreweryModel {
       cacthErrosFunctions(error);
     }
   }
-  async findByTag(search: string) {
+  async searchByTags(search: string) {
     try {
       return await this.brewerie.find({
         tags: search
       });
+    } catch (error) {
+      catchErrorsFunctions(error);
+    }
+  }
+
+  async addTag(id: string, tag: string) {
+    try {
+      return await this.brewerie.updateOne(
+        {
+          _id: id
+        },
+        {
+          $push: {
+            tags: tag
+          }
+        }
+      );
     } catch (error) {
       catchErrorsFunctions(error);
     }

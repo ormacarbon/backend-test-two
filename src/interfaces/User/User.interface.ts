@@ -13,7 +13,7 @@ export interface UserLoginInterface {
 
 export interface User extends Document {
   username: string;
-  password: string;
+  password?: string;
   email: string;
   id: string;
   created_at: Date;

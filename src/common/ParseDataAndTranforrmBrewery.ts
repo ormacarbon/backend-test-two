@@ -11,7 +11,7 @@ export async function parseDataAndTransform(
   brewery: BreweryInterface
 ) {
   if (brewery.name) {
-    const findName = await BreweriesService.findName(brewery.name);
+    const findName = await BreweriesService.findByName(brewery.name);
 
     if (findName) {
       errors.push('Error: Name already in use');

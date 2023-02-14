@@ -3,36 +3,39 @@ import cacthErrosFunctions from '../common/utils/err/catchErrorsFunction';
 import BrewelyInterface from '../interfaces/Breweries/Brewery.interface';
 import { BreweriesUpdateInterface } from '../interfaces/Breweries/BreweryUptade.interface';
 import { Filters } from '../interfaces/Filters.interface';
-import BreweriesModel from '../model/Breweries.Schema';
+
 import { InvalidArgumentError } from '../services/err/Errors';
 import MenuService from '../services/Menu.service';
 import { parseDataAndTransform } from '../common/ParseDataAndTranforrmBrewery';
 
+import BreweriesModel from '../model/Breweries.Schema';
+import natural from 'natural';
+
 class BreweriesService {
-  async findBrewelers<T>(filters: Filters, limit: T) {
+  async findBreweleries<T>(filters: Filters, limit: T) {
     try {
       const filteredObject = Object.fromEntries(
         Object.entries(filters).filter(([, value]) => value != 'undefined')
       );
 
       if (filteredObject) {
-        return await BreweriesModel.findBreweryWithFilter(
+        return await BreweriesModel.findBreweleries(
           filteredObject,
-          limit
+          limit as number
         );
       }
 
-      return await BreweriesModel.findAllBreweries(limit);
+      return await BreweriesModel.findAllBreweries(limit as number);
     } catch (error) {
       cacthErrosFunctions(error);
     }
   }
 
-  async findByID(id: string) {
+  async findById(id: string) {
     try {
       const errors = [];
 
-      const brewery = await BreweriesModel.find(id);
+      const brewery = await BreweriesModel.findById(id);
 
       if (!brewery) {
         errors.push(`Error: Brewery not found`);
@@ -52,9 +55,9 @@ class BreweriesService {
     try {
       const errors = [];
 
-      const findBrewery = await BreweriesModel.find(id);
+      const finrewery = await BreweriesModel.findById(id);
 
-      if (!findBrewery) {
+      if (!finrewery) {
         errors.push('Error: Brewery not found');
       }
 
@@ -62,10 +65,30 @@ class BreweriesService {
         throw new InvalidArgumentError(JSON.stringify(errors));
       }
 
-      await BreweriesModel.update(id, breweryUptade);
+      if (breweryUptade.name) {
+        const href_contructor: string = breweryUptade.name
+          .replace(/ /g, '')
+          .toLowerCase();
+
+        breweryUptade.path = href_contructor;
+
+        const tokenizer = new natural.WordTokenizer();
+
+        const processedName = tokenizer.tokenize(
+          breweryUptade.name.toLowerCase()
+        );
+
+        await this.updateTags(id, processedName);
+      }
+
+      const data = await BreweriesModel.update(id, breweryUptade);
+
+      return data;
     } catch (error) {
       cacthErrosFunctions(error);
     }
+
+    return breweryUptade;
   }
 
   async storeWithJSONFile(data: string) {
@@ -81,9 +104,9 @@ class BreweriesService {
 
         if (!errors.length) {
           if (data) {
-            const createdBrewery = await BreweriesModel.create(data);
-            if (createdBrewery) {
-              await MenuService.store(createdBrewery.id);
+            const createrewery = await BreweriesModel.store(data);
+            if (createrewery) {
+              await MenuService.store(createrewery.id);
             }
           }
         }
@@ -94,6 +117,8 @@ class BreweriesService {
     } catch (error) {
       cacthErrosFunctions(error);
     }
+
+    return true;
   }
 
   async store(brewery: BrewelyInterface) {
@@ -107,7 +132,7 @@ class BreweriesService {
       }
 
       if (data) {
-        const brewelyStored = await BreweriesModel.create(data);
+        const brewelyStored = await BreweriesModel.store(data);
         await MenuService.store(brewelyStored?.id);
 
         return brewelyStored;
@@ -115,13 +140,15 @@ class BreweriesService {
     } catch (error) {
       cacthErrosFunctions(error);
     }
+
+    return brewery;
   }
 
   async delete(id: string) {
     try {
       const errors = [];
 
-      const find = await this.findByID(id);
+      const find = await this.findById(id);
 
       if (!find) {
         errors.push('Error: Brewely not found;');
@@ -139,53 +166,17 @@ class BreweriesService {
     }
   }
 
-  async verifyCoordenates(coords: number[]) {
+  async findByName(name: string) {
     try {
-      return await BreweriesModel.findCoordenatesDatabase(coords);
+      return BreweriesModel.findByName(name);
     } catch (error) {
       cacthErrosFunctions(error);
     }
   }
 
-  async verifyWebSite(website: string) {
+  async findUserReputation(idUser: string) {
     try {
-      return await BreweriesModel.findWebSiteHref(website);
-    } catch (error) {
-      cacthErrosFunctions(error);
-    }
-  }
-
-  async findByName(path: string) {
-    try {
-      const errors = [];
-
-      const result = await BreweriesModel.findByName(path);
-
-      if (!result) {
-        errors.push('Invalid href or not exists');
-      }
-
-      if (errors.length > 0) {
-        throw new InvalidArgumentError(JSON.stringify(errors));
-      }
-
-      return result;
-    } catch (error) {
-      cacthErrosFunctions(error);
-    }
-  }
-
-  async findName(name: string) {
-    try {
-      return BreweriesModel.findName(name);
-    } catch (error) {
-      cacthErrosFunctions(error);
-    }
-  }
-
-  async findUserInReputation(idUser: string) {
-    try {
-      return BreweriesModel.findUserInReputation(idUser);
+      return BreweriesModel.findUserByIdReputation(idUser);
     } catch (error) {
       cacthErrosFunctions(error);
     }
@@ -194,11 +185,21 @@ class BreweriesService {
   async searchByTags(data: string[]) {
     try {
       const captureResponse = data.map((search) =>
-        BreweriesModel.findByTag(search).then((data) => data)
+        BreweriesModel.searchByTags(search).then((data) => data)
       );
 
       return Promise.all(captureResponse).then((resolvedData) => {
         return resolvedData;
+      });
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async updateTags(id: string, data: string[]) {
+    try {
+      data.forEach(async (tag) => {
+        await BreweriesModel.addTag(id, tag);
       });
     } catch (error) {
       cacthErrosFunctions(error);

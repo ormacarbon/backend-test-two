@@ -11,6 +11,8 @@ export interface BreweriesUpdateInterface {
   name?: string;
   state?: string;
   website?: string;
+  path?: string;
+  tags?: string[];
 }
 
 export type Coords = number[];
