@@ -48,7 +48,7 @@ Será necessário que a porta 3000 e 3001 estejam disponíveis para a aplicaçã
 ```
 git@github.com:AiramToscano/backend-test-two.git
 ```
-2 - Entre na pasta `app` e suba o docker-compose, todas as depêndencias serão automaticamente instaladas
+2 - Suba o docker-compose, todas as depêndencias serão automaticamente instaladas
 ```
 npm run compose:up   // para subir a aplicação
 npm run compose:down // para parar completamente a aplicação
