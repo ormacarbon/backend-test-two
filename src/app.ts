@@ -1,10 +1,30 @@
 import express from "express";
 import beersRoute from "./routes/Beers.route";
 
-const app = express();
+class App {
+  public app: express.Express;
 
-app.use(express.json());
+  constructor() {
+    this.app = express();
+    this.config();
+    this.routes();
+  }
 
-app.use("/beers", beersRoute);
+  private config(): void {
+    this.app.use(express.json());
+  }
 
-export default app;
+  private routes(): void {
+    this.app.use("/beers", beersRoute);
+  }
+
+  public start(PORT: number): void {
+    this.app.listen(PORT, () =>
+      console.log(`Server is running on PORT: ${PORT}`)
+    );
+  }
+}
+
+export { App };
+
+export const { app } = new App();

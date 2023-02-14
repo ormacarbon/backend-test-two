@@ -1,11 +1,11 @@
-import app from "./app";
+import { App } from "./app";
 import connectToDatabase from "./database/Connection";
 
 const PORT = 8000;
 
 connectToDatabase()
   .then(() => {
-    app.listen(PORT, () => console.log(`Running server on port: ${PORT}`));
+    new App().start(PORT);
   })
   .catch((error) => {
     console.log("Connection with database generated an error:\r\n");
