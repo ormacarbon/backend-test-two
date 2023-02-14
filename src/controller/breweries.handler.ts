@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import ValueIsHeximaDecimal from '../common/utils/err/ValueIsHeximadecimal';
 
 import BreweryDTO from '../dtos/breweries/Brewery.dto';
 import BreweryUpdateDTO from '../dtos/breweries/BreweryUpdate.dto';
@@ -73,20 +74,8 @@ class BreweriesController {
   async delete(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
 
-    /**
-     * @var regex   Check if id param is hexadecimal
-     * @default
-     * @type {RegExp}
-     */
-
-    const regex = /[0-9A-Fa-f]{6}/g;
-
     try {
-      if (!regex.test(id)) {
-        throw new InvalidArgumentError(
-          'Error: not-valid-param; hexadecimal neccessity'
-        );
-      }
+      ValueIsHeximaDecimal(id);
 
       await BreweriesService.delete(id);
 
@@ -128,19 +117,13 @@ class BreweriesController {
 
       if (fileJSON) {
         const data = await BreweriesService.storeWithJSONFile(fileJSON);
-
-        return res.status(201).json({
-          message: data
-            ? 'Data was added, but some duplicate keys were rejected, check your file;'
-            : 'Dadas was added with sucess.',
-          duplicateKeys: data,
-
-          statusCode: 200
-        });
+        console.log(data);
+        return res.status(201).json(data);
+      } else {
+        throw new InvalidArgumentError('Error: unknown file');
       }
-
-      throw new InvalidArgumentError('Error: unknown file');
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }

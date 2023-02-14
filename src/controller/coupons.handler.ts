@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import ValueIsHeximaDecimal from '../common/utils/err/ValueIsHeximadecimal';
 import CouponDTO from '../dtos/Coupons/Coupon.dto';
 import { CouponInterface } from '../interfaces/Coupons/Coupon.interface';
 import CouponsService from '../services/Coupons.service';
@@ -30,6 +31,8 @@ class BreweriesHandlerController {
     const { id } = req.params;
 
     try {
+      ValueIsHeximaDecimal(id);
+
       await CouponsService.delete(id);
 
       return res.status(204).json({

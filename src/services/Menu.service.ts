@@ -55,6 +55,13 @@ class MenuService {
     try {
       const errors = [];
 
+      /**
+       * Capture all "+"
+       */
+      const regex = /(\+)/g;
+
+      data.name = data.name.replace(regex, ' ');
+
       const brewery = await BreweriesService.findById(data.owner);
 
       if (!brewery) {

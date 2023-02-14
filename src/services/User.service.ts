@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import jwt from '../common/utils/auth/jwt';
 import catchErrorsFunctions from '../common/utils/err/catchErrorsFunction';
 import {
-  User,
   UserCreateInterface,
   UserLoginInterface
 } from '../interfaces/User/User.interface';
@@ -53,15 +52,7 @@ class UserService {
 
   async findAll() {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const data = await UserModel.findAll().then((value: any) => {
-        return value.map((element: User) => ({
-          id: element.id,
-          username: element.username,
-          email: element.email,
-          created_at: element.created_at
-        }));
-      });
+      const data = await UserModel.findAll();
 
       return data;
     } catch (error) {
@@ -112,8 +103,8 @@ class UserService {
     try {
       const errors = [];
 
-      const user = this.findById(id);
-
+      const user = await this.findById(id);
+      console.log(user);
       if (!user) {
         errors.push(`Error: User not find`);
       }

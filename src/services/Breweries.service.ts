@@ -95,12 +95,10 @@ class BreweriesService {
     try {
       const content: BrewelyInterface[] = JSON.parse(data);
 
-      let duplicateKey = false;
-
-      for (let i = 0; i < content.length; i++) {
+      content.forEach(async (element) => {
         const errors: string[] = [];
 
-        const data = await parseDataAndTransform(errors, content[i]);
+        const data = await parseDataAndTransform(errors, element);
 
         if (!errors.length) {
           if (data) {
@@ -110,15 +108,12 @@ class BreweriesService {
             }
           }
         }
-        duplicateKey = true;
-      }
+      });
 
-      return duplicateKey;
+      return;
     } catch (error) {
       cacthErrosFunctions(error);
     }
-
-    return true;
   }
 
   async store(brewery: BrewelyInterface) {
@@ -183,6 +178,14 @@ class BreweriesService {
   async findUserReputation(idUser: string) {
     try {
       return BreweriesModel.findUserByIdReputation(idUser);
+    } catch (error) {
+      cacthErrosFunctions(error);
+    }
+  }
+
+  async findNameNotValidation(name: string) {
+    try {
+      return BreweriesModel.findName(name);
     } catch (error) {
       cacthErrosFunctions(error);
     }

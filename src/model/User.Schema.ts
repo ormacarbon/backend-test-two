@@ -39,7 +39,7 @@ class UserModel {
 
   async findAll() {
     try {
-      const data = await this.User.find();
+      const data = await this.User.find().select('-password');
 
       return data;
     } catch (error) {

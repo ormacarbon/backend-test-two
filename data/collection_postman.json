@@ -1,0 +1,700 @@
+{
+	"info": {
+		"_postman_id": "823e3d0a-382f-4c17-9248-cfd0917987eb",
+		"name": "Back End Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Brewerles",
+			"item": [
+				{
+					"name": "Create Brewery",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"abv\": 2,\n   \"address\": \"Vila do Rosario\",\n   \"category\": \"Bebidas geladas\",\n   \"city\": \"Angra do reis\",\n   \"coordinates\": [434,5454],\n   \"country\": \"brazil\",\n   \"description\": \"cervejaria\",\n   \"ibu\": 23,\n   \"name\": \"BebidinhaGeladinhaGostosinha\",\n   \"state\": \"Rio de Janeiro\",\n   \"website\": \"bebidasgeladas.com.br\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/breweries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"breweries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find brewery by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/brewery/63eadb27dca4e9c389e8f7ec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"brewery",
+								"63eadb27dca4e9c389e8f7ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Brewerles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Caipirinha\",\n    \"description\": \"Uma otima bebida\",\n    \"ingredients\": [\"limão\", \"cachaça\", \"corante\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/breweries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"breweries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find bewlerles with filters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/breweries?country=brazil&city=angra+dos+reis&state=rio+de+janeiro&limit=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"breweries"
+							],
+							"query": [
+								{
+									"key": "country",
+									"value": "brazil"
+								},
+								{
+									"key": "city",
+									"value": "angra+dos+reis"
+								},
+								{
+									"key": "state",
+									"value": "rio+de+janeiro"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Are you looking to find a brewery near where you are?\n\nthen filter the data and be happy\n\nHere, you can find brewely through of querys, filtering city, state and country.\n\n\nUPDATE:\nNow, limit of responses are reality.."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete brewery",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/brewery/63eadafddca4e9c389e8f7e0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"brewery",
+								"63eadafddca4e9c389e8f7e0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update brewery",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"ze do coco\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/brewery/63eadb27dca4e9c389e8f7ec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"brewery",
+								"63eadb27dca4e9c389e8f7ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create many brewery with JSON file",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"type": "file",
+									"src": "/home/victor/Documentos/backend-test-two/db.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/breweries/file",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"breweries",
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find brewely by Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"abv\": 1,\n   \"address\": \"Contanto\",\n   \"category\": \"brinquedos\",\n   \"city\": \"rosairo\",\n   \"coordinates\": [434,5454],\n   \"country\": \"braszil\",\n   \"description\": \"cervejaria\",\n   \"ibu\": 23,\n   \"name\": \"cervekaria top322\",\n   \"state\": \"californaia\",\n   \"website\": \"google.com.br\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/zedococo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"zedococo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Menu",
+			"item": [
+				{
+					"name": "Add menu",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Caipirinha Vermelha\",\n    \"description\": \"Uma otima bebida\",\n    \"ingredients\": [\"limão\", \"cachaça\", \"corante\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/menu/63eadb27dca4e9c389e8f7ec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"menu",
+								"63eadb27dca4e9c389e8f7ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Menu with name Brewely",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/menu/brewery/zedococo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"menu",
+								"brewery",
+								"zedococo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Menus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/menu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Element Menu",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/menu/63eadb27dca4e9c389e8f7ec/Caipirinha+Vermelha",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"menu",
+								"63eadb27dca4e9c389e8f7ec",
+								"Caipirinha+Vermelha"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coupouns",
+			"item": [
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/coupons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"CUPOM BRAHMA: ACIMA DE 50 COMPRAS 90% OFF\",\n    \"description\": \"APENAS POR UM DIA A BRAHMA ESTA LIBERANDO 90% OFF EM SEUS PRODUTOS\",\n    \"status\": \"ACTIVE\",\n    \"created_by\": \"Victor\",\n    \"discount_max\": 90,\n    \"found_on\": {\n        \"name\": \"Brahma\",\n        \"website\": \"brahma.com.br\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/coupons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"CUPOM BRAHMA: ACIMA DE 50 COMPRAS 90% OFF\",\n    \"description\": \"APENAS POR UM DIA A BRAHMA ESTA LIBERANDO 90% OFF EM SEUS PRODUTOS\",\n    \"status\": \"ACTIVE\",\n    \"created_by\": \"Victor\",\n    \"discount_max\": 90,\n    \"found_on\": {\n        \"name\": \"Brahma\",\n        \"website\": \"brahma.com.br\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/coupons/63eae380afd12bbc5457d10e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"coupons",
+								"63eae380afd12bbc5457d10e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"vitinho\",\n    \"email\": \"email@email.com\",\n    \"password\": \"senha123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"vitinho\",\n    \"email\": \"email@email.com\",\n    \"password\": \"senha123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/all/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"all",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"email@email.com\",\n    \"password\": \"senha123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find User by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"vitinho\",\n    \"email\": \"email@email.com\",\n    \"password\": \"senha123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user/63e8dbdf173ccdc1400e9676",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"63e8dbdf173ccdc1400e9676"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find User With Header",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer <token_here>",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"vitinho\",\n    \"email\": \"email@email.com\",\n    \"password\": \"senha123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reputation",
+			"item": [
+				{
+					"name": "Add reputation",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWE4NDk5OTZiMzcyMTEwM2U0MDhlNiIsImlhdCI6MTY3NjMxMzc1MywiZXhwIjoxNjc2NDAwMTUzfQ.k2940wClClla2Og-7yxtYu3JxVJnfz4pxPHMqGbQdTE",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/reputation/63ea849296b3721103e408e1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"reputation",
+								"63ea849296b3721103e408e1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Search",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"search\": [\"testing\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

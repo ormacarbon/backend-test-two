@@ -1,4 +1,5 @@
 import catchErrorsFunctions from '../common/utils/err/catchErrorsFunction';
+import { handleErrorDatabase } from '../common/utils/err/errorDatabaseHandler';
 import { CouponInterface } from '../interfaces/Coupons/Coupon.interface';
 import CoupounsModel from '../model/coupons.Schema';
 import { InvalidArgumentError } from './err/Errors';
@@ -40,7 +41,7 @@ class CoupounsService {
 
   async findById(id: string) {
     try {
-      return await CoupounsModel.findById(id);
+      return await CoupounsModel.findById(id).catch(handleErrorDatabase);
     } catch (error) {
       catchErrorsFunctions(error);
     }

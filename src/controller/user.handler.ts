@@ -34,7 +34,6 @@ class UserHandler {
   async findUserById(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-
       const data = await UserService.findUserById(id);
       res.status(200).json(data);
     } catch (error) {
@@ -45,7 +44,6 @@ class UserHandler {
   async findAll(req: Request, res: Response, next: NextFunction) {
     try {
       const data = await UserService.findAll();
-
       res.status(200).json(data);
     } catch (error) {
       next(error);
