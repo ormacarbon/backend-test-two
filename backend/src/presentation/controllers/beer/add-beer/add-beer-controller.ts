@@ -26,36 +26,9 @@ export class AddBeerController implements Controller {
 				return badRequest(error)
 			}
 
-			// Getting data from request
+			const beerRequest = httpRequest.body
 
-			const {
-				abv,
-				address,
-				category,
-				city,
-				coordinates,
-				country,
-				description,
-				ibu,
-				name,
-				state,
-				website
-			} = httpRequest.body
-
-			const beer = await this.addBeer.add({
-				abv,
-				address,
-				category,
-				city,
-				coordinates,
-				country,
-				description,
-				ibu,
-				name,
-				state,
-				website,
-				created_at: new Date()
-			})
+			const beer = await this.addBeer.add(beerRequest)
 
 			return ok(beer)
 		} catch (err: any) {

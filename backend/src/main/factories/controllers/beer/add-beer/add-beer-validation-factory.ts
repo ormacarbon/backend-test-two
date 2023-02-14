@@ -5,7 +5,7 @@ import { ValidationComposite } from '../../../../../validations/validators/valid
 export const makeAddBeerValidation = (): ValidationComposite => {
 	// removing category and description because both fields are optional
 	const validations: Validation[] = []
-	for (const field of ['abv', 'address', 'city', 'coordinates', 'country', 'ibu', 'name', 'state']) {
+	for (const field of ['name']) {
 		validations.push(new RequiredFieldsValidation(field))
 	}
 	return new ValidationComposite(validations)
