@@ -11,7 +11,7 @@ Antes de utilizar o projeto, é necessario ter Git, Docker/Docker-compose e npm/
 
 ## 📃 Sobre
   <p>
-    Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo é realizar alguns desafios propostos pela empresa Orma Carbon.
+    Estruturar uma aplicação backend, dockerizada, cujo objetivo é salvar o banco de dados e criar uma nova API com dados do json, e também realizar alguns desafios propostos pela empresa Orma Carbon.
   </p>
 
 
