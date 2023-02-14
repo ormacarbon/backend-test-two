@@ -86,7 +86,6 @@ class UserService {
         if (findEmail) {
           const access_key = jwt.access_token(findEmail.id);
           const reflesh_token = jwt.reflesh_token(findEmail.id);
-
           return {
             access_key,
             reflesh_token

@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
 import jwt, { JsonWebTokenError, JwtPayload } from 'jsonwebtoken';
 
 class JWT {
@@ -6,7 +8,7 @@ class JWT {
       {
         id
       },
-      process.env.SECRET as string,
+      String(process.env.SECRET),
       {
         expiresIn: '1d'
       }
@@ -14,7 +16,7 @@ class JWT {
   }
 
   reflesh_token(id: string): string {
-    return jwt.sign({ id: id }, process.env.SECRET as string, {
+    return jwt.sign({ id: id }, String(process.env.SECRET), {
       expiresIn: '7d'
     });
   }
