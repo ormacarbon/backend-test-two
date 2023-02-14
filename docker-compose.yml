@@ -20,11 +20,11 @@ services:
     restart: always
     environment:
       - DATABASE_URL=postgresql://root:root@db:5432/brewery
-      - PORT=3002
+      - PORT=3001
     volumes:
       - .:/app
     ports:
-      - '3002:3002'
+      - '3001:3001'
     links:
       - db
     depends_on:
