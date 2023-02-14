@@ -20,7 +20,7 @@ export default class BeerService {
   public async create(
     beer: IBeer
   ): Promise<IController<Beer | string | Error | null>> {
-    if (!beer)
+    if (Object.keys(beer).length === 0)
       return {
         status: StatusHttp.BAD_REQUEST,
         message: "please enter all fields",
