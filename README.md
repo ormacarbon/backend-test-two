@@ -1,6 +1,6 @@
 # Beers API
 
-![Postman Collection](postman-colection.png)
+![Postman Collection](postman-collection.png)
 
 # Context
 
