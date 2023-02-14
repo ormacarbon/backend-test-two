@@ -15,7 +15,7 @@ Em primeiro lugar, entrar no diretorio ou code base onde está a aplicação bac
 ```sh
 cd backend
 ```
-Em segundo se faz necessário preencher as variáveis de ambiente, lembrando que a porta usada e mapeada pelo docker é a 8086 da aplicação e a do banco de dados é a 5432, e no DB_HOST sera o nome do serviço do docker é ```db```, bom o resto das variáveis fica a seu critério:
+Em segundo se faz necessário preencher as variáveis de ambiente, lembrando que a porta usada e mapeada pelo docker é a 8087 da aplicação.
 ```
 PORT=
 MONGOURL=
@@ -23,6 +23,12 @@ MONGOURL=
 A mongo url é basicamente essa mongodb://mongo:27017/nomedobanco
 o nome do banco coloquei orma_carbon
 ```
+Realizando build da aplicação
+```
+npm run build
+yarn build
+```
+
 Em seguida é so subir o container docker:
 
 ```
