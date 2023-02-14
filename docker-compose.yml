@@ -24,7 +24,7 @@ services:
   database_test:
     image: mongo
     ports:
-      - "5005:5005"
+      - "5005:27017"
     networks:
       - application-network
   

@@ -14,7 +14,7 @@ import ReputationsFunction from './ReputationsFunctions.service';
 class ReputationService {
   async add(reputation: Reputation) {
     try {
-      const brewery = await BreweriesService.findByID(reputation.id);
+      const brewery = await BreweriesService.findById(reputation.id);
 
       if (!brewery) {
         throw new InvalidArgumentError('nao posso continuar');
