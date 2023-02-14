@@ -8,4 +8,4 @@ COPY ./db.json  .
 
 COPY ./dist  .
 
-RUN npm install --omit=dev
+RUN npm install
