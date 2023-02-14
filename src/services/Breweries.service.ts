@@ -168,7 +168,13 @@ class BreweriesService {
 
   async findByName(name: string) {
     try {
-      return BreweriesModel.findByName(name);
+      const data = await BreweriesModel.findByName(name);
+
+      if (!data) {
+        throw new InvalidArgumentError('Invalid href or not exists;');
+      }
+
+      return data;
     } catch (error) {
       cacthErrosFunctions(error);
     }
