@@ -10,6 +10,6 @@ export type BeerModel = {
 	ibu: number
 	name: string
 	state: string
-	website: string
+	website?: string
   created_at: Date
 }
