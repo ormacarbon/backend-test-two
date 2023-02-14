@@ -74,8 +74,7 @@ Para testar as rotas basta subir o backend, as rotas estão documentadas no swag
 - `http://localhost:3001/api-docs/` - Documentada pelo Swagger.
 
 
-```
-## ⚙️ Executando os testes
+### ⚙️ Executando os testes
 
 Para essa aplicação back-end, foi feito testes unitarios, cobrindo 100% da aplicação.
 
@@ -85,7 +84,7 @@ Para essa aplicação back-end, foi feito testes unitarios, cobrindo 100% da apl
 
 Testes back-end com quase 100% de cobertura.
 
-```
+
 
 # Front-End
 
