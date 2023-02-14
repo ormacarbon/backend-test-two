@@ -8,7 +8,7 @@ services:
       - mongo
     image: cadastro-api
     volumes:
-      - ./dist:/api/dist
+      - ./dist:/dist
     command: npm start
     ports:
       - "5050:5050"

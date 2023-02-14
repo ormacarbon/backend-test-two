@@ -10,6 +10,7 @@ describe("readDbFile", () => {
         const data = await (0, read_db_file_1.readDbFile)();
         expect(data[0]).toHaveProperty("name");
     });
+    
     it("Should return an object of AddBeerData", async () => {
         const fakeBeer = {
             name: "Stone House Stout",
