@@ -7,9 +7,9 @@ services:
     depends_on:
       - mongo
     image: cadastro-api
-    command: npm start
     volumes:
       - ./dist:/api/dist
+    command: npm start
     ports:
       - "5050:5050"
     links:
