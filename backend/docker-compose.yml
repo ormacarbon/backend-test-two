@@ -1,0 +1,28 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongo-container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+  api:
+    build: .
+    container_name: orma_carbon_api
+    restart: always
+    command: npm run start
+    volumes:
+      - ./src:/usr/src/orma_carbon/src
+      - ./dist:/usr/src/orma_carbon/dist
+      - ./package.json:/usr/src/orma_carbon/package.json
+    ports:
+      - 8087:8087
+      - 9222:9222
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+volumes:
+  mongo_data:

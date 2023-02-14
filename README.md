@@ -1,61 +1,75 @@
-# **TESTE DE BACKEND**
+# Aplicação Node - Orma Carbon
 
-## SITUAÇÃO-PROBLEMA
+API HTTP em Node.js com TypeScript, Express e Docker e MongoDB. Tendo como front o React com o Sass.
 
-Você acabou de ser contratado para uma vaga de desenvolvedor backend de uma empresa que revende cervejas do mundo inteiro. O desenvolvedor anterior corrompeu completamente o banco de dados e a API anterior e sobrou apenas um arquivo .JSON com todas as informações do banco. Seu líder confiou a tarefa de recriar a API e o banco de dados a você.
+## Guia de desenvolvimento
 
-Neste teste, você deverá criar uma API com endpoints a serem consumidos via REST e um banco de dados, utilizando os dados fornecidos no arquivo. ````db.json````.
+Prerequisites:
+-  caso não utilize docker é recomendado ter uma versao do node mais atual.
+- `yarn` ou `npm` (para gerenciamento de dependências e execução de scripts)
+- `docker` e `docker-compose` (para executar o servidor, banco de dados localmente de forma isolada e reproduzível)
 
----------------------------------------------------------------------
+### Backend: 
 
-## REQUISITOS OBRIGATÓRIOS:
+Em primeiro lugar, entrar no diretorio ou code base onde está a aplicação backend:
+```sh
+cd backend
+```
+Em segundo se faz necessário preencher as variáveis de ambiente, lembrando que a porta usada e mapeada pelo docker é a 8087 da aplicação.
+```
+PORT=
+MONGOURL=
 
-- Seja original, projetos suspeitos de serem copiados serão descartados.
-- Queremos ver o seu código, e não o de outros.
-- Criar coleção no Postman (seu teste será testado por aqui).
+A mongo url é basicamente essa mongodb://mongo:27017/nomedobanco
+o nome do banco coloquei orma_carbon
+```
+Realizando build da aplicação
+```
+npm run build
+yarn build
+```
 
-## GIT
+Em seguida é so subir o container docker:
 
-- Faça um fork deste repositório.
-- Crie uma branch para codar as suas features.
-- Faça um pull-request quando o teste for finalizado.
+```
+sudo docker compose up
+```
 
-##### **NOTA: Será avaliado também se o nome da branch, títulos de commit, push e comentários possuem boa legibilidade.**
+Sem o docker:
+```
+npm i
+npm run start
+yarn start
+```
 
------------------------------------------------------
+### Frontend
 
-## FRAMEWORK -
+Entrando no diretorio específico:
 
-- Servidor: Express (Javascript/Typescript) *<u>**OU**</u>* Gin (Golang)
-- Banco de dados: MongoDB, DynamoDB, MySQL, Postgres...
+```sh
+cd frontend
+```
+Depois instalar as dependencias com ```yarn``` ou ```npm```:
 
------------------------------------------------------
+```
+npm install
+yarn
+```
+Agora é so rodar o script de inicialização que o frontend estará disponível em ```http://locahost:8086```
 
-## PROJETO
+```
+npm run dev
+yarn dev
+```
+### Testes
+Foi realizado alguns testes unitários e para rodar basta executar o comando:
+```
+npm run test
+```
 
-- Api deve conter pelo menos 1 endpoint para cada operação crud (Create, Read, Update, Delete).
-- Um endpoint para listagem de conteúdo.
-- Banco de dados a escolha do dev.
+Qualquer duvida só me chamar pelo linkedin
+```
+https://www.linkedin.com/in/gabriel-rodrigues-aaa352207/
+```
 
--------------------------------------------------------
-
-## REQUISITOS DIFERENCIAIS:
-
-- Seguir os princípios de SOLID.
-- Fazer o teste em GoLang.
-- Codar um código performático.
-- Utilizar inglês no projeto todo.
-- Utilizar Injeção de dependências.
-- Criar um frontend que consuma a API
-- Fazer deploy do mesmo (heroku, aws, google cloud ou outro da preferência).
-
-
-
----
-
-## ENTREGA
-
-- Faça um pull request e nomeie-o como no ex.: Teste de (Seu nome aqui).
-- Envie um email para schmidt@repenso.eco e kevin@repenso.eco com o link do pull request, do deploy (tanto do front quanto do back se feito), e anexe a coleção do postman.
-- Assim que avaliarmos seu teste, enviaremos uma devolutiva de sucesso ou falha, e caso seja aprovado, um link para agendar sua entrevista técnica.
 
