@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "14c505cc-2781-43e3-94d1-50639a26ae15",
+		"name": "Brewery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Load",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/brewery",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"brewery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"abv\": 91061,\r\n  \"ibu\": 40165,\r\n  \"address\": \"49401 Hoppe Forks\",\r\n  \"category\": \"Industrial\",\r\n  \"city\": \"San Rafael\",\r\n  \"coordinates\": [ 15771.06, 89112.66 ],\r\n  \"country\": \"Montserrat\",\r\n  \"description\": \"Omnis expedita vitae. Alias debitis sit minima officiis quaerat placeat eaque commodi. Dicta deleniti accusantium facilis natus porro. Ab aliquam animi minus asperiores architecto similique sapiente eveniet. Veniam explicabo vero harum tempore excepturi delectus.\",\r\n  \"name\": \"Miller, Grimes and Lakin\",\r\n  \"state\": \"Nevada\",\r\n  \"website\": \"unknown-meteorology.net\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/brewery",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"brewery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"000cbca6-d62f-4c0a-89f7-66449994a4a9\",\r\n  \"abv\": 91061,\r\n  \"ibu\": 40165,\r\n  \"address\": \"49401 Hoppe Forks\",\r\n  \"category\": \"Industrial\",\r\n  \"city\": \"San Rafael\",\r\n  \"coordinates\": [ 15771.06, 89112.66 ],\r\n  \"country\": \"Montserrat\",\r\n  \"description\": \"Omnis expedita vitae. Alias debitis sit minima officiis quaerat placeat eaque commodi. Dicta deleniti accusantium facilis natus porro. Ab aliquam animi minus asperiores architecto similique sapiente eveniet. Veniam explicabo vero harum tempore excepturi delectus.\",\r\n  \"name\": \"Miller, Grimes and Lakin\",\r\n  \"state\": \"Nevada\",\r\n  \"website\": \"unknown-meteorology.net\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/brewery",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"brewery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/brewery/?id=000046a8-9e67-4a6a-b7de-56b2fb6726fc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"brewery",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "000046a8-9e67-4a6a-b7de-56b2fb6726fc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
