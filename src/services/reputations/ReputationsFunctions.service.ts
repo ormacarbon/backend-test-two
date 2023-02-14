@@ -1,6 +1,6 @@
 import BreweriesService from '../Breweries.service';
 import ReputationService from './Reputation.service';
-import { Reputation, ReputationUpdate, updateReputationUserAlreadyReted } from '../../interfaces/reputation/Reputation.interface';
+import { updateReputationUserAlreadyReted } from '../../interfaces/reputation/Reputation.interface';
 
 import catchErrorsFunctions from '../../common/utils/err/catchErrorsFunction';
 import { InvalidArgumentError } from '../err/Errors';
@@ -9,8 +9,9 @@ import { CalculateReputation } from '../../common/calculateReputation';
 class ReputationsFunctions {
   async CheckIfUserHasAlreadyRated(user_id: string) {
     try {
-      const findReputationFromUser =
-        await BreweriesService.findUserReputation(user_id);
+      const findReputationFromUser = await BreweriesService.findUserReputation(
+        user_id
+      );
 
       if (!findReputationFromUser) {
         return;
@@ -51,8 +52,7 @@ class ReputationsFunctions {
 
     await ReputationService.updateReputation({
       id: reputation.id,
-      reputation: calculateReputation 
-      
+      reputation: calculateReputation
     });
   }
 }

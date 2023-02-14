@@ -164,14 +164,18 @@ class BreweryModel {
 
   async addListReputation(reputation: Reputation) {
     try {
-      const data = await this.brewerie.findByIdAndUpdate(reputation.id, {
-        $push: {
-          list_reputation: {
-            user_id: reputation.user_id,
-            reputation: reputation.reputation
+      const data = await this.brewerie.findByIdAndUpdate(
+        reputation.id,
+        {
+          $push: {
+            list_reputation: {
+              user_id: reputation.user_id,
+              reputation: reputation.reputation
+            }
           }
-        }, 
-      }, {new: true});
+        },
+        { new: true }
+      );
 
       return data;
     } catch (error) {
@@ -187,7 +191,8 @@ class BreweryModel {
         },
         {
           reputation: reputation.reputation
-        },  {new: true}
+        },
+        { new: true }
       );
     } catch (error) {
       cacthErrosFunctions(error);
@@ -210,7 +215,6 @@ class BreweryModel {
     updateReputationUserAlreadyReted: updateReputationUserAlreadyReted
   ) {
     try {
-
       const data = await this.brewerie.findOneAndUpdate(
         { 'list_reputation.user_id': updateReputationUserAlreadyReted.user_id },
         {
@@ -218,7 +222,8 @@ class BreweryModel {
             'list_reputation.$.reputation':
               updateReputationUserAlreadyReted.reputation
           }
-        },  {new: true}
+        },
+        { new: true }
       );
 
       return data;
