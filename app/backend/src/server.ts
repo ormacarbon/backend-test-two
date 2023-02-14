@@ -1,16 +1,16 @@
-import express, { Express, Request, Response } from 'express';
+import 'dotenv/config';
+import app from './app';
+import connectToDatabase from './connection';
 
-import dotenv from 'dotenv';
+const APP_PORT = Number(process.env.APP_PORT) || 3001;
 
-dotenv.config();
-
-const app: Express = express();
-const port = process.env.PORT;
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
-});
-
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
-});
+connectToDatabase()
+  .then(() => {
+    app.listen(APP_PORT, () => console.log(`Running server on port: ${APP_PORT}`));
+  })
+  .catch((error) => {
+    console.log('Connection with database generated an error:\r\n');
+    console.error(error);
+    console.log('\r\nServer initialization cancelled');
+    process.exit(0);
+  });

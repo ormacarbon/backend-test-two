@@ -30,8 +30,3 @@ jobs:
          cd app/backend
          npm i
          npm run lint
-
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true

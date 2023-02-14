@@ -1,61 +1,95 @@
-# **TESTE DE BACKEND**
+# Desafio para o processo seletivo Orma Carbon
 
-## SITUAÇÃO-PROBLEMA
+Repositório destinado aos interessados em participar do processo seletivo da Orma Carbon
 
-Você acabou de ser contratado para uma vaga de desenvolvedor backend de uma empresa que revende cervejas do mundo inteiro. O desenvolvedor anterior corrompeu completamente o banco de dados e a API anterior e sobrou apenas um arquivo .JSON com todas as informações do banco. Seu líder confiou a tarefa de recriar a API e o banco de dados a você.
 
-Neste teste, você deverá criar uma API com endpoints a serem consumidos via REST e um banco de dados, utilizando os dados fornecidos no arquivo. ````db.json````.
+## 🚀 Começando
 
----------------------------------------------------------------------
-
-## REQUISITOS OBRIGATÓRIOS:
-
-- Seja original, projetos suspeitos de serem copiados serão descartados.
-- Queremos ver o seu código, e não o de outros.
-- Criar coleção no Postman (seu teste será testado por aqui).
-
-## GIT
-
-- Faça um fork deste repositório.
-- Crie uma branch para codar as suas features.
-- Faça um pull-request quando o teste for finalizado.
-
-##### **NOTA: Será avaliado também se o nome da branch, títulos de commit, push e comentários possuem boa legibilidade.**
-
------------------------------------------------------
-
-## FRAMEWORK -
-
-- Servidor: Express (Javascript/Typescript) *<u>**OU**</u>* Gin (Golang)
-- Banco de dados: MongoDB, DynamoDB, MySQL, Postgres...
-
------------------------------------------------------
-
-## PROJETO
-
-- Api deve conter pelo menos 1 endpoint para cada operação crud (Create, Read, Update, Delete).
-- Um endpoint para listagem de conteúdo.
-- Banco de dados a escolha do dev.
-
--------------------------------------------------------
-
-## REQUISITOS DIFERENCIAIS:
-
-- Seguir os princípios de SOLID.
-- Fazer o teste em GoLang.
-- Codar um código performático.
-- Utilizar inglês no projeto todo.
-- Utilizar Injeção de dependências.
-- Criar um frontend que consuma a API
-- Fazer deploy do mesmo (heroku, aws, google cloud ou outro da preferência).
+Antes de utilizar o projeto, é necessario ter Git, Docker/Docker-compose e npm/yarn instalado na máquina.
 
 
 
----
+## 📃 Sobre
+  <p>
+    Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo é realizar alguns desafios propostos pela empresa Orma Carbon.
+  </p>
 
-## ENTREGA
 
-- Faça um pull request e nomeie-o como no ex.: Teste de (Seu nome aqui).
-- Envie um email para schmidt@repenso.eco e kevin@repenso.eco com o link do pull request, do deploy (tanto do front quanto do back se feito), e anexe a coleção do postman.
-- Assim que avaliarmos seu teste, enviaremos uma devolutiva de sucesso ou falha, e caso seja aprovado, um link para agendar sua entrevista técnica.
+## 🛠️ Ferramentas
 
+## - Front-End:
+  - React
+  - Typescript
+  - Vite
+  - React Router Dom
+  - React Hooks
+  - Css modules
+  - Axios
+  
+## - Back-End:
+  - Node
+  - Typescript
+  - Express
+  - Cors
+  - Mongodb
+  - Swagger
+  - Eslint
+  - GitHub CI/CD
+  - Chai/Mocha
+  - mongoose
+  - Shell
+  - Migrate-mongo
+
+## ⚙️ Como executar
+
+Será necessário que a porta 3000 e 3001 estejam disponíveis para a aplicação, Mongodb usará a porta 27017.
+
+1 - Clone o repositório em uma pasta de sua preferencia 
+```
+git@github.com:AiramToscano/backend-test-two.git
+```
+2 - Suba o docker-compose, todas as depêndencias serão automaticamente instaladas
+```
+npm run compose:up   // para subir a aplicação
+npm run compose:down // para parar completamente a aplicação
+```
+3 - Após rodar o comando, aguarde um pouco que a aplicação irá ficar disponivel nas seguintes rotas:
+
+  `- Front-End: http://localhost:3000`
+
+  `- Back-End: http://localhost:3001`
+
+  <p> Caso algum container tiver com o status unhealty, você poderá acessar a aplicação localmente, instalando as dependências  `npm install`, tanto no <code>/app/frontend</code> quanto no <code>/app/backend</code></p>
+
+  <p>E logo após a instalação das dependências, rode os comandos <code>npm run dev</code> no Frontend e o comando <code>npm run dev</code> no Backend</p>
+
+  <p>Caso queria rodar localmente, irá precisar ter o mongoDB instalado na máquina ou em um container docker, com o a url `mongodb://localhost:27017/testtwo` </p>
+
+# Back-End
+
+## 1 - Rotas dos estoques da Cerveja - Beers
+
+Para testar as rotas basta subir o backend, as rotas estão documentadas no swagger.
+
+- `http://localhost:3001/api-docs/` - Documentada pelo Swagger.
+
+
+```
+## ⚙️ Executando os testes
+
+Para essa aplicação back-end, foi feito testes unitarios, cobrindo 100% da aplicação.
+
+- `npm run test:dev` - Para rodar os testes unitários.
+
+- `npm run test:coverage` - Para rodar os testes junto com a cobertura da aplicação.
+
+Testes back-end com quase 100% de cobertura.
+
+# Front-End
+
+
+
+
+## 🎁 Expressões de gratidão
+
+- Gostaria de agradecer a Orma Carbon  por esse desafio, aprendi muito com esse projeto, a cada um novo desafio se torna um novo aprendizado.
