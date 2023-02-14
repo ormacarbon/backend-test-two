@@ -1,61 +1,50 @@
-# **TESTE DE BACKEND**
+# Beers API
 
-## SITUAÇÃO-PROBLEMA
+![Postman Collection](postman-collection.png)
 
-Você acabou de ser contratado para uma vaga de desenvolvedor backend de uma empresa que revende cervejas do mundo inteiro. O desenvolvedor anterior corrompeu completamente o banco de dados e a API anterior e sobrou apenas um arquivo .JSON com todas as informações do banco. Seu líder confiou a tarefa de recriar a API e o banco de dados a você.
+# Context
 
-Neste teste, você deverá criar uma API com endpoints a serem consumidos via REST e um banco de dados, utilizando os dados fornecidos no arquivo. ````db.json````.
+Project of a beers CRUD API created using the SOLID principles, POO and TDD.
 
----------------------------------------------------------------------
+## Tecnologies
 
-## REQUISITOS OBRIGATÓRIOS:
+ NodeJS, ExpressJS, TypeScript, MongoDb, Swagger, Rimraf, Jest, Supertest
 
-- Seja original, projetos suspeitos de serem copiados serão descartados.
-- Queremos ver o seu código, e não o de outros.
-- Criar coleção no Postman (seu teste será testado por aqui).
+## Runing with Docker
 
-## GIT
+ * Cloning the repository:
 
-- Faça um fork deste repositório.
-- Crie uma branch para codar as suas features.
-- Faça um pull-request quando o teste for finalizado.
+  ```
+  git clone git@github.com:DouglasD18/backend-test-two.git
+  cd backend-test-two
+  ```
 
-##### **NOTA: Será avaliado também se o nome da branch, títulos de commit, push e comentários possuem boa legibilidade.**
+* Rodando docker-compose
+  ```
+  docker-compose up
+  ```
 
------------------------------------------------------
+## Runing without Docker
 
-## FRAMEWORK -
+### Installing Dependencies
 
-- Servidor: Express (Javascript/Typescript) *<u>**OU**</u>* Gin (Golang)
-- Banco de dados: MongoDB, DynamoDB, MySQL, Postgres...
+```bash
+npm install
+``` 
 
------------------------------------------------------
+### Runing Application
 
-## PROJETO
+* To run the server:
 
-- Api deve conter pelo menos 1 endpoint para cada operação crud (Create, Read, Update, Delete).
-- Um endpoint para listagem de conteúdo.
-- Banco de dados a escolha do dev.
+  ```
+  npm start
+  ```
 
--------------------------------------------------------
+* To run the tests:
 
-## REQUISITOS DIFERENCIAIS:
+  ```
+  npm run test
+  ```
+  
 
-- Seguir os princípios de SOLID.
-- Fazer o teste em GoLang.
-- Codar um código performático.
-- Utilizar inglês no projeto todo.
-- Utilizar Injeção de dependências.
-- Criar um frontend que consuma a API
-- Fazer deploy do mesmo (heroku, aws, google cloud ou outro da preferência).
-
-
-
----
-
-## ENTREGA
-
-- Faça um pull request e nomeie-o como no ex.: Teste de (Seu nome aqui).
-- Envie um email para schmidt@repenso.eco e kevin@repenso.eco com o link do pull request, do deploy (tanto do front quanto do back se feito), e anexe a coleção do postman.
-- Assim que avaliarmos seu teste, enviaremos uma devolutiva de sucesso ou falha, e caso seja aprovado, um link para agendar sua entrevista técnica.
-
+Application documentation route: http://localhost:5050/api-docs/
