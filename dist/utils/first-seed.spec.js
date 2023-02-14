@@ -15,7 +15,6 @@ const fakeBeer = {
     state: "Pennsylvania",
     website: "http://www.northcountrybrewing.com"
 };
-
 describe("firstSeed", () => {
     beforeEach(async () => {
         const accountCollection = await mongo_helper_1.MongoHelper.getCollection('beers');
