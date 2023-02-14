@@ -12,5 +12,6 @@ const firstSeed = async () => {
     const beersData = await (0, read_db_file_1.readDbFile)();
     await beerCollections.insertMany(beersData);
 };
+
 exports.firstSeed = firstSeed;
 //# sourceMappingURL=first-seed.js.map
