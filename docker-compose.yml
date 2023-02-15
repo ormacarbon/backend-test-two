@@ -1,0 +1,33 @@
+services:
+  app:
+
+    build: .
+    ports: 
+     - 3000:3000
+    volumes:
+      - ".:/usr/app"
+    networks:
+      - application-network
+    environment:
+      - DATABASE_CONNECTION=mongodb://172.17.0.1:27017/Application
+      - DATABASE_CONNECTION_TEST=mongodb://172.17.0.1:5005/Application
+
+    depends_on:
+      - database
+      - database_test
+  database:
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - application-network
+  database_test:
+    image: mongo
+    ports:
+      - 5005:27017
+    networks:
+      - application-network
+  
+networks:
+  application-network:
+    driver: bridge

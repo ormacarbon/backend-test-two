@@ -1,0 +1,442 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "API",
+        "description": "Here I gathered all the routes of this application"
+    },
+    "paths": {
+        "/ap1/v1/${name}": {
+            "description": "Use for find brewery by name",
+            "get": {
+                "tags": ["Breweries"],
+                "parameters": [
+                    {
+                      "name": "name",
+                      "in": "path",
+                      "description": "brewery name",
+                      "required": true,
+                      "type": "string"
+                    }
+                  ]
+            }
+
+
+        },
+
+        "/api/v1/breweries": {
+            "get": {
+                "description": "Return all Breweries",
+                "tags": ["Breweries"],
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contry",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "type": "number"
+                    }
+                ]
+            },
+            "post": {
+                "description": "Store user and return",
+                "tags": ["Breweries"],
+                "parameters": [
+                    {
+                      "name": "body",
+                      "in": "body",
+                      "description": "Object JSON with data",
+                      "required": true,
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                            "abv": {
+                                "type": "number"
+                            },
+                            "address": {
+                                "type": "string"
+                            },
+                            "category":{
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "coordinates":{
+                                "type": "array",
+                                "items": {
+                                    "type": "number"
+                                }
+                            },
+                            "country": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "ibu": {
+                                "type": "number"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            },
+                            "website":{
+                                "type": "string"
+                            }
+                        }
+                      }
+                    }
+                    
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "Resposta de sucesso"
+                    }
+                  }
+
+            }
+        },
+        "/api/v1/brewery/${id}": {
+            "get": {
+                "description": "Return Brewery through ID",
+                "tags": ["Breweries"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "id item for receive",
+                      "required": true,
+                      "type": "integer"
+                    }
+                  ]
+            },
+            "delete": {
+                "description": "Delete Brewery through ID",
+                "tags": ["Breweries"],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "id item for delete",
+                      "required": true,
+                      "type": "integer"
+                    }
+                  ]
+            },
+            "put": {
+                    "description": "Update Brewery",
+                    "tags": ["Breweries"],
+                    "parameters": [
+                        {
+                          "name": "body",
+                          "in": "body",
+                          "description": "Object JSON with data",
+                          "required": false,
+                          "schema": {
+                            "type": "object",
+                            "properties": {
+                                "abv": {
+                                    "type": "number"
+                                },
+                                "address": {
+                                    "type": "string"
+                                },
+                                "category":{
+                                    "type": "string"
+                                },
+                                "city": {
+                                    "type": "string"
+                                },
+                                "coordinates":{
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    }
+                                },
+                                "country": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "ibu": {
+                                    "type": "number"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "state": {
+                                    "type": "string"
+                                }
+                            }
+                          }
+                        }
+                        
+                      ]
+            }
+        },
+        "/api/v1/breweries/file": {
+            "post":{
+                "tags": ["Breweries"],
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "file",
+                        "required": true
+
+                    }
+
+                ]
+            }
+        },
+
+    "/api/v1/user": {
+        "get": {
+            "tags": ["User"],
+            "description": "Find user by header Bearer",
+            "parameters": [
+                {
+                  "name": "Access Token",
+                  "in": "headers",
+
+                  "required": true,
+                  "type": "string"
+                }
+              ]
+        },
+        "post": {
+            "tags": ["User"],
+            "description": "Create User",
+            "parameters": [
+                {
+                  "name": "body",
+                  "in": "body",
+                  "description": "Object JSON",
+                  "required": true,
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                        "email": {
+                            "type": "string"
+                        },
+                        "username": {
+                            "type": "string"
+                        },
+                        "password":{
+                            "type": "string"
+                        }
+                    }
+                  }
+                }
+                
+              ]
+        }
+    },
+    "/api/v1/user/{id}": {
+        "get": {
+            "tags": ["User"],
+            "description": "Find user by id",
+            "parameters": [
+                {
+                  "name": "Id",
+                  "in": "params",
+
+                  "required": true,
+                  "type": "string"
+                }
+              ]
+        }
+    },
+    "/api/v1/all/user": {
+        "get": {
+            "tags": ["User"],
+            "description": "Find all user"
+        }
+    },
+    "/api/v1/login": {
+        "post": {
+            "tags": ["User"],
+            "description": "Login User",
+            "parameters": [
+                {
+                    "name": "email",
+                    "required": true                    
+                },
+                {
+                    "name": "password",
+                    "required": true                    
+                }
+            ]
+        }
+    },
+
+    "/api/v1/reputation/{brewery_id}/{reputation}": {
+        "get": {
+            "tags": ["Reputation"],
+            "summary": "Reputation should be 1 to 5",
+            "description": "Add reputation for Brewery",
+            "parameters":[
+                {
+                    "name": "id",
+                    "required": true,
+                    "type":"string"                    
+                }
+            ]
+        }
+    },
+    "/api/v1/menu/{brewery_id}": {
+        "post": {
+            "tags": ["Menu"],
+            "summary": "Add item in brewery Menu",
+            "description": "Add item in menu",
+            "parameters": [
+                {
+                  "name": "body",
+                  "in": "body",
+                  "description": "Object JSON with data",
+                  "required": true,
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "ingredients":{
+                            "type": "array",
+                            "items": {
+                                "type":"string"
+                            }
+
+                    }
+                  }
+                }
+                }
+                
+              ]
+        }
+    },
+    "/api/v1/menu": {
+        "get": {
+            "tags": ["Menu"],
+            "description": "All menus"
+        }
+    },
+    "/api/v1/menu/brewery/${brewery_name}": {
+        "get": {
+            "tags": ["Menu"],
+            "description": "Find menu from brewery, REMENBER, if name brewery are 'Find menu from brewery, REMENBER, if name brewery are 'Cervejinha top das top', the path are 'cervejinhatopdastop'"
+
+        }
+    },
+    "/api/v1/menu/{id_brewery}/{name_item}": {
+
+        "delete": {
+            "tags":["Menu"],
+            "description": "Delete item from list"
+        },
+        "parameters": [
+            {
+                "name": "id_brewery",
+                "required":true,
+                "in":"params"
+            },
+            {
+                "name": "name_item",
+                "required":true,
+                "description": "if it contains spaces it must contain %20 instead",
+                "in":"params"
+
+            }
+        ]
+    },
+
+    "/ap1/v1/coupons": {
+        "get": {
+            "tags":["Coupons"],
+            "description": "All cupouns"
+        },
+        "post": {
+            "tags":["Coupons"],
+            "description": "Add cupouns",
+            "parameters": [
+                {
+                    "name":"Access Token",
+                    "required": true
+                },
+                {
+                    "name": "body",
+                    "in": "body",
+                    "description": "Object JSON with data",
+                    "required": true,
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                          "name": {
+                              "type": "string"
+                          },
+                          "description": {
+                              "type": "string"
+                          },
+                          "discount_max":{
+                              "type": "number"
+                          },
+                          "found_on": {
+                            
+                            "type":"object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                    },
+                                "website": {
+                                        "type": "string"
+                                 }
+                            }
+   
+
+                                
+                          }
+                          
+                      }
+                    }
+                  }
+            ]
+        }
+    },
+    "/api/v1/coupons/{id}": {
+        "delete": {
+            "tags":["Coupons"],
+            "description": "Delete cupouns",
+            "parameters": [
+            {
+                "name": "id",
+                "required":true,
+                "in":"params"
+            }]
+        }
+    }
+
+    }
+}
