@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "c438b170-7f19-4103-bc6e-5280ef75d56f",
+		"name": "Beers Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25750161"
+	},
+	"item": [
+		{
+			"name": "Cria Bebida. Caso de Sucesso.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"abv\": 10.5,\r\n  \"ibu\": 123, \r\n  \"name\": \"Bebida Teste\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/beers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cria Bebida. Caso de Falha. (falta atributo)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"abv\": 10.5,\r\n  \"ibu\": 123\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/beers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cria Bebida. Caso de Falha. (atributo com propriedade errada)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"abv\": 10,\r\n  \"ibu\": 123, \r\n  \"name\": \"Bebida Teste\",\r\n  \"coordinates\": [25, 40],\r\n  \"country\": 25\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/beers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cria Bebida com todos atributos com sucesso",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"abv\": 10,\r\n  \"ibu\": 123, \r\n  \"name\": \"BraZZil Cerveja's\",\r\n  \"address\": \"Rua brasileira do Brasil\",\r\n  \"category\": \"Cerveja do Brasil\",\r\n  \"city\": \"Rio de Janeiro\",\r\n  \"coordinates\": [25, 240],\r\n  \"country\": \"Brasil\",\r\n  \"state\": \"Rio de Janeiro\",\r\n  \"website\": \"http://www.bebidabrasileira.com/\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/beers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retorna todas as beers.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/beers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retorna bebida pelo id.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/beers/63ea566d4201e9a5de3d7f15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers",
+						"63ea566d4201e9a5de3d7f15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retorna bebida pelo id. Caso de falha",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/beers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualiza um documento. Caso de sucesso.",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Putting Name\",\r\n    \"address\": \"Putting Address2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/beers/63e68be8a2fbf74e9362a56f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers",
+						"63e68be8a2fbf74e9362a56f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualiza um documento. Caso de falha. (propriedades faltando no json)",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/beers/63e68be8a2fbf74e9362a56f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers",
+						"63e68be8a2fbf74e9362a56f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualiza um documento. Caso de falha. (id inválido)",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Putting Name\",\r\n    \"address\": \"Putting Address2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/beers/asdasd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers",
+						"asdasd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleta um documento. Caso de sucesso.",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/beers/63ea566d4201e9a5de3d7f31",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers",
+						"63ea566d4201e9a5de3d7f31"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleta um documento. Caso de falha.",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/beers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"beers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
