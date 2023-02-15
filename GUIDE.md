@@ -19,8 +19,7 @@ Technologies chosen for the project</h3>
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
 ### Others:
-
-Have libs as natural (used for tokenize words and storage), 
+ 
 concurrently(using for commits), 
 Zod(Use for validate parameters from request, we can say, used like DTO)
 Multer (Used for receive files from request).
