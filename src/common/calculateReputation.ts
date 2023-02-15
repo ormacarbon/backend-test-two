@@ -1,8 +1,8 @@
 /**
- * 
- * @param reputation 
+ *
+ * @param reputation
  * @returns {number}
- * 
+ *
  * Calculates the average of a brewery's reputation list and returns it
  */
 

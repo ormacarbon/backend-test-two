@@ -41,7 +41,7 @@ docker compose up -d
 
 ## Documentation routes
 
-The project use swagger for document endpoins, you can access <strong>/docs</strong> for show the endpoints,
+The project use swagger for document endpoints, you can access <strong>/docs</strong> for show the endpoints,
 just run the project and access  <strong>/docs</strong> 
 
 ```
@@ -75,11 +75,20 @@ If you choose the container, feel free to run the command
 $ docker run -d -p 27017:27017 mongo
 ```
 
-Done that, just run
+Done that, build the project
 ```npm
-$ npm run dev'
+$ npm run build
 ```
 
+Ok, ready to start
+```npm
+$ npm run start
+```
+
+If you dont want build, use in mode development:
+```npm
+$ npm run dev
+```
 
 
 <br/>

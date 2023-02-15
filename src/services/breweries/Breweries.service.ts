@@ -9,7 +9,7 @@ import MenuService from '../Menu.service';
 import { parseDataAndTransform } from '../../common/ParseDataAndTranforrmBrewery';
 
 import BreweriesModel from '../../model/Breweries.Schema';
-import natural from 'natural';
+
 import tagsService from './tags.service';
 import hrefService from './href.service';
 
@@ -74,14 +74,13 @@ class BreweriesService {
 
         breweryUptade.path = href_contructor;
 
-        const tokenizer = new natural.WordTokenizer();
-
-        const processedName = tokenizer.tokenize(
-          breweryUptade.name.toLowerCase()
-        );
+        const processedName = breweryUptade.name.toLowerCase().split(/\W+/);
 
         await tagsService.updateTags(id, processedName);
-        await hrefService.updateHref(id, `${process.env.ENDPOINT}/${href_contructor}`)
+        await hrefService.updateHref(
+          id,
+          `${process.env.ENDPOINT}/${href_contructor}`
+        );
       }
 
       const data = await BreweriesModel.update(id, breweryUptade);
@@ -201,9 +200,6 @@ class BreweriesService {
       cacthErrosFunctions(error);
     }
   }
-
-
-
 }
 
 export default new BreweriesService();

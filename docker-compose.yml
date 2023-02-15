@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: NODE_APP
+
     build: .
     ports: 
      - 3000:3000
@@ -18,13 +18,13 @@ services:
   database:
     image: mongo
     ports:
-      - "27017:27017"
+      - 27017:27017
     networks:
       - application-network
   database_test:
     image: mongo
     ports:
-      - "5005:27017"
+      - 5005:27017
     networks:
       - application-network
   
