@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "## SITUAÇÃO-PROBLEMA",
   "scripts": {
-    "start": "npx tsc && dist/server.js",
+    "start": "node dist/server.js",
     "build": "tsc -p .",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts --resolveJsonModule",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",

@@ -75,6 +75,13 @@ If you choose the container, feel free to run the command
 $ docker run -d -p 27017:27017 mongo
 ```
 
+Done that, just run
+```npm
+$ npm run dev'
+```
+
+
+
 <br/>
 
 ## Collection

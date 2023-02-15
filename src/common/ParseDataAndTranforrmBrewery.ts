@@ -6,20 +6,19 @@ import BreweryInterface, {
 
 import { LowerCaseFunction } from './utils/LowerCaseFunction';
 
-
-
 /**
- * 
- * @param brewery 
+ *
+ * @param brewery
  * @returns {constructorBreweryInterface}
- * 
+ *
  * @description Get information from a brewery dto and prepare it for storage in the database, tokenizing words, building a href for an easily accessible endpoint.
- * 
+ *
  */
-export async function parseDataAndTransform(brewery: BreweryInterface): Promise<constructorBreweryInterface> {
-
-    LowerCaseFunction(brewery);
-
+export async function parseDataAndTransform(
+  brewery: BreweryInterface
+): Promise<constructorBreweryInterface | void> {
+  LowerCaseFunction(brewery);
+  if (brewery.name) {
     const href_contructor = brewery.name.replace(/ /g, '').toLowerCase();
 
     const tokenizer = new natural.WordTokenizer();
@@ -44,8 +43,8 @@ export async function parseDataAndTransform(brewery: BreweryInterface): Promise<
         ...processedState
       ]
     };
-
     return data;
-  
-  
+  }
+
+  return;
 }

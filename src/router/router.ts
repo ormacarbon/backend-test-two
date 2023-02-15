@@ -6,7 +6,6 @@ import reputationRouter from './routes/reputation.router';
 import useRouter from './routes/user.router';
 import searchRouter from './routes/search.router';
 
-
 /**
  * @param {Express.App}
  * @description used to load application routes
