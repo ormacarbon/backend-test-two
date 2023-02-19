@@ -3,6 +3,7 @@
 Beer api made for the backend test on Orma Carbon.
 
 [Docs of deployed app](https://beer-api-ormacarbon.herokuapp.com/api-docs/)
+(I deleted the app because heroku started to charge, but I can deploy again if it is needed)
 
 ## Problem-situation
 
