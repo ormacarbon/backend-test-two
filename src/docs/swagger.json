@@ -1,0 +1,356 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Beer API",
+        "description": "A beer API for the backend test",
+        "contact": {
+            "email": "pablodg290@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/beers": {
+            "get": {
+                "summary": "Get beers",
+                "description": "Lists beers",
+                "tags": [
+                    "Beers"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit results, default is 10"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/JSON": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Beer"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create beers",
+                "description": "Create a new beer",
+                "tags": [
+                    "Beers"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/JSON": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Beer"
+                            },
+                            "examples": {
+                                "beer": {
+                                    "value": {
+                                        "abv": 8.918797384901016,
+                                        "category": "IPA",
+                                        "city": "Erechim",
+                                        "coordinates": [
+                                            41.0638,
+                                            -80.0556
+                                        ],
+                                        "country": "Brazil",
+                                        "ibu": 98,
+                                        "name": "Galgo Beer",
+                                        "state": "Rio Grande do Sul"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created successfully",
+                        "content": {
+                            "application/JSON": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Beer"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            }
+        },
+        "/beers/search": {
+            "get": {
+                "summary": "Get beer by name",
+                "description": "Find a beer by name",
+                "tags": [
+                    "Beers"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "beer name",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/JSON": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Beer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/Not Found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            }
+        },
+        "/beers/{id}": {
+            "get": {
+                "summary": "Get beer by ID",
+                "description": "Find a beer by ID",
+                "tags": [
+                    "Beers"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "beer ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/JSON": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Beer"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update a beer",
+                "description": "Update data of a beer",
+                "tags": [
+                    "Beers"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "beer ID",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/JSON": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Beer"
+                            },
+                            "examples": {
+                                "beer": {
+                                    "value": {
+                                        "city": "Porto Alegre"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated successfully",
+                        "content": {
+                            "application/JSON": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Remove a beer",
+                "description": "Delete a beer",
+                "tags": [
+                    "Beers"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "beer ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted successfully",
+                        "content": {
+                            "application/JSON": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/Not Found"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            }
+        },
+        "/beers/insertData": {
+            "post": {
+                "summary": "Insert beers",
+                "description": "Insert beers of 'db.json' file",
+                "tags": [
+                    "Beers"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Data inserted successfully",
+                        "content": {
+                            "application/JSON": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/GeneralError"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "GeneralError": {
+                "description": "Internal Server Error",
+                "content": {
+                    "application/JSON": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "Not Found": {
+                "description": "Error: Not Found",
+                "content": {
+                    "application/JSON": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "schemas": {
+            "Beer": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "abv": {
+                        "type": "number",
+                        "required": true
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "coordinates": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "required": true
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "ibu": {
+                        "type": "number",
+                        "required": true
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "website": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

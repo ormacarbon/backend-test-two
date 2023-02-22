@@ -1,61 +1,48 @@
-# **TESTE DE BACKEND**
+# Beer API
 
-## SITUAÇÃO-PROBLEMA
+Beer api made for the backend test on Orma Carbon.
 
-Você acabou de ser contratado para uma vaga de desenvolvedor backend de uma empresa que revende cervejas do mundo inteiro. O desenvolvedor anterior corrompeu completamente o banco de dados e a API anterior e sobrou apenas um arquivo .JSON com todas as informações do banco. Seu líder confiou a tarefa de recriar a API e o banco de dados a você.
+[Docs of deployed app](https://beer-api-ormacarbon.herokuapp.com/api-docs/)
+(I deleted the app because heroku started to charge, but I can deploy again if it is needed)
 
-Neste teste, você deverá criar uma API com endpoints a serem consumidos via REST e um banco de dados, utilizando os dados fornecidos no arquivo. ````db.json````.
+## Problem-situation
 
----------------------------------------------------------------------
-
-## REQUISITOS OBRIGATÓRIOS:
-
-- Seja original, projetos suspeitos de serem copiados serão descartados.
-- Queremos ver o seu código, e não o de outros.
-- Criar coleção no Postman (seu teste será testado por aqui).
-
-## GIT
-
-- Faça um fork deste repositório.
-- Crie uma branch para codar as suas features.
-- Faça um pull-request quando o teste for finalizado.
-
-##### **NOTA: Será avaliado também se o nome da branch, títulos de commit, push e comentários possuem boa legibilidade.**
-
------------------------------------------------------
-
-## FRAMEWORK -
-
-- Servidor: Express (Javascript/Typescript) *<u>**OU**</u>* Gin (Golang)
-- Banco de dados: MongoDB, DynamoDB, MySQL, Postgres...
-
------------------------------------------------------
-
-## PROJETO
-
-- Api deve conter pelo menos 1 endpoint para cada operação crud (Create, Read, Update, Delete).
-- Um endpoint para listagem de conteúdo.
-- Banco de dados a escolha do dev.
-
--------------------------------------------------------
-
-## REQUISITOS DIFERENCIAIS:
-
-- Seguir os princípios de SOLID.
-- Fazer o teste em GoLang.
-- Codar um código performático.
-- Utilizar inglês no projeto todo.
-- Utilizar Injeção de dependências.
-- Criar um frontend que consuma a API
-- Fazer deploy do mesmo (heroku, aws, google cloud ou outro da preferência).
+>Você acabou de ser contratado para uma vaga de desenvolvedor backend de uma empresa que revende cervejas do mundo inteiro. O desenvolvedor anterior corrompeu completamente o banco de dados e a API anterior e sobrou apenas um arquivo .JSON com todas as informações do banco. Seu líder confiou a tarefa de recriar a API e o banco de dados a você.
 
 
+## Used Technologies
+- Node.js
+- Javascript
+- Express
+- MongoDB
+- Swagger
 
----
+# Installation
 
-## ENTREGA
+## Need to have
+- node.js 16.14.2
+- npm 8.5.0
 
-- Faça um pull request e nomeie-o como no ex.: Teste de (Seu nome aqui).
-- Envie um email para schmidt@repenso.eco e kevin@repenso.eco com o link do pull request, do deploy (tanto do front quanto do back se feito), e anexe a coleção do postman.
-- Assim que avaliarmos seu teste, enviaremos uma devolutiva de sucesso ou falha, e caso seja aprovado, um link para agendar sua entrevista técnica.
+## Clone this project
 
+```bash
+git clone https://github.com/pabloghid/backend-test-two.git
+```
+## Install dependencies
+
+```bash
+npm install
+```
+## Configure .env
+Rename the file .env.example to .env and add your MongoDB
+
+## Run app
+```bash
+npm run start
+```
+
+## Usage
+
+Go to /api-docs to see the endpoints.
+
+You can make a POST request to the /beers/insertData endpoint to insert data from the db.json file into your database. Please note that in the deployed app, the data has already been added.
